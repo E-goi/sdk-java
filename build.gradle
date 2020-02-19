@@ -3,7 +3,7 @@ apply plugin: 'eclipse'
 apply plugin: 'java'
 
 group = 'org.egoi'
-version = '1.0.0RC'
+version = '1.0.0RC1'
 
 buildscript {
     repositories {

@@ -1,6 +1,6 @@
 /*
  * APIv3 (Beta)
- *  # Introduction Just a quick pick!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # HTTP Methods for RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  <security-definitions/>
+ *  # Introduction Just a quick peek!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services. * <b><a href='https://github.com/E-goi/sdk-java'>Java</a></b> * <b><a href='https://github.com/E-goi/sdk-php'>PHP</a></b> * <b><a href='https://github.com/E-goi/sdk-python'>Python</a></b>  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0-beta
  * 
@@ -25,36 +25,26 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.egoi.client.model.Contact;
+import org.egoi.client.model.ContactBulk;
 
 /**
  * Contact import bulk request schema
  */
 @ApiModel(description = "Contact import bulk request schema")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-06T16:12:38.678183Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-02-19T15:12:15.913371Z[Europe/Lisbon]")
 public class ImportBulkRequest   {
   /**
-   * Field ID which will be mapped for comparison to prevent duplicates. If it is an extra field,                         append the prefix &#39;extra_&#39; to it (e. g. &#39;extra_1&#39;)
+   * Add new contacts only (&#39;add&#39;) or add and replace existing ones (&#39;update&#39;)
    */
-  @JsonAdapter(CompareFieldEnum.Adapter.class)
-  public enum CompareFieldEnum {
-    EMAIL("email"),
+  @JsonAdapter(ModeEnum.Adapter.class)
+  public enum ModeEnum {
+    ADD("add"),
     
-    CELLPHONE("cellphone"),
-    
-    PHONE("phone"),
-    
-    FIRST_NAME("first_name"),
-    
-    LAST_NAME("last_name"),
-    
-    BIRTH_DATE("birth_date"),
-    
-    EXTRA_X("extra_X");
+    UPDATE("update");
 
     private String value;
 
-    CompareFieldEnum(String value) {
+    ModeEnum(String value) {
       this.value = value;
     }
 
@@ -67,8 +57,8 @@ public class ImportBulkRequest   {
       return String.valueOf(value);
     }
 
-    public static CompareFieldEnum fromValue(String value) {
-      for (CompareFieldEnum b : CompareFieldEnum.values()) {
+    public static ModeEnum fromValue(String value) {
+      for (ModeEnum b : ModeEnum.values()) {
         if (b.value.equals(value)) {
           return b;
         }
@@ -76,112 +66,96 @@ public class ImportBulkRequest   {
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
-    public static class Adapter extends TypeAdapter<CompareFieldEnum> {
+    public static class Adapter extends TypeAdapter<ModeEnum> {
       @Override
-      public void write(final JsonWriter jsonWriter, final CompareFieldEnum enumeration) throws IOException {
+      public void write(final JsonWriter jsonWriter, final ModeEnum enumeration) throws IOException {
         jsonWriter.value(enumeration.getValue());
       }
 
       @Override
-      public CompareFieldEnum read(final JsonReader jsonReader) throws IOException {
+      public ModeEnum read(final JsonReader jsonReader) throws IOException {
         String value =  jsonReader.nextString();
-        return CompareFieldEnum.fromValue(value);
+        return ModeEnum.fromValue(value);
       }
     }
   }
 
+  public static final String SERIALIZED_NAME_MODE = "mode";
+  @SerializedName(SERIALIZED_NAME_MODE)
+  private ModeEnum mode;
+
   public static final String SERIALIZED_NAME_COMPARE_FIELD = "compare_field";
   @SerializedName(SERIALIZED_NAME_COMPARE_FIELD)
-  private CompareFieldEnum compareField;
-
-  public static final String SERIALIZED_NAME_REPLACE_EXISTING_CONTACTS = "replace_existing_contacts";
-  @SerializedName(SERIALIZED_NAME_REPLACE_EXISTING_CONTACTS)
-  private Boolean replaceExistingContacts = false;
-
-  public static final String SERIALIZED_NAME_SEND_AUTORESPONDER = "send_autoresponder";
-  @SerializedName(SERIALIZED_NAME_SEND_AUTORESPONDER)
-  private Boolean sendAutoresponder = false;
+  private String compareField;
 
   public static final String SERIALIZED_NAME_CONTACTS = "contacts";
   @SerializedName(SERIALIZED_NAME_CONTACTS)
-  private List<Contact> contacts = new ArrayList<Contact>();
+  private List<ContactBulk> contacts = new ArrayList<ContactBulk>();
+
+  public static final String SERIALIZED_NAME_FORCE_EMPTY = "force_empty";
+  @SerializedName(SERIALIZED_NAME_FORCE_EMPTY)
+  private Boolean forceEmpty = false;
+
+  public static final String SERIALIZED_NAME_NOTIFY = "notify";
+  @SerializedName(SERIALIZED_NAME_NOTIFY)
+  private List<Integer> notify = null;
+
+  public static final String SERIALIZED_NAME_CALLBACK_URL = "callback_url";
+  @SerializedName(SERIALIZED_NAME_CALLBACK_URL)
+  private String callbackUrl;
 
 
-  public ImportBulkRequest compareField(CompareFieldEnum compareField) {
+  public ImportBulkRequest mode(ModeEnum mode) {
+    
+    this.mode = mode;
+    return this;
+  }
+
+   /**
+   * Add new contacts only (&#39;add&#39;) or add and replace existing ones (&#39;update&#39;)
+   * @return mode
+  **/
+  @ApiModelProperty(required = true, value = "Add new contacts only ('add') or add and replace existing ones ('update')")
+
+  public ModeEnum getMode() {
+    return mode;
+  }
+
+
+  public void setMode(ModeEnum mode) {
+    this.mode = mode;
+  }
+
+
+  public ImportBulkRequest compareField(String compareField) {
     
     this.compareField = compareField;
     return this;
   }
 
    /**
-   * Field ID which will be mapped for comparison to prevent duplicates. If it is an extra field,                         append the prefix &#39;extra_&#39; to it (e. g. &#39;extra_1&#39;)
+   * Field ID which will be mapped for comparison to prevent duplicates)
    * @return compareField
   **/
-  @ApiModelProperty(example = "email", required = true, value = "Field ID which will be mapped for comparison to prevent duplicates. If it is an extra field,                         append the prefix 'extra_' to it (e. g. 'extra_1')")
+  @ApiModelProperty(example = "email", required = true, value = "Field ID which will be mapped for comparison to prevent duplicates)")
 
-  public CompareFieldEnum getCompareField() {
+  public String getCompareField() {
     return compareField;
   }
 
 
-  public void setCompareField(CompareFieldEnum compareField) {
+  public void setCompareField(String compareField) {
     this.compareField = compareField;
   }
 
 
-  public ImportBulkRequest replaceExistingContacts(Boolean replaceExistingContacts) {
-    
-    this.replaceExistingContacts = replaceExistingContacts;
-    return this;
-  }
-
-   /**
-   * False to add new contacts only, true to replace existing contacts
-   * @return replaceExistingContacts
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "False to add new contacts only, true to replace existing contacts")
-
-  public Boolean getReplaceExistingContacts() {
-    return replaceExistingContacts;
-  }
-
-
-  public void setReplaceExistingContacts(Boolean replaceExistingContacts) {
-    this.replaceExistingContacts = replaceExistingContacts;
-  }
-
-
-  public ImportBulkRequest sendAutoresponder(Boolean sendAutoresponder) {
-    
-    this.sendAutoresponder = sendAutoresponder;
-    return this;
-  }
-
-   /**
-   * True to send each imported contact the autoresponder sequence you have previously set up for                         sign-ups in this mailing list
-   * @return sendAutoresponder
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "True to send each imported contact the autoresponder sequence you have previously set up for                         sign-ups in this mailing list")
-
-  public Boolean getSendAutoresponder() {
-    return sendAutoresponder;
-  }
-
-
-  public void setSendAutoresponder(Boolean sendAutoresponder) {
-    this.sendAutoresponder = sendAutoresponder;
-  }
-
-
-  public ImportBulkRequest contacts(List<Contact> contacts) {
+  public ImportBulkRequest contacts(List<ContactBulk> contacts) {
     
     this.contacts = contacts;
     return this;
   }
 
-  public ImportBulkRequest addContactsItem(Contact contactsItem) {
+  public ImportBulkRequest addContactsItem(ContactBulk contactsItem) {
     this.contacts.add(contactsItem);
     return this;
   }
@@ -192,13 +166,90 @@ public class ImportBulkRequest   {
   **/
   @ApiModelProperty(required = true, value = "Array of contacts to import")
 
-  public List<Contact> getContacts() {
+  public List<ContactBulk> getContacts() {
     return contacts;
   }
 
 
-  public void setContacts(List<Contact> contacts) {
+  public void setContacts(List<ContactBulk> contacts) {
     this.contacts = contacts;
+  }
+
+
+  public ImportBulkRequest forceEmpty(Boolean forceEmpty) {
+    
+    this.forceEmpty = forceEmpty;
+    return this;
+  }
+
+   /**
+   * If &#39;true&#39; accepts empty values and erases those fields
+   * @return forceEmpty
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "If 'true' accepts empty values and erases those fields")
+
+  public Boolean getForceEmpty() {
+    return forceEmpty;
+  }
+
+
+  public void setForceEmpty(Boolean forceEmpty) {
+    this.forceEmpty = forceEmpty;
+  }
+
+
+  public ImportBulkRequest notify(List<Integer> notify) {
+    
+    this.notify = notify;
+    return this;
+  }
+
+  public ImportBulkRequest addNotifyItem(Integer notifyItem) {
+    if (this.notify == null) {
+      this.notify = new ArrayList<Integer>();
+    }
+    this.notify.add(notifyItem);
+    return this;
+  }
+
+   /**
+   * Array of IDs of the users to notify
+   * @return notify
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Array of IDs of the users to notify")
+
+  public List<Integer> getNotify() {
+    return notify;
+  }
+
+
+  public void setNotify(List<Integer> notify) {
+    this.notify = notify;
+  }
+
+
+  public ImportBulkRequest callbackUrl(String callbackUrl) {
+    
+    this.callbackUrl = callbackUrl;
+    return this;
+  }
+
+   /**
+   * Url to receive the report
+   * @return callbackUrl
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Url to receive the report")
+
+  public String getCallbackUrl() {
+    return callbackUrl;
+  }
+
+
+  public void setCallbackUrl(String callbackUrl) {
+    this.callbackUrl = callbackUrl;
   }
 
 
@@ -211,15 +262,17 @@ public class ImportBulkRequest   {
       return false;
     }
     ImportBulkRequest importBulkRequest = (ImportBulkRequest) o;
-    return Objects.equals(this.compareField, importBulkRequest.compareField) &&
-        Objects.equals(this.replaceExistingContacts, importBulkRequest.replaceExistingContacts) &&
-        Objects.equals(this.sendAutoresponder, importBulkRequest.sendAutoresponder) &&
-        Objects.equals(this.contacts, importBulkRequest.contacts);
+    return Objects.equals(this.mode, importBulkRequest.mode) &&
+        Objects.equals(this.compareField, importBulkRequest.compareField) &&
+        Objects.equals(this.contacts, importBulkRequest.contacts) &&
+        Objects.equals(this.forceEmpty, importBulkRequest.forceEmpty) &&
+        Objects.equals(this.notify, importBulkRequest.notify) &&
+        Objects.equals(this.callbackUrl, importBulkRequest.callbackUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(compareField, replaceExistingContacts, sendAutoresponder, contacts);
+    return Objects.hash(mode, compareField, contacts, forceEmpty, notify, callbackUrl);
   }
 
 
@@ -227,10 +280,12 @@ public class ImportBulkRequest   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ImportBulkRequest {\n");
+    sb.append("    mode: ").append(toIndentedString(mode)).append("\n");
     sb.append("    compareField: ").append(toIndentedString(compareField)).append("\n");
-    sb.append("    replaceExistingContacts: ").append(toIndentedString(replaceExistingContacts)).append("\n");
-    sb.append("    sendAutoresponder: ").append(toIndentedString(sendAutoresponder)).append("\n");
     sb.append("    contacts: ").append(toIndentedString(contacts)).append("\n");
+    sb.append("    forceEmpty: ").append(toIndentedString(forceEmpty)).append("\n");
+    sb.append("    notify: ").append(toIndentedString(notify)).append("\n");
+    sb.append("    callbackUrl: ").append(toIndentedString(callbackUrl)).append("\n");
     sb.append("}");
     return sb.toString();
   }

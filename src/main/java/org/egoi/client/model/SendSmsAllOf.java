@@ -1,6 +1,6 @@
 /*
  * APIv3 (Beta)
- *  # Introduction Just a quick pick!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # HTTP Methods for RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  <security-definitions/>
+ *  # Introduction Just a quick peek!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services. * <b><a href='https://github.com/E-goi/sdk-java'>Java</a></b> * <b><a href='https://github.com/E-goi/sdk-php'>PHP</a></b> * <b><a href='https://github.com/E-goi/sdk-python'>Python</a></b>  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0-beta
  * 
@@ -27,34 +27,33 @@ import java.io.IOException;
 /**
  * SendSmsAllOf
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-01-06T16:12:38.678183Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-02-19T15:12:15.913371Z[Europe/Lisbon]")
 public class SendSmsAllOf   {
-  public static final String SERIALIZED_NAME_LIST_ID = "list_id";
-  @SerializedName(SERIALIZED_NAME_LIST_ID)
-  private Integer listId;
+  public static final String SERIALIZED_NAME_DESTINATION_FIELD = "destination_field";
+  @SerializedName(SERIALIZED_NAME_DESTINATION_FIELD)
+  private String destinationField;
 
 
-  public SendSmsAllOf listId(Integer listId) {
+  public SendSmsAllOf destinationField(String destinationField) {
     
-    this.listId = listId;
+    this.destinationField = destinationField;
     return this;
   }
 
    /**
-   * Get listId
-   * minimum: 1
-   * @return listId
+   * SMS campaign destination field. Must be &#39;cellphone&#39; or the other field ID of type                                 cellphone
+   * @return destinationField
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "1", value = "")
+  @ApiModelProperty(example = "cellphone", value = "SMS campaign destination field. Must be 'cellphone' or the other field ID of type                                 cellphone")
 
-  public Integer getListId() {
-    return listId;
+  public String getDestinationField() {
+    return destinationField;
   }
 
 
-  public void setListId(Integer listId) {
-    this.listId = listId;
+  public void setDestinationField(String destinationField) {
+    this.destinationField = destinationField;
   }
 
 
@@ -67,12 +66,12 @@ public class SendSmsAllOf   {
       return false;
     }
     SendSmsAllOf sendSmsAllOf = (SendSmsAllOf) o;
-    return Objects.equals(this.listId, sendSmsAllOf.listId);
+    return Objects.equals(this.destinationField, sendSmsAllOf.destinationField);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listId);
+    return Objects.hash(destinationField);
   }
 
 
@@ -80,7 +79,7 @@ public class SendSmsAllOf   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SendSmsAllOf {\n");
-    sb.append("    listId: ").append(toIndentedString(listId)).append("\n");
+    sb.append("    destinationField: ").append(toIndentedString(destinationField)).append("\n");
     sb.append("}");
     return sb.toString();
   }

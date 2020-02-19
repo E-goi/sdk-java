@@ -1,13 +1,12 @@
 
 
-# ImportBulkResponse
+# ContactTagsBulk
 
-Contact import bulk response schema
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **Object** |  |  [optional]
+**tags** | **List&lt;Integer&gt;** | Array of tags for this contact |  [optional] [readonly]
 
 
 

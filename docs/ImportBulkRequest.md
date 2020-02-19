@@ -7,24 +7,21 @@ Contact import bulk request schema
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**compareField** | [**CompareFieldEnum**](#CompareFieldEnum) | Field ID which will be mapped for comparison to prevent duplicates. If it is an extra field,                         append the prefix &#39;extra_&#39; to it (e. g. &#39;extra_1&#39;) | 
-**replaceExistingContacts** | **Boolean** | False to add new contacts only, true to replace existing contacts |  [optional]
-**sendAutoresponder** | **Boolean** | True to send each imported contact the autoresponder sequence you have previously set up for                         sign-ups in this mailing list |  [optional]
-**contacts** | [**List&lt;Contact&gt;**](Contact.md) | Array of contacts to import | 
+**mode** | [**ModeEnum**](#ModeEnum) | Add new contacts only (&#39;add&#39;) or add and replace existing ones (&#39;update&#39;) | 
+**compareField** | **String** | Field ID which will be mapped for comparison to prevent duplicates) | 
+**contacts** | [**List&lt;ContactBulk&gt;**](ContactBulk.md) | Array of contacts to import | 
+**forceEmpty** | **Boolean** | If &#39;true&#39; accepts empty values and erases those fields |  [optional]
+**notify** | **List&lt;Integer&gt;** | Array of IDs of the users to notify |  [optional]
+**callbackUrl** | **String** | Url to receive the report |  [optional]
 
 
 
-## Enum: CompareFieldEnum
+## Enum: ModeEnum
 
 Name | Value
 ---- | -----
-EMAIL | &quot;email&quot;
-CELLPHONE | &quot;cellphone&quot;
-PHONE | &quot;phone&quot;
-FIRST_NAME | &quot;first_name&quot;
-LAST_NAME | &quot;last_name&quot;
-BIRTH_DATE | &quot;birth_date&quot;
-EXTRA_X | &quot;extra_X&quot;
+ADD | &quot;add&quot;
+UPDATE | &quot;update&quot;
 
 
 

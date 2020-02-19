@@ -1,12 +1,12 @@
 
 
-# SendSmsAllOf2
+# SendSmartSmsAllOf
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**segments** | [**SmsSegmentsActionSend**](SmsSegmentsActionSend.md) |  |  [optional]
+**listId** | **Integer** |  |  [optional]
 
 
 
