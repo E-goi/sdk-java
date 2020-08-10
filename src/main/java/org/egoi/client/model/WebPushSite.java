@@ -1,6 +1,6 @@
 /*
  * APIv3 (Beta)
- *  # Introduction Just a quick peek!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services. * <b><a href='https://github.com/E-goi/sdk-java'>Java</a></b> * <b><a href='https://github.com/E-goi/sdk-php'>PHP</a></b> * <b><a href='https://github.com/E-goi/sdk-python'>Python</a></b>  <security-definitions/>
+ *  # Introduction Just a quick peek!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB. <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0-beta
  * 
@@ -28,19 +28,27 @@ import java.io.IOException;
  * WebPush site schema
  */
 @ApiModel(description = "WebPush site schema")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-02-19T15:12:15.913371Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-08-10T12:53:53.038698+01:00[Europe/Lisbon]")
 public class WebPushSite   {
   public static final String SERIALIZED_NAME_SITE_ID = "site_id";
   @SerializedName(SERIALIZED_NAME_SITE_ID)
   private Integer siteId;
 
+  public static final String SERIALIZED_NAME_SITE = "site";
+  @SerializedName(SERIALIZED_NAME_SITE)
+  private String site;
+
   public static final String SERIALIZED_NAME_LIST_ID = "list_id";
   @SerializedName(SERIALIZED_NAME_LIST_ID)
-  private String listId;
+  private Integer listId;
 
   public static final String SERIALIZED_NAME_APP_CODE = "app_code";
   @SerializedName(SERIALIZED_NAME_APP_CODE)
   private String appCode;
+
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  private String name;
 
 
    /**
@@ -58,34 +66,52 @@ public class WebPushSite   {
 
 
 
-  public WebPushSite listId(String listId) {
+  public WebPushSite site(String site) {
+    
+    this.site = site;
+    return this;
+  }
+
+   /**
+   * Webpush site
+   * @return site
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Webpush site")
+
+  public String getSite() {
+    return site;
+  }
+
+
+  public void setSite(String site) {
+    this.site = site;
+  }
+
+
+  public WebPushSite listId(Integer listId) {
     
     this.listId = listId;
     return this;
   }
 
    /**
-   * Name of the tag
+   * Get listId
+   * minimum: 1
    * @return listId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "List's id", value = "Name of the tag")
+  @ApiModelProperty(example = "1", value = "")
 
-  public String getListId() {
+  public Integer getListId() {
     return listId;
   }
 
 
-  public void setListId(String listId) {
+  public void setListId(Integer listId) {
     this.listId = listId;
   }
 
-
-  public WebPushSite appCode(String appCode) {
-    
-    this.appCode = appCode;
-    return this;
-  }
 
    /**
    * App code
@@ -99,8 +125,28 @@ public class WebPushSite   {
   }
 
 
-  public void setAppCode(String appCode) {
-    this.appCode = appCode;
+
+
+  public WebPushSite name(String name) {
+    
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Webpush name
+   * @return name
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Webpush name")
+
+  public String getName() {
+    return name;
+  }
+
+
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -114,13 +160,15 @@ public class WebPushSite   {
     }
     WebPushSite webPushSite = (WebPushSite) o;
     return Objects.equals(this.siteId, webPushSite.siteId) &&
+        Objects.equals(this.site, webPushSite.site) &&
         Objects.equals(this.listId, webPushSite.listId) &&
-        Objects.equals(this.appCode, webPushSite.appCode);
+        Objects.equals(this.appCode, webPushSite.appCode) &&
+        Objects.equals(this.name, webPushSite.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(siteId, listId, appCode);
+    return Objects.hash(siteId, site, listId, appCode, name);
   }
 
 
@@ -129,8 +177,10 @@ public class WebPushSite   {
     StringBuilder sb = new StringBuilder();
     sb.append("class WebPushSite {\n");
     sb.append("    siteId: ").append(toIndentedString(siteId)).append("\n");
+    sb.append("    site: ").append(toIndentedString(site)).append("\n");
     sb.append("    listId: ").append(toIndentedString(listId)).append("\n");
     sb.append("    appCode: ").append(toIndentedString(appCode)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

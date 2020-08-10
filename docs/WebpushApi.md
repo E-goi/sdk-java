@@ -8,7 +8,8 @@ Method | HTTP request | Description
 [**actionSendWebPush**](WebpushApi.md#actionSendWebPush) | **POST** /campaigns/web-push/{campaign_hash}/actions/send | Send webpush message
 [**createWebPushCampaign**](WebpushApi.md#createWebPushCampaign) | **POST** /campaigns/web-push | Create new webpush campaign
 [**createWebPushRssCampaign**](WebpushApi.md#createWebPushRssCampaign) | **POST** /campaigns/webpush/rss | Create new webpush rss campaign
-[**getAllWebPushSites**](WebpushApi.md#getAllWebPushSites) | **GET** /webpush/site | Get all webpush sites
+[**createWebpushSite**](WebpushApi.md#createWebpushSite) | **POST** /webpush/sites | Creates a webpush site
+[**getAllWebPushSites**](WebpushApi.md#getAllWebPushSites) | **GET** /webpush/sites | Get all webpush sites
 [**patchWebPushCampaign**](WebpushApi.md#patchWebPushCampaign) | **PATCH** /campaigns/web-push/{campaign_hash} | Update a specific webpush campaign
 
 
@@ -309,6 +310,81 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**409** | Conflict |  -  |
+**422** | Unprocessable Entity |  -  |
+**500** | Internal Server Error |  -  |
+
+<a name="createWebpushSite"></a>
+# **createWebpushSite**
+> WebPushSite createWebpushSite(webPushSite)
+
+Creates a webpush site
+
+Create a new webpush site
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.WebpushApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    WebpushApi apiInstance = new WebpushApi(defaultClient);
+    WebPushSite webPushSite = new WebPushSite(); // WebPushSite | Parameters for the webpush site
+    try {
+      WebPushSite result = apiInstance.createWebpushSite(webPushSite);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling WebpushApi#createWebpushSite");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webPushSite** | [**WebPushSite**](WebPushSite.md)| Parameters for the webpush site |
+
+### Return type
+
+[**WebPushSite**](WebPushSite.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
 **409** | Conflict |  -  |
 **422** | Unprocessable Entity |  -  |
 **500** | Internal Server Error |  -  |

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 Name | Value
 ---- | -----
-YOU_CAN_ONLY_DELETE_SEGMENTS_OF_TYPE_SAVED_ | &quot;You can only delete segments of type &#39;saved&#39;&quot;
+YOU_CAN_ONLY_DELETE_SEGMENTS_OF_TYPE_SAVED | &quot;You can only delete segments of  type saved&quot;
 
 
 

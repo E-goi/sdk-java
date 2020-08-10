@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**getAllCatalogs**](EcommerceApi.md#getAllCatalogs) | **GET** /catalogs | Get all catalogs
 [**getAllProducts**](EcommerceApi.md#getAllProducts) | **GET** /catalogs/{catalog_id}/products | Get all products
 [**getProduct**](EcommerceApi.md#getProduct) | **GET** /catalogs/{catalog_id}/products/{product_identifier} | Get product
+[**importOrdersBulk**](EcommerceApi.md#importOrdersBulk) | **POST** /lists/{list_id}/orders | Orders import bulk request
 [**importProducts**](EcommerceApi.md#importProducts) | **POST** /catalogs/{catalog_id}/products/actions/import | Import products
 [**updateProduct**](EcommerceApi.md#updateProduct) | **PATCH** /catalogs/{catalog_id}/products/{product_identifier} | Update product
 
@@ -535,13 +536,90 @@ Name | Type | Description  | Notes
 **404** | Not Found |  -  |
 **500** | Internal Server Error |  -  |
 
+<a name="importOrdersBulk"></a>
+# **importOrdersBulk**
+> AcceptedResponse importOrdersBulk(listId, importOrdersBulkBulkRequest)
+
+Orders import bulk request
+
+Creates new bulk orders syncronization
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.EcommerceApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    EcommerceApi apiInstance = new EcommerceApi(defaultClient);
+    Integer listId = 56; // Integer | ID of the List
+    List<ImportOrdersBulkBulkRequest> importOrdersBulkBulkRequest = Arrays.asList(); // List<ImportOrdersBulkBulkRequest> | Parameters for the Orders
+    try {
+      AcceptedResponse result = apiInstance.importOrdersBulk(listId, importOrdersBulkBulkRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling EcommerceApi#importOrdersBulk");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **listId** | **Integer**| ID of the List |
+ **importOrdersBulkBulkRequest** | [**List&lt;ImportOrdersBulkBulkRequest&gt;**](ImportOrdersBulkBulkRequest.md)| Parameters for the Orders |
+
+### Return type
+
+[**AcceptedResponse**](AcceptedResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
+**422** | Unprocessable Entity |  -  |
+**500** | Internal Server Error |  -  |
+
 <a name="importProducts"></a>
 # **importProducts**
 > AcceptedResponse importProducts(catalogId, productBulkRequest)
 
 Import products
 
-Imports a collection of products
+Imports a collection of products&lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
 
 ### Example
 ```java

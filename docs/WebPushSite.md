@@ -8,8 +8,10 @@ WebPush site schema
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **siteId** | **Integer** |  |  [optional] [readonly]
-**listId** | **String** | Name of the tag |  [optional]
-**appCode** | **String** | App code |  [optional]
+**site** | **String** | Webpush site |  [optional]
+**listId** | **Integer** |  |  [optional]
+**appCode** | **String** | App code |  [optional] [readonly]
+**name** | **String** | Webpush name |  [optional]
 
 
 

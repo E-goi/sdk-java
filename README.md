@@ -8,7 +8,7 @@ The API describes each available method. Learn about parameters, errors, and how
 If you find a bug or something worth fixing, create an issue.
 
 ### Changelog
-#### 1.0.0RC1
+#### 1.1.0RC2
 ## Requirements
 
 Building the API client library requires:
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.egoi</groupId>
   <artifactId>egoi-java-client</artifactId>
-  <version>1.0.0RC1</version>
+  <version>1.1.0RC2</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -49,7 +49,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "org.egoi:egoi-java-client:1.0.0RC1"
+compile "org.egoi:egoi-java-client:1.1.0RC2"
 ```
 
 ### Others
@@ -62,7 +62,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/egoi-java-client-1.0.0RC1.jar`
+* `target/egoi-java-client-1.1.0RC2.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -127,6 +127,7 @@ Class | Method | HTTP request | Description
 *AdvancedReportsApi* | [**getAllAdvancedReports**](docs/AdvancedReportsApi.md#getAllAdvancedReports) | **GET** /reports/advanced | Get all advanced reports
 *AutomationsApi* | [**deleteAutomation**](docs/AutomationsApi.md#deleteAutomation) | **DELETE** /automations/{automation_id} | Remove automation
 *AutomationsApi* | [**getAllAutomations**](docs/AutomationsApi.md#getAllAutomations) | **GET** /automations | Get all automations
+*CNamesApi* | [**createCName**](docs/CNamesApi.md#createCName) | **POST** /cnames | Create cname
 *CNamesApi* | [**getAllCNames**](docs/CNamesApi.md#getAllCNames) | **GET** /cnames | Get All CNames
 *CampaignGroupsApi* | [**createCampaignGroup**](docs/CampaignGroupsApi.md#createCampaignGroup) | **POST** /campaign-groups | Create new campaign group
 *CampaignGroupsApi* | [**deleteCampaignGroup**](docs/CampaignGroupsApi.md#deleteCampaignGroup) | **DELETE** /campaign-groups/{group_id} | Remove Campaign Group
@@ -134,9 +135,12 @@ Class | Method | HTTP request | Description
 *CampaignGroupsApi* | [**updateCampaignGroup**](docs/CampaignGroupsApi.md#updateCampaignGroup) | **PUT** /campaign-groups/{group_id} | Update a specific campaign group
 *CampaignsApi* | [**deleteCampaigns**](docs/CampaignsApi.md#deleteCampaigns) | **DELETE** /campaigns/{campaign_hash} | Remove Campaign
 *CampaignsApi* | [**getAllCampaigns**](docs/CampaignsApi.md#getAllCampaigns) | **GET** /campaigns | Get all Campaigns
+*ContactsApi* | [**actionActivateContacts**](docs/ContactsApi.md#actionActivateContacts) | **POST** /lists/{list_id}/contacts/actions/activate | Activate contacts
 *ContactsApi* | [**actionAttachTag**](docs/ContactsApi.md#actionAttachTag) | **POST** /lists/{list_id}/contacts/actions/attach-tag | Attach tag to contact
+*ContactsApi* | [**actionDeactivateContacts**](docs/ContactsApi.md#actionDeactivateContacts) | **POST** /lists/{list_id}/contacts/actions/deactivate | Deactivate contacts
 *ContactsApi* | [**actionDetachTag**](docs/ContactsApi.md#actionDetachTag) | **POST** /lists/{list_id}/contacts/actions/detach-tag | Detach tag to contact
 *ContactsApi* | [**actionExportContacts**](docs/ContactsApi.md#actionExportContacts) | **POST** /lists/{list_id}/contacts/actions/export | Exports a list of contacts
+*ContactsApi* | [**actionForgetContacts**](docs/ContactsApi.md#actionForgetContacts) | **POST** /lists/{list_id}/contacts/actions/forget | Forget contacts
 *ContactsApi* | [**actionImportBulk**](docs/ContactsApi.md#actionImportBulk) | **POST** /lists/{list_id}/contacts/actions/import-bulk | Import collection of contacts
 *ContactsApi* | [**actionStartAutomation**](docs/ContactsApi.md#actionStartAutomation) | **POST** /lists/{list_id}/contacts/actions/start-automation | Start automation
 *ContactsApi* | [**actionUnsubscribeContact**](docs/ContactsApi.md#actionUnsubscribeContact) | **POST** /lists/{list_id}/contacts/actions/unsubscribe | Unsubscribes contacts
@@ -145,6 +149,7 @@ Class | Method | HTTP request | Description
 *ContactsApi* | [**getAllContacts**](docs/ContactsApi.md#getAllContacts) | **GET** /lists/{list_id}/contacts | Get all contacts
 *ContactsApi* | [**getContact**](docs/ContactsApi.md#getContact) | **GET** /lists/{list_id}/contacts/{contact_id} | Get contact
 *ContactsApi* | [**patchContact**](docs/ContactsApi.md#patchContact) | **PATCH** /lists/{list_id}/contacts/{contact_id} | Update a specific contact
+*ContactsApi* | [**searchContacts**](docs/ContactsApi.md#searchContacts) | **GET** /contacts/search | Search contact
 *EcommerceApi* | [**createCatalog**](docs/EcommerceApi.md#createCatalog) | **POST** /catalogs | Create new catalog
 *EcommerceApi* | [**createProduct**](docs/EcommerceApi.md#createProduct) | **POST** /catalogs/{catalog_id}/products | Create new product
 *EcommerceApi* | [**deleteCatalog**](docs/EcommerceApi.md#deleteCatalog) | **DELETE** /catalogs/{catalog_id} | Remove catalog
@@ -152,6 +157,7 @@ Class | Method | HTTP request | Description
 *EcommerceApi* | [**getAllCatalogs**](docs/EcommerceApi.md#getAllCatalogs) | **GET** /catalogs | Get all catalogs
 *EcommerceApi* | [**getAllProducts**](docs/EcommerceApi.md#getAllProducts) | **GET** /catalogs/{catalog_id}/products | Get all products
 *EcommerceApi* | [**getProduct**](docs/EcommerceApi.md#getProduct) | **GET** /catalogs/{catalog_id}/products/{product_identifier} | Get product
+*EcommerceApi* | [**importOrdersBulk**](docs/EcommerceApi.md#importOrdersBulk) | **POST** /lists/{list_id}/orders | Orders import bulk request
 *EcommerceApi* | [**importProducts**](docs/EcommerceApi.md#importProducts) | **POST** /catalogs/{catalog_id}/products/actions/import | Import products
 *EcommerceApi* | [**updateProduct**](docs/EcommerceApi.md#updateProduct) | **PATCH** /catalogs/{catalog_id}/products/{product_identifier} | Update product
 *EmailApi* | [**actionEnableEmailRss**](docs/EmailApi.md#actionEnableEmailRss) | **POST** /campaigns/email/rss/{campaign_hash}/actions/enable | Enables a rss email campaign
@@ -215,11 +221,15 @@ Class | Method | HTTP request | Description
 *VoiceApi* | [**actionSendVoice**](docs/VoiceApi.md#actionSendVoice) | **POST** /campaigns/voice/{campaign_hash}/actions/send | Send voice message
 *VoiceApi* | [**createVoiceCampaign**](docs/VoiceApi.md#createVoiceCampaign) | **POST** /campaigns/voice | Create new voice campaign
 *VoiceApi* | [**patchVoiceCampaign**](docs/VoiceApi.md#patchVoiceCampaign) | **PATCH** /campaigns/voice/{campaign_hash} | Update a specific voice campaign
+*WebHooksApi* | [**createWebhook**](docs/WebHooksApi.md#createWebhook) | **POST** /webhooks | Create new webhook
+*WebHooksApi* | [**deleteWebhook**](docs/WebHooksApi.md#deleteWebhook) | **DELETE** /webhooks/{webhook_id} | Remove webhook
+*WebHooksApi* | [**getAllWebhooks**](docs/WebHooksApi.md#getAllWebhooks) | **GET** /webhooks | Get all webhooks
 *WebpushApi* | [**actionEnableWebPushRss**](docs/WebpushApi.md#actionEnableWebPushRss) | **POST** /campaigns/webpush/rss/{campaign_hash}/actions/enable | Enable a rss webpush campaign
 *WebpushApi* | [**actionSendWebPush**](docs/WebpushApi.md#actionSendWebPush) | **POST** /campaigns/web-push/{campaign_hash}/actions/send | Send webpush message
 *WebpushApi* | [**createWebPushCampaign**](docs/WebpushApi.md#createWebPushCampaign) | **POST** /campaigns/web-push | Create new webpush campaign
 *WebpushApi* | [**createWebPushRssCampaign**](docs/WebpushApi.md#createWebPushRssCampaign) | **POST** /campaigns/webpush/rss | Create new webpush rss campaign
-*WebpushApi* | [**getAllWebPushSites**](docs/WebpushApi.md#getAllWebPushSites) | **GET** /webpush/site | Get all webpush sites
+*WebpushApi* | [**createWebpushSite**](docs/WebpushApi.md#createWebpushSite) | **POST** /webpush/sites | Creates a webpush site
+*WebpushApi* | [**getAllWebPushSites**](docs/WebpushApi.md#getAllWebPushSites) | **GET** /webpush/sites | Get all webpush sites
 *WebpushApi* | [**patchWebPushCampaign**](docs/WebpushApi.md#patchWebPushCampaign) | **PATCH** /campaigns/web-push/{campaign_hash} | Update a specific webpush campaign
 
 
@@ -235,6 +245,8 @@ Class | Method | HTTP request | Description
  - [AbstractSendVoice](docs/AbstractSendVoice.md)
  - [AbstractSendVoiceAllOf](docs/AbstractSendVoiceAllOf.md)
  - [AcceptedResponse](docs/AcceptedResponse.md)
+ - [ActivateContactsAll](docs/ActivateContactsAll.md)
+ - [ActivateContactsMany](docs/ActivateContactsMany.md)
  - [ActivityCollection](docs/ActivityCollection.md)
  - [AdvancedReport](docs/AdvancedReport.md)
  - [AdvancedReportEmailBouncesColumns](docs/AdvancedReportEmailBouncesColumns.md)
@@ -324,6 +336,8 @@ Class | Method | HTTP request | Description
  - [CatalogCollection](docs/CatalogCollection.md)
  - [CatalogPostRequest](docs/CatalogPostRequest.md)
  - [CellphoneSenderCollection](docs/CellphoneSenderCollection.md)
+ - [CnameExists](docs/CnameExists.md)
+ - [CnameExistsErrors](docs/CnameExistsErrors.md)
  - [ComplexContact](docs/ComplexContact.md)
  - [ComplexContactAllOf](docs/ComplexContactAllOf.md)
  - [ComplexContactAllOfEmailStats](docs/ComplexContactAllOfEmailStats.md)
@@ -371,9 +385,11 @@ Class | Method | HTTP request | Description
  - [ContactExtraFieldText](docs/ContactExtraFieldText.md)
  - [ContactExtraFieldsBulkSchema](docs/ContactExtraFieldsBulkSchema.md)
  - [ContactExtraFieldsSchema](docs/ContactExtraFieldsSchema.md)
+ - [ContactForgetRequest](docs/ContactForgetRequest.md)
  - [ContactInsideBase](docs/ContactInsideBase.md)
  - [ContactInsideBaseBulk](docs/ContactInsideBaseBulk.md)
  - [ContactOtherActivity](docs/ContactOtherActivity.md)
+ - [ContactSearchResponse](docs/ContactSearchResponse.md)
  - [ContactStatusFieldsBulkSchema](docs/ContactStatusFieldsBulkSchema.md)
  - [ContactStatusFieldsSchema](docs/ContactStatusFieldsSchema.md)
  - [ContactTags](docs/ContactTags.md)
@@ -384,6 +400,8 @@ Class | Method | HTTP request | Description
  - [Country](docs/Country.md)
  - [CountryCollection](docs/CountryCollection.md)
  - [CreateContactResponse](docs/CreateContactResponse.md)
+ - [DeactivateContactsAll](docs/DeactivateContactsAll.md)
+ - [DeactivateContactsMany](docs/DeactivateContactsMany.md)
  - [DeleteCampaignsConflict](docs/DeleteCampaignsConflict.md)
  - [DeleteFieldsConflict](docs/DeleteFieldsConflict.md)
  - [DomainAlreadyDefined](docs/DomainAlreadyDefined.md)
@@ -453,7 +471,10 @@ Class | Method | HTTP request | Description
  - [HeaderFooterHeaderLinks](docs/HeaderFooterHeaderLinks.md)
  - [HeaderFooterTemplate](docs/HeaderFooterTemplate.md)
  - [ImportBulkRequest](docs/ImportBulkRequest.md)
+ - [ImportOrdersBulkBulkRequest](docs/ImportOrdersBulkBulkRequest.md)
+ - [ImportOrdersBulkBulkRequestItems](docs/ImportOrdersBulkBulkRequestItems.md)
  - [InlineObject](docs/InlineObject.md)
+ - [InlineResponse200](docs/InlineResponse200.md)
  - [InternalServerError](docs/InternalServerError.md)
  - [InvalidSegmentType](docs/InvalidSegmentType.md)
  - [InvalidSegmentTypeErrors](docs/InvalidSegmentTypeErrors.md)
@@ -465,6 +486,7 @@ Class | Method | HTTP request | Description
  - [LimitHourActionSendLimitHour](docs/LimitHourActionSendLimitHour.md)
  - [LimitSpeedActionSend](docs/LimitSpeedActionSend.md)
  - [ListCollection](docs/ListCollection.md)
+ - [ListCollection1](docs/ListCollection1.md)
  - [ListLimitReached](docs/ListLimitReached.md)
  - [ListLimitReachedErrors](docs/ListLimitReachedErrors.md)
  - [ListModel](docs/ListModel.md)
@@ -475,6 +497,8 @@ Class | Method | HTTP request | Description
  - [ModuleInfoModuleInfo](docs/ModuleInfoModuleInfo.md)
  - [ModuleInfoModuleInfoTe](docs/ModuleInfoModuleInfoTe.md)
  - [MyAccount](docs/MyAccount.md)
+ - [NameAlreadyExists](docs/NameAlreadyExists.md)
+ - [NameAlreadyExistsErrors](docs/NameAlreadyExistsErrors.md)
  - [NotFound](docs/NotFound.md)
  - [NotifyUserIdArrayActionSend](docs/NotifyUserIdArrayActionSend.md)
  - [Now](docs/Now.md)
@@ -502,10 +526,12 @@ Class | Method | HTTP request | Description
  - [Ping](docs/Ping.md)
  - [PlanInfo](docs/PlanInfo.md)
  - [PlanInfoPlanInfo](docs/PlanInfoPlanInfo.md)
+ - [PostCNameConflict](docs/PostCNameConflict.md)
  - [PostContactsConflict](docs/PostContactsConflict.md)
  - [PostListsConflict](docs/PostListsConflict.md)
  - [PostProductsConflict](docs/PostProductsConflict.md)
  - [PostRequestList](docs/PostRequestList.md)
+ - [PostWebpushSiteConflict](docs/PostWebpushSiteConflict.md)
  - [Product](docs/Product.md)
  - [ProductAllOf](docs/ProductAllOf.md)
  - [ProductAlreadyExists](docs/ProductAlreadyExists.md)
@@ -619,6 +645,8 @@ Class | Method | HTTP request | Description
  - [WebPushRssCampaign](docs/WebPushRssCampaign.md)
  - [WebPushSite](docs/WebPushSite.md)
  - [WebPushStats](docs/WebPushStats.md)
+ - [Webhook](docs/Webhook.md)
+ - [WebhookActionSchema](docs/WebhookActionSchema.md)
 
 
 ## Documentation for Authorization

@@ -1,6 +1,6 @@
 /*
  * APIv3 (Beta)
- *  # Introduction Just a quick peek!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services. * <b><a href='https://github.com/E-goi/sdk-java'>Java</a></b> * <b><a href='https://github.com/E-goi/sdk-php'>PHP</a></b> * <b><a href='https://github.com/E-goi/sdk-python'>Python</a></b>  <security-definitions/>
+ *  # Introduction Just a quick peek!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB. <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0-beta
  * 
@@ -28,6 +28,7 @@ import java.io.IOException;
 
 
 import org.egoi.client.model.AcceptedResponse;
+import org.egoi.client.model.ActivateContactsRequest;
 import org.egoi.client.model.ActivityCollection;
 import org.egoi.client.model.AttachTagRequest;
 import org.egoi.client.model.AttachTagResponse;
@@ -37,9 +38,12 @@ import org.egoi.client.model.ContactBaseExtra;
 import org.egoi.client.model.ContactBaseStatusExtra;
 import org.egoi.client.model.ContactCollection;
 import org.egoi.client.model.ContactExportRequest;
+import org.egoi.client.model.ContactForgetRequest;
 import org.egoi.client.model.CreateContactResponse;
+import org.egoi.client.model.DeactivateContactsRequest;
 import org.egoi.client.model.Forbidden;
 import org.egoi.client.model.ImportBulkRequest;
+import org.egoi.client.model.InlineResponse200;
 import org.egoi.client.model.InternalServerError;
 import org.egoi.client.model.NotFound;
 import org.threeten.bp.OffsetDateTime;
@@ -76,6 +80,150 @@ public class ContactsApi {
         this.localVarApiClient = apiClient;
     }
 
+    /**
+     * Build call for actionActivateContacts
+     * @param listId ID of the List (required)
+     * @param activateContactsRequest Parameters for the request (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call actionActivateContactsCall(Integer listId, ActivateContactsRequest activateContactsRequest, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = activateContactsRequest;
+
+        // create path and map variables
+        String localVarPath = "/lists/{list_id}/contacts/actions/activate"
+            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        String[] localVarAuthNames = new String[] { "Apikey" };
+        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call actionActivateContactsValidateBeforeCall(Integer listId, ActivateContactsRequest activateContactsRequest, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'listId' is set
+        if (listId == null) {
+            throw new ApiException("Missing the required parameter 'listId' when calling actionActivateContacts(Async)");
+        }
+        
+        // verify the required parameter 'activateContactsRequest' is set
+        if (activateContactsRequest == null) {
+            throw new ApiException("Missing the required parameter 'activateContactsRequest' when calling actionActivateContacts(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = actionActivateContactsCall(listId, activateContactsRequest, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * Activate contacts
+     * Activates a collection of contacts (does not apply to removed contacts)
+     * @param listId ID of the List (required)
+     * @param activateContactsRequest Parameters for the request (required)
+     * @return AcceptedResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AcceptedResponse actionActivateContacts(Integer listId, ActivateContactsRequest activateContactsRequest) throws ApiException {
+        ApiResponse<AcceptedResponse> localVarResp = actionActivateContactsWithHttpInfo(listId, activateContactsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Activate contacts
+     * Activates a collection of contacts (does not apply to removed contacts)
+     * @param listId ID of the List (required)
+     * @param activateContactsRequest Parameters for the request (required)
+     * @return ApiResponse&lt;AcceptedResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AcceptedResponse> actionActivateContactsWithHttpInfo(Integer listId, ActivateContactsRequest activateContactsRequest) throws ApiException {
+        okhttp3.Call localVarCall = actionActivateContactsValidateBeforeCall(listId, activateContactsRequest, null);
+        Type localVarReturnType = new TypeToken<AcceptedResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Activate contacts (asynchronously)
+     * Activates a collection of contacts (does not apply to removed contacts)
+     * @param listId ID of the List (required)
+     * @param activateContactsRequest Parameters for the request (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call actionActivateContactsAsync(Integer listId, ActivateContactsRequest activateContactsRequest, final ApiCallback<AcceptedResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = actionActivateContactsValidateBeforeCall(listId, activateContactsRequest, _callback);
+        Type localVarReturnType = new TypeToken<AcceptedResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
     /**
      * Build call for actionAttachTag
      * @param listId ID of the List (required)
@@ -217,6 +365,150 @@ public class ContactsApi {
 
         okhttp3.Call localVarCall = actionAttachTagValidateBeforeCall(listId, attachTagRequest, _callback);
         Type localVarReturnType = new TypeToken<AttachTagResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for actionDeactivateContacts
+     * @param listId ID of the List (required)
+     * @param deactivateContactsRequest Parameters for the request (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call actionDeactivateContactsCall(Integer listId, DeactivateContactsRequest deactivateContactsRequest, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = deactivateContactsRequest;
+
+        // create path and map variables
+        String localVarPath = "/lists/{list_id}/contacts/actions/deactivate"
+            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        String[] localVarAuthNames = new String[] { "Apikey" };
+        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call actionDeactivateContactsValidateBeforeCall(Integer listId, DeactivateContactsRequest deactivateContactsRequest, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'listId' is set
+        if (listId == null) {
+            throw new ApiException("Missing the required parameter 'listId' when calling actionDeactivateContacts(Async)");
+        }
+        
+        // verify the required parameter 'deactivateContactsRequest' is set
+        if (deactivateContactsRequest == null) {
+            throw new ApiException("Missing the required parameter 'deactivateContactsRequest' when calling actionDeactivateContacts(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = actionDeactivateContactsCall(listId, deactivateContactsRequest, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * Deactivate contacts
+     * Deactivates a collection of contacts (does not apply to removed contacts)
+     * @param listId ID of the List (required)
+     * @param deactivateContactsRequest Parameters for the request (required)
+     * @return AcceptedResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AcceptedResponse actionDeactivateContacts(Integer listId, DeactivateContactsRequest deactivateContactsRequest) throws ApiException {
+        ApiResponse<AcceptedResponse> localVarResp = actionDeactivateContactsWithHttpInfo(listId, deactivateContactsRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Deactivate contacts
+     * Deactivates a collection of contacts (does not apply to removed contacts)
+     * @param listId ID of the List (required)
+     * @param deactivateContactsRequest Parameters for the request (required)
+     * @return ApiResponse&lt;AcceptedResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AcceptedResponse> actionDeactivateContactsWithHttpInfo(Integer listId, DeactivateContactsRequest deactivateContactsRequest) throws ApiException {
+        okhttp3.Call localVarCall = actionDeactivateContactsValidateBeforeCall(listId, deactivateContactsRequest, null);
+        Type localVarReturnType = new TypeToken<AcceptedResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Deactivate contacts (asynchronously)
+     * Deactivates a collection of contacts (does not apply to removed contacts)
+     * @param listId ID of the List (required)
+     * @param deactivateContactsRequest Parameters for the request (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call actionDeactivateContactsAsync(Integer listId, DeactivateContactsRequest deactivateContactsRequest, final ApiCallback<AcceptedResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = actionDeactivateContactsValidateBeforeCall(listId, deactivateContactsRequest, _callback);
+        Type localVarReturnType = new TypeToken<AcceptedResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -509,6 +801,150 @@ public class ContactsApi {
         return localVarCall;
     }
     /**
+     * Build call for actionForgetContacts
+     * @param listId ID of the List (required)
+     * @param contactForgetRequest Parameters for the action (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call actionForgetContactsCall(Integer listId, ContactForgetRequest contactForgetRequest, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = contactForgetRequest;
+
+        // create path and map variables
+        String localVarPath = "/lists/{list_id}/contacts/actions/forget"
+            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        String[] localVarAuthNames = new String[] { "Apikey" };
+        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call actionForgetContactsValidateBeforeCall(Integer listId, ContactForgetRequest contactForgetRequest, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'listId' is set
+        if (listId == null) {
+            throw new ApiException("Missing the required parameter 'listId' when calling actionForgetContacts(Async)");
+        }
+        
+        // verify the required parameter 'contactForgetRequest' is set
+        if (contactForgetRequest == null) {
+            throw new ApiException("Missing the required parameter 'contactForgetRequest' when calling actionForgetContacts(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = actionForgetContactsCall(listId, contactForgetRequest, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * Forget contacts
+     * Forgets a list of contacts to the desired callback url
+     * @param listId ID of the List (required)
+     * @param contactForgetRequest Parameters for the action (required)
+     * @return AcceptedResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AcceptedResponse actionForgetContacts(Integer listId, ContactForgetRequest contactForgetRequest) throws ApiException {
+        ApiResponse<AcceptedResponse> localVarResp = actionForgetContactsWithHttpInfo(listId, contactForgetRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Forget contacts
+     * Forgets a list of contacts to the desired callback url
+     * @param listId ID of the List (required)
+     * @param contactForgetRequest Parameters for the action (required)
+     * @return ApiResponse&lt;AcceptedResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<AcceptedResponse> actionForgetContactsWithHttpInfo(Integer listId, ContactForgetRequest contactForgetRequest) throws ApiException {
+        okhttp3.Call localVarCall = actionForgetContactsValidateBeforeCall(listId, contactForgetRequest, null);
+        Type localVarReturnType = new TypeToken<AcceptedResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Forget contacts (asynchronously)
+     * Forgets a list of contacts to the desired callback url
+     * @param listId ID of the List (required)
+     * @param contactForgetRequest Parameters for the action (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 202 </td><td> Accepted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call actionForgetContactsAsync(Integer listId, ContactForgetRequest contactForgetRequest, final ApiCallback<AcceptedResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = actionForgetContactsValidateBeforeCall(listId, contactForgetRequest, _callback);
+        Type localVarReturnType = new TypeToken<AcceptedResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
      * Build call for actionImportBulk
      * @param listId ID of the List (required)
      * @param importBulkRequest Parameters for the bulk import (required)
@@ -577,7 +1013,7 @@ public class ContactsApi {
 
     /**
      * Import collection of contacts
-     * Imports a collection of contacts
+     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
      * @param listId ID of the List (required)
      * @param importBulkRequest Parameters for the bulk import (required)
      * @return AcceptedResponse
@@ -600,7 +1036,7 @@ public class ContactsApi {
 
     /**
      * Import collection of contacts
-     * Imports a collection of contacts
+     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
      * @param listId ID of the List (required)
      * @param importBulkRequest Parameters for the bulk import (required)
      * @return ApiResponse&lt;AcceptedResponse&gt;
@@ -624,7 +1060,7 @@ public class ContactsApi {
 
     /**
      * Import collection of contacts (asynchronously)
-     * Imports a collection of contacts
+     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
      * @param listId ID of the List (required)
      * @param importBulkRequest Parameters for the bulk import (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1254,6 +1690,7 @@ public class ContactsApi {
      * @param listId ID of the List (required)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
+     * @param email Email of the contacts to return (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1268,7 +1705,7 @@ public class ContactsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getAllContactsCall(Integer listId, Integer offset, Integer limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getAllContactsCall(Integer listId, Integer offset, Integer limit, String email, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1283,6 +1720,10 @@ public class ContactsApi {
 
         if (limit != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (email != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("email", email));
         }
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
@@ -1307,7 +1748,7 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getAllContactsValidateBeforeCall(Integer listId, Integer offset, Integer limit, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getAllContactsValidateBeforeCall(Integer listId, Integer offset, Integer limit, String email, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'listId' is set
         if (listId == null) {
@@ -1315,7 +1756,7 @@ public class ContactsApi {
         }
         
 
-        okhttp3.Call localVarCall = getAllContactsCall(listId, offset, limit, _callback);
+        okhttp3.Call localVarCall = getAllContactsCall(listId, offset, limit, email, _callback);
         return localVarCall;
 
     }
@@ -1326,6 +1767,7 @@ public class ContactsApi {
      * @param listId ID of the List (required)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
+     * @param email Email of the contacts to return (optional)
      * @return ContactCollection
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1339,8 +1781,8 @@ public class ContactsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ContactCollection getAllContacts(Integer listId, Integer offset, Integer limit) throws ApiException {
-        ApiResponse<ContactCollection> localVarResp = getAllContactsWithHttpInfo(listId, offset, limit);
+    public ContactCollection getAllContacts(Integer listId, Integer offset, Integer limit, String email) throws ApiException {
+        ApiResponse<ContactCollection> localVarResp = getAllContactsWithHttpInfo(listId, offset, limit, email);
         return localVarResp.getData();
     }
 
@@ -1350,6 +1792,7 @@ public class ContactsApi {
      * @param listId ID of the List (required)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
+     * @param email Email of the contacts to return (optional)
      * @return ApiResponse&lt;ContactCollection&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1363,8 +1806,8 @@ public class ContactsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ContactCollection> getAllContactsWithHttpInfo(Integer listId, Integer offset, Integer limit) throws ApiException {
-        okhttp3.Call localVarCall = getAllContactsValidateBeforeCall(listId, offset, limit, null);
+    public ApiResponse<ContactCollection> getAllContactsWithHttpInfo(Integer listId, Integer offset, Integer limit, String email) throws ApiException {
+        okhttp3.Call localVarCall = getAllContactsValidateBeforeCall(listId, offset, limit, email, null);
         Type localVarReturnType = new TypeToken<ContactCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1375,6 +1818,7 @@ public class ContactsApi {
      * @param listId ID of the List (required)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
+     * @param email Email of the contacts to return (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1389,9 +1833,9 @@ public class ContactsApi {
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getAllContactsAsync(Integer listId, Integer offset, Integer limit, final ApiCallback<ContactCollection> _callback) throws ApiException {
+    public okhttp3.Call getAllContactsAsync(Integer listId, Integer offset, Integer limit, String email, final ApiCallback<ContactCollection> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getAllContactsValidateBeforeCall(listId, offset, limit, _callback);
+        okhttp3.Call localVarCall = getAllContactsValidateBeforeCall(listId, offset, limit, email, _callback);
         Type localVarReturnType = new TypeToken<ContactCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1688,6 +2132,148 @@ public class ContactsApi {
 
         okhttp3.Call localVarCall = patchContactValidateBeforeCall(contactId, listId, contactBaseStatusExtra, _callback);
         Type localVarReturnType = new TypeToken<CreateContactResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchContacts
+     * @param contact Contact to search (required)
+     * @param type Type of contact to search (defaults to &#39;email&#39;) (optional, default to email)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchContactsCall(String contact, String type, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/contacts/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (type != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("type", type));
+        }
+
+        if (contact != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("contact", contact));
+        }
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        String[] localVarAuthNames = new String[] { "Apikey" };
+        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchContactsValidateBeforeCall(String contact, String type, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'contact' is set
+        if (contact == null) {
+            throw new ApiException("Missing the required parameter 'contact' when calling searchContacts(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = searchContactsCall(contact, type, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * Search contact
+     * Searches a contact across all lists and returns a collection of contacts found
+     * @param contact Contact to search (required)
+     * @param type Type of contact to search (defaults to &#39;email&#39;) (optional, default to email)
+     * @return InlineResponse200
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public InlineResponse200 searchContacts(String contact, String type) throws ApiException {
+        ApiResponse<InlineResponse200> localVarResp = searchContactsWithHttpInfo(contact, type);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Search contact
+     * Searches a contact across all lists and returns a collection of contacts found
+     * @param contact Contact to search (required)
+     * @param type Type of contact to search (defaults to &#39;email&#39;) (optional, default to email)
+     * @return ApiResponse&lt;InlineResponse200&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<InlineResponse200> searchContactsWithHttpInfo(String contact, String type) throws ApiException {
+        okhttp3.Call localVarCall = searchContactsValidateBeforeCall(contact, type, null);
+        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Search contact (asynchronously)
+     * Searches a contact across all lists and returns a collection of contacts found
+     * @param contact Contact to search (required)
+     * @param type Type of contact to search (defaults to &#39;email&#39;) (optional, default to email)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchContactsAsync(String contact, String type, final ApiCallback<InlineResponse200> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchContactsValidateBeforeCall(contact, type, _callback);
+        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
