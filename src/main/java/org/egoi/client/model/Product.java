@@ -1,8 +1,8 @@
 /*
- * APIv3 (Beta)
- *  # Introduction Just a quick peek!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB. <security-definitions/>
+ * APIv3 (New)
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  <security-definitions/>
  *
- * The version of the OpenAPI document: 3.0.0-beta
+ * The version of the OpenAPI document: 3.0.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -27,12 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.egoi.client.model.BasicProduct;
 import org.egoi.client.model.ProductAllOf;
+import org.egoi.client.model.ProductCustomAttributes;
 
 /**
  * Product schema
  */
 @ApiModel(description = "Product schema")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2020-08-10T12:53:53.038698+01:00[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-07-12T20:27:19.076308+01:00[Europe/Lisbon]")
 public class Product   {
   public static final String SERIALIZED_NAME_PRODUCT_IDENTIFIER = "product_identifier";
   @SerializedName(SERIALIZED_NAME_PRODUCT_IDENTIFIER)
@@ -80,11 +81,11 @@ public class Product   {
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
-  private Double price = null;
+  private Double price = 0d;
 
   public static final String SERIALIZED_NAME_SALE_PRICE = "sale_price";
   @SerializedName(SERIALIZED_NAME_SALE_PRICE)
-  private Double salePrice = null;
+  private Double salePrice = 0d;
 
   public static final String SERIALIZED_NAME_BRAND = "brand";
   @SerializedName(SERIALIZED_NAME_BRAND)
@@ -97,6 +98,10 @@ public class Product   {
   public static final String SERIALIZED_NAME_RELATED_PRODUCTS = "related_products";
   @SerializedName(SERIALIZED_NAME_RELATED_PRODUCTS)
   private List<String> relatedProducts = null;
+
+  public static final String SERIALIZED_NAME_CUSTOM_ATTRIBUTES = "custom_attributes";
+  @SerializedName(SERIALIZED_NAME_CUSTOM_ATTRIBUTES)
+  private List<ProductCustomAttributes> customAttributes = null;
 
 
   public Product productIdentifier(String productIdentifier) {
@@ -355,7 +360,7 @@ public class Product   {
    * @return price
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Price of the product")
+  @ApiModelProperty(example = "10", value = "Price of the product")
 
   public Double getPrice() {
     return price;
@@ -378,7 +383,7 @@ public class Product   {
    * @return salePrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Sale price of the product")
+  @ApiModelProperty(example = "10", value = "Sale price of the product")
 
   public Double getSalePrice() {
     return salePrice;
@@ -475,6 +480,37 @@ public class Product   {
   }
 
 
+  public Product customAttributes(List<ProductCustomAttributes> customAttributes) {
+    
+    this.customAttributes = customAttributes;
+    return this;
+  }
+
+  public Product addCustomAttributesItem(ProductCustomAttributes customAttributesItem) {
+    if (this.customAttributes == null) {
+      this.customAttributes = new ArrayList<ProductCustomAttributes>();
+    }
+    this.customAttributes.add(customAttributesItem);
+    return this;
+  }
+
+   /**
+   * Custom attributes
+   * @return customAttributes
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Custom attributes")
+
+  public List<ProductCustomAttributes> getCustomAttributes() {
+    return customAttributes;
+  }
+
+
+  public void setCustomAttributes(List<ProductCustomAttributes> customAttributes) {
+    this.customAttributes = customAttributes;
+  }
+
+
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -499,12 +535,13 @@ public class Product   {
         Objects.equals(this.salePrice, product.salePrice) &&
         Objects.equals(this.brand, product.brand) &&
         Objects.equals(this.categories, product.categories) &&
-        Objects.equals(this.relatedProducts, product.relatedProducts);
+        Objects.equals(this.relatedProducts, product.relatedProducts) &&
+        Objects.equals(this.customAttributes, product.customAttributes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(productIdentifier, catalogId, name, description, sku, upc, ean, gtin, mpn, link, imageLink, price, salePrice, brand, categories, relatedProducts);
+    return Objects.hash(productIdentifier, catalogId, name, description, sku, upc, ean, gtin, mpn, link, imageLink, price, salePrice, brand, categories, relatedProducts, customAttributes);
   }
 
 
@@ -528,6 +565,7 @@ public class Product   {
     sb.append("    brand: ").append(toIndentedString(brand)).append("\n");
     sb.append("    categories: ").append(toIndentedString(categories)).append("\n");
     sb.append("    relatedProducts: ").append(toIndentedString(relatedProducts)).append("\n");
+    sb.append("    customAttributes: ").append(toIndentedString(customAttributes)).append("\n");
     sb.append("}");
     return sb.toString();
   }

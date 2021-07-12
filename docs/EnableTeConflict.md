@@ -7,6 +7,7 @@ Error schema for lists conflicts
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**errors** | [**DomainListRequiredErrors**](DomainListRequiredErrors.md) |  |  [optional]
 **type** | **String** | RFC for status code definitions |  [optional]
 **title** | [**TitleEnum**](#TitleEnum) | Error title |  [optional]
 **status** | **Integer** | Status code |  [optional]

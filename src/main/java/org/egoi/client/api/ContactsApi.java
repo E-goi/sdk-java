@@ -1,8 +1,8 @@
 /*
- * APIv3 (Beta)
- *  # Introduction Just a quick peek!!! This is our new version of API. Remember, it is not stable yet!!! But we invite you play with it and give us your feedback ;) # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB. <security-definitions/>
+ * APIv3 (New)
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  <security-definitions/>
  *
- * The version of the OpenAPI document: 3.0.0-beta
+ * The version of the OpenAPI document: 3.0.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -45,13 +45,17 @@ import org.egoi.client.model.Forbidden;
 import org.egoi.client.model.ImportBulkRequest;
 import org.egoi.client.model.InlineResponse200;
 import org.egoi.client.model.InternalServerError;
+import org.threeten.bp.LocalDate;
 import org.egoi.client.model.NotFound;
 import org.threeten.bp.OffsetDateTime;
 import org.egoi.client.model.PostContactsConflict;
 import org.egoi.client.model.RemoveRequest;
 import org.egoi.client.model.RemoveResponse;
+import org.egoi.client.model.RequestTimeout;
+import org.egoi.client.model.ServiceUnavailable;
 import org.egoi.client.model.StartAutomationRequest;
 import org.egoi.client.model.StartAutomationResponse;
+import org.egoi.client.model.TooManyRequests;
 import org.egoi.client.model.Unauthorized;
 import org.egoi.client.model.UnprocessableEntity;
 
@@ -95,8 +99,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionActivateContactsCall(Integer listId, ActivateContactsRequest activateContactsRequest, final ApiCallback _callback) throws ApiException {
@@ -163,8 +170,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public AcceptedResponse actionActivateContacts(Integer listId, ActivateContactsRequest activateContactsRequest) throws ApiException {
@@ -187,8 +197,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<AcceptedResponse> actionActivateContactsWithHttpInfo(Integer listId, ActivateContactsRequest activateContactsRequest) throws ApiException {
@@ -213,8 +226,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionActivateContactsAsync(Integer listId, ActivateContactsRequest activateContactsRequest, final ApiCallback<AcceptedResponse> _callback) throws ApiException {
@@ -239,8 +255,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionAttachTagCall(Integer listId, AttachTagRequest attachTagRequest, final ApiCallback _callback) throws ApiException {
@@ -294,7 +313,7 @@ public class ContactsApi {
 
     /**
      * Attach tag to contact
-     * Attaches a tag to the provided contacts
+     * Attaches a tag to the provided contacts. &lt;br&gt;***Note:***&lt;br&gt; If you provide the array of **contacts** there will be a maximum limit of 1000 contacts in the payload, but if you provide a **segment_id** instead of     the array of contacts you will get an asynchronous response with the status code 202
      * @param listId ID of the List (required)
      * @param attachTagRequest Parameters for the Tag (required)
      * @return AttachTagResponse
@@ -307,8 +326,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public AttachTagResponse actionAttachTag(Integer listId, AttachTagRequest attachTagRequest) throws ApiException {
@@ -318,7 +340,7 @@ public class ContactsApi {
 
     /**
      * Attach tag to contact
-     * Attaches a tag to the provided contacts
+     * Attaches a tag to the provided contacts. &lt;br&gt;***Note:***&lt;br&gt; If you provide the array of **contacts** there will be a maximum limit of 1000 contacts in the payload, but if you provide a **segment_id** instead of     the array of contacts you will get an asynchronous response with the status code 202
      * @param listId ID of the List (required)
      * @param attachTagRequest Parameters for the Tag (required)
      * @return ApiResponse&lt;AttachTagResponse&gt;
@@ -331,8 +353,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<AttachTagResponse> actionAttachTagWithHttpInfo(Integer listId, AttachTagRequest attachTagRequest) throws ApiException {
@@ -343,7 +368,7 @@ public class ContactsApi {
 
     /**
      * Attach tag to contact (asynchronously)
-     * Attaches a tag to the provided contacts
+     * Attaches a tag to the provided contacts. &lt;br&gt;***Note:***&lt;br&gt; If you provide the array of **contacts** there will be a maximum limit of 1000 contacts in the payload, but if you provide a **segment_id** instead of     the array of contacts you will get an asynchronous response with the status code 202
      * @param listId ID of the List (required)
      * @param attachTagRequest Parameters for the Tag (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -357,8 +382,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionAttachTagAsync(Integer listId, AttachTagRequest attachTagRequest, final ApiCallback<AttachTagResponse> _callback) throws ApiException {
@@ -383,8 +411,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionDeactivateContactsCall(Integer listId, DeactivateContactsRequest deactivateContactsRequest, final ApiCallback _callback) throws ApiException {
@@ -451,8 +482,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public AcceptedResponse actionDeactivateContacts(Integer listId, DeactivateContactsRequest deactivateContactsRequest) throws ApiException {
@@ -475,8 +509,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<AcceptedResponse> actionDeactivateContactsWithHttpInfo(Integer listId, DeactivateContactsRequest deactivateContactsRequest) throws ApiException {
@@ -501,8 +538,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionDeactivateContactsAsync(Integer listId, DeactivateContactsRequest deactivateContactsRequest, final ApiCallback<AcceptedResponse> _callback) throws ApiException {
@@ -527,8 +567,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionDetachTagCall(Integer listId, AttachTagRequest attachTagRequest, final ApiCallback _callback) throws ApiException {
@@ -595,8 +638,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public AttachTagResponse actionDetachTag(Integer listId, AttachTagRequest attachTagRequest) throws ApiException {
@@ -619,8 +665,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<AttachTagResponse> actionDetachTagWithHttpInfo(Integer listId, AttachTagRequest attachTagRequest) throws ApiException {
@@ -645,8 +694,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionDetachTagAsync(Integer listId, AttachTagRequest attachTagRequest, final ApiCallback<AttachTagResponse> _callback) throws ApiException {
@@ -671,8 +723,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionExportContactsCall(Integer listId, ContactExportRequest contactExportRequest, final ApiCallback _callback) throws ApiException {
@@ -739,8 +794,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public AcceptedResponse actionExportContacts(Integer listId, ContactExportRequest contactExportRequest) throws ApiException {
@@ -763,8 +821,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<AcceptedResponse> actionExportContactsWithHttpInfo(Integer listId, ContactExportRequest contactExportRequest) throws ApiException {
@@ -789,8 +850,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionExportContactsAsync(Integer listId, ContactExportRequest contactExportRequest, final ApiCallback<AcceptedResponse> _callback) throws ApiException {
@@ -815,8 +879,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionForgetContactsCall(Integer listId, ContactForgetRequest contactForgetRequest, final ApiCallback _callback) throws ApiException {
@@ -883,8 +950,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public AcceptedResponse actionForgetContacts(Integer listId, ContactForgetRequest contactForgetRequest) throws ApiException {
@@ -907,8 +977,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<AcceptedResponse> actionForgetContactsWithHttpInfo(Integer listId, ContactForgetRequest contactForgetRequest) throws ApiException {
@@ -933,8 +1006,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionForgetContactsAsync(Integer listId, ContactForgetRequest contactForgetRequest, final ApiCallback<AcceptedResponse> _callback) throws ApiException {
@@ -958,8 +1034,11 @@ public class ContactsApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionImportBulkCall(Integer listId, ImportBulkRequest importBulkRequest, final ApiCallback _callback) throws ApiException {
@@ -1013,7 +1092,7 @@ public class ContactsApi {
 
     /**
      * Import collection of contacts
-     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
+     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)&lt;br&gt; ***Note:*** minimum of 2 contacts to use this method. [use Create new contact method instead](#operation/createContact &#39;Create new contact&#39;)
      * @param listId ID of the List (required)
      * @param importBulkRequest Parameters for the bulk import (required)
      * @return AcceptedResponse
@@ -1025,8 +1104,11 @@ public class ContactsApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public AcceptedResponse actionImportBulk(Integer listId, ImportBulkRequest importBulkRequest) throws ApiException {
@@ -1036,7 +1118,7 @@ public class ContactsApi {
 
     /**
      * Import collection of contacts
-     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
+     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)&lt;br&gt; ***Note:*** minimum of 2 contacts to use this method. [use Create new contact method instead](#operation/createContact &#39;Create new contact&#39;)
      * @param listId ID of the List (required)
      * @param importBulkRequest Parameters for the bulk import (required)
      * @return ApiResponse&lt;AcceptedResponse&gt;
@@ -1048,8 +1130,11 @@ public class ContactsApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<AcceptedResponse> actionImportBulkWithHttpInfo(Integer listId, ImportBulkRequest importBulkRequest) throws ApiException {
@@ -1060,7 +1145,7 @@ public class ContactsApi {
 
     /**
      * Import collection of contacts (asynchronously)
-     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
+     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)&lt;br&gt; ***Note:*** minimum of 2 contacts to use this method. [use Create new contact method instead](#operation/createContact &#39;Create new contact&#39;)
      * @param listId ID of the List (required)
      * @param importBulkRequest Parameters for the bulk import (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1073,8 +1158,11 @@ public class ContactsApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionImportBulkAsync(Integer listId, ImportBulkRequest importBulkRequest, final ApiCallback<AcceptedResponse> _callback) throws ApiException {
@@ -1099,8 +1187,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionStartAutomationCall(Integer listId, StartAutomationRequest startAutomationRequest, final ApiCallback _callback) throws ApiException {
@@ -1167,8 +1258,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public StartAutomationResponse actionStartAutomation(Integer listId, StartAutomationRequest startAutomationRequest) throws ApiException {
@@ -1191,8 +1285,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<StartAutomationResponse> actionStartAutomationWithHttpInfo(Integer listId, StartAutomationRequest startAutomationRequest) throws ApiException {
@@ -1217,8 +1314,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionStartAutomationAsync(Integer listId, StartAutomationRequest startAutomationRequest, final ApiCallback<StartAutomationResponse> _callback) throws ApiException {
@@ -1242,8 +1342,11 @@ public class ContactsApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionUnsubscribeContactCall(Integer listId, RemoveRequest removeRequest, final ApiCallback _callback) throws ApiException {
@@ -1309,8 +1412,11 @@ public class ContactsApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public RemoveResponse actionUnsubscribeContact(Integer listId, RemoveRequest removeRequest) throws ApiException {
@@ -1332,8 +1438,11 @@ public class ContactsApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<RemoveResponse> actionUnsubscribeContactWithHttpInfo(Integer listId, RemoveRequest removeRequest) throws ApiException {
@@ -1357,8 +1466,11 @@ public class ContactsApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call actionUnsubscribeContactAsync(Integer listId, RemoveRequest removeRequest, final ApiCallback<RemoveResponse> _callback) throws ApiException {
@@ -1383,9 +1495,12 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call createContactCall(Integer listId, ContactBaseExtra contactBaseExtra, final ApiCallback _callback) throws ApiException {
@@ -1452,9 +1567,12 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public CreateContactResponse createContact(Integer listId, ContactBaseExtra contactBaseExtra) throws ApiException {
@@ -1477,9 +1595,12 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<CreateContactResponse> createContactWithHttpInfo(Integer listId, ContactBaseExtra contactBaseExtra) throws ApiException {
@@ -1504,9 +1625,12 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call createContactAsync(Integer listId, ContactBaseExtra contactBaseExtra, final ApiCallback<CreateContactResponse> _callback) throws ApiException {
@@ -1533,8 +1657,11 @@ public class ContactsApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getAllContactActivitiesCall(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, final ApiCallback _callback) throws ApiException {
@@ -1620,8 +1747,11 @@ public class ContactsApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ActivityCollection getAllContactActivities(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax) throws ApiException {
@@ -1646,8 +1776,11 @@ public class ContactsApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<ActivityCollection> getAllContactActivitiesWithHttpInfo(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax) throws ApiException {
@@ -1674,8 +1807,11 @@ public class ContactsApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getAllContactActivitiesAsync(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, final ApiCallback<ActivityCollection> _callback) throws ApiException {
@@ -1690,7 +1826,17 @@ public class ContactsApi {
      * @param listId ID of the List (required)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
+     * @param firstName First name of the contacts to return (optional)
+     * @param lastName Last name of the contacts to return (optional)
      * @param email Email of the contacts to return (optional)
+     * @param emailStatus EmailStatus of the contacts to return (optional)
+     * @param cellphone Cellphone of the contacts to return (optional)
+     * @param cellphoneStatus CellphoneStatus of the contacts to return (optional)
+     * @param phone Phone of the contacts to return (optional)
+     * @param phoneStatus PhoneStatus of the contacts to return (optional)
+     * @param birthDate Birth date of the contacts to return (optional, default to null)
+     * @param language Language date of the contacts to return (optional)
+     * @param extraFieldId Extra field of contacts, extra_field_id[field_id]&#x3D;value (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1701,11 +1847,14 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getAllContactsCall(Integer listId, Integer offset, Integer limit, String email, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getAllContactsCall(Integer listId, Integer offset, Integer limit, String firstName, String lastName, String email, Boolean emailStatus, String cellphone, Boolean cellphoneStatus, String phone, Boolean phoneStatus, LocalDate birthDate, String language, List<String> extraFieldId, final ApiCallback _callback) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1722,8 +1871,48 @@ public class ContactsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
         }
 
+        if (firstName != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("first_name", firstName));
+        }
+
+        if (lastName != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("last_name", lastName));
+        }
+
         if (email != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("email", email));
+        }
+
+        if (emailStatus != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("email_status", emailStatus));
+        }
+
+        if (cellphone != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("cellphone", cellphone));
+        }
+
+        if (cellphoneStatus != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("cellphone_status", cellphoneStatus));
+        }
+
+        if (phone != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("phone", phone));
+        }
+
+        if (phoneStatus != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("phone_status", phoneStatus));
+        }
+
+        if (birthDate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("birth_date", birthDate));
+        }
+
+        if (language != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("language", language));
+        }
+
+        if (extraFieldId != null) {
+            localVarCollectionQueryParams.addAll(localVarApiClient.parameterToPairs("multi", "extra_field_id", extraFieldId));
         }
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
@@ -1748,7 +1937,7 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getAllContactsValidateBeforeCall(Integer listId, Integer offset, Integer limit, String email, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getAllContactsValidateBeforeCall(Integer listId, Integer offset, Integer limit, String firstName, String lastName, String email, Boolean emailStatus, String cellphone, Boolean cellphoneStatus, String phone, Boolean phoneStatus, LocalDate birthDate, String language, List<String> extraFieldId, final ApiCallback _callback) throws ApiException {
         
         // verify the required parameter 'listId' is set
         if (listId == null) {
@@ -1756,7 +1945,7 @@ public class ContactsApi {
         }
         
 
-        okhttp3.Call localVarCall = getAllContactsCall(listId, offset, limit, email, _callback);
+        okhttp3.Call localVarCall = getAllContactsCall(listId, offset, limit, firstName, lastName, email, emailStatus, cellphone, cellphoneStatus, phone, phoneStatus, birthDate, language, extraFieldId, _callback);
         return localVarCall;
 
     }
@@ -1767,7 +1956,17 @@ public class ContactsApi {
      * @param listId ID of the List (required)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
+     * @param firstName First name of the contacts to return (optional)
+     * @param lastName Last name of the contacts to return (optional)
      * @param email Email of the contacts to return (optional)
+     * @param emailStatus EmailStatus of the contacts to return (optional)
+     * @param cellphone Cellphone of the contacts to return (optional)
+     * @param cellphoneStatus CellphoneStatus of the contacts to return (optional)
+     * @param phone Phone of the contacts to return (optional)
+     * @param phoneStatus PhoneStatus of the contacts to return (optional)
+     * @param birthDate Birth date of the contacts to return (optional, default to null)
+     * @param language Language date of the contacts to return (optional)
+     * @param extraFieldId Extra field of contacts, extra_field_id[field_id]&#x3D;value (optional)
      * @return ContactCollection
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1777,12 +1976,15 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ContactCollection getAllContacts(Integer listId, Integer offset, Integer limit, String email) throws ApiException {
-        ApiResponse<ContactCollection> localVarResp = getAllContactsWithHttpInfo(listId, offset, limit, email);
+    public ContactCollection getAllContacts(Integer listId, Integer offset, Integer limit, String firstName, String lastName, String email, Boolean emailStatus, String cellphone, Boolean cellphoneStatus, String phone, Boolean phoneStatus, LocalDate birthDate, String language, List<String> extraFieldId) throws ApiException {
+        ApiResponse<ContactCollection> localVarResp = getAllContactsWithHttpInfo(listId, offset, limit, firstName, lastName, email, emailStatus, cellphone, cellphoneStatus, phone, phoneStatus, birthDate, language, extraFieldId);
         return localVarResp.getData();
     }
 
@@ -1792,7 +1994,17 @@ public class ContactsApi {
      * @param listId ID of the List (required)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
+     * @param firstName First name of the contacts to return (optional)
+     * @param lastName Last name of the contacts to return (optional)
      * @param email Email of the contacts to return (optional)
+     * @param emailStatus EmailStatus of the contacts to return (optional)
+     * @param cellphone Cellphone of the contacts to return (optional)
+     * @param cellphoneStatus CellphoneStatus of the contacts to return (optional)
+     * @param phone Phone of the contacts to return (optional)
+     * @param phoneStatus PhoneStatus of the contacts to return (optional)
+     * @param birthDate Birth date of the contacts to return (optional, default to null)
+     * @param language Language date of the contacts to return (optional)
+     * @param extraFieldId Extra field of contacts, extra_field_id[field_id]&#x3D;value (optional)
      * @return ApiResponse&lt;ContactCollection&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1802,12 +2014,15 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ContactCollection> getAllContactsWithHttpInfo(Integer listId, Integer offset, Integer limit, String email) throws ApiException {
-        okhttp3.Call localVarCall = getAllContactsValidateBeforeCall(listId, offset, limit, email, null);
+    public ApiResponse<ContactCollection> getAllContactsWithHttpInfo(Integer listId, Integer offset, Integer limit, String firstName, String lastName, String email, Boolean emailStatus, String cellphone, Boolean cellphoneStatus, String phone, Boolean phoneStatus, LocalDate birthDate, String language, List<String> extraFieldId) throws ApiException {
+        okhttp3.Call localVarCall = getAllContactsValidateBeforeCall(listId, offset, limit, firstName, lastName, email, emailStatus, cellphone, cellphoneStatus, phone, phoneStatus, birthDate, language, extraFieldId, null);
         Type localVarReturnType = new TypeToken<ContactCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1818,7 +2033,17 @@ public class ContactsApi {
      * @param listId ID of the List (required)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
+     * @param firstName First name of the contacts to return (optional)
+     * @param lastName Last name of the contacts to return (optional)
      * @param email Email of the contacts to return (optional)
+     * @param emailStatus EmailStatus of the contacts to return (optional)
+     * @param cellphone Cellphone of the contacts to return (optional)
+     * @param cellphoneStatus CellphoneStatus of the contacts to return (optional)
+     * @param phone Phone of the contacts to return (optional)
+     * @param phoneStatus PhoneStatus of the contacts to return (optional)
+     * @param birthDate Birth date of the contacts to return (optional, default to null)
+     * @param language Language date of the contacts to return (optional)
+     * @param extraFieldId Extra field of contacts, extra_field_id[field_id]&#x3D;value (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1829,13 +2054,197 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getAllContactsAsync(Integer listId, Integer offset, Integer limit, String email, final ApiCallback<ContactCollection> _callback) throws ApiException {
+    public okhttp3.Call getAllContactsAsync(Integer listId, Integer offset, Integer limit, String firstName, String lastName, String email, Boolean emailStatus, String cellphone, Boolean cellphoneStatus, String phone, Boolean phoneStatus, LocalDate birthDate, String language, List<String> extraFieldId, final ApiCallback<ContactCollection> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getAllContactsValidateBeforeCall(listId, offset, limit, email, _callback);
+        okhttp3.Call localVarCall = getAllContactsValidateBeforeCall(listId, offset, limit, firstName, lastName, email, emailStatus, cellphone, cellphoneStatus, phone, phoneStatus, birthDate, language, extraFieldId, _callback);
+        Type localVarReturnType = new TypeToken<ContactCollection>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getAllContactsBySegment
+     * @param listId ID of the List (required)
+     * @param segmentId ID of the Segment (required)
+     * @param offset Element offset (starting at zero for the first element) (optional)
+     * @param limit Number of items to return (optional, default to 10)
+     * @param showRemoved Show removed contacts (optional, default to false)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAllContactsBySegmentCall(Integer listId, String segmentId, Integer offset, Integer limit, Boolean showRemoved, final ApiCallback _callback) throws ApiException {
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/lists/{list_id}/contacts/segment/{segment_id}"
+            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()))
+            .replaceAll("\\{" + "segment_id" + "\\}", localVarApiClient.escapeString(segmentId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        if (offset != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
+        }
+
+        if (limit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
+        }
+
+        if (showRemoved != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("show_removed", showRemoved));
+        }
+
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        localVarHeaderParams.put("Content-Type", localVarContentType);
+
+        String[] localVarAuthNames = new String[] { "Apikey" };
+        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAllContactsBySegmentValidateBeforeCall(Integer listId, String segmentId, Integer offset, Integer limit, Boolean showRemoved, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'listId' is set
+        if (listId == null) {
+            throw new ApiException("Missing the required parameter 'listId' when calling getAllContactsBySegment(Async)");
+        }
+        
+        // verify the required parameter 'segmentId' is set
+        if (segmentId == null) {
+            throw new ApiException("Missing the required parameter 'segmentId' when calling getAllContactsBySegment(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = getAllContactsBySegmentCall(listId, segmentId, offset, limit, showRemoved, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * Get all contacts by Segment Id
+     * Returns all contacts filtered by Segment Id
+     * @param listId ID of the List (required)
+     * @param segmentId ID of the Segment (required)
+     * @param offset Element offset (starting at zero for the first element) (optional)
+     * @param limit Number of items to return (optional, default to 10)
+     * @param showRemoved Show removed contacts (optional, default to false)
+     * @return ContactCollection
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
+     </table>
+     */
+    public ContactCollection getAllContactsBySegment(Integer listId, String segmentId, Integer offset, Integer limit, Boolean showRemoved) throws ApiException {
+        ApiResponse<ContactCollection> localVarResp = getAllContactsBySegmentWithHttpInfo(listId, segmentId, offset, limit, showRemoved);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get all contacts by Segment Id
+     * Returns all contacts filtered by Segment Id
+     * @param listId ID of the List (required)
+     * @param segmentId ID of the Segment (required)
+     * @param offset Element offset (starting at zero for the first element) (optional)
+     * @param limit Number of items to return (optional, default to 10)
+     * @param showRemoved Show removed contacts (optional, default to false)
+     * @return ApiResponse&lt;ContactCollection&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ContactCollection> getAllContactsBySegmentWithHttpInfo(Integer listId, String segmentId, Integer offset, Integer limit, Boolean showRemoved) throws ApiException {
+        okhttp3.Call localVarCall = getAllContactsBySegmentValidateBeforeCall(listId, segmentId, offset, limit, showRemoved, null);
+        Type localVarReturnType = new TypeToken<ContactCollection>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get all contacts by Segment Id (asynchronously)
+     * Returns all contacts filtered by Segment Id
+     * @param listId ID of the List (required)
+     * @param segmentId ID of the Segment (required)
+     * @param offset Element offset (starting at zero for the first element) (optional)
+     * @param limit Number of items to return (optional, default to 10)
+     * @param showRemoved Show removed contacts (optional, default to false)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAllContactsBySegmentAsync(Integer listId, String segmentId, Integer offset, Integer limit, Boolean showRemoved, final ApiCallback<ContactCollection> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAllContactsBySegmentValidateBeforeCall(listId, segmentId, offset, limit, showRemoved, _callback);
         Type localVarReturnType = new TypeToken<ContactCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1854,8 +2263,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getContactCall(String contactId, Integer listId, final ApiCallback _callback) throws ApiException {
@@ -1922,8 +2334,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ComplexContact getContact(String contactId, Integer listId) throws ApiException {
@@ -1945,8 +2360,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<ComplexContact> getContactWithHttpInfo(String contactId, Integer listId) throws ApiException {
@@ -1970,8 +2388,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getContactAsync(String contactId, Integer listId, final ApiCallback<ComplexContact> _callback) throws ApiException {
@@ -1997,8 +2418,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call patchContactCall(String contactId, Integer listId, ContactBaseStatusExtra contactBaseStatusExtra, final ApiCallback _callback) throws ApiException {
@@ -2072,8 +2496,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public CreateContactResponse patchContact(String contactId, Integer listId, ContactBaseStatusExtra contactBaseStatusExtra) throws ApiException {
@@ -2097,8 +2524,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<CreateContactResponse> patchContactWithHttpInfo(String contactId, Integer listId, ContactBaseStatusExtra contactBaseStatusExtra) throws ApiException {
@@ -2124,8 +2554,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call patchContactAsync(String contactId, Integer listId, ContactBaseStatusExtra contactBaseStatusExtra, final ApiCallback<CreateContactResponse> _callback) throws ApiException {
@@ -2149,8 +2582,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call searchContactsCall(String contact, String type, final ApiCallback _callback) throws ApiException {
@@ -2218,8 +2654,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public InlineResponse200 searchContacts(String contact, String type) throws ApiException {
@@ -2241,8 +2680,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<InlineResponse200> searchContactsWithHttpInfo(String contact, String type) throws ApiException {
@@ -2266,8 +2708,11 @@ public class ContactsApi {
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
+        <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call searchContactsAsync(String contact, String type, final ApiCallback<InlineResponse200> _callback) throws ApiException {

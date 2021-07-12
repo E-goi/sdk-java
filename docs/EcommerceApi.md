@@ -4,17 +4,97 @@ All URIs are relative to *https://api.egoiapp.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**createCart**](EcommerceApi.md#createCart) | **POST** /{domain}/carts | Create cart
 [**createCatalog**](EcommerceApi.md#createCatalog) | **POST** /catalogs | Create new catalog
+[**createOrder**](EcommerceApi.md#createOrder) | **POST** /{domain}/orders | Create order
 [**createProduct**](EcommerceApi.md#createProduct) | **POST** /catalogs/{catalog_id}/products | Create new product
 [**deleteCatalog**](EcommerceApi.md#deleteCatalog) | **DELETE** /catalogs/{catalog_id} | Remove catalog
 [**deleteProduct**](EcommerceApi.md#deleteProduct) | **DELETE** /catalogs/{catalog_id}/products/{product_identifier} | Remove product
 [**getAllCatalogs**](EcommerceApi.md#getAllCatalogs) | **GET** /catalogs | Get all catalogs
 [**getAllProducts**](EcommerceApi.md#getAllProducts) | **GET** /catalogs/{catalog_id}/products | Get all products
 [**getProduct**](EcommerceApi.md#getProduct) | **GET** /catalogs/{catalog_id}/products/{product_identifier} | Get product
-[**importOrdersBulk**](EcommerceApi.md#importOrdersBulk) | **POST** /lists/{list_id}/orders | Orders import bulk request
 [**importProducts**](EcommerceApi.md#importProducts) | **POST** /catalogs/{catalog_id}/products/actions/import | Import products
 [**updateProduct**](EcommerceApi.md#updateProduct) | **PATCH** /catalogs/{catalog_id}/products/{product_identifier} | Update product
 
+
+<a name="createCart"></a>
+# **createCart**
+> AcceptedResponse createCart(domain, cart)
+
+Create cart
+
+Creates a new cart. If ***contact_id*** is specified, order will be atached to the contact, if the contact propreties are specified, we&#39;ll create the user, if its already in your list it will get the correct contact (**make sure you are sending atleast all configured list&#39;s unique fields**). This same logic is also applied to the **product_identifier**.
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.EcommerceApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    EcommerceApi apiInstance = new EcommerceApi(defaultClient);
+    String domain = "domain_example"; // String | Domain
+    Cart cart = new Cart(); // Cart | Parameters for the Carts
+    try {
+      AcceptedResponse result = apiInstance.createCart(domain, cart);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling EcommerceApi#createCart");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **domain** | **String**| Domain |
+ **cart** | [**Cart**](Cart.md)| Parameters for the Carts |
+
+### Return type
+
+[**AcceptedResponse**](AcceptedResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
+**500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="createCatalog"></a>
 # **createCatalog**
@@ -87,8 +167,91 @@ Name | Type | Description  | Notes
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
+
+<a name="createOrder"></a>
+# **createOrder**
+> AcceptedResponse createOrder(domain, createOrder)
+
+Create order
+
+Creates a new order. If **contact_id** is specified, order will be atached to the contact, if the contact propreties are specified, we&#39;ll create the user, if its already in your list it will get the correct contact (***make sure you are sending atleast all configured list&#39;s unique fields***). This same logic is also applied to the **product_identifier**.
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.EcommerceApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    EcommerceApi apiInstance = new EcommerceApi(defaultClient);
+    String domain = "domain_example"; // String | Domain
+    CreateOrder createOrder = new CreateOrder(); // CreateOrder | Parameters for the Orders
+    try {
+      AcceptedResponse result = apiInstance.createOrder(domain, createOrder);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling EcommerceApi#createOrder");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **domain** | **String**| Domain |
+ **createOrder** | [**CreateOrder**](CreateOrder.md)| Parameters for the Orders |
+
+### Return type
+
+[**AcceptedResponse**](AcceptedResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | NotFound |  -  |
+**408** | Request Timeout |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
+**500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="createProduct"></a>
 # **createProduct**
@@ -164,9 +327,12 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |
+**408** | Request Timeout |  -  |
 **409** | Conflict |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="deleteCatalog"></a>
 # **deleteCatalog**
@@ -238,7 +404,10 @@ null (empty response body)
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="deleteProduct"></a>
 # **deleteProduct**
@@ -312,7 +481,10 @@ null (empty response body)
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="getAllCatalogs"></a>
 # **getAllCatalogs**
@@ -380,7 +552,10 @@ This endpoint does not need any parameter.
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**408** | Request Timeout |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="getAllProducts"></a>
 # **getAllProducts**
@@ -459,7 +634,10 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |
+**408** | Request Timeout |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="getProduct"></a>
 # **getProduct**
@@ -534,84 +712,10 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
-
-<a name="importOrdersBulk"></a>
-# **importOrdersBulk**
-> AcceptedResponse importOrdersBulk(listId, importOrdersBulkBulkRequest)
-
-Orders import bulk request
-
-Creates new bulk orders syncronization
-
-### Example
-```java
-// Import classes:
-import org.egoi.client.ApiClient;
-import org.egoi.client.ApiException;
-import org.egoi.client.Configuration;
-import org.egoi.client.auth.*;
-import org.egoi.client.models.*;
-import org.egoi.client.api.EcommerceApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.egoiapp.com");
-    
-    // Configure API key authorization: Apikey
-    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
-    Apikey.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //Apikey.setApiKeyPrefix("Token");
-
-    EcommerceApi apiInstance = new EcommerceApi(defaultClient);
-    Integer listId = 56; // Integer | ID of the List
-    List<ImportOrdersBulkBulkRequest> importOrdersBulkBulkRequest = Arrays.asList(); // List<ImportOrdersBulkBulkRequest> | Parameters for the Orders
-    try {
-      AcceptedResponse result = apiInstance.importOrdersBulk(listId, importOrdersBulkBulkRequest);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling EcommerceApi#importOrdersBulk");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **listId** | **Integer**| ID of the List |
- **importOrdersBulkBulkRequest** | [**List&lt;ImportOrdersBulkBulkRequest&gt;**](ImportOrdersBulkBulkRequest.md)| Parameters for the Orders |
-
-### Return type
-
-[**AcceptedResponse**](AcceptedResponse.md)
-
-### Authorization
-
-[Apikey](../README.md#Apikey)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**202** | OK |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**422** | Unprocessable Entity |  -  |
-**500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="importProducts"></a>
 # **importProducts**
@@ -687,8 +791,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | NotFound |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="updateProduct"></a>
 # **updateProduct**
@@ -766,6 +873,9 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 

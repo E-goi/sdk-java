@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**createContact**](ContactsApi.md#createContact) | **POST** /lists/{list_id}/contacts | Create new contact
 [**getAllContactActivities**](ContactsApi.md#getAllContactActivities) | **GET** /lists/{list_id}/contacts/{contact_id}/activities | Get all contact activities
 [**getAllContacts**](ContactsApi.md#getAllContacts) | **GET** /lists/{list_id}/contacts | Get all contacts
+[**getAllContactsBySegment**](ContactsApi.md#getAllContactsBySegment) | **GET** /lists/{list_id}/contacts/segment/{segment_id} | Get all contacts by Segment Id
 [**getContact**](ContactsApi.md#getContact) | **GET** /lists/{list_id}/contacts/{contact_id} | Get contact
 [**patchContact**](ContactsApi.md#patchContact) | **PATCH** /lists/{list_id}/contacts/{contact_id} | Update a specific contact
 [**searchContacts**](ContactsApi.md#searchContacts) | **GET** /contacts/search | Search contact
@@ -95,8 +96,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="actionAttachTag"></a>
 # **actionAttachTag**
@@ -104,7 +108,7 @@ Name | Type | Description  | Notes
 
 Attach tag to contact
 
-Attaches a tag to the provided contacts
+Attaches a tag to the provided contacts. &lt;br&gt;***Note:***&lt;br&gt; If you provide the array of **contacts** there will be a maximum limit of 1000 contacts in the payload, but if you provide a **segment_id** instead of     the array of contacts you will get an asynchronous response with the status code 202
 
 ### Example
 ```java
@@ -172,8 +176,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="actionDeactivateContacts"></a>
 # **actionDeactivateContacts**
@@ -249,8 +256,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="actionDetachTag"></a>
 # **actionDetachTag**
@@ -326,8 +336,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="actionExportContacts"></a>
 # **actionExportContacts**
@@ -403,8 +416,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="actionForgetContacts"></a>
 # **actionForgetContacts**
@@ -480,8 +496,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="actionImportBulk"></a>
 # **actionImportBulk**
@@ -489,7 +508,7 @@ Name | Type | Description  | Notes
 
 Import collection of contacts
 
-Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
+Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)&lt;br&gt; ***Note:*** minimum of 2 contacts to use this method. [use Create new contact method instead](#operation/createContact &#39;Create new contact&#39;)
 
 ### Example
 ```java
@@ -556,8 +575,11 @@ Name | Type | Description  | Notes
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="actionStartAutomation"></a>
 # **actionStartAutomation**
@@ -633,8 +655,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="actionUnsubscribeContact"></a>
 # **actionUnsubscribeContact**
@@ -709,8 +734,11 @@ Name | Type | Description  | Notes
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="createContact"></a>
 # **createContact**
@@ -786,9 +814,12 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **409** | Conflict |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="getAllContactActivities"></a>
 # **getAllContactActivities**
@@ -870,12 +901,15 @@ Name | Type | Description  | Notes
 **200** | OK |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="getAllContacts"></a>
 # **getAllContacts**
-> ContactCollection getAllContacts(listId, offset, limit, email)
+> ContactCollection getAllContacts(listId, offset, limit, firstName, lastName, email, emailStatus, cellphone, cellphoneStatus, phone, phoneStatus, birthDate, language, extraFieldId)
 
 Get all contacts
 
@@ -906,9 +940,19 @@ public class Example {
     Integer listId = 56; // Integer | ID of the List
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
+    String firstName = "firstName_example"; // String | First name of the contacts to return
+    String lastName = "lastName_example"; // String | Last name of the contacts to return
     String email = "email_example"; // String | Email of the contacts to return
+    Boolean emailStatus = true; // Boolean | EmailStatus of the contacts to return
+    String cellphone = "cellphone_example"; // String | Cellphone of the contacts to return
+    Boolean cellphoneStatus = true; // Boolean | CellphoneStatus of the contacts to return
+    String phone = "phone_example"; // String | Phone of the contacts to return
+    Boolean phoneStatus = true; // Boolean | PhoneStatus of the contacts to return
+    LocalDate birthDate = new LocalDate(); // LocalDate | Birth date of the contacts to return
+    String language = "language_example"; // String | Language date of the contacts to return
+    List<String> extraFieldId = Arrays.asList(); // List<String> | Extra field of contacts, extra_field_id[field_id]=value
     try {
-      ContactCollection result = apiInstance.getAllContacts(listId, offset, limit, email);
+      ContactCollection result = apiInstance.getAllContacts(listId, offset, limit, firstName, lastName, email, emailStatus, cellphone, cellphoneStatus, phone, phoneStatus, birthDate, language, extraFieldId);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ContactsApi#getAllContacts");
@@ -928,7 +972,17 @@ Name | Type | Description  | Notes
  **listId** | **Integer**| ID of the List |
  **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
  **limit** | **Integer**| Number of items to return | [optional] [default to 10]
+ **firstName** | **String**| First name of the contacts to return | [optional]
+ **lastName** | **String**| Last name of the contacts to return | [optional]
  **email** | **String**| Email of the contacts to return | [optional]
+ **emailStatus** | **Boolean**| EmailStatus of the contacts to return | [optional]
+ **cellphone** | **String**| Cellphone of the contacts to return | [optional]
+ **cellphoneStatus** | **Boolean**| CellphoneStatus of the contacts to return | [optional]
+ **phone** | **String**| Phone of the contacts to return | [optional]
+ **phoneStatus** | **Boolean**| PhoneStatus of the contacts to return | [optional]
+ **birthDate** | [**LocalDate**](.md)| Birth date of the contacts to return | [optional] [default to null]
+ **language** | **String**| Language date of the contacts to return | [optional] [enum: pt, en, es, br, fr, de]
+ **extraFieldId** | [**List&lt;String&gt;**](String.md)| Extra field of contacts, extra_field_id[field_id]&#x3D;value | [optional]
 
 ### Return type
 
@@ -950,8 +1004,97 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
+
+<a name="getAllContactsBySegment"></a>
+# **getAllContactsBySegment**
+> ContactCollection getAllContactsBySegment(listId, segmentId, offset, limit, showRemoved)
+
+Get all contacts by Segment Id
+
+Returns all contacts filtered by Segment Id
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.ContactsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    ContactsApi apiInstance = new ContactsApi(defaultClient);
+    Integer listId = 56; // Integer | ID of the List
+    String segmentId = "segmentId_example"; // String | ID of the Segment
+    Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
+    Integer limit = 10; // Integer | Number of items to return
+    Boolean showRemoved = false; // Boolean | Show removed contacts
+    try {
+      ContactCollection result = apiInstance.getAllContactsBySegment(listId, segmentId, offset, limit, showRemoved);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ContactsApi#getAllContactsBySegment");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **listId** | **Integer**| ID of the List |
+ **segmentId** | **String**| ID of the Segment |
+ **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
+ **limit** | **Integer**| Number of items to return | [optional] [default to 10]
+ **showRemoved** | **Boolean**| Show removed contacts | [optional] [default to false]
+
+### Return type
+
+[**ContactCollection**](ContactCollection.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
+**422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
+**500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="getContact"></a>
 # **getContact**
@@ -1026,8 +1169,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="patchContact"></a>
 # **patchContact**
@@ -1105,8 +1251,11 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 
 <a name="searchContacts"></a>
 # **searchContacts**
@@ -1181,6 +1330,9 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**408** | Request Timeout |  -  |
 **422** | Unprocessable Entity |  -  |
+**429** | Too Many Requests |  -  |
 **500** | Internal Server Error |  -  |
+**503** | Service Unavailable |  -  |
 

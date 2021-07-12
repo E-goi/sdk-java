@@ -20,6 +20,7 @@ FREE | &quot;free&quot;
 PRO | &quot;pro&quot;
 STARTER | &quot;starter&quot;
 TRIAL | &quot;trial&quot;
+BASE | &quot;base&quot;
 
 
 

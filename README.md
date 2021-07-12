@@ -8,7 +8,7 @@ The API describes each available method. Learn about parameters, errors, and how
 If you find a bug or something worth fixing, create an issue.
 
 ### Changelog
-#### 1.1.0RC2
+#### 1.1.1RC1
 ## Requirements
 
 Building the API client library requires:
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.egoi</groupId>
   <artifactId>egoi-java-client</artifactId>
-  <version>1.1.0RC2</version>
+  <version>1.1.1RC1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -49,7 +49,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "org.egoi:egoi-java-client:1.1.0RC2"
+compile "org.egoi:egoi-java-client:1.1.1RC1"
 ```
 
 ### Others
@@ -62,7 +62,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/egoi-java-client-1.1.0RC2.jar`
+* `target/egoi-java-client-1.1.1RC1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -147,19 +147,22 @@ Class | Method | HTTP request | Description
 *ContactsApi* | [**createContact**](docs/ContactsApi.md#createContact) | **POST** /lists/{list_id}/contacts | Create new contact
 *ContactsApi* | [**getAllContactActivities**](docs/ContactsApi.md#getAllContactActivities) | **GET** /lists/{list_id}/contacts/{contact_id}/activities | Get all contact activities
 *ContactsApi* | [**getAllContacts**](docs/ContactsApi.md#getAllContacts) | **GET** /lists/{list_id}/contacts | Get all contacts
+*ContactsApi* | [**getAllContactsBySegment**](docs/ContactsApi.md#getAllContactsBySegment) | **GET** /lists/{list_id}/contacts/segment/{segment_id} | Get all contacts by Segment Id
 *ContactsApi* | [**getContact**](docs/ContactsApi.md#getContact) | **GET** /lists/{list_id}/contacts/{contact_id} | Get contact
 *ContactsApi* | [**patchContact**](docs/ContactsApi.md#patchContact) | **PATCH** /lists/{list_id}/contacts/{contact_id} | Update a specific contact
 *ContactsApi* | [**searchContacts**](docs/ContactsApi.md#searchContacts) | **GET** /contacts/search | Search contact
+*EcommerceApi* | [**createCart**](docs/EcommerceApi.md#createCart) | **POST** /{domain}/carts | Create cart
 *EcommerceApi* | [**createCatalog**](docs/EcommerceApi.md#createCatalog) | **POST** /catalogs | Create new catalog
+*EcommerceApi* | [**createOrder**](docs/EcommerceApi.md#createOrder) | **POST** /{domain}/orders | Create order
 *EcommerceApi* | [**createProduct**](docs/EcommerceApi.md#createProduct) | **POST** /catalogs/{catalog_id}/products | Create new product
 *EcommerceApi* | [**deleteCatalog**](docs/EcommerceApi.md#deleteCatalog) | **DELETE** /catalogs/{catalog_id} | Remove catalog
 *EcommerceApi* | [**deleteProduct**](docs/EcommerceApi.md#deleteProduct) | **DELETE** /catalogs/{catalog_id}/products/{product_identifier} | Remove product
 *EcommerceApi* | [**getAllCatalogs**](docs/EcommerceApi.md#getAllCatalogs) | **GET** /catalogs | Get all catalogs
 *EcommerceApi* | [**getAllProducts**](docs/EcommerceApi.md#getAllProducts) | **GET** /catalogs/{catalog_id}/products | Get all products
 *EcommerceApi* | [**getProduct**](docs/EcommerceApi.md#getProduct) | **GET** /catalogs/{catalog_id}/products/{product_identifier} | Get product
-*EcommerceApi* | [**importOrdersBulk**](docs/EcommerceApi.md#importOrdersBulk) | **POST** /lists/{list_id}/orders | Orders import bulk request
 *EcommerceApi* | [**importProducts**](docs/EcommerceApi.md#importProducts) | **POST** /catalogs/{catalog_id}/products/actions/import | Import products
 *EcommerceApi* | [**updateProduct**](docs/EcommerceApi.md#updateProduct) | **PATCH** /catalogs/{catalog_id}/products/{product_identifier} | Update product
+*EcommerceActivityApi* | [**importOrdersBulk**](docs/EcommerceActivityApi.md#importOrdersBulk) | **POST** /lists/{list_id}/orders | Orders import bulk request
 *EmailApi* | [**actionEnableEmailRss**](docs/EmailApi.md#actionEnableEmailRss) | **POST** /campaigns/email/rss/{campaign_hash}/actions/enable | Enables a rss email campaign
 *EmailApi* | [**actionSendEmail**](docs/EmailApi.md#actionSendEmail) | **POST** /campaigns/email/{campaign_hash}/actions/send | Send email message
 *EmailApi* | [**createEmailCampaign**](docs/EmailApi.md#createEmailCampaign) | **POST** /campaigns/email | Create new email campaign
@@ -188,7 +191,11 @@ Class | Method | HTTP request | Description
 *PingApi* | [**ping**](docs/PingApi.md#ping) | **POST** /ping | Pings the API
 *PushApi* | [**actionSendPush**](docs/PushApi.md#actionSendPush) | **POST** /campaigns/push/{campaign_hash}/actions/send | Send push message
 *PushApi* | [**createPushCampaign**](docs/PushApi.md#createPushCampaign) | **POST** /campaigns/push | Create new push campaign
+*PushApi* | [**getPushApp**](docs/PushApi.md#getPushApp) | **GET** /push/apps/{app_id} | Get a Push application from E-goi
+*PushApi* | [**getPushApps**](docs/PushApi.md#getPushApps) | **GET** /push/apps | Get all Push applications from E-goi
 *PushApi* | [**patchPushCampaign**](docs/PushApi.md#patchPushCampaign) | **PATCH** /campaigns/push/{campaign_hash} | Update a specific push campaign
+*PushApi* | [**registerPushEvent**](docs/PushApi.md#registerPushEvent) | **POST** /push/apps/{app_id}/event | Registers an event from the push notification.
+*PushApi* | [**registerPushToken**](docs/PushApi.md#registerPushToken) | **POST** /push/apps/{app_id}/token | Registers a Firebase token
 *ReportsApi* | [**getSMSReport**](docs/ReportsApi.md#getSMSReport) | **GET** /reports/sms/{campaign_hash} | Get sms report
 *ReportsApi* | [**getVoiceReport**](docs/ReportsApi.md#getVoiceReport) | **GET** /reports/voice/{campaign_hash} | Get voice report
 *ReportsApi* | [**getWebPushReport**](docs/ReportsApi.md#getWebPushReport) | **GET** /reports/web-push/{campaign_hash} | Get webpush report
@@ -215,6 +222,8 @@ Class | Method | HTTP request | Description
 *TagsApi* | [**deleteTag**](docs/TagsApi.md#deleteTag) | **DELETE** /tags/{tag_id} | Remove tag
 *TagsApi* | [**getAllTags**](docs/TagsApi.md#getAllTags) | **GET** /tags | Get all tags
 *TagsApi* | [**updateTag**](docs/TagsApi.md#updateTag) | **PUT** /tags/{tag_id} | Update a specific tag
+*TrackEngageApi* | [**getAllDomains**](docs/TrackEngageApi.md#getAllDomains) | **GET** /trackengage/domains | Get all domains
+*TrackEngageApi* | [**getAllGoals**](docs/TrackEngageApi.md#getAllGoals) | **GET** /trackengage/goals | Get all goals
 *UsersApi* | [**deleteUser**](docs/UsersApi.md#deleteUser) | **DELETE** /users/{user_id} | Remove user
 *UsersApi* | [**getAllUsers**](docs/UsersApi.md#getAllUsers) | **GET** /users | Get all users
 *UtilitiesApi* | [**getAllCountries**](docs/UtilitiesApi.md#getAllCountries) | **GET** /utilities/countries | Get all countries
@@ -273,7 +282,10 @@ Class | Method | HTTP request | Description
  - [AdvancedReportsCollection](docs/AdvancedReportsCollection.md)
  - [AlphanumericCellphoneSender](docs/AlphanumericCellphoneSender.md)
  - [AlphanumericCellphoneSenderAllOf](docs/AlphanumericCellphoneSenderAllOf.md)
- - [AttachTagRequest](docs/AttachTagRequest.md)
+ - [AppStructure](docs/AppStructure.md)
+ - [AppStructureList](docs/AppStructureList.md)
+ - [AttachTagRequestOneOf](docs/AttachTagRequestOneOf.md)
+ - [AttachTagRequestOneOf1](docs/AttachTagRequestOneOf1.md)
  - [AttachTagResponse](docs/AttachTagResponse.md)
  - [AutomaticSegment](docs/AutomaticSegment.md)
  - [AutomaticSegmentAllOf](docs/AutomaticSegmentAllOf.md)
@@ -332,6 +344,8 @@ Class | Method | HTTP request | Description
  - [CampaignVoiceScheduleRequest](docs/CampaignVoiceScheduleRequest.md)
  - [CampaignWebPushScheduleRequest](docs/CampaignWebPushScheduleRequest.md)
  - [CampaignsCollection](docs/CampaignsCollection.md)
+ - [Cart](docs/Cart.md)
+ - [CartPatchRequest](docs/CartPatchRequest.md)
  - [Catalog](docs/Catalog.md)
  - [CatalogCollection](docs/CatalogCollection.md)
  - [CatalogPostRequest](docs/CatalogPostRequest.md)
@@ -361,8 +375,10 @@ Class | Method | HTTP request | Description
  - [ContactActivityClickAllOfActionData](docs/ContactActivityClickAllOfActionData.md)
  - [ContactBaseExtra](docs/ContactBaseExtra.md)
  - [ContactBaseExtraBulk](docs/ContactBaseExtraBulk.md)
+ - [ContactBaseExtraFull](docs/ContactBaseExtraFull.md)
  - [ContactBaseFieldsBulkSchema](docs/ContactBaseFieldsBulkSchema.md)
  - [ContactBaseFieldsSchema](docs/ContactBaseFieldsSchema.md)
+ - [ContactBaseFieldsWithIdSchema](docs/ContactBaseFieldsWithIdSchema.md)
  - [ContactBaseStatusExtra](docs/ContactBaseStatusExtra.md)
  - [ContactBaseStatusExtraBulk](docs/ContactBaseStatusExtraBulk.md)
  - [ContactBaseWithStatusFieldsBulkSchema](docs/ContactBaseWithStatusFieldsBulkSchema.md)
@@ -388,6 +404,7 @@ Class | Method | HTTP request | Description
  - [ContactForgetRequest](docs/ContactForgetRequest.md)
  - [ContactInsideBase](docs/ContactInsideBase.md)
  - [ContactInsideBaseBulk](docs/ContactInsideBaseBulk.md)
+ - [ContactInsideBaseWithId](docs/ContactInsideBaseWithId.md)
  - [ContactOtherActivity](docs/ContactOtherActivity.md)
  - [ContactSearchResponse](docs/ContactSearchResponse.md)
  - [ContactStatusFieldsBulkSchema](docs/ContactStatusFieldsBulkSchema.md)
@@ -399,13 +416,20 @@ Class | Method | HTTP request | Description
  - [ContentVoiceTemplate](docs/ContentVoiceTemplate.md)
  - [Country](docs/Country.md)
  - [CountryCollection](docs/CountryCollection.md)
+ - [CreateCartResponse](docs/CreateCartResponse.md)
  - [CreateContactResponse](docs/CreateContactResponse.md)
+ - [CreateOrder](docs/CreateOrder.md)
+ - [CreateOrderResponse](docs/CreateOrderResponse.md)
  - [DeactivateContactsAll](docs/DeactivateContactsAll.md)
  - [DeactivateContactsMany](docs/DeactivateContactsMany.md)
  - [DeleteCampaignsConflict](docs/DeleteCampaignsConflict.md)
  - [DeleteFieldsConflict](docs/DeleteFieldsConflict.md)
+ - [Domain](docs/Domain.md)
  - [DomainAlreadyDefined](docs/DomainAlreadyDefined.md)
  - [DomainAlreadyDefinedErrors](docs/DomainAlreadyDefinedErrors.md)
+ - [DomainCollection](docs/DomainCollection.md)
+ - [DomainListRequired](docs/DomainListRequired.md)
+ - [DomainListRequiredErrors](docs/DomainListRequiredErrors.md)
  - [EmailBouncesCampaignFields](docs/EmailBouncesCampaignFields.md)
  - [EmailBouncesListStatsFields](docs/EmailBouncesListStatsFields.md)
  - [EmailCampaignCreate](docs/EmailCampaignCreate.md)
@@ -453,6 +477,11 @@ Class | Method | HTTP request | Description
  - [GenerateSmsEventsReport](docs/GenerateSmsEventsReport.md)
  - [GenerateSubscriptionsReport](docs/GenerateSubscriptionsReport.md)
  - [GenerateUnsubscriptionsReport](docs/GenerateUnsubscriptionsReport.md)
+ - [Goal](docs/Goal.md)
+ - [GoalAutommaticInfo](docs/GoalAutommaticInfo.md)
+ - [GoalCollection](docs/GoalCollection.md)
+ - [GoalManualInfo](docs/GoalManualInfo.md)
+ - [GoalTimeInfo](docs/GoalTimeInfo.md)
  - [HasAutomations](docs/HasAutomations.md)
  - [HasAutomationsErrors](docs/HasAutomationsErrors.md)
  - [HasCampaignsLastThirtyDays](docs/HasCampaignsLastThirtyDays.md)
@@ -510,6 +539,8 @@ Class | Method | HTTP request | Description
  - [OperationActionResponseError](docs/OperationActionResponseError.md)
  - [OperationOperationData](docs/OperationOperationData.md)
  - [OperationsCollection](docs/OperationsCollection.md)
+ - [Order](docs/Order.md)
+ - [OrderPatchRequest](docs/OrderPatchRequest.md)
  - [Overall](docs/Overall.md)
  - [OverallOverall](docs/OverallOverall.md)
  - [PatchRequestBaseField](docs/PatchRequestBaseField.md)
@@ -538,6 +569,7 @@ Class | Method | HTTP request | Description
  - [ProductAlreadyExistsErrors](docs/ProductAlreadyExistsErrors.md)
  - [ProductBulkRequest](docs/ProductBulkRequest.md)
  - [ProductCollection](docs/ProductCollection.md)
+ - [ProductCustomAttributes](docs/ProductCustomAttributes.md)
  - [ProductPatchRequest](docs/ProductPatchRequest.md)
  - [ProductPatchRequestRelatedProducts](docs/ProductPatchRequestRelatedProducts.md)
  - [ProductPostRequest](docs/ProductPostRequest.md)
@@ -547,11 +579,15 @@ Class | Method | HTTP request | Description
  - [PushCampaignPostRequestActions](docs/PushCampaignPostRequestActions.md)
  - [PushCampaignPostRequestGeoOptions](docs/PushCampaignPostRequestGeoOptions.md)
  - [PushCampaignPostRequestNotificationOptions](docs/PushCampaignPostRequestNotificationOptions.md)
+ - [PushEvent](docs/PushEvent.md)
  - [PushNotificationSoundSchemaDefault](docs/PushNotificationSoundSchemaDefault.md)
  - [PushNotificationSoundSchemaNone](docs/PushNotificationSoundSchemaNone.md)
  - [PushNotificationSoundSchemaUrl](docs/PushNotificationSoundSchemaUrl.md)
  - [PushReport](docs/PushReport.md)
  - [PushReportAllOf](docs/PushReportAllOf.md)
+ - [PushResponse](docs/PushResponse.md)
+ - [PushToken](docs/PushToken.md)
+ - [PushTokenTwoStepsData](docs/PushTokenTwoStepsData.md)
  - [PushVersions](docs/PushVersions.md)
  - [PushVersionsVersions](docs/PushVersionsVersions.md)
  - [RemoveRequest](docs/RemoveRequest.md)
@@ -563,6 +599,7 @@ Class | Method | HTTP request | Description
  - [ReportCampaignsSpecific](docs/ReportCampaignsSpecific.md)
  - [RequestItemsUnsubscribe](docs/RequestItemsUnsubscribe.md)
  - [RequestItemsUnsubscribeAllOf](docs/RequestItemsUnsubscribeAllOf.md)
+ - [RequestTimeout](docs/RequestTimeout.md)
  - [SavedSegment](docs/SavedSegment.md)
  - [SavedSegmentAllOf](docs/SavedSegmentAllOf.md)
  - [SavedSegmentAllOf1](docs/SavedSegmentAllOf1.md)
@@ -589,6 +626,9 @@ Class | Method | HTTP request | Description
  - [SendWebPush](docs/SendWebPush.md)
  - [SendWebPushAllOf](docs/SendWebPushAllOf.md)
  - [SendsCampaignFields](docs/SendsCampaignFields.md)
+ - [ServiceUnavailable](docs/ServiceUnavailable.md)
+ - [SingleCartObject](docs/SingleCartObject.md)
+ - [SingleOrderObject](docs/SingleOrderObject.md)
  - [SmartSmsCampaign](docs/SmartSmsCampaign.md)
  - [SmartSmsCampaignCampaignContent](docs/SmartSmsCampaignCampaignContent.md)
  - [SmartSmsCampaignPatchRequest](docs/SmartSmsCampaignPatchRequest.md)
@@ -616,6 +656,7 @@ Class | Method | HTTP request | Description
  - [TagSegmentAllOf](docs/TagSegmentAllOf.md)
  - [TeResponse](docs/TeResponse.md)
  - [TeResponseAllOf](docs/TeResponseAllOf.md)
+ - [TooManyRequests](docs/TooManyRequests.md)
  - [Unauthorized](docs/Unauthorized.md)
  - [UniqueFieldInUse](docs/UniqueFieldInUse.md)
  - [UniqueFieldInUseErrors](docs/UniqueFieldInUseErrors.md)

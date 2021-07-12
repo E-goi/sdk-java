@@ -5,7 +5,7 @@
     <artifactId>egoi-java-client</artifactId>
     <packaging>jar</packaging>
     <name>egoi-java-client</name>
-    <version>1.1.0RC2</version>
+    <version>1.1.1RC1</version>
     <url>https://developers.e-goi.com/api/v3/</url>
     <description>OpenApi Egoi Java</description>
     <scm>
