@@ -2,11 +2,12 @@
 
 # SendWebPushAllOf
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**siteId** | **Integer** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**siteId** | **Integer** |  |  [optional] |
 
 
 

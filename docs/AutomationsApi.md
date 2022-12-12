@@ -2,10 +2,10 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**deleteAutomation**](AutomationsApi.md#deleteAutomation) | **DELETE** /automations/{automation_id} | Remove automation
-[**getAllAutomations**](AutomationsApi.md#getAllAutomations) | **GET** /automations | Get all automations
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**deleteAutomation**](AutomationsApi.md#deleteAutomation) | **DELETE** /automations/{automation_id} | Remove automation |
+| [**getAllAutomations**](AutomationsApi.md#getAllAutomations) | **GET** /automations | Get all automations |
 
 
 <a name="deleteAutomation"></a>
@@ -54,9 +54,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **automationId** | **Integer**| ID of the Automation |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **automationId** | **Integer**| ID of the Automation | |
 
 ### Return type
 
@@ -74,15 +74,15 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **204** | No Content |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllAutomations"></a>
 # **getAllAutomations**
@@ -118,10 +118,10 @@ public class Example {
     String title = "title_example"; // String | Reference attribute to title
     Integer createdBy = 56; // Integer | Reference attribute to created by
     Integer listId = 56; // Integer | ID of the list that owns the automation
-    String status = "status_example"; // String | Automation status
+    String status = "active"; // String | Automation status
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
-    String order = "desc"; // String | Type of order
+    String order = "asc"; // String | Type of order
     String orderBy = "automation_id"; // String | Reference attribute to order automations
     try {
       AutomationCollection result = apiInstance.getAllAutomations(automationId, title, createdBy, listId, status, offset, limit, order, orderBy);
@@ -139,17 +139,17 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **automationId** | **Integer**| Reference attribute to automation id | [optional]
- **title** | **String**| Reference attribute to title | [optional]
- **createdBy** | **Integer**| Reference attribute to created by | [optional]
- **listId** | **Integer**| ID of the list that owns the automation | [optional]
- **status** | **String**| Automation status | [optional] [enum: active, inactive]
- **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
- **limit** | **Integer**| Number of items to return | [optional] [default to 10]
- **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc]
- **orderBy** | **String**| Reference attribute to order automations | [optional] [default to automation_id] [enum: automation_id, title, list_id, created_by]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **automationId** | **Integer**| Reference attribute to automation id | [optional] |
+| **title** | **String**| Reference attribute to title | [optional] |
+| **createdBy** | **Integer**| Reference attribute to created by | [optional] |
+| **listId** | **Integer**| ID of the list that owns the automation | [optional] |
+| **status** | **String**| Automation status | [optional] [enum: active, inactive] |
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc] |
+| **orderBy** | **String**| Reference attribute to order automations | [optional] [default to automation_id] [enum: automation_id, title, list_id, created_by] |
 
 ### Return type
 
@@ -167,12 +167,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

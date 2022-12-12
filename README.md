@@ -8,12 +8,12 @@ The API describes each available method. Learn about parameters, errors, and how
 If you find a bug or something worth fixing, create an issue.
 
 ### Changelog
-#### 1.1.1RC1
+#### 1.1.2RC1
 ## Requirements
 
 Building the API client library requires:
-1. Java 1.7+
-2. Maven/Gradle
+1. Java 1.8+
+2. Maven (3.8.3+)/Gradle (7.2+)
 
 ## Installation
 
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.egoi</groupId>
   <artifactId>egoi-java-client</artifactId>
-  <version>1.1.1RC1</version>
+  <version>1.1.2RC1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -49,7 +49,14 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "org.egoi:egoi-java-client:1.1.1RC1"
+  repositories {
+    mavenCentral()     // Needed if the 'egoi-java-client' jar has been published to maven central.
+    mavenLocal()       // Needed if the 'egoi-java-client' jar has been published to the local maven repo.
+  }
+
+  dependencies {
+     implementation "org.egoi:egoi-java-client:1.1.2RC1"
+  }
 ```
 
 ### Others
@@ -62,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/egoi-java-client-1.1.1RC1.jar`
+* `target/egoi-java-client-1.1.2RC1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -135,6 +142,10 @@ Class | Method | HTTP request | Description
 *CampaignGroupsApi* | [**updateCampaignGroup**](docs/CampaignGroupsApi.md#updateCampaignGroup) | **PUT** /campaign-groups/{group_id} | Update a specific campaign group
 *CampaignsApi* | [**deleteCampaigns**](docs/CampaignsApi.md#deleteCampaigns) | **DELETE** /campaigns/{campaign_hash} | Remove Campaign
 *CampaignsApi* | [**getAllCampaigns**](docs/CampaignsApi.md#getAllCampaigns) | **GET** /campaigns | Get all Campaigns
+*ConnectedSitesApi* | [**createConnectedSites**](docs/ConnectedSitesApi.md#createConnectedSites) | **POST** /connectedsites | Creates a Connected Site
+*ConnectedSitesApi* | [**deleteConnectedSites**](docs/ConnectedSitesApi.md#deleteConnectedSites) | **DELETE** /connectedsites/{domain} | Deletes a Connected Site
+*ConnectedSitesApi* | [**getAllConnectedSites**](docs/ConnectedSitesApi.md#getAllConnectedSites) | **GET** /connectedsites | Get all Connected Sites
+*ConnectedSitesApi* | [**getConnectedSites**](docs/ConnectedSitesApi.md#getConnectedSites) | **GET** /connectedsites/{domain} | Get a Connected Site
 *ContactsApi* | [**actionActivateContacts**](docs/ContactsApi.md#actionActivateContacts) | **POST** /lists/{list_id}/contacts/actions/activate | Activate contacts
 *ContactsApi* | [**actionAttachTag**](docs/ContactsApi.md#actionAttachTag) | **POST** /lists/{list_id}/contacts/actions/attach-tag | Attach tag to contact
 *ContactsApi* | [**actionDeactivateContacts**](docs/ContactsApi.md#actionDeactivateContacts) | **POST** /lists/{list_id}/contacts/actions/deactivate | Deactivate contacts
@@ -144,6 +155,7 @@ Class | Method | HTTP request | Description
 *ContactsApi* | [**actionImportBulk**](docs/ContactsApi.md#actionImportBulk) | **POST** /lists/{list_id}/contacts/actions/import-bulk | Import collection of contacts
 *ContactsApi* | [**actionStartAutomation**](docs/ContactsApi.md#actionStartAutomation) | **POST** /lists/{list_id}/contacts/actions/start-automation | Start automation
 *ContactsApi* | [**actionUnsubscribeContact**](docs/ContactsApi.md#actionUnsubscribeContact) | **POST** /lists/{list_id}/contacts/actions/unsubscribe | Unsubscribes contacts
+*ContactsApi* | [**actionUpdateContacts**](docs/ContactsApi.md#actionUpdateContacts) | **POST** /lists/{list_id}/contacts/actions/update | Updates contacts
 *ContactsApi* | [**createContact**](docs/ContactsApi.md#createContact) | **POST** /lists/{list_id}/contacts | Create new contact
 *ContactsApi* | [**getAllContactActivities**](docs/ContactsApi.md#getAllContactActivities) | **GET** /lists/{list_id}/contacts/{contact_id}/activities | Get all contact activities
 *ContactsApi* | [**getAllContacts**](docs/ContactsApi.md#getAllContacts) | **GET** /lists/{list_id}/contacts | Get all contacts
@@ -182,6 +194,7 @@ Class | Method | HTTP request | Description
 *ListsApi* | [**getAllLists**](docs/ListsApi.md#getAllLists) | **GET** /lists | Get all lists
 *ListsApi* | [**updateList**](docs/ListsApi.md#updateList) | **PATCH** /lists/{list_id} | Update a specific list
 *MyAccountApi* | [**enableTe**](docs/MyAccountApi.md#enableTe) | **POST** /my-account/actions/enable-te | Enable Track&amp;Engage
+*MyAccountApi* | [**enableTransactional**](docs/MyAccountApi.md#enableTransactional) | **POST** /my-account/actions/enable-transactional | Enable Transactional
 *MyAccountApi* | [**getMyAccount**](docs/MyAccountApi.md#getMyAccount) | **GET** /my-account | Get My Account Info
 *OperationsApi* | [**actionApproveOperation**](docs/OperationsApi.md#actionApproveOperation) | **POST** /operations/actions/approve | Approve operation
 *OperationsApi* | [**actionCancelOperation**](docs/OperationsApi.md#actionCancelOperation) | **POST** /operations/actions/cancel | Cancel operation
@@ -196,6 +209,7 @@ Class | Method | HTTP request | Description
 *PushApi* | [**patchPushCampaign**](docs/PushApi.md#patchPushCampaign) | **PATCH** /campaigns/push/{campaign_hash} | Update a specific push campaign
 *PushApi* | [**registerPushEvent**](docs/PushApi.md#registerPushEvent) | **POST** /push/apps/{app_id}/event | Registers an event from the push notification.
 *PushApi* | [**registerPushToken**](docs/PushApi.md#registerPushToken) | **POST** /push/apps/{app_id}/token | Registers a Firebase token
+*ReportsApi* | [**getEmailReport**](docs/ReportsApi.md#getEmailReport) | **GET** /reports/email/{campaign_hash} | Get email report
 *ReportsApi* | [**getSMSReport**](docs/ReportsApi.md#getSMSReport) | **GET** /reports/sms/{campaign_hash} | Get sms report
 *ReportsApi* | [**getVoiceReport**](docs/ReportsApi.md#getVoiceReport) | **GET** /reports/voice/{campaign_hash} | Get voice report
 *ReportsApi* | [**getWebPushReport**](docs/ReportsApi.md#getWebPushReport) | **GET** /reports/web-push/{campaign_hash} | Get webpush report
@@ -217,6 +231,8 @@ Class | Method | HTTP request | Description
 *SmsApi* | [**actionSendSms**](docs/SmsApi.md#actionSendSms) | **POST** /campaigns/sms/{campaign_hash}/actions/send | Send sms message
 *SmsApi* | [**createSmsCampaign**](docs/SmsApi.md#createSmsCampaign) | **POST** /campaigns/sms | Create new sms campaign
 *SmsApi* | [**patchSmsCampaign**](docs/SmsApi.md#patchSmsCampaign) | **PATCH** /campaigns/sms/{campaign_hash} | Update a specific sms campaign
+*SuppressionListApi* | [**createSuppressionList**](docs/SuppressionListApi.md#createSuppressionList) | **POST** /suppression-list | Add to suppression list
+*SuppressionListApi* | [**deleteSuppressionList**](docs/SuppressionListApi.md#deleteSuppressionList) | **DELETE** /suppression-list/{suppression_id} | Delete from suppression list
 *SuppressionListApi* | [**getAllSuppressionList**](docs/SuppressionListApi.md#getAllSuppressionList) | **GET** /suppression-list | Get the suppression list
 *TagsApi* | [**createTag**](docs/TagsApi.md#createTag) | **POST** /tags | Create new tag
 *TagsApi* | [**deleteTag**](docs/TagsApi.md#deleteTag) | **DELETE** /tags/{tag_id} | Remove tag
@@ -253,11 +269,15 @@ Class | Method | HTTP request | Description
  - [AbstractSendEmail](docs/AbstractSendEmail.md)
  - [AbstractSendVoice](docs/AbstractSendVoice.md)
  - [AbstractSendVoiceAllOf](docs/AbstractSendVoiceAllOf.md)
+ - [AbstractSendVoiceAllOf1](docs/AbstractSendVoiceAllOf1.md)
+ - [AbstractSuppresionList](docs/AbstractSuppresionList.md)
  - [AcceptedResponse](docs/AcceptedResponse.md)
  - [ActivateContactsAll](docs/ActivateContactsAll.md)
  - [ActivateContactsMany](docs/ActivateContactsMany.md)
+ - [ActivateContactsRequest](docs/ActivateContactsRequest.md)
  - [ActivityCollection](docs/ActivityCollection.md)
  - [AdvancedReport](docs/AdvancedReport.md)
+ - [AdvancedReportCampaignsObject](docs/AdvancedReportCampaignsObject.md)
  - [AdvancedReportEmailBouncesColumns](docs/AdvancedReportEmailBouncesColumns.md)
  - [AdvancedReportEmailBouncesOptions](docs/AdvancedReportEmailBouncesOptions.md)
  - [AdvancedReportEmailClicksByContactColumns](docs/AdvancedReportEmailClicksByContactColumns.md)
@@ -268,6 +288,8 @@ Class | Method | HTTP request | Description
  - [AdvancedReportEmailEventsOptions](docs/AdvancedReportEmailEventsOptions.md)
  - [AdvancedReportEmailUnsubscriptionsColumns](docs/AdvancedReportEmailUnsubscriptionsColumns.md)
  - [AdvancedReportEmailUnsubscriptionsOptions](docs/AdvancedReportEmailUnsubscriptionsOptions.md)
+ - [AdvancedReportFormsInner](docs/AdvancedReportFormsInner.md)
+ - [AdvancedReportListExtraFieldsInner](docs/AdvancedReportListExtraFieldsInner.md)
  - [AdvancedReportRange](docs/AdvancedReportRange.md)
  - [AdvancedReportSendsColumns](docs/AdvancedReportSendsColumns.md)
  - [AdvancedReportSendsOptions](docs/AdvancedReportSendsOptions.md)
@@ -281,17 +303,21 @@ Class | Method | HTTP request | Description
  - [AdvancedReportUnsubscriptionsOptions](docs/AdvancedReportUnsubscriptionsOptions.md)
  - [AdvancedReportsCollection](docs/AdvancedReportsCollection.md)
  - [AlphanumericCellphoneSender](docs/AlphanumericCellphoneSender.md)
- - [AlphanumericCellphoneSenderAllOf](docs/AlphanumericCellphoneSenderAllOf.md)
+ - [AlphanumericCellphoneSenderPost](docs/AlphanumericCellphoneSenderPost.md)
+ - [AlphanumericCellphoneSenderPostAllOf](docs/AlphanumericCellphoneSenderPostAllOf.md)
  - [AppStructure](docs/AppStructure.md)
  - [AppStructureList](docs/AppStructureList.md)
- - [AttachTagRequestOneOf](docs/AttachTagRequestOneOf.md)
- - [AttachTagRequestOneOf1](docs/AttachTagRequestOneOf1.md)
+ - [AttachByContacts](docs/AttachByContacts.md)
+ - [AttachBySegment](docs/AttachBySegment.md)
+ - [AttachTagRequest](docs/AttachTagRequest.md)
  - [AttachTagResponse](docs/AttachTagResponse.md)
  - [AutomaticSegment](docs/AutomaticSegment.md)
  - [AutomaticSegmentAllOf](docs/AutomaticSegmentAllOf.md)
  - [Automation](docs/Automation.md)
  - [AutomationAllOf](docs/AutomationAllOf.md)
  - [AutomationCollection](docs/AutomationCollection.md)
+ - [AutomationPost](docs/AutomationPost.md)
+ - [AutomationPostAllOf](docs/AutomationPostAllOf.md)
  - [BadRequest](docs/BadRequest.md)
  - [BalanceInfo](docs/BalanceInfo.md)
  - [BalanceInfoBalanceInfo](docs/BalanceInfoBalanceInfo.md)
@@ -304,9 +330,11 @@ Class | Method | HTTP request | Description
  - [BillingInfoAllOfBillingInfoCountry](docs/BillingInfoAllOfBillingInfoCountry.md)
  - [BulkActionResponse](docs/BulkActionResponse.md)
  - [CName](docs/CName.md)
+ - [CNamePost](docs/CNamePost.md)
  - [CNamesCollection](docs/CNamesCollection.md)
  - [Campaign](docs/Campaign.md)
  - [CampaignEmailBaseContent](docs/CampaignEmailBaseContent.md)
+ - [CampaignEmailContent](docs/CampaignEmailContent.md)
  - [CampaignEmailContentFile](docs/CampaignEmailContentFile.md)
  - [CampaignEmailContentFileAllOf](docs/CampaignEmailContentFileAllOf.md)
  - [CampaignEmailContentHtml](docs/CampaignEmailContentHtml.md)
@@ -317,39 +345,58 @@ Class | Method | HTTP request | Description
  - [CampaignEmailContentTemplateAllOf](docs/CampaignEmailContentTemplateAllOf.md)
  - [CampaignEmailContentWebPage](docs/CampaignEmailContentWebPage.md)
  - [CampaignEmailContentWebPageAllOf](docs/CampaignEmailContentWebPageAllOf.md)
+ - [CampaignEmailRssContent](docs/CampaignEmailRssContent.md)
  - [CampaignEmailRssContentHtml](docs/CampaignEmailRssContentHtml.md)
  - [CampaignEmailRssContentHtmlAllOf](docs/CampaignEmailRssContentHtmlAllOf.md)
  - [CampaignEmailScheduleRequest](docs/CampaignEmailScheduleRequest.md)
  - [CampaignEmailScheduleRequestAllOf](docs/CampaignEmailScheduleRequestAllOf.md)
  - [CampaignEmailSendNowRequest](docs/CampaignEmailSendNowRequest.md)
+ - [CampaignEmailSendRequest](docs/CampaignEmailSendRequest.md)
  - [CampaignGroup](docs/CampaignGroup.md)
  - [CampaignGroupAllOf](docs/CampaignGroupAllOf.md)
  - [CampaignGroupCollection](docs/CampaignGroupCollection.md)
+ - [CampaignGroupPost](docs/CampaignGroupPost.md)
+ - [CampaignGroupPostAllOf](docs/CampaignGroupPostAllOf.md)
  - [CampaignHash](docs/CampaignHash.md)
+ - [CampaignPushContent](docs/CampaignPushContent.md)
  - [CampaignPushContentTemplate](docs/CampaignPushContentTemplate.md)
  - [CampaignPushContentText](docs/CampaignPushContentText.md)
  - [CampaignPushScheduleRequest](docs/CampaignPushScheduleRequest.md)
+ - [CampaignPushSendRequest](docs/CampaignPushSendRequest.md)
  - [CampaignScheduleDate](docs/CampaignScheduleDate.md)
  - [CampaignSentLast30Days](docs/CampaignSentLast30Days.md)
  - [CampaignSentLast30DaysErrors](docs/CampaignSentLast30DaysErrors.md)
  - [CampaignSmartSmsHtml](docs/CampaignSmartSmsHtml.md)
  - [CampaignSmartSmsImport](docs/CampaignSmartSmsImport.md)
  - [CampaignSmartSmsOptions](docs/CampaignSmartSmsOptions.md)
+ - [CampaignSmartSmsPageContent](docs/CampaignSmartSmsPageContent.md)
  - [CampaignSmartSmsRedirect](docs/CampaignSmartSmsRedirect.md)
  - [CampaignSmartSmsScheduleRequest](docs/CampaignSmartSmsScheduleRequest.md)
+ - [CampaignSmartSmsSendRequest](docs/CampaignSmartSmsSendRequest.md)
+ - [CampaignSmsContent](docs/CampaignSmsContent.md)
  - [CampaignSmsContentTemplate](docs/CampaignSmsContentTemplate.md)
  - [CampaignSmsContentText](docs/CampaignSmsContentText.md)
  - [CampaignSmsOptions](docs/CampaignSmsOptions.md)
  - [CampaignSmsScheduleRequest](docs/CampaignSmsScheduleRequest.md)
+ - [CampaignSmsSendRequest](docs/CampaignSmsSendRequest.md)
  - [CampaignVoiceScheduleRequest](docs/CampaignVoiceScheduleRequest.md)
+ - [CampaignVoiceSendRequest](docs/CampaignVoiceSendRequest.md)
  - [CampaignWebPushScheduleRequest](docs/CampaignWebPushScheduleRequest.md)
+ - [CampaignWebPushSendRequest](docs/CampaignWebPushSendRequest.md)
  - [CampaignsCollection](docs/CampaignsCollection.md)
  - [Cart](docs/Cart.md)
  - [CartPatchRequest](docs/CartPatchRequest.md)
  - [Catalog](docs/Catalog.md)
  - [CatalogCollection](docs/CatalogCollection.md)
+ - [CatalogPost](docs/CatalogPost.md)
  - [CatalogPostRequest](docs/CatalogPostRequest.md)
+ - [CellphoneSender](docs/CellphoneSender.md)
  - [CellphoneSenderCollection](docs/CellphoneSenderCollection.md)
+ - [CellphoneSenderPost](docs/CellphoneSenderPost.md)
+ - [ClientAlreadyEnabled](docs/ClientAlreadyEnabled.md)
+ - [ClientAlreadyEnabledErrors](docs/ClientAlreadyEnabledErrors.md)
+ - [ClientIsBeingEnabled](docs/ClientIsBeingEnabled.md)
+ - [ClientIsBeingEnabledErrors](docs/ClientIsBeingEnabledErrors.md)
  - [CnameExists](docs/CnameExists.md)
  - [CnameExistsErrors](docs/CnameExistsErrors.md)
  - [ComplexContact](docs/ComplexContact.md)
@@ -366,9 +413,23 @@ Class | Method | HTTP request | Description
  - [ComplexListAllOfStats](docs/ComplexListAllOfStats.md)
  - [ComplexUser](docs/ComplexUser.md)
  - [ComplexUserAllOf](docs/ComplexUserAllOf.md)
+ - [ComplexUserPost](docs/ComplexUserPost.md)
  - [Conflict](docs/Conflict.md)
  - [ConflictAllOf](docs/ConflictAllOf.md)
+ - [ConnectedSitesDomain](docs/ConnectedSitesDomain.md)
+ - [ConnectedSitesDomainDetail](docs/ConnectedSitesDomainDetail.md)
+ - [ConnectedSitesEmbedForm](docs/ConnectedSitesEmbedForm.md)
+ - [ConnectedSitesGeneralProductAppDetail](docs/ConnectedSitesGeneralProductAppDetail.md)
+ - [ConnectedSitesGeneralProductAppDetailGlobal](docs/ConnectedSitesGeneralProductAppDetailGlobal.md)
+ - [ConnectedSitesGeneralProductFormDetail](docs/ConnectedSitesGeneralProductFormDetail.md)
+ - [ConnectedSitesGeneralProductFormDetailGlobal](docs/ConnectedSitesGeneralProductFormDetailGlobal.md)
+ - [ConnectedSitesGeneralProductTEDetailGlobal](docs/ConnectedSitesGeneralProductTEDetailGlobal.md)
+ - [ConnectedSitesProductEmbedFormDetail](docs/ConnectedSitesProductEmbedFormDetail.md)
+ - [ConnectedSitesProducts](docs/ConnectedSitesProducts.md)
  - [Contact](docs/Contact.md)
+ - [Contact1](docs/Contact1.md)
+ - [Contact2](docs/Contact2.md)
+ - [ContactActivity](docs/ContactActivity.md)
  - [ContactActivityAbstractActionsWithData](docs/ContactActivityAbstractActionsWithData.md)
  - [ContactActivityClick](docs/ContactActivityClick.md)
  - [ContactActivityClickAllOf](docs/ContactActivityClickAllOf.md)
@@ -376,17 +437,33 @@ Class | Method | HTTP request | Description
  - [ContactBaseExtra](docs/ContactBaseExtra.md)
  - [ContactBaseExtraBulk](docs/ContactBaseExtraBulk.md)
  - [ContactBaseExtraFull](docs/ContactBaseExtraFull.md)
+ - [ContactBaseExtraPost](docs/ContactBaseExtraPost.md)
  - [ContactBaseFieldsBulkSchema](docs/ContactBaseFieldsBulkSchema.md)
+ - [ContactBaseFieldsBulkSchemaBase](docs/ContactBaseFieldsBulkSchemaBase.md)
+ - [ContactBaseFieldsPostSchema](docs/ContactBaseFieldsPostSchema.md)
+ - [ContactBaseFieldsPostSchemaBase](docs/ContactBaseFieldsPostSchemaBase.md)
  - [ContactBaseFieldsSchema](docs/ContactBaseFieldsSchema.md)
+ - [ContactBaseFieldsSchemaBase](docs/ContactBaseFieldsSchemaBase.md)
  - [ContactBaseFieldsWithIdSchema](docs/ContactBaseFieldsWithIdSchema.md)
+ - [ContactBaseFieldsWithIdSchemaBase](docs/ContactBaseFieldsWithIdSchemaBase.md)
  - [ContactBaseStatusExtra](docs/ContactBaseStatusExtra.md)
  - [ContactBaseStatusExtraBulk](docs/ContactBaseStatusExtraBulk.md)
+ - [ContactBaseStatusExtraNoRemoved](docs/ContactBaseStatusExtraNoRemoved.md)
  - [ContactBaseWithStatusFieldsBulkSchema](docs/ContactBaseWithStatusFieldsBulkSchema.md)
+ - [ContactBaseWithStatusFieldsNoTokensSchema](docs/ContactBaseWithStatusFieldsNoTokensSchema.md)
+ - [ContactBaseWithStatusFieldsNoTokensSchemaBase](docs/ContactBaseWithStatusFieldsNoTokensSchemaBase.md)
  - [ContactBaseWithStatusFieldsSchema](docs/ContactBaseWithStatusFieldsSchema.md)
  - [ContactBaseWithStatusFieldsSchemaBase](docs/ContactBaseWithStatusFieldsSchemaBase.md)
- - [ContactBaseWithStatusFieldsSchemaBasePushTokenAndroid](docs/ContactBaseWithStatusFieldsSchemaBasePushTokenAndroid.md)
- - [ContactBaseWithStatusFieldsSchemaBasePushTokenIos](docs/ContactBaseWithStatusFieldsSchemaBasePushTokenIos.md)
+ - [ContactBaseWithStatusNoRemovedFieldsSchema](docs/ContactBaseWithStatusNoRemovedFieldsSchema.md)
+ - [ContactBaseWithStatusNoRemovedFieldsSchemaBase](docs/ContactBaseWithStatusNoRemovedFieldsSchemaBase.md)
+ - [ContactBaseWithStatusNoRemovedFieldsSchemaBasePushTokenAndroidInner](docs/ContactBaseWithStatusNoRemovedFieldsSchemaBasePushTokenAndroidInner.md)
+ - [ContactBaseWithStatusNoRemovedFieldsSchemaBasePushTokenIosInner](docs/ContactBaseWithStatusNoRemovedFieldsSchemaBasePushTokenIosInner.md)
  - [ContactBulk](docs/ContactBulk.md)
+ - [ContactBulkFile](docs/ContactBulkFile.md)
+ - [ContactBulkFileAllOf](docs/ContactBulkFileAllOf.md)
+ - [ContactBulkFileAllOf1](docs/ContactBulkFileAllOf1.md)
+ - [ContactBulkFileAllOf2](docs/ContactBulkFileAllOf2.md)
+ - [ContactBulkFileAllOf3](docs/ContactBulkFileAllOf3.md)
  - [ContactCollection](docs/ContactCollection.md)
  - [ContactExportRequest](docs/ContactExportRequest.md)
  - [ContactExtraFieldCellphone](docs/ContactExtraFieldCellphone.md)
@@ -399,11 +476,15 @@ Class | Method | HTTP request | Description
  - [ContactExtraFieldPhone](docs/ContactExtraFieldPhone.md)
  - [ContactExtraFieldPhoneBulk](docs/ContactExtraFieldPhoneBulk.md)
  - [ContactExtraFieldText](docs/ContactExtraFieldText.md)
+ - [ContactExtraFields](docs/ContactExtraFields.md)
+ - [ContactExtraFieldsBulk](docs/ContactExtraFieldsBulk.md)
  - [ContactExtraFieldsBulkSchema](docs/ContactExtraFieldsBulkSchema.md)
  - [ContactExtraFieldsSchema](docs/ContactExtraFieldsSchema.md)
+ - [ContactFieldMappingFileBulkSchema](docs/ContactFieldMappingFileBulkSchema.md)
  - [ContactForgetRequest](docs/ContactForgetRequest.md)
  - [ContactInsideBase](docs/ContactInsideBase.md)
  - [ContactInsideBaseBulk](docs/ContactInsideBaseBulk.md)
+ - [ContactInsideBasePost](docs/ContactInsideBasePost.md)
  - [ContactInsideBaseWithId](docs/ContactInsideBaseWithId.md)
  - [ContactOtherActivity](docs/ContactOtherActivity.md)
  - [ContactSearchResponse](docs/ContactSearchResponse.md)
@@ -411,6 +492,8 @@ Class | Method | HTTP request | Description
  - [ContactStatusFieldsSchema](docs/ContactStatusFieldsSchema.md)
  - [ContactTags](docs/ContactTags.md)
  - [ContactTagsBulk](docs/ContactTagsBulk.md)
+ - [ContactsActionUpdateContactsSchema](docs/ContactsActionUpdateContactsSchema.md)
+ - [ContentVoice](docs/ContentVoice.md)
  - [ContentVoiceAudio](docs/ContentVoiceAudio.md)
  - [ContentVoicePatch](docs/ContentVoicePatch.md)
  - [ContentVoiceTemplate](docs/ContentVoiceTemplate.md)
@@ -420,10 +503,20 @@ Class | Method | HTTP request | Description
  - [CreateContactResponse](docs/CreateContactResponse.md)
  - [CreateOrder](docs/CreateOrder.md)
  - [CreateOrderResponse](docs/CreateOrderResponse.md)
+ - [CreateSuppressionListRequest](docs/CreateSuppressionListRequest.md)
  - [DeactivateContactsAll](docs/DeactivateContactsAll.md)
  - [DeactivateContactsMany](docs/DeactivateContactsMany.md)
+ - [DeactivateContactsRequest](docs/DeactivateContactsRequest.md)
  - [DeleteCampaignsConflict](docs/DeleteCampaignsConflict.md)
  - [DeleteFieldsConflict](docs/DeleteFieldsConflict.md)
+ - [DeleteListsConflict](docs/DeleteListsConflict.md)
+ - [DeleteListsConflictsErrors](docs/DeleteListsConflictsErrors.md)
+ - [DeleteSegmentsConflict](docs/DeleteSegmentsConflict.md)
+ - [DeleteSegmentsConflictsErrors](docs/DeleteSegmentsConflictsErrors.md)
+ - [DeleteSuppressionListConflictsErrors](docs/DeleteSuppressionListConflictsErrors.md)
+ - [DetachByContacts](docs/DetachByContacts.md)
+ - [DetachBySegment](docs/DetachBySegment.md)
+ - [DetachTagRequest](docs/DetachTagRequest.md)
  - [Domain](docs/Domain.md)
  - [DomainAlreadyDefined](docs/DomainAlreadyDefined.md)
  - [DomainAlreadyDefinedErrors](docs/DomainAlreadyDefinedErrors.md)
@@ -444,15 +537,40 @@ Class | Method | HTTP request | Description
  - [EmailClicksByUrlListStatsFields](docs/EmailClicksByUrlListStatsFields.md)
  - [EmailEventsCampaignFields](docs/EmailEventsCampaignFields.md)
  - [EmailEventsListStatsFields](docs/EmailEventsListStatsFields.md)
+ - [EmailReport](docs/EmailReport.md)
+ - [EmailReportAllOf](docs/EmailReportAllOf.md)
+ - [EmailReportByDate](docs/EmailReportByDate.md)
+ - [EmailReportByDateDateInner](docs/EmailReportByDateDateInner.md)
+ - [EmailReportByDomain](docs/EmailReportByDomain.md)
+ - [EmailReportByDomainDomainInner](docs/EmailReportByDomainDomainInner.md)
+ - [EmailReportByEcommerce](docs/EmailReportByEcommerce.md)
+ - [EmailReportByEcommerceEcommerce](docs/EmailReportByEcommerceEcommerce.md)
+ - [EmailReportByHour](docs/EmailReportByHour.md)
+ - [EmailReportByHourHourInner](docs/EmailReportByHourHourInner.md)
+ - [EmailReportByLocation](docs/EmailReportByLocation.md)
+ - [EmailReportByLocationLocationInner](docs/EmailReportByLocationLocationInner.md)
+ - [EmailReportByReader](docs/EmailReportByReader.md)
+ - [EmailReportByReaderReaderInner](docs/EmailReportByReaderReaderInner.md)
+ - [EmailReportByUrl](docs/EmailReportByUrl.md)
+ - [EmailReportByUrlUrlInner](docs/EmailReportByUrlUrlInner.md)
+ - [EmailReportByWeekday](docs/EmailReportByWeekday.md)
+ - [EmailReportByWeekdayWeekdayInner](docs/EmailReportByWeekdayWeekdayInner.md)
+ - [EmailReportOverall](docs/EmailReportOverall.md)
+ - [EmailReportOverallOverall](docs/EmailReportOverallOverall.md)
  - [EmailRssCampaignCreate](docs/EmailRssCampaignCreate.md)
+ - [EmailSendSegment](docs/EmailSendSegment.md)
  - [EmailSender](docs/EmailSender.md)
  - [EmailSenderAllOf](docs/EmailSenderAllOf.md)
  - [EmailSenderCollection](docs/EmailSenderCollection.md)
+ - [EmailSenderPost](docs/EmailSenderPost.md)
  - [EmailSenderPutRequest](docs/EmailSenderPutRequest.md)
  - [EmailUnsubscriptionsCampaignFields](docs/EmailUnsubscriptionsCampaignFields.md)
  - [EmailUnsubscriptionsListStatsFields](docs/EmailUnsubscriptionsListStatsFields.md)
  - [EnableTeConflict](docs/EnableTeConflict.md)
  - [EnableTeConflictsErrors](docs/EnableTeConflictsErrors.md)
+ - [EnableTeRequest](docs/EnableTeRequest.md)
+ - [EnableTransactionalConflict](docs/EnableTransactionalConflict.md)
+ - [EnableTransactionalConflictsErrors](docs/EnableTransactionalConflictsErrors.md)
  - [ExportContactsWebhookData](docs/ExportContactsWebhookData.md)
  - [Field](docs/Field.md)
  - [FieldCollection](docs/FieldCollection.md)
@@ -460,6 +578,7 @@ Class | Method | HTTP request | Description
  - [FieldInUseErrors](docs/FieldInUseErrors.md)
  - [FieldInUseErrorsFieldInUseData](docs/FieldInUseErrorsFieldInUseData.md)
  - [FieldOption](docs/FieldOption.md)
+ - [FieldOptionPost](docs/FieldOptionPost.md)
  - [FieldOptionsCollection](docs/FieldOptionsCollection.md)
  - [Forbidden](docs/Forbidden.md)
  - [Form](docs/Form.md)
@@ -477,9 +596,12 @@ Class | Method | HTTP request | Description
  - [GenerateSmsEventsReport](docs/GenerateSmsEventsReport.md)
  - [GenerateSubscriptionsReport](docs/GenerateSubscriptionsReport.md)
  - [GenerateUnsubscriptionsReport](docs/GenerateUnsubscriptionsReport.md)
+ - [GetAllContactsExtraFieldIdParameter](docs/GetAllContactsExtraFieldIdParameter.md)
+ - [GetAllProductsCustomAttributesParameter](docs/GetAllProductsCustomAttributesParameter.md)
  - [Goal](docs/Goal.md)
  - [GoalAutommaticInfo](docs/GoalAutommaticInfo.md)
  - [GoalCollection](docs/GoalCollection.md)
+ - [GoalInfo](docs/GoalInfo.md)
  - [GoalManualInfo](docs/GoalManualInfo.md)
  - [GoalTimeInfo](docs/GoalTimeInfo.md)
  - [HasAutomations](docs/HasAutomations.md)
@@ -499,11 +621,12 @@ Class | Method | HTTP request | Description
  - [HeaderFooterFooterLinks](docs/HeaderFooterFooterLinks.md)
  - [HeaderFooterHeaderLinks](docs/HeaderFooterHeaderLinks.md)
  - [HeaderFooterTemplate](docs/HeaderFooterTemplate.md)
+ - [ImportBulkFileRequest](docs/ImportBulkFileRequest.md)
+ - [ImportBulkFileRequestSchema](docs/ImportBulkFileRequestSchema.md)
+ - [ImportBulkFileRequestSchemaFile](docs/ImportBulkFileRequestSchemaFile.md)
  - [ImportBulkRequest](docs/ImportBulkRequest.md)
  - [ImportOrdersBulkBulkRequest](docs/ImportOrdersBulkBulkRequest.md)
  - [ImportOrdersBulkBulkRequestItems](docs/ImportOrdersBulkBulkRequestItems.md)
- - [InlineObject](docs/InlineObject.md)
- - [InlineResponse200](docs/InlineResponse200.md)
  - [InternalServerError](docs/InternalServerError.md)
  - [InvalidSegmentType](docs/InvalidSegmentType.md)
  - [InvalidSegmentTypeErrors](docs/InvalidSegmentTypeErrors.md)
@@ -518,10 +641,10 @@ Class | Method | HTTP request | Description
  - [ListCollection1](docs/ListCollection1.md)
  - [ListLimitReached](docs/ListLimitReached.md)
  - [ListLimitReachedErrors](docs/ListLimitReachedErrors.md)
- - [ListModel](docs/ListModel.md)
  - [MessageWebPush](docs/MessageWebPush.md)
  - [MessageWebPushPost](docs/MessageWebPushPost.md)
  - [MessageWebPushRss](docs/MessageWebPushRss.md)
+ - [ModelList](docs/ModelList.md)
  - [ModuleInfo](docs/ModuleInfo.md)
  - [ModuleInfoModuleInfo](docs/ModuleInfoModuleInfo.md)
  - [ModuleInfoModuleInfoTe](docs/ModuleInfoModuleInfoTe.md)
@@ -532,7 +655,11 @@ Class | Method | HTTP request | Description
  - [NotifyUserIdArrayActionSend](docs/NotifyUserIdArrayActionSend.md)
  - [Now](docs/Now.md)
  - [NumericCellphoneSender](docs/NumericCellphoneSender.md)
- - [NumericCellphoneSenderAllOf](docs/NumericCellphoneSenderAllOf.md)
+ - [NumericCellphoneSenderPost](docs/NumericCellphoneSenderPost.md)
+ - [NumericCellphoneSenderPostAllOf](docs/NumericCellphoneSenderPostAllOf.md)
+ - [OLimitContactsActionSend](docs/OLimitContactsActionSend.md)
+ - [OSegmentsActionSend](docs/OSegmentsActionSend.md)
+ - [OSegmentsWithoutContactActionSend](docs/OSegmentsWithoutContactActionSend.md)
  - [Operation](docs/Operation.md)
  - [OperationActionRequest](docs/OperationActionRequest.md)
  - [OperationActionResponse](docs/OperationActionResponse.md)
@@ -546,6 +673,8 @@ Class | Method | HTTP request | Description
  - [PatchRequestBaseField](docs/PatchRequestBaseField.md)
  - [PatchRequestField](docs/PatchRequestField.md)
  - [PatchRequestList](docs/PatchRequestList.md)
+ - [PatchVoiceCampaign200Response](docs/PatchVoiceCampaign200Response.md)
+ - [PayloadTooLarge](docs/PayloadTooLarge.md)
  - [PhoneCampaignTemplate](docs/PhoneCampaignTemplate.md)
  - [PhoneCampaignTemplateAllOf](docs/PhoneCampaignTemplateAllOf.md)
  - [PhoneReport](docs/PhoneReport.md)
@@ -554,6 +683,7 @@ Class | Method | HTTP request | Description
  - [PhoneSender](docs/PhoneSender.md)
  - [PhoneSenderAllOf](docs/PhoneSenderAllOf.md)
  - [PhoneSenderCollection](docs/PhoneSenderCollection.md)
+ - [PhoneSenderPost](docs/PhoneSenderPost.md)
  - [Ping](docs/Ping.md)
  - [PlanInfo](docs/PlanInfo.md)
  - [PlanInfoPlanInfo](docs/PlanInfoPlanInfo.md)
@@ -575,11 +705,13 @@ Class | Method | HTTP request | Description
  - [ProductPostRequest](docs/ProductPostRequest.md)
  - [PushCampaignPatchRequest](docs/PushCampaignPatchRequest.md)
  - [PushCampaignPatchRequestContent](docs/PushCampaignPatchRequestContent.md)
+ - [PushCampaignPatchRequestGeoOptions](docs/PushCampaignPatchRequestGeoOptions.md)
  - [PushCampaignPostRequest](docs/PushCampaignPostRequest.md)
  - [PushCampaignPostRequestActions](docs/PushCampaignPostRequestActions.md)
  - [PushCampaignPostRequestGeoOptions](docs/PushCampaignPostRequestGeoOptions.md)
  - [PushCampaignPostRequestNotificationOptions](docs/PushCampaignPostRequestNotificationOptions.md)
  - [PushEvent](docs/PushEvent.md)
+ - [PushNotificationSoundSchema](docs/PushNotificationSoundSchema.md)
  - [PushNotificationSoundSchemaDefault](docs/PushNotificationSoundSchemaDefault.md)
  - [PushNotificationSoundSchemaNone](docs/PushNotificationSoundSchemaNone.md)
  - [PushNotificationSoundSchemaUrl](docs/PushNotificationSoundSchemaUrl.md)
@@ -589,7 +721,7 @@ Class | Method | HTTP request | Description
  - [PushToken](docs/PushToken.md)
  - [PushTokenTwoStepsData](docs/PushTokenTwoStepsData.md)
  - [PushVersions](docs/PushVersions.md)
- - [PushVersionsVersions](docs/PushVersionsVersions.md)
+ - [PushVersionsVersionsInner](docs/PushVersionsVersionsInner.md)
  - [RemoveRequest](docs/RemoveRequest.md)
  - [RemoveResponse](docs/RemoveResponse.md)
  - [RemoveResponseErrors](docs/RemoveResponseErrors.md)
@@ -597,21 +729,23 @@ Class | Method | HTTP request | Description
  - [ReportCampaignsGroup](docs/ReportCampaignsGroup.md)
  - [ReportCampaignsLast](docs/ReportCampaignsLast.md)
  - [ReportCampaignsSpecific](docs/ReportCampaignsSpecific.md)
+ - [RequestEntityTooLarge](docs/RequestEntityTooLarge.md)
  - [RequestItemsUnsubscribe](docs/RequestItemsUnsubscribe.md)
  - [RequestItemsUnsubscribeAllOf](docs/RequestItemsUnsubscribeAllOf.md)
  - [RequestTimeout](docs/RequestTimeout.md)
  - [SavedSegment](docs/SavedSegment.md)
  - [SavedSegmentAllOf](docs/SavedSegmentAllOf.md)
  - [SavedSegmentAllOf1](docs/SavedSegmentAllOf1.md)
- - [SavedSegmentAllOfSegmentFilter](docs/SavedSegmentAllOfSegmentFilter.md)
- - [SavedSegmentAllOfSegmentFilterSegmentFilterArray](docs/SavedSegmentAllOfSegmentFilterSegmentFilterArray.md)
+ - [SavedSegmentAllOf1SegmentFilter](docs/SavedSegmentAllOf1SegmentFilter.md)
+ - [SavedSegmentAllOf1SegmentFilterSegmentFilterArray](docs/SavedSegmentAllOf1SegmentFilterSegmentFilterArray.md)
+ - [SearchContacts200Response](docs/SearchContacts200Response.md)
+ - [Segment](docs/Segment.md)
  - [SegmentCollection](docs/SegmentCollection.md)
  - [SegmentsActionSend](docs/SegmentsActionSend.md)
  - [SegmentsWithoutContactActionSend](docs/SegmentsWithoutContactActionSend.md)
  - [SendContact](docs/SendContact.md)
  - [SendContactCellphone](docs/SendContactCellphone.md)
  - [SendEmailContact](docs/SendEmailContact.md)
- - [SendEmailContactAllOf](docs/SendEmailContactAllOf.md)
  - [SendNone](docs/SendNone.md)
  - [SendPush](docs/SendPush.md)
  - [SendPushAllOf](docs/SendPushAllOf.md)
@@ -634,6 +768,7 @@ Class | Method | HTTP request | Description
  - [SmartSmsCampaignPatchRequest](docs/SmartSmsCampaignPatchRequest.md)
  - [SmartSmsCampaignPatchRequestCampaignContent](docs/SmartSmsCampaignPatchRequestCampaignContent.md)
  - [SmartSmsCampaignPatchRequestPageContent](docs/SmartSmsCampaignPatchRequestPageContent.md)
+ - [SmartSmsSegmentsActionSend](docs/SmartSmsSegmentsActionSend.md)
  - [SmsBouncesCampaignFields](docs/SmsBouncesCampaignFields.md)
  - [SmsBouncesListStatsFields](docs/SmsBouncesListStatsFields.md)
  - [SmsCampaign](docs/SmsCampaign.md)
@@ -643,11 +778,27 @@ Class | Method | HTTP request | Description
  - [SmsCampaignTemplateAllOf](docs/SmsCampaignTemplateAllOf.md)
  - [SmsEventsCampaignFields](docs/SmsEventsCampaignFields.md)
  - [SmsEventsListStatsFields](docs/SmsEventsListStatsFields.md)
+ - [SmsSegmentsActionSend](docs/SmsSegmentsActionSend.md)
  - [StartAutomationRequest](docs/StartAutomationRequest.md)
  - [StartAutomationResponse](docs/StartAutomationResponse.md)
  - [SubscriptionsListStatsFields](docs/SubscriptionsListStatsFields.md)
  - [SuppressionList](docs/SuppressionList.md)
  - [SuppressionListItems](docs/SuppressionListItems.md)
+ - [SuppressionTypeCellphone](docs/SuppressionTypeCellphone.md)
+ - [SuppressionTypeCellphoneAllOf](docs/SuppressionTypeCellphoneAllOf.md)
+ - [SuppressionTypeCellphoneAllOf1](docs/SuppressionTypeCellphoneAllOf1.md)
+ - [SuppressionTypeEmail](docs/SuppressionTypeEmail.md)
+ - [SuppressionTypeEmailAllOf](docs/SuppressionTypeEmailAllOf.md)
+ - [SuppressionTypeEmailAllOf1](docs/SuppressionTypeEmailAllOf1.md)
+ - [SuppressionTypeEmailDomain](docs/SuppressionTypeEmailDomain.md)
+ - [SuppressionTypeEmailDomainAllOf](docs/SuppressionTypeEmailDomainAllOf.md)
+ - [SuppressionTypeEmailDomainAllOf1](docs/SuppressionTypeEmailDomainAllOf1.md)
+ - [SuppressionTypePhone](docs/SuppressionTypePhone.md)
+ - [SuppressionTypePhoneAllOf](docs/SuppressionTypePhoneAllOf.md)
+ - [SuppressionTypePhoneAllOf1](docs/SuppressionTypePhoneAllOf1.md)
+ - [SuppressionTypeUserEmail](docs/SuppressionTypeUserEmail.md)
+ - [SuppressionTypeUserEmailAllOf](docs/SuppressionTypeUserEmailAllOf.md)
+ - [SuppressionTypeUserEmailAllOf1](docs/SuppressionTypeUserEmailAllOf1.md)
  - [Tag](docs/Tag.md)
  - [TagCollection](docs/TagCollection.md)
  - [TagCollection1](docs/TagCollection1.md)
@@ -661,8 +812,14 @@ Class | Method | HTTP request | Description
  - [UniqueFieldInUse](docs/UniqueFieldInUse.md)
  - [UniqueFieldInUseErrors](docs/UniqueFieldInUseErrors.md)
  - [UnprocessableEntity](docs/UnprocessableEntity.md)
+ - [UnremovableEntry](docs/UnremovableEntry.md)
+ - [UnremovableEntryErrors](docs/UnremovableEntryErrors.md)
  - [UnsubscriptionObject](docs/UnsubscriptionObject.md)
  - [UnsubscriptionsListStatsFields](docs/UnsubscriptionsListStatsFields.md)
+ - [UpdateByContact](docs/UpdateByContact.md)
+ - [UpdateBySegment](docs/UpdateBySegment.md)
+ - [UpdateContactsRequest](docs/UpdateContactsRequest.md)
+ - [UpdateForAll](docs/UpdateForAll.md)
  - [UsedInAutomations](docs/UsedInAutomations.md)
  - [UsedInAutomationsErrors](docs/UsedInAutomationsErrors.md)
  - [UsedInRecurringMessages](docs/UsedInRecurringMessages.md)
@@ -670,6 +827,8 @@ Class | Method | HTTP request | Description
  - [User](docs/User.md)
  - [UserAllOf](docs/UserAllOf.md)
  - [UserCollection](docs/UserCollection.md)
+ - [UserPost](docs/UserPost.md)
+ - [UserPostAllOf](docs/UserPostAllOf.md)
  - [UserPostRequest](docs/UserPostRequest.md)
  - [UserPostRequestAllOf](docs/UserPostRequestAllOf.md)
  - [VoiceCampaign](docs/VoiceCampaign.md)
@@ -681,13 +840,22 @@ Class | Method | HTTP request | Description
  - [WebPushCampaign](docs/WebPushCampaign.md)
  - [WebPushPatchCampaign](docs/WebPushPatchCampaign.md)
  - [WebPushReport](docs/WebPushReport.md)
- - [WebPushReportBrowsers](docs/WebPushReportBrowsers.md)
- - [WebPushReportOperatingSystems](docs/WebPushReportOperatingSystems.md)
+ - [WebPushReportBrowsersInner](docs/WebPushReportBrowsersInner.md)
+ - [WebPushReportBrowsersInnerVersionsInner](docs/WebPushReportBrowsersInnerVersionsInner.md)
+ - [WebPushReportBrowsersInnerVersionsInnerAllOf](docs/WebPushReportBrowsersInnerVersionsInnerAllOf.md)
+ - [WebPushReportDevicesInner](docs/WebPushReportDevicesInner.md)
+ - [WebPushReportDevicesInnerAllOf](docs/WebPushReportDevicesInnerAllOf.md)
+ - [WebPushReportOperatingSystemsInner](docs/WebPushReportOperatingSystemsInner.md)
+ - [WebPushReportOperatingSystemsInnerVersionsInner](docs/WebPushReportOperatingSystemsInnerVersionsInner.md)
+ - [WebPushReportOperatingSystemsInnerVersionsInnerAllOf](docs/WebPushReportOperatingSystemsInnerVersionsInnerAllOf.md)
+ - [WebPushReportUrlInner](docs/WebPushReportUrlInner.md)
+ - [WebPushReportUrlInnerAllOf](docs/WebPushReportUrlInnerAllOf.md)
  - [WebPushRssCampaign](docs/WebPushRssCampaign.md)
  - [WebPushSite](docs/WebPushSite.md)
  - [WebPushStats](docs/WebPushStats.md)
  - [Webhook](docs/Webhook.md)
  - [WebhookActionSchema](docs/WebhookActionSchema.md)
+ - [WebpushActionsInner](docs/WebpushActionsInner.md)
 
 
 ## Documentation for Authorization

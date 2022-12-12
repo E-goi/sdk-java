@@ -2,10 +2,10 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getAllDomains**](TrackEngageApi.md#getAllDomains) | **GET** /trackengage/domains | Get all domains
-[**getAllGoals**](TrackEngageApi.md#getAllGoals) | **GET** /trackengage/goals | Get all goals
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**getAllDomains**](TrackEngageApi.md#getAllDomains) | **GET** /trackengage/domains | Get all domains |
+| [**getAllGoals**](TrackEngageApi.md#getAllGoals) | **GET** /trackengage/goals | Get all goals |
 
 
 <a name="getAllDomains"></a>
@@ -71,13 +71,13 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllGoals"></a>
 # **getAllGoals**
@@ -142,11 +142,11 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

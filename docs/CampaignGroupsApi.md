@@ -2,17 +2,17 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createCampaignGroup**](CampaignGroupsApi.md#createCampaignGroup) | **POST** /campaign-groups | Create new campaign group
-[**deleteCampaignGroup**](CampaignGroupsApi.md#deleteCampaignGroup) | **DELETE** /campaign-groups/{group_id} | Remove Campaign Group
-[**getAllCampaignGroups**](CampaignGroupsApi.md#getAllCampaignGroups) | **GET** /campaign-groups | Get all campaign groups
-[**updateCampaignGroup**](CampaignGroupsApi.md#updateCampaignGroup) | **PUT** /campaign-groups/{group_id} | Update a specific campaign group
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createCampaignGroup**](CampaignGroupsApi.md#createCampaignGroup) | **POST** /campaign-groups | Create new campaign group |
+| [**deleteCampaignGroup**](CampaignGroupsApi.md#deleteCampaignGroup) | **DELETE** /campaign-groups/{group_id} | Remove Campaign Group |
+| [**getAllCampaignGroups**](CampaignGroupsApi.md#getAllCampaignGroups) | **GET** /campaign-groups | Get all campaign groups |
+| [**updateCampaignGroup**](CampaignGroupsApi.md#updateCampaignGroup) | **PUT** /campaign-groups/{group_id} | Update a specific campaign group |
 
 
 <a name="createCampaignGroup"></a>
 # **createCampaignGroup**
-> CampaignGroup createCampaignGroup(campaignGroup)
+> CampaignGroup createCampaignGroup(campaignGroupPost)
 
 Create new campaign group
 
@@ -40,9 +40,9 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     CampaignGroupsApi apiInstance = new CampaignGroupsApi(defaultClient);
-    CampaignGroup campaignGroup = new CampaignGroup(); // CampaignGroup | Parameters for the Campaign Group
+    CampaignGroupPost campaignGroupPost = new CampaignGroupPost(); // CampaignGroupPost | Parameters for the Campaign Group
     try {
-      CampaignGroup result = apiInstance.createCampaignGroup(campaignGroup);
+      CampaignGroup result = apiInstance.createCampaignGroup(campaignGroupPost);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CampaignGroupsApi#createCampaignGroup");
@@ -57,9 +57,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **campaignGroup** | [**CampaignGroup**](CampaignGroup.md)| Parameters for the Campaign Group |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **campaignGroupPost** | [**CampaignGroupPost**](CampaignGroupPost.md)| Parameters for the Campaign Group | |
 
 ### Return type
 
@@ -77,15 +77,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | OK |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**409** | Conflict |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **201** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **409** | Conflict |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="deleteCampaignGroup"></a>
 # **deleteCampaignGroup**
@@ -133,9 +133,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupId** | **Integer**| ID of the Campaign Group |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **Integer**| ID of the Campaign Group | |
 
 ### Return type
 
@@ -153,15 +153,15 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **204** | No Content |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllCampaignGroups"></a>
 # **getAllCampaignGroups**
@@ -213,12 +213,12 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupId** | **Integer**| Reference attribute to campaign group id | [optional]
- **name** | **String**| Reference attribute to campaign group id | [optional]
- **limit** | **Integer**| Number of items to return | [optional] [default to 10]
- **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **Integer**| Reference attribute to campaign group id | [optional] |
+| **name** | **String**| Reference attribute to campaign group id | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
 
 ### Return type
 
@@ -236,17 +236,17 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="updateCampaignGroup"></a>
 # **updateCampaignGroup**
-> CampaignGroup updateCampaignGroup(groupId, campaignGroup)
+> CampaignGroup updateCampaignGroup(groupId, campaignGroupPost)
 
 Update a specific campaign group
 
@@ -275,9 +275,9 @@ public class Example {
 
     CampaignGroupsApi apiInstance = new CampaignGroupsApi(defaultClient);
     Integer groupId = 56; // Integer | ID of the Campaign Group
-    CampaignGroup campaignGroup = new CampaignGroup(); // CampaignGroup | Parameters for the Campaign Group
+    CampaignGroupPost campaignGroupPost = new CampaignGroupPost(); // CampaignGroupPost | Parameters for the Campaign Group
     try {
-      CampaignGroup result = apiInstance.updateCampaignGroup(groupId, campaignGroup);
+      CampaignGroup result = apiInstance.updateCampaignGroup(groupId, campaignGroupPost);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CampaignGroupsApi#updateCampaignGroup");
@@ -292,10 +292,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **groupId** | **Integer**| ID of the Campaign Group |
- **campaignGroup** | [**CampaignGroup**](CampaignGroup.md)| Parameters for the Campaign Group |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **Integer**| ID of the Campaign Group | |
+| **campaignGroupPost** | [**CampaignGroupPost**](CampaignGroupPost.md)| Parameters for the Campaign Group | |
 
 ### Return type
 
@@ -313,14 +313,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

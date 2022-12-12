@@ -2,11 +2,12 @@
 
 # ConflictAllOf
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**errors** | [**Object**](.md) | Information about the conflict |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**errors** | **Object** | Information about the conflict |  [optional] |
 
 
 

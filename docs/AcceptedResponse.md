@@ -3,19 +3,20 @@
 # AcceptedResponse
 
 Accepted response schema
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**result** | [**ResultEnum**](#ResultEnum) |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**result** | [**ResultEnum**](#ResultEnum) |  |  [optional] |
 
 
 
 ## Enum: ResultEnum
 
-Name | Value
----- | -----
-SUCCESS | &quot;success&quot;
+| Name | Value |
+|---- | -----|
+| SUCCESS | &quot;success&quot; |
 
 
 

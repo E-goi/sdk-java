@@ -2,20 +2,20 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**generateEmailBouncesReport**](AdvancedReportsApi.md#generateEmailBouncesReport) | **POST** /reports/advanced/email-bounces | Generate email bounces report
-[**generateEmailClicksByContactReport**](AdvancedReportsApi.md#generateEmailClicksByContactReport) | **POST** /reports/advanced/email-clicks-by-contact | Generate email clicks by contact report
-[**generateEmailClicksByUrlReport**](AdvancedReportsApi.md#generateEmailClicksByUrlReport) | **POST** /reports/advanced/email-clicks-by-url | Generate email clicks by URL report
-[**generateEmailEventsReport**](AdvancedReportsApi.md#generateEmailEventsReport) | **POST** /reports/advanced/email-events | Generate email events report
-[**generateEmailSmsReport**](AdvancedReportsApi.md#generateEmailSmsReport) | **POST** /reports/advanced/sms-bounces | Generate SMS bounces report
-[**generateEmailUnsubscriptionsReport**](AdvancedReportsApi.md#generateEmailUnsubscriptionsReport) | **POST** /reports/advanced/email-unsubscriptions | Generate email unsubscriptions report
-[**generateFormAnswersReport**](AdvancedReportsApi.md#generateFormAnswersReport) | **POST** /reports/advanced/form-answers | Generate form answers report
-[**generateSendsReport**](AdvancedReportsApi.md#generateSendsReport) | **POST** /reports/advanced/sends | Generate sends report
-[**generateSmsEventsReport**](AdvancedReportsApi.md#generateSmsEventsReport) | **POST** /reports/advanced/sms-events | Generate SMS events report
-[**generateSubscriptionsReport**](AdvancedReportsApi.md#generateSubscriptionsReport) | **POST** /reports/advanced/subscriptions | Generate subscriptions report
-[**generateUnsubscriptionsReport**](AdvancedReportsApi.md#generateUnsubscriptionsReport) | **POST** /reports/advanced/unsubscriptions | Generate unsubscriptions report
-[**getAllAdvancedReports**](AdvancedReportsApi.md#getAllAdvancedReports) | **GET** /reports/advanced | Get all advanced reports
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**generateEmailBouncesReport**](AdvancedReportsApi.md#generateEmailBouncesReport) | **POST** /reports/advanced/email-bounces | Generate email bounces report |
+| [**generateEmailClicksByContactReport**](AdvancedReportsApi.md#generateEmailClicksByContactReport) | **POST** /reports/advanced/email-clicks-by-contact | Generate email clicks by contact report |
+| [**generateEmailClicksByUrlReport**](AdvancedReportsApi.md#generateEmailClicksByUrlReport) | **POST** /reports/advanced/email-clicks-by-url | Generate email clicks by URL report |
+| [**generateEmailEventsReport**](AdvancedReportsApi.md#generateEmailEventsReport) | **POST** /reports/advanced/email-events | Generate email events report |
+| [**generateEmailSmsReport**](AdvancedReportsApi.md#generateEmailSmsReport) | **POST** /reports/advanced/sms-bounces | Generate SMS bounces report |
+| [**generateEmailUnsubscriptionsReport**](AdvancedReportsApi.md#generateEmailUnsubscriptionsReport) | **POST** /reports/advanced/email-unsubscriptions | Generate email unsubscriptions report |
+| [**generateFormAnswersReport**](AdvancedReportsApi.md#generateFormAnswersReport) | **POST** /reports/advanced/form-answers | Generate form answers report |
+| [**generateSendsReport**](AdvancedReportsApi.md#generateSendsReport) | **POST** /reports/advanced/sends | Generate sends report |
+| [**generateSmsEventsReport**](AdvancedReportsApi.md#generateSmsEventsReport) | **POST** /reports/advanced/sms-events | Generate SMS events report |
+| [**generateSubscriptionsReport**](AdvancedReportsApi.md#generateSubscriptionsReport) | **POST** /reports/advanced/subscriptions | Generate subscriptions report |
+| [**generateUnsubscriptionsReport**](AdvancedReportsApi.md#generateUnsubscriptionsReport) | **POST** /reports/advanced/unsubscriptions | Generate unsubscriptions report |
+| [**getAllAdvancedReports**](AdvancedReportsApi.md#getAllAdvancedReports) | **GET** /reports/advanced | Get all advanced reports |
 
 
 <a name="generateEmailBouncesReport"></a>
@@ -65,9 +65,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateEmailBouncesReport** | [**GenerateEmailBouncesReport**](GenerateEmailBouncesReport.md)| Parameters for the email bounces report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateEmailBouncesReport** | [**GenerateEmailBouncesReport**](GenerateEmailBouncesReport.md)| Parameters for the email bounces report | |
 
 ### Return type
 
@@ -85,14 +85,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateEmailClicksByContactReport"></a>
 # **generateEmailClicksByContactReport**
@@ -141,9 +141,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateEmailClicksByContactReport** | [**GenerateEmailClicksByContactReport**](GenerateEmailClicksByContactReport.md)| Parameters for the email clicks by contact report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateEmailClicksByContactReport** | [**GenerateEmailClicksByContactReport**](GenerateEmailClicksByContactReport.md)| Parameters for the email clicks by contact report | |
 
 ### Return type
 
@@ -161,15 +161,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateEmailClicksByUrlReport"></a>
 # **generateEmailClicksByUrlReport**
@@ -218,9 +218,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateEmailClicksByUrlReport** | [**GenerateEmailClicksByUrlReport**](GenerateEmailClicksByUrlReport.md)| Parameters for the email clicks by URL report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateEmailClicksByUrlReport** | [**GenerateEmailClicksByUrlReport**](GenerateEmailClicksByUrlReport.md)| Parameters for the email clicks by URL report | |
 
 ### Return type
 
@@ -238,15 +238,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateEmailEventsReport"></a>
 # **generateEmailEventsReport**
@@ -295,9 +295,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateEmailEventsReport** | [**GenerateEmailEventsReport**](GenerateEmailEventsReport.md)| Parameters for the email events report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateEmailEventsReport** | [**GenerateEmailEventsReport**](GenerateEmailEventsReport.md)| Parameters for the email events report | |
 
 ### Return type
 
@@ -315,15 +315,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateEmailSmsReport"></a>
 # **generateEmailSmsReport**
@@ -372,9 +372,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateSmsBouncesReport** | [**GenerateSmsBouncesReport**](GenerateSmsBouncesReport.md)| Parameters for the SMS bounces report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateSmsBouncesReport** | [**GenerateSmsBouncesReport**](GenerateSmsBouncesReport.md)| Parameters for the SMS bounces report | |
 
 ### Return type
 
@@ -392,15 +392,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateEmailUnsubscriptionsReport"></a>
 # **generateEmailUnsubscriptionsReport**
@@ -449,9 +449,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateEmailUnsubscriptionsReport** | [**GenerateEmailUnsubscriptionsReport**](GenerateEmailUnsubscriptionsReport.md)| Parameters for the email unsubscriptions report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateEmailUnsubscriptionsReport** | [**GenerateEmailUnsubscriptionsReport**](GenerateEmailUnsubscriptionsReport.md)| Parameters for the email unsubscriptions report | |
 
 ### Return type
 
@@ -469,15 +469,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateFormAnswersReport"></a>
 # **generateFormAnswersReport**
@@ -526,9 +526,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateFormAnswersReport** | [**GenerateFormAnswersReport**](GenerateFormAnswersReport.md)| Parameters for the form answers report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateFormAnswersReport** | [**GenerateFormAnswersReport**](GenerateFormAnswersReport.md)| Parameters for the form answers report | |
 
 ### Return type
 
@@ -546,15 +546,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateSendsReport"></a>
 # **generateSendsReport**
@@ -603,9 +603,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateSendsReport** | [**GenerateSendsReport**](GenerateSendsReport.md)| Parameters for the sends report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateSendsReport** | [**GenerateSendsReport**](GenerateSendsReport.md)| Parameters for the sends report | |
 
 ### Return type
 
@@ -623,15 +623,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateSmsEventsReport"></a>
 # **generateSmsEventsReport**
@@ -680,9 +680,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateSmsEventsReport** | [**GenerateSmsEventsReport**](GenerateSmsEventsReport.md)| Parameters for the SMS events report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateSmsEventsReport** | [**GenerateSmsEventsReport**](GenerateSmsEventsReport.md)| Parameters for the SMS events report | |
 
 ### Return type
 
@@ -700,15 +700,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateSubscriptionsReport"></a>
 # **generateSubscriptionsReport**
@@ -757,9 +757,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateSubscriptionsReport** | [**GenerateSubscriptionsReport**](GenerateSubscriptionsReport.md)| Parameters for the subscriptions report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateSubscriptionsReport** | [**GenerateSubscriptionsReport**](GenerateSubscriptionsReport.md)| Parameters for the subscriptions report | |
 
 ### Return type
 
@@ -777,15 +777,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateUnsubscriptionsReport"></a>
 # **generateUnsubscriptionsReport**
@@ -834,9 +834,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generateUnsubscriptionsReport** | [**GenerateUnsubscriptionsReport**](GenerateUnsubscriptionsReport.md)| Parameters for the unsubscriptions report |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateUnsubscriptionsReport** | [**GenerateUnsubscriptionsReport**](GenerateUnsubscriptionsReport.md)| Parameters for the unsubscriptions report | |
 
 ### Return type
 
@@ -854,15 +854,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllAdvancedReports"></a>
 # **getAllAdvancedReports**
@@ -894,13 +894,13 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     AdvancedReportsApi apiInstance = new AdvancedReportsApi(defaultClient);
-    String status = "status_example"; // String | Advanced report status
+    String status = "queued"; // String | Advanced report status
     String title = "title_example"; // String | Advanced report title
-    OffsetDateTime createdMin = new OffsetDateTime(); // OffsetDateTime | Created initial date
-    OffsetDateTime createdMax = new OffsetDateTime(); // OffsetDateTime | Created finish
+    OffsetDateTime createdMin = OffsetDateTime.now(); // OffsetDateTime | Created initial date
+    OffsetDateTime createdMax = OffsetDateTime.now(); // OffsetDateTime | Created finish
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
-    String order = "desc"; // String | Type of order
+    String order = "asc"; // String | Type of order
     String orderBy = "advanced_report_id"; // String | Reference attribute to order the advanced reports
     try {
       AdvancedReportsCollection result = apiInstance.getAllAdvancedReports(status, title, createdMin, createdMax, offset, limit, order, orderBy);
@@ -918,16 +918,16 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **status** | **String**| Advanced report status | [optional] [enum: queued, running, finished, stopped, canceled, paused, error]
- **title** | **String**| Advanced report title | [optional]
- **createdMin** | **OffsetDateTime**| Created initial date | [optional]
- **createdMax** | **OffsetDateTime**| Created finish | [optional]
- **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
- **limit** | **Integer**| Number of items to return | [optional] [default to 10]
- **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc]
- **orderBy** | **String**| Reference attribute to order the advanced reports | [optional] [default to advanced_report_id] [enum: advanced_report_id, title, created]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **status** | **String**| Advanced report status | [optional] [enum: queued, running, finished, stopped, canceled, paused, error] |
+| **title** | **String**| Advanced report title | [optional] |
+| **createdMin** | **OffsetDateTime**| Created initial date | [optional] |
+| **createdMax** | **OffsetDateTime**| Created finish | [optional] |
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc] |
+| **orderBy** | **String**| Reference attribute to order the advanced reports | [optional] [default to advanced_report_id] [enum: advanced_report_id, title, created] |
 
 ### Return type
 
@@ -945,12 +945,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

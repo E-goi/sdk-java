@@ -2,9 +2,9 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**importOrdersBulk**](EcommerceActivityApi.md#importOrdersBulk) | **POST** /lists/{list_id}/orders | Orders import bulk request
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**importOrdersBulk**](EcommerceActivityApi.md#importOrdersBulk) | **POST** /lists/{list_id}/orders | Orders import bulk request |
 
 
 <a name="importOrdersBulk"></a>
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 Orders import bulk request
 
-Creates new bulk orders syncronization
+Creates new bulk orders syncronization &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
 
 ### Example
 ```java
@@ -55,10 +55,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **listId** | **Integer**| ID of the List |
- **importOrdersBulkBulkRequest** | [**List&lt;ImportOrdersBulkBulkRequest&gt;**](ImportOrdersBulkBulkRequest.md)| Parameters for the Orders |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **listId** | **Integer**| ID of the List | |
+| **importOrdersBulkBulkRequest** | [**List&lt;ImportOrdersBulkBulkRequest&gt;**](ImportOrdersBulkBulkRequest.md)| Parameters for the Orders | |
 
 ### Return type
 
@@ -76,13 +76,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | OK |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | NotFound |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

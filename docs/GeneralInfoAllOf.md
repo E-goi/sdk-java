@@ -2,11 +2,12 @@
 
 # GeneralInfoAllOf
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**generalInfo** | [**GeneralInfoAllOfGeneralInfo**](GeneralInfoAllOfGeneralInfo.md) |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**generalInfo** | [**GeneralInfoAllOfGeneralInfo**](GeneralInfoAllOfGeneralInfo.md) |  |  [optional] |
 
 
 

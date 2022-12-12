@@ -3,13 +3,14 @@
 # AdvancedReportSendsColumns
 
 Columns of the report
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**listBaseFields** | **List&lt;String&gt;** | Array of base fields | 
-**listExtraFields** | **List&lt;Object&gt;** |  | 
-**campaignFields** | [**SendsCampaignFields**](SendsCampaignFields.md) |  | 
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**listBaseFields** | **List&lt;String&gt;** | Array of base fields |  |
+|**listExtraFields** | [**List&lt;AdvancedReportListExtraFieldsInner&gt;**](AdvancedReportListExtraFieldsInner.md) |  |  |
+|**campaignFields** | [**SendsCampaignFields**](SendsCampaignFields.md) |  |  |
 
 
 

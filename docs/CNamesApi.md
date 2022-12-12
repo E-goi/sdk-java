@@ -2,15 +2,15 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createCName**](CNamesApi.md#createCName) | **POST** /cnames | Create cname
-[**getAllCNames**](CNamesApi.md#getAllCNames) | **GET** /cnames | Get All CNames
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createCName**](CNamesApi.md#createCName) | **POST** /cnames | Create cname |
+| [**getAllCNames**](CNamesApi.md#getAllCNames) | **GET** /cnames | Get All CNames |
 
 
 <a name="createCName"></a>
 # **createCName**
-> CName createCName(cname)
+> CName createCName(cnamePost)
 
 Create cname
 
@@ -38,9 +38,9 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     CNamesApi apiInstance = new CNamesApi(defaultClient);
-    CName cname = new CName(); // CName | Parameters for the cname
+    CNamePost cnamePost = new CNamePost(); // CNamePost | Parameters for the cname
     try {
-      CName result = apiInstance.createCName(cname);
+      CName result = apiInstance.createCName(cnamePost);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CNamesApi#createCName");
@@ -55,9 +55,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cname** | [**CName**](CName.md)| Parameters for the cname |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **cnamePost** | [**CNamePost**](CNamePost.md)| Parameters for the cname | |
 
 ### Return type
 
@@ -75,16 +75,16 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **201** | Created |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllCNames"></a>
 # **getAllCNames**
@@ -149,12 +149,12 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

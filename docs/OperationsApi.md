@@ -2,13 +2,13 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**actionApproveOperation**](OperationsApi.md#actionApproveOperation) | **POST** /operations/actions/approve | Approve operation
-[**actionCancelOperation**](OperationsApi.md#actionCancelOperation) | **POST** /operations/actions/cancel | Cancel operation
-[**actionPauseOperation**](OperationsApi.md#actionPauseOperation) | **POST** /operations/actions/pause | Pause operation
-[**actionResumeOperation**](OperationsApi.md#actionResumeOperation) | **POST** /operations/actions/resume | Resume operation
-[**getAllOperations**](OperationsApi.md#getAllOperations) | **GET** /operations | Get all queued operations
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**actionApproveOperation**](OperationsApi.md#actionApproveOperation) | **POST** /operations/actions/approve | Approve operation |
+| [**actionCancelOperation**](OperationsApi.md#actionCancelOperation) | **POST** /operations/actions/cancel | Cancel operation |
+| [**actionPauseOperation**](OperationsApi.md#actionPauseOperation) | **POST** /operations/actions/pause | Pause operation |
+| [**actionResumeOperation**](OperationsApi.md#actionResumeOperation) | **POST** /operations/actions/resume | Resume operation |
+| [**getAllOperations**](OperationsApi.md#getAllOperations) | **GET** /operations | Get all queued operations |
 
 
 <a name="actionApproveOperation"></a>
@@ -58,9 +58,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **operationActionRequest** | [**OperationActionRequest**](OperationActionRequest.md)| Parameters for the request |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **operationActionRequest** | [**OperationActionRequest**](OperationActionRequest.md)| Parameters for the request | |
 
 ### Return type
 
@@ -78,14 +78,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="actionCancelOperation"></a>
 # **actionCancelOperation**
@@ -134,9 +134,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **operationActionRequest** | [**OperationActionRequest**](OperationActionRequest.md)| Parameters for the request |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **operationActionRequest** | [**OperationActionRequest**](OperationActionRequest.md)| Parameters for the request | |
 
 ### Return type
 
@@ -154,14 +154,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="actionPauseOperation"></a>
 # **actionPauseOperation**
@@ -210,9 +210,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **operationActionRequest** | [**OperationActionRequest**](OperationActionRequest.md)| Parameters for the request |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **operationActionRequest** | [**OperationActionRequest**](OperationActionRequest.md)| Parameters for the request | |
 
 ### Return type
 
@@ -230,14 +230,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="actionResumeOperation"></a>
 # **actionResumeOperation**
@@ -286,9 +286,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **operationActionRequest** | [**OperationActionRequest**](OperationActionRequest.md)| Parameters for the request |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **operationActionRequest** | [**OperationActionRequest**](OperationActionRequest.md)| Parameters for the request | |
 
 ### Return type
 
@@ -306,13 +306,13 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllOperations"></a>
 # **getAllOperations**
@@ -344,12 +344,12 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     OperationsApi apiInstance = new OperationsApi(defaultClient);
-    String type = "type_example"; // String | Operation type
-    String status = "status_example"; // String | Operation state
+    String type = "import_contacts"; // String | Operation type
+    String status = "queued"; // String | Operation state
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
-    String order = "desc"; // String | Type of order
-    String orderBy = "orderBy_example"; // String | Reference attribute to order operations
+    String order = "asc"; // String | Type of order
+    String orderBy = "operation_id"; // String | Reference attribute to order operations
     try {
       OperationsCollection result = apiInstance.getAllOperations(type, status, offset, limit, order, orderBy);
       System.out.println(result);
@@ -366,14 +366,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **type** | **String**| Operation type | [optional] [enum: import_contacts, export_contacts, export_reports, advanced_report, email, sms, smart_sms, voice, push, webpush, ads, segment_generation, mass_operation, unify]
- **status** | **String**| Operation state | [optional] [enum: queued, processing, executing, paused]
- **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
- **limit** | **Integer**| Number of items to return | [optional] [default to 10]
- **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc]
- **orderBy** | **String**| Reference attribute to order operations | [optional] [enum: operation_id, created, start_date]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **type** | **String**| Operation type | [optional] [enum: import_contacts, update_contacts, export_contacts, export_reports, advanced_report, email, sms, smart_sms, voice, push, webpush, ads, social, segment_generation, mass_operation, unify, import_ecommerce, attach_tag, detach_tag] |
+| **status** | **String**| Operation state | [optional] [enum: queued, processing, executing, paused] |
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc] |
+| **orderBy** | **String**| Reference attribute to order operations | [optional] [enum: operation_id, created, start_date] |
 
 ### Return type
 
@@ -391,12 +391,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

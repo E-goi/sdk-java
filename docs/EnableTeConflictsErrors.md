@@ -2,11 +2,12 @@
 
 # EnableTeConflictsErrors
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**errors** | [**DomainListRequiredErrors**](DomainListRequiredErrors.md) |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**errors** | [**DomainListRequiredErrors**](DomainListRequiredErrors.md) |  |  [optional] |
 
 
 

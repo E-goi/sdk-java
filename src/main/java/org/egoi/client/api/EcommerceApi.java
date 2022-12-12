@@ -1,6 +1,6 @@
 /*
  * APIv3 (New)
- *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  <security-definitions/>
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0
  * 
@@ -29,20 +29,24 @@ import java.io.IOException;
 
 import org.egoi.client.model.AcceptedResponse;
 import org.egoi.client.model.BadRequest;
+import java.math.BigDecimal;
 import org.egoi.client.model.Cart;
 import org.egoi.client.model.Catalog;
 import org.egoi.client.model.CatalogCollection;
 import org.egoi.client.model.CatalogPostRequest;
 import org.egoi.client.model.CreateOrder;
 import org.egoi.client.model.Forbidden;
+import org.egoi.client.model.GetAllProductsCustomAttributesParameter;
 import org.egoi.client.model.InternalServerError;
 import org.egoi.client.model.NotFound;
+import org.egoi.client.model.PayloadTooLarge;
 import org.egoi.client.model.PostProductsConflict;
 import org.egoi.client.model.Product;
 import org.egoi.client.model.ProductBulkRequest;
 import org.egoi.client.model.ProductCollection;
 import org.egoi.client.model.ProductPatchRequest;
 import org.egoi.client.model.ProductPostRequest;
+import org.egoi.client.model.RequestEntityTooLarge;
 import org.egoi.client.model.RequestTimeout;
 import org.egoi.client.model.ServiceUnavailable;
 import org.egoi.client.model.TooManyRequests;
@@ -54,9 +58,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class EcommerceApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public EcommerceApi() {
         this(Configuration.getDefaultApiClient());
@@ -74,6 +81,22 @@ public class EcommerceApi {
         this.localVarApiClient = apiClient;
     }
 
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
     /**
      * Build call for createCart
      * @param domain Domain (required)
@@ -88,7 +111,6 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -96,17 +118,31 @@ public class EcommerceApi {
      </table>
      */
     public okhttp3.Call createCartCall(String domain, Cart cart, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = cart;
 
         // create path and map variables
         String localVarPath = "/{domain}/carts"
-            .replaceAll("\\{" + "domain" + "\\}", localVarApiClient.escapeString(domain.toString()));
+            .replace("{" + "domain" + "}", localVarApiClient.escapeString(domain.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -119,28 +155,27 @@ public class EcommerceApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call createCartValidateBeforeCall(String domain, Cart cart, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'domain' is set
         if (domain == null) {
             throw new ApiException("Missing the required parameter 'domain' when calling createCart(Async)");
         }
-        
+
         // verify the required parameter 'cart' is set
         if (cart == null) {
             throw new ApiException("Missing the required parameter 'cart' when calling createCart(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createCartCall(domain, cart, _callback);
-        return localVarCall;
+        return createCartCall(domain, cart, _callback);
 
     }
 
@@ -158,7 +193,6 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -184,7 +218,6 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -212,7 +245,6 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -247,6 +279,19 @@ public class EcommerceApi {
      </table>
      */
     public okhttp3.Call createCatalogCall(CatalogPostRequest catalogPostRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = catalogPostRequest;
 
         // create path and map variables
@@ -257,6 +302,7 @@ public class EcommerceApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -269,23 +315,22 @@ public class EcommerceApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call createCatalogValidateBeforeCall(CatalogPostRequest catalogPostRequest, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'catalogPostRequest' is set
         if (catalogPostRequest == null) {
             throw new ApiException("Missing the required parameter 'catalogPostRequest' when calling createCatalog(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createCatalogCall(catalogPostRequest, _callback);
-        return localVarCall;
+        return createCatalogCall(catalogPostRequest, _callback);
 
     }
 
@@ -382,8 +427,8 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Request Entity Too Large </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -391,17 +436,31 @@ public class EcommerceApi {
      </table>
      */
     public okhttp3.Call createOrderCall(String domain, CreateOrder createOrder, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = createOrder;
 
         // create path and map variables
         String localVarPath = "/{domain}/orders"
-            .replaceAll("\\{" + "domain" + "\\}", localVarApiClient.escapeString(domain.toString()));
+            .replace("{" + "domain" + "}", localVarApiClient.escapeString(domain.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -414,28 +473,27 @@ public class EcommerceApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call createOrderValidateBeforeCall(String domain, CreateOrder createOrder, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'domain' is set
         if (domain == null) {
             throw new ApiException("Missing the required parameter 'domain' when calling createOrder(Async)");
         }
-        
+
         // verify the required parameter 'createOrder' is set
         if (createOrder == null) {
             throw new ApiException("Missing the required parameter 'createOrder' when calling createOrder(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createOrderCall(domain, createOrder, _callback);
-        return localVarCall;
+        return createOrderCall(domain, createOrder, _callback);
 
     }
 
@@ -453,8 +511,8 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Request Entity Too Large </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -480,8 +538,8 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Request Entity Too Large </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -509,8 +567,8 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Request Entity Too Large </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -538,7 +596,6 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
@@ -548,17 +605,31 @@ public class EcommerceApi {
      </table>
      */
     public okhttp3.Call createProductCall(Integer catalogId, ProductPostRequest productPostRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = productPostRequest;
 
         // create path and map variables
         String localVarPath = "/catalogs/{catalog_id}/products"
-            .replaceAll("\\{" + "catalog_id" + "\\}", localVarApiClient.escapeString(catalogId.toString()));
+            .replace("{" + "catalog_id" + "}", localVarApiClient.escapeString(catalogId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -571,28 +642,27 @@ public class EcommerceApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call createProductValidateBeforeCall(Integer catalogId, ProductPostRequest productPostRequest, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'catalogId' is set
         if (catalogId == null) {
             throw new ApiException("Missing the required parameter 'catalogId' when calling createProduct(Async)");
         }
-        
+
         // verify the required parameter 'productPostRequest' is set
         if (productPostRequest == null) {
             throw new ApiException("Missing the required parameter 'productPostRequest' when calling createProduct(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createProductCall(catalogId, productPostRequest, _callback);
-        return localVarCall;
+        return createProductCall(catalogId, productPostRequest, _callback);
 
     }
 
@@ -610,7 +680,6 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
@@ -638,7 +707,6 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
@@ -668,7 +736,6 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> Conflict </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
@@ -696,25 +763,39 @@ public class EcommerceApi {
         <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call deleteCatalogCall(Integer catalogId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/catalogs/{catalog_id}"
-            .replaceAll("\\{" + "catalog_id" + "\\}", localVarApiClient.escapeString(catalogId.toString()));
+            .replace("{" + "catalog_id" + "}", localVarApiClient.escapeString(catalogId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -724,26 +805,24 @@ public class EcommerceApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteCatalogValidateBeforeCall(Integer catalogId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'catalogId' is set
         if (catalogId == null) {
             throw new ApiException("Missing the required parameter 'catalogId' when calling deleteCatalog(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteCatalogCall(catalogId, _callback);
-        return localVarCall;
+        return deleteCatalogCall(catalogId, _callback);
 
     }
 
@@ -758,8 +837,8 @@ public class EcommerceApi {
         <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
@@ -781,8 +860,8 @@ public class EcommerceApi {
         <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
@@ -806,8 +885,8 @@ public class EcommerceApi {
         <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
@@ -840,18 +919,32 @@ public class EcommerceApi {
      </table>
      */
     public okhttp3.Call deleteProductCall(Integer catalogId, String productIdentifier, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/catalogs/{catalog_id}/products/{product_identifier}"
-            .replaceAll("\\{" + "catalog_id" + "\\}", localVarApiClient.escapeString(catalogId.toString()))
-            .replaceAll("\\{" + "product_identifier" + "\\}", localVarApiClient.escapeString(productIdentifier.toString()));
+            .replace("{" + "catalog_id" + "}", localVarApiClient.escapeString(catalogId.toString()))
+            .replace("{" + "product_identifier" + "}", localVarApiClient.escapeString(productIdentifier.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -861,31 +954,29 @@ public class EcommerceApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteProductValidateBeforeCall(Integer catalogId, String productIdentifier, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'catalogId' is set
         if (catalogId == null) {
             throw new ApiException("Missing the required parameter 'catalogId' when calling deleteProduct(Async)");
         }
-        
+
         // verify the required parameter 'productIdentifier' is set
         if (productIdentifier == null) {
             throw new ApiException("Missing the required parameter 'productIdentifier' when calling deleteProduct(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteProductCall(catalogId, productIdentifier, _callback);
-        return localVarCall;
+        return deleteProductCall(catalogId, productIdentifier, _callback);
 
     }
 
@@ -982,6 +1073,19 @@ public class EcommerceApi {
      </table>
      */
     public okhttp3.Call getAllCatalogsCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -992,6 +1096,7 @@ public class EcommerceApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1001,21 +1106,19 @@ public class EcommerceApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getAllCatalogsValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getAllCatalogsCall(_callback);
-        return localVarCall;
+        return getAllCatalogsCall(_callback);
 
     }
 
@@ -1092,7 +1195,18 @@ public class EcommerceApi {
     /**
      * Build call for getAllProducts
      * @param catalogId ID of the Catalog (required)
-     * @param productIdentifier Product ID in your store (optional)
+     * @param productIdentifier Filter by product ID in your store (optional)
+     * @param name Filter by name of the product (optional)
+     * @param description Filter by description of the product (optional)
+     * @param sku Filter by Stock Keeping Unit (optional)
+     * @param upc Filter by Universal Product Code (optional)
+     * @param ean Filter by European Article Numbering (optional)
+     * @param gtin Filter by Global Trade Item Number (optional)
+     * @param mpn Filter by Manufacturer Part Number (optional)
+     * @param price Filter by price of the product (optional)
+     * @param salePrice Filter by sale price of the product (optional)
+     * @param brand Filter by brand of the product (optional)
+     * @param customAttributes Filter by custom attributes of products&lt;div&gt;&lt;span class&#x3D;&#39;sc-cJSrbW cWGDGi&#39;&gt; Example: &lt;/span&gt; &lt;span class&#x3D;&#39;sc-uJMKN cTkJKI&#39;&gt; &#39;custom_attributes[alias]&#x3D;value&#39; &lt;/span&gt;&lt;/div&gt; (optional)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
      * @param _callback Callback for upload/download progress
@@ -1104,24 +1218,85 @@ public class EcommerceApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getAllProductsCall(Integer catalogId, String productIdentifier, Integer offset, Integer limit, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getAllProductsCall(Integer catalogId, String productIdentifier, String name, String description, String sku, String upc, String ean, String gtin, String mpn, BigDecimal price, BigDecimal salePrice, String brand, GetAllProductsCustomAttributesParameter customAttributes, Integer offset, Integer limit, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/catalogs/{catalog_id}/products"
-            .replaceAll("\\{" + "catalog_id" + "\\}", localVarApiClient.escapeString(catalogId.toString()));
+            .replace("{" + "catalog_id" + "}", localVarApiClient.escapeString(catalogId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (productIdentifier != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("product_identifier", productIdentifier));
+        }
+
+        if (name != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("name", name));
+        }
+
+        if (description != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("description", description));
+        }
+
+        if (sku != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sku", sku));
+        }
+
+        if (upc != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("upc", upc));
+        }
+
+        if (ean != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("ean", ean));
+        }
+
+        if (gtin != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("gtin", gtin));
+        }
+
+        if (mpn != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("mpn", mpn));
+        }
+
+        if (price != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("price", price));
+        }
+
+        if (salePrice != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("sale_price", salePrice));
+        }
+
+        if (brand != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("brand", brand));
+        }
+
+        if (customAttributes != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("custom_attributes", customAttributes));
         }
 
         if (offset != null) {
@@ -1132,9 +1307,6 @@ public class EcommerceApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1144,26 +1316,24 @@ public class EcommerceApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getAllProductsValidateBeforeCall(Integer catalogId, String productIdentifier, Integer offset, Integer limit, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call getAllProductsValidateBeforeCall(Integer catalogId, String productIdentifier, String name, String description, String sku, String upc, String ean, String gtin, String mpn, BigDecimal price, BigDecimal salePrice, String brand, GetAllProductsCustomAttributesParameter customAttributes, Integer offset, Integer limit, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'catalogId' is set
         if (catalogId == null) {
             throw new ApiException("Missing the required parameter 'catalogId' when calling getAllProducts(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getAllProductsCall(catalogId, productIdentifier, offset, limit, _callback);
-        return localVarCall;
+        return getAllProductsCall(catalogId, productIdentifier, name, description, sku, upc, ean, gtin, mpn, price, salePrice, brand, customAttributes, offset, limit, _callback);
 
     }
 
@@ -1171,7 +1341,18 @@ public class EcommerceApi {
      * Get all products
      * Returns all products for the given catalog
      * @param catalogId ID of the Catalog (required)
-     * @param productIdentifier Product ID in your store (optional)
+     * @param productIdentifier Filter by product ID in your store (optional)
+     * @param name Filter by name of the product (optional)
+     * @param description Filter by description of the product (optional)
+     * @param sku Filter by Stock Keeping Unit (optional)
+     * @param upc Filter by Universal Product Code (optional)
+     * @param ean Filter by European Article Numbering (optional)
+     * @param gtin Filter by Global Trade Item Number (optional)
+     * @param mpn Filter by Manufacturer Part Number (optional)
+     * @param price Filter by price of the product (optional)
+     * @param salePrice Filter by sale price of the product (optional)
+     * @param brand Filter by brand of the product (optional)
+     * @param customAttributes Filter by custom attributes of products&lt;div&gt;&lt;span class&#x3D;&#39;sc-cJSrbW cWGDGi&#39;&gt; Example: &lt;/span&gt; &lt;span class&#x3D;&#39;sc-uJMKN cTkJKI&#39;&gt; &#39;custom_attributes[alias]&#x3D;value&#39; &lt;/span&gt;&lt;/div&gt; (optional)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
      * @return ProductCollection
@@ -1182,15 +1363,15 @@ public class EcommerceApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ProductCollection getAllProducts(Integer catalogId, String productIdentifier, Integer offset, Integer limit) throws ApiException {
-        ApiResponse<ProductCollection> localVarResp = getAllProductsWithHttpInfo(catalogId, productIdentifier, offset, limit);
+    public ProductCollection getAllProducts(Integer catalogId, String productIdentifier, String name, String description, String sku, String upc, String ean, String gtin, String mpn, BigDecimal price, BigDecimal salePrice, String brand, GetAllProductsCustomAttributesParameter customAttributes, Integer offset, Integer limit) throws ApiException {
+        ApiResponse<ProductCollection> localVarResp = getAllProductsWithHttpInfo(catalogId, productIdentifier, name, description, sku, upc, ean, gtin, mpn, price, salePrice, brand, customAttributes, offset, limit);
         return localVarResp.getData();
     }
 
@@ -1198,7 +1379,18 @@ public class EcommerceApi {
      * Get all products
      * Returns all products for the given catalog
      * @param catalogId ID of the Catalog (required)
-     * @param productIdentifier Product ID in your store (optional)
+     * @param productIdentifier Filter by product ID in your store (optional)
+     * @param name Filter by name of the product (optional)
+     * @param description Filter by description of the product (optional)
+     * @param sku Filter by Stock Keeping Unit (optional)
+     * @param upc Filter by Universal Product Code (optional)
+     * @param ean Filter by European Article Numbering (optional)
+     * @param gtin Filter by Global Trade Item Number (optional)
+     * @param mpn Filter by Manufacturer Part Number (optional)
+     * @param price Filter by price of the product (optional)
+     * @param salePrice Filter by sale price of the product (optional)
+     * @param brand Filter by brand of the product (optional)
+     * @param customAttributes Filter by custom attributes of products&lt;div&gt;&lt;span class&#x3D;&#39;sc-cJSrbW cWGDGi&#39;&gt; Example: &lt;/span&gt; &lt;span class&#x3D;&#39;sc-uJMKN cTkJKI&#39;&gt; &#39;custom_attributes[alias]&#x3D;value&#39; &lt;/span&gt;&lt;/div&gt; (optional)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
      * @return ApiResponse&lt;ProductCollection&gt;
@@ -1209,15 +1401,15 @@ public class EcommerceApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ProductCollection> getAllProductsWithHttpInfo(Integer catalogId, String productIdentifier, Integer offset, Integer limit) throws ApiException {
-        okhttp3.Call localVarCall = getAllProductsValidateBeforeCall(catalogId, productIdentifier, offset, limit, null);
+    public ApiResponse<ProductCollection> getAllProductsWithHttpInfo(Integer catalogId, String productIdentifier, String name, String description, String sku, String upc, String ean, String gtin, String mpn, BigDecimal price, BigDecimal salePrice, String brand, GetAllProductsCustomAttributesParameter customAttributes, Integer offset, Integer limit) throws ApiException {
+        okhttp3.Call localVarCall = getAllProductsValidateBeforeCall(catalogId, productIdentifier, name, description, sku, upc, ean, gtin, mpn, price, salePrice, brand, customAttributes, offset, limit, null);
         Type localVarReturnType = new TypeToken<ProductCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1226,7 +1418,18 @@ public class EcommerceApi {
      * Get all products (asynchronously)
      * Returns all products for the given catalog
      * @param catalogId ID of the Catalog (required)
-     * @param productIdentifier Product ID in your store (optional)
+     * @param productIdentifier Filter by product ID in your store (optional)
+     * @param name Filter by name of the product (optional)
+     * @param description Filter by description of the product (optional)
+     * @param sku Filter by Stock Keeping Unit (optional)
+     * @param upc Filter by Universal Product Code (optional)
+     * @param ean Filter by European Article Numbering (optional)
+     * @param gtin Filter by Global Trade Item Number (optional)
+     * @param mpn Filter by Manufacturer Part Number (optional)
+     * @param price Filter by price of the product (optional)
+     * @param salePrice Filter by sale price of the product (optional)
+     * @param brand Filter by brand of the product (optional)
+     * @param customAttributes Filter by custom attributes of products&lt;div&gt;&lt;span class&#x3D;&#39;sc-cJSrbW cWGDGi&#39;&gt; Example: &lt;/span&gt; &lt;span class&#x3D;&#39;sc-uJMKN cTkJKI&#39;&gt; &#39;custom_attributes[alias]&#x3D;value&#39; &lt;/span&gt;&lt;/div&gt; (optional)
      * @param offset Element offset (starting at zero for the first element) (optional)
      * @param limit Number of items to return (optional, default to 10)
      * @param _callback The callback to be executed when the API call finishes
@@ -1238,16 +1441,16 @@ public class EcommerceApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getAllProductsAsync(Integer catalogId, String productIdentifier, Integer offset, Integer limit, final ApiCallback<ProductCollection> _callback) throws ApiException {
+    public okhttp3.Call getAllProductsAsync(Integer catalogId, String productIdentifier, String name, String description, String sku, String upc, String ean, String gtin, String mpn, BigDecimal price, BigDecimal salePrice, String brand, GetAllProductsCustomAttributesParameter customAttributes, Integer offset, Integer limit, final ApiCallback<ProductCollection> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getAllProductsValidateBeforeCall(catalogId, productIdentifier, offset, limit, _callback);
+        okhttp3.Call localVarCall = getAllProductsValidateBeforeCall(catalogId, productIdentifier, name, description, sku, upc, ean, gtin, mpn, price, salePrice, brand, customAttributes, offset, limit, _callback);
         Type localVarReturnType = new TypeToken<ProductCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1265,26 +1468,40 @@ public class EcommerceApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call getProductCall(Integer catalogId, String productIdentifier, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/catalogs/{catalog_id}/products/{product_identifier}"
-            .replaceAll("\\{" + "catalog_id" + "\\}", localVarApiClient.escapeString(catalogId.toString()))
-            .replaceAll("\\{" + "product_identifier" + "\\}", localVarApiClient.escapeString(productIdentifier.toString()));
+            .replace("{" + "catalog_id" + "}", localVarApiClient.escapeString(catalogId.toString()))
+            .replace("{" + "product_identifier" + "}", localVarApiClient.escapeString(productIdentifier.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1294,31 +1511,29 @@ public class EcommerceApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getProductValidateBeforeCall(Integer catalogId, String productIdentifier, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'catalogId' is set
         if (catalogId == null) {
             throw new ApiException("Missing the required parameter 'catalogId' when calling getProduct(Async)");
         }
-        
+
         // verify the required parameter 'productIdentifier' is set
         if (productIdentifier == null) {
             throw new ApiException("Missing the required parameter 'productIdentifier' when calling getProduct(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getProductCall(catalogId, productIdentifier, _callback);
-        return localVarCall;
+        return getProductCall(catalogId, productIdentifier, _callback);
 
     }
 
@@ -1335,8 +1550,8 @@ public class EcommerceApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
@@ -1360,8 +1575,8 @@ public class EcommerceApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
@@ -1387,8 +1602,8 @@ public class EcommerceApi {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
@@ -1415,8 +1630,8 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Payload Too Large </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -1424,17 +1639,31 @@ public class EcommerceApi {
      </table>
      */
     public okhttp3.Call importProductsCall(Integer catalogId, ProductBulkRequest productBulkRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = productBulkRequest;
 
         // create path and map variables
         String localVarPath = "/catalogs/{catalog_id}/products/actions/import"
-            .replaceAll("\\{" + "catalog_id" + "\\}", localVarApiClient.escapeString(catalogId.toString()));
+            .replace("{" + "catalog_id" + "}", localVarApiClient.escapeString(catalogId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1447,28 +1676,27 @@ public class EcommerceApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call importProductsValidateBeforeCall(Integer catalogId, ProductBulkRequest productBulkRequest, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'catalogId' is set
         if (catalogId == null) {
             throw new ApiException("Missing the required parameter 'catalogId' when calling importProducts(Async)");
         }
-        
+
         // verify the required parameter 'productBulkRequest' is set
         if (productBulkRequest == null) {
             throw new ApiException("Missing the required parameter 'productBulkRequest' when calling importProducts(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = importProductsCall(catalogId, productBulkRequest, _callback);
-        return localVarCall;
+        return importProductsCall(catalogId, productBulkRequest, _callback);
 
     }
 
@@ -1486,8 +1714,8 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Payload Too Large </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -1513,8 +1741,8 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Payload Too Large </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -1542,8 +1770,8 @@ public class EcommerceApi {
         <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> Forbidden </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> NotFound </td><td>  -  </td></tr>
         <tr><td> 408 </td><td> Request Timeout </td><td>  -  </td></tr>
+        <tr><td> 413 </td><td> Payload Too Large </td><td>  -  </td></tr>
         <tr><td> 422 </td><td> Unprocessable Entity </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too Many Requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Internal Server Error </td><td>  -  </td></tr>
@@ -1581,18 +1809,32 @@ public class EcommerceApi {
      </table>
      */
     public okhttp3.Call updateProductCall(Integer catalogId, String productIdentifier, ProductPatchRequest productPatchRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = productPatchRequest;
 
         // create path and map variables
         String localVarPath = "/catalogs/{catalog_id}/products/{product_identifier}"
-            .replaceAll("\\{" + "catalog_id" + "\\}", localVarApiClient.escapeString(catalogId.toString()))
-            .replaceAll("\\{" + "product_identifier" + "\\}", localVarApiClient.escapeString(productIdentifier.toString()));
+            .replace("{" + "catalog_id" + "}", localVarApiClient.escapeString(catalogId.toString()))
+            .replace("{" + "product_identifier" + "}", localVarApiClient.escapeString(productIdentifier.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1605,33 +1847,32 @@ public class EcommerceApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call updateProductValidateBeforeCall(Integer catalogId, String productIdentifier, ProductPatchRequest productPatchRequest, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'catalogId' is set
         if (catalogId == null) {
             throw new ApiException("Missing the required parameter 'catalogId' when calling updateProduct(Async)");
         }
-        
+
         // verify the required parameter 'productIdentifier' is set
         if (productIdentifier == null) {
             throw new ApiException("Missing the required parameter 'productIdentifier' when calling updateProduct(Async)");
         }
-        
+
         // verify the required parameter 'productPatchRequest' is set
         if (productPatchRequest == null) {
             throw new ApiException("Missing the required parameter 'productPatchRequest' when calling updateProduct(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = updateProductCall(catalogId, productIdentifier, productPatchRequest, _callback);
-        return localVarCall;
+        return updateProductCall(catalogId, productIdentifier, productPatchRequest, _callback);
 
     }
 

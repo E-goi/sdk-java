@@ -2,11 +2,12 @@
 
 # SendSmartSmsAllOf
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**listId** | **Integer** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**listId** | **Integer** |  |  [optional] |
 
 
 

@@ -3,11 +3,12 @@
 # ExportContactsWebhookData
 
 Accepted response schema
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**file** | [**URI**](URI.md) |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**_file** | **URI** |  |  [optional] |
 
 
 

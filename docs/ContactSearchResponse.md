@@ -3,12 +3,13 @@
 # ContactSearchResponse
 
 Returned contacts
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**contactId** | **String** |  |  [optional] [readonly]
-**listId** | **Integer** |  |  [optional] [readonly]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**contactId** | **String** |  |  [optional] [readonly] |
+|**listId** | **Integer** |  |  [optional] [readonly] |
 
 
 

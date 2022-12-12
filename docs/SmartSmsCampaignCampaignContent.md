@@ -2,11 +2,12 @@
 
 # SmartSmsCampaignCampaignContent
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**message** | **String** | Smart SMS message | 
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**message** | **String** | Smart SMS message |  |
 
 
 

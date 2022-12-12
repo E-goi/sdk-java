@@ -1,6 +1,6 @@
 /*
  * APIv3 (New)
- *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  <security-definitions/>
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0
  * 
@@ -30,15 +30,18 @@ import java.io.IOException;
 import org.egoi.client.model.BadRequest;
 import org.egoi.client.model.CellphoneSender;
 import org.egoi.client.model.CellphoneSenderCollection;
+import org.egoi.client.model.CellphoneSenderPost;
 import org.egoi.client.model.Conflict;
 import org.egoi.client.model.EmailSender;
 import org.egoi.client.model.EmailSenderCollection;
+import org.egoi.client.model.EmailSenderPost;
 import org.egoi.client.model.EmailSenderPutRequest;
 import org.egoi.client.model.Forbidden;
 import org.egoi.client.model.InternalServerError;
 import org.egoi.client.model.NotFound;
 import org.egoi.client.model.PhoneSender;
 import org.egoi.client.model.PhoneSenderCollection;
+import org.egoi.client.model.PhoneSenderPost;
 import org.egoi.client.model.RequestTimeout;
 import org.egoi.client.model.ServiceUnavailable;
 import org.egoi.client.model.TooManyRequests;
@@ -50,9 +53,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class SendersApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public SendersApi() {
         this(Configuration.getDefaultApiClient());
@@ -70,9 +76,25 @@ public class SendersApi {
         this.localVarApiClient = apiClient;
     }
 
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
+    }
+
     /**
      * Build call for createCellphoneSender
-     * @param cellphoneSender Parameters for the sender (required)
+     * @param cellphoneSenderPost Parameters for the sender (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -91,8 +113,21 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createCellphoneSenderCall(CellphoneSender cellphoneSender, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = cellphoneSender;
+    public okhttp3.Call createCellphoneSenderCall(CellphoneSenderPost cellphoneSenderPost, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = cellphoneSenderPost;
 
         // create path and map variables
         String localVarPath = "/senders/cellphone";
@@ -102,6 +137,7 @@ public class SendersApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -114,30 +150,29 @@ public class SendersApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createCellphoneSenderValidateBeforeCall(CellphoneSender cellphoneSender, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'cellphoneSender' is set
-        if (cellphoneSender == null) {
-            throw new ApiException("Missing the required parameter 'cellphoneSender' when calling createCellphoneSender(Async)");
+    private okhttp3.Call createCellphoneSenderValidateBeforeCall(CellphoneSenderPost cellphoneSenderPost, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'cellphoneSenderPost' is set
+        if (cellphoneSenderPost == null) {
+            throw new ApiException("Missing the required parameter 'cellphoneSenderPost' when calling createCellphoneSender(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createCellphoneSenderCall(cellphoneSender, _callback);
-        return localVarCall;
+        return createCellphoneSenderCall(cellphoneSenderPost, _callback);
 
     }
 
     /**
      * Create cellphone sender
      * Creates a cellphone sender
-     * @param cellphoneSender Parameters for the sender (required)
+     * @param cellphoneSenderPost Parameters for the sender (required)
      * @return CellphoneSender
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -155,15 +190,15 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public CellphoneSender createCellphoneSender(CellphoneSender cellphoneSender) throws ApiException {
-        ApiResponse<CellphoneSender> localVarResp = createCellphoneSenderWithHttpInfo(cellphoneSender);
+    public CellphoneSender createCellphoneSender(CellphoneSenderPost cellphoneSenderPost) throws ApiException {
+        ApiResponse<CellphoneSender> localVarResp = createCellphoneSenderWithHttpInfo(cellphoneSenderPost);
         return localVarResp.getData();
     }
 
     /**
      * Create cellphone sender
      * Creates a cellphone sender
-     * @param cellphoneSender Parameters for the sender (required)
+     * @param cellphoneSenderPost Parameters for the sender (required)
      * @return ApiResponse&lt;CellphoneSender&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -181,8 +216,8 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<CellphoneSender> createCellphoneSenderWithHttpInfo(CellphoneSender cellphoneSender) throws ApiException {
-        okhttp3.Call localVarCall = createCellphoneSenderValidateBeforeCall(cellphoneSender, null);
+    public ApiResponse<CellphoneSender> createCellphoneSenderWithHttpInfo(CellphoneSenderPost cellphoneSenderPost) throws ApiException {
+        okhttp3.Call localVarCall = createCellphoneSenderValidateBeforeCall(cellphoneSenderPost, null);
         Type localVarReturnType = new TypeToken<CellphoneSender>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -190,7 +225,7 @@ public class SendersApi {
     /**
      * Create cellphone sender (asynchronously)
      * Creates a cellphone sender
-     * @param cellphoneSender Parameters for the sender (required)
+     * @param cellphoneSenderPost Parameters for the sender (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -209,16 +244,16 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createCellphoneSenderAsync(CellphoneSender cellphoneSender, final ApiCallback<CellphoneSender> _callback) throws ApiException {
+    public okhttp3.Call createCellphoneSenderAsync(CellphoneSenderPost cellphoneSenderPost, final ApiCallback<CellphoneSender> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createCellphoneSenderValidateBeforeCall(cellphoneSender, _callback);
+        okhttp3.Call localVarCall = createCellphoneSenderValidateBeforeCall(cellphoneSenderPost, _callback);
         Type localVarReturnType = new TypeToken<CellphoneSender>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for createEmailSender
-     * @param emailSender Parameters for the sender (required)
+     * @param emailSenderPost Parameters for the sender (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -237,8 +272,21 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createEmailSenderCall(EmailSender emailSender, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = emailSender;
+    public okhttp3.Call createEmailSenderCall(EmailSenderPost emailSenderPost, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = emailSenderPost;
 
         // create path and map variables
         String localVarPath = "/senders/email";
@@ -248,6 +296,7 @@ public class SendersApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -260,30 +309,29 @@ public class SendersApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createEmailSenderValidateBeforeCall(EmailSender emailSender, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'emailSender' is set
-        if (emailSender == null) {
-            throw new ApiException("Missing the required parameter 'emailSender' when calling createEmailSender(Async)");
+    private okhttp3.Call createEmailSenderValidateBeforeCall(EmailSenderPost emailSenderPost, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'emailSenderPost' is set
+        if (emailSenderPost == null) {
+            throw new ApiException("Missing the required parameter 'emailSenderPost' when calling createEmailSender(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createEmailSenderCall(emailSender, _callback);
-        return localVarCall;
+        return createEmailSenderCall(emailSenderPost, _callback);
 
     }
 
     /**
      * Create email sender
      * Creates an email sender
-     * @param emailSender Parameters for the sender (required)
+     * @param emailSenderPost Parameters for the sender (required)
      * @return EmailSender
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -301,15 +349,15 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public EmailSender createEmailSender(EmailSender emailSender) throws ApiException {
-        ApiResponse<EmailSender> localVarResp = createEmailSenderWithHttpInfo(emailSender);
+    public EmailSender createEmailSender(EmailSenderPost emailSenderPost) throws ApiException {
+        ApiResponse<EmailSender> localVarResp = createEmailSenderWithHttpInfo(emailSenderPost);
         return localVarResp.getData();
     }
 
     /**
      * Create email sender
      * Creates an email sender
-     * @param emailSender Parameters for the sender (required)
+     * @param emailSenderPost Parameters for the sender (required)
      * @return ApiResponse&lt;EmailSender&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -327,8 +375,8 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<EmailSender> createEmailSenderWithHttpInfo(EmailSender emailSender) throws ApiException {
-        okhttp3.Call localVarCall = createEmailSenderValidateBeforeCall(emailSender, null);
+    public ApiResponse<EmailSender> createEmailSenderWithHttpInfo(EmailSenderPost emailSenderPost) throws ApiException {
+        okhttp3.Call localVarCall = createEmailSenderValidateBeforeCall(emailSenderPost, null);
         Type localVarReturnType = new TypeToken<EmailSender>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -336,7 +384,7 @@ public class SendersApi {
     /**
      * Create email sender (asynchronously)
      * Creates an email sender
-     * @param emailSender Parameters for the sender (required)
+     * @param emailSenderPost Parameters for the sender (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -355,16 +403,16 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createEmailSenderAsync(EmailSender emailSender, final ApiCallback<EmailSender> _callback) throws ApiException {
+    public okhttp3.Call createEmailSenderAsync(EmailSenderPost emailSenderPost, final ApiCallback<EmailSender> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createEmailSenderValidateBeforeCall(emailSender, _callback);
+        okhttp3.Call localVarCall = createEmailSenderValidateBeforeCall(emailSenderPost, _callback);
         Type localVarReturnType = new TypeToken<EmailSender>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
      * Build call for createPhoneSender
-     * @param phoneSender Parameters for the sender (required)
+     * @param phoneSenderPost Parameters for the sender (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -383,8 +431,21 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createPhoneSenderCall(PhoneSender phoneSender, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = phoneSender;
+    public okhttp3.Call createPhoneSenderCall(PhoneSenderPost phoneSenderPost, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = phoneSenderPost;
 
         // create path and map variables
         String localVarPath = "/senders/phone";
@@ -394,6 +455,7 @@ public class SendersApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -406,30 +468,29 @@ public class SendersApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createPhoneSenderValidateBeforeCall(PhoneSender phoneSender, final ApiCallback _callback) throws ApiException {
-        
-        // verify the required parameter 'phoneSender' is set
-        if (phoneSender == null) {
-            throw new ApiException("Missing the required parameter 'phoneSender' when calling createPhoneSender(Async)");
+    private okhttp3.Call createPhoneSenderValidateBeforeCall(PhoneSenderPost phoneSenderPost, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'phoneSenderPost' is set
+        if (phoneSenderPost == null) {
+            throw new ApiException("Missing the required parameter 'phoneSenderPost' when calling createPhoneSender(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createPhoneSenderCall(phoneSender, _callback);
-        return localVarCall;
+        return createPhoneSenderCall(phoneSenderPost, _callback);
 
     }
 
     /**
      * Create phone sender
      * Creates a phone sender
-     * @param phoneSender Parameters for the sender (required)
+     * @param phoneSenderPost Parameters for the sender (required)
      * @return PhoneSender
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -447,15 +508,15 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public PhoneSender createPhoneSender(PhoneSender phoneSender) throws ApiException {
-        ApiResponse<PhoneSender> localVarResp = createPhoneSenderWithHttpInfo(phoneSender);
+    public PhoneSender createPhoneSender(PhoneSenderPost phoneSenderPost) throws ApiException {
+        ApiResponse<PhoneSender> localVarResp = createPhoneSenderWithHttpInfo(phoneSenderPost);
         return localVarResp.getData();
     }
 
     /**
      * Create phone sender
      * Creates a phone sender
-     * @param phoneSender Parameters for the sender (required)
+     * @param phoneSenderPost Parameters for the sender (required)
      * @return ApiResponse&lt;PhoneSender&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -473,8 +534,8 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PhoneSender> createPhoneSenderWithHttpInfo(PhoneSender phoneSender) throws ApiException {
-        okhttp3.Call localVarCall = createPhoneSenderValidateBeforeCall(phoneSender, null);
+    public ApiResponse<PhoneSender> createPhoneSenderWithHttpInfo(PhoneSenderPost phoneSenderPost) throws ApiException {
+        okhttp3.Call localVarCall = createPhoneSenderValidateBeforeCall(phoneSenderPost, null);
         Type localVarReturnType = new TypeToken<PhoneSender>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -482,7 +543,7 @@ public class SendersApi {
     /**
      * Create phone sender (asynchronously)
      * Creates a phone sender
-     * @param phoneSender Parameters for the sender (required)
+     * @param phoneSenderPost Parameters for the sender (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -501,9 +562,9 @@ public class SendersApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createPhoneSenderAsync(PhoneSender phoneSender, final ApiCallback<PhoneSender> _callback) throws ApiException {
+    public okhttp3.Call createPhoneSenderAsync(PhoneSenderPost phoneSenderPost, final ApiCallback<PhoneSender> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createPhoneSenderValidateBeforeCall(phoneSender, _callback);
+        okhttp3.Call localVarCall = createPhoneSenderValidateBeforeCall(phoneSenderPost, _callback);
         Type localVarReturnType = new TypeToken<PhoneSender>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -529,17 +590,31 @@ public class SendersApi {
      </table>
      */
     public okhttp3.Call deleteCellphoneSenderCall(Integer senderId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/senders/cellphone/{sender_id}"
-            .replaceAll("\\{" + "sender_id" + "\\}", localVarApiClient.escapeString(senderId.toString()));
+            .replace("{" + "sender_id" + "}", localVarApiClient.escapeString(senderId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -549,26 +624,24 @@ public class SendersApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteCellphoneSenderValidateBeforeCall(Integer senderId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'senderId' is set
         if (senderId == null) {
             throw new ApiException("Missing the required parameter 'senderId' when calling deleteCellphoneSender(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteCellphoneSenderCall(senderId, _callback);
-        return localVarCall;
+        return deleteCellphoneSenderCall(senderId, _callback);
 
     }
 
@@ -668,17 +741,31 @@ public class SendersApi {
      </table>
      */
     public okhttp3.Call deleteEmailSenderCall(Integer senderId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/senders/email/{sender_id}"
-            .replaceAll("\\{" + "sender_id" + "\\}", localVarApiClient.escapeString(senderId.toString()));
+            .replace("{" + "sender_id" + "}", localVarApiClient.escapeString(senderId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -688,26 +775,24 @@ public class SendersApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteEmailSenderValidateBeforeCall(Integer senderId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'senderId' is set
         if (senderId == null) {
             throw new ApiException("Missing the required parameter 'senderId' when calling deleteEmailSender(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteEmailSenderCall(senderId, _callback);
-        return localVarCall;
+        return deleteEmailSenderCall(senderId, _callback);
 
     }
 
@@ -807,17 +892,31 @@ public class SendersApi {
      </table>
      */
     public okhttp3.Call deletePhoneSenderCall(Integer senderId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/senders/phone/{sender_id}"
-            .replaceAll("\\{" + "sender_id" + "\\}", localVarApiClient.escapeString(senderId.toString()));
+            .replace("{" + "sender_id" + "}", localVarApiClient.escapeString(senderId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -827,26 +926,24 @@ public class SendersApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deletePhoneSenderValidateBeforeCall(Integer senderId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'senderId' is set
         if (senderId == null) {
             throw new ApiException("Missing the required parameter 'senderId' when calling deletePhoneSender(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deletePhoneSenderCall(senderId, _callback);
-        return localVarCall;
+        return deletePhoneSenderCall(senderId, _callback);
 
     }
 
@@ -947,6 +1044,19 @@ public class SendersApi {
      </table>
      */
     public okhttp3.Call getAllCellphoneSendersCall(Integer offset, Integer limit, String status, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -954,6 +1064,10 @@ public class SendersApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (offset != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
         }
@@ -966,9 +1080,6 @@ public class SendersApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -978,21 +1089,19 @@ public class SendersApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getAllCellphoneSendersValidateBeforeCall(Integer offset, Integer limit, String status, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getAllCellphoneSendersCall(offset, limit, status, _callback);
-        return localVarCall;
+        return getAllCellphoneSendersCall(offset, limit, status, _callback);
 
     }
 
@@ -1100,6 +1209,19 @@ public class SendersApi {
      </table>
      */
     public okhttp3.Call getAllEmailSendersCall(Integer offset, Integer limit, String status, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1107,6 +1229,10 @@ public class SendersApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (offset != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
         }
@@ -1119,9 +1245,6 @@ public class SendersApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1131,21 +1254,19 @@ public class SendersApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getAllEmailSendersValidateBeforeCall(Integer offset, Integer limit, String status, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getAllEmailSendersCall(offset, limit, status, _callback);
-        return localVarCall;
+        return getAllEmailSendersCall(offset, limit, status, _callback);
 
     }
 
@@ -1253,6 +1374,19 @@ public class SendersApi {
      </table>
      */
     public okhttp3.Call getAllPhoneSendersCall(Integer offset, Integer limit, String status, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
@@ -1260,6 +1394,10 @@ public class SendersApi {
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (offset != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
         }
@@ -1272,9 +1410,6 @@ public class SendersApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("status", status));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1284,21 +1419,19 @@ public class SendersApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getAllPhoneSendersValidateBeforeCall(Integer offset, Integer limit, String status, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = getAllPhoneSendersCall(offset, limit, status, _callback);
-        return localVarCall;
+        return getAllPhoneSendersCall(offset, limit, status, _callback);
 
     }
 
@@ -1407,17 +1540,31 @@ public class SendersApi {
      </table>
      */
     public okhttp3.Call putEmailSenderCall(Integer senderId, EmailSenderPutRequest emailSenderPutRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = emailSenderPutRequest;
 
         // create path and map variables
         String localVarPath = "/senders/email/{sender_id}"
-            .replaceAll("\\{" + "sender_id" + "\\}", localVarApiClient.escapeString(senderId.toString()));
+            .replace("{" + "sender_id" + "}", localVarApiClient.escapeString(senderId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1430,28 +1577,27 @@ public class SendersApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call putEmailSenderValidateBeforeCall(Integer senderId, EmailSenderPutRequest emailSenderPutRequest, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'senderId' is set
         if (senderId == null) {
             throw new ApiException("Missing the required parameter 'senderId' when calling putEmailSender(Async)");
         }
-        
+
         // verify the required parameter 'emailSenderPutRequest' is set
         if (emailSenderPutRequest == null) {
             throw new ApiException("Missing the required parameter 'emailSenderPutRequest' when calling putEmailSender(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = putEmailSenderCall(senderId, emailSenderPutRequest, _callback);
-        return localVarCall;
+        return putEmailSenderCall(senderId, emailSenderPutRequest, _callback);
 
     }
 

@@ -2,11 +2,12 @@
 
 # SendPushAllOf
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**appId** | **Integer** |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**appId** | **String** |  |  [optional] |
 
 
 

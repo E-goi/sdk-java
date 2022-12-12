@@ -2,9 +2,9 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**ping**](PingApi.md#ping) | **POST** /ping | Pings the API
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**ping**](PingApi.md#ping) | **POST** /ping | Pings the API |
 
 
 <a name="ping"></a>
@@ -63,7 +63,7 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

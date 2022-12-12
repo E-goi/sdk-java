@@ -2,11 +2,12 @@
 
 # ContactActivityClickAllOf
 
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**actionData** | [**ContactActivityClickAllOfActionData**](ContactActivityClickAllOfActionData.md) |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**actionData** | [**ContactActivityClickAllOfActionData**](ContactActivityClickAllOfActionData.md) |  |  [optional] |
 
 
 

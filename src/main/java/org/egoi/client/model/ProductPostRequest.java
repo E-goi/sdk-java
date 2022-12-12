@@ -1,6 +1,6 @@
 /*
  * APIv3 (New)
- *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  <security-definitions/>
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0
  * 
@@ -15,40 +15,586 @@ package org.egoi.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import org.egoi.client.model.Product;
 import org.egoi.client.model.ProductCustomAttributes;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.egoi.client.JSON;
 
 /**
  * Product post request schema
  */
 @ApiModel(description = "Product post request schema")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-07-12T20:27:19.076308+01:00[Europe/Lisbon]")
-public class ProductPostRequest extends Product   {
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-12-12T17:30:24.773899Z[Europe/Lisbon]")
+public class ProductPostRequest {
+  public static final String SERIALIZED_NAME_CATEGORIES = "categories";
+  @SerializedName(SERIALIZED_NAME_CATEGORIES)
+  private List<String> categories = null;
+
+  public static final String SERIALIZED_NAME_RELATED_PRODUCTS = "related_products";
+  @SerializedName(SERIALIZED_NAME_RELATED_PRODUCTS)
+  private List<String> relatedProducts = null;
+
+  public static final String SERIALIZED_NAME_CUSTOM_ATTRIBUTES = "custom_attributes";
+  @SerializedName(SERIALIZED_NAME_CUSTOM_ATTRIBUTES)
+  private List<ProductCustomAttributes> customAttributes = null;
+
+  public static final String SERIALIZED_NAME_PRODUCT_IDENTIFIER = "product_identifier";
+  @SerializedName(SERIALIZED_NAME_PRODUCT_IDENTIFIER)
+  private String productIdentifier;
+
+  public static final String SERIALIZED_NAME_CATALOG_ID = "catalog_id";
+  @SerializedName(SERIALIZED_NAME_CATALOG_ID)
+  private Integer catalogId;
+
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  private String name;
+
+  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
+  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
+  private String description;
+
+  public static final String SERIALIZED_NAME_SKU = "sku";
+  @SerializedName(SERIALIZED_NAME_SKU)
+  private String sku;
+
+  public static final String SERIALIZED_NAME_UPC = "upc";
+  @SerializedName(SERIALIZED_NAME_UPC)
+  private String upc;
+
+  public static final String SERIALIZED_NAME_EAN = "ean";
+  @SerializedName(SERIALIZED_NAME_EAN)
+  private String ean;
+
+  public static final String SERIALIZED_NAME_GTIN = "gtin";
+  @SerializedName(SERIALIZED_NAME_GTIN)
+  private String gtin;
+
+  public static final String SERIALIZED_NAME_MPN = "mpn";
+  @SerializedName(SERIALIZED_NAME_MPN)
+  private String mpn;
+
+  public static final String SERIALIZED_NAME_LINK = "link";
+  @SerializedName(SERIALIZED_NAME_LINK)
+  private String link;
+
+  public static final String SERIALIZED_NAME_IMAGE_LINK = "image_link";
+  @SerializedName(SERIALIZED_NAME_IMAGE_LINK)
+  private String imageLink;
+
+  public static final String SERIALIZED_NAME_PRICE = "price";
+  @SerializedName(SERIALIZED_NAME_PRICE)
+  private Double price = 0d;
+
+  public static final String SERIALIZED_NAME_SALE_PRICE = "sale_price";
+  @SerializedName(SERIALIZED_NAME_SALE_PRICE)
+  private Double salePrice = 0d;
+
+  public static final String SERIALIZED_NAME_BRAND = "brand";
+  @SerializedName(SERIALIZED_NAME_BRAND)
+  private String brand;
+
+  public ProductPostRequest() {
+  }
+
+  
+  public ProductPostRequest(
+     Integer catalogId
+  ) {
+    this();
+    this.catalogId = catalogId;
+  }
+
+  public ProductPostRequest categories(List<String> categories) {
+    
+    this.categories = categories;
+    return this;
+  }
+
+  public ProductPostRequest addCategoriesItem(String categoriesItem) {
+    if (this.categories == null) {
+      this.categories = new ArrayList<>();
+    }
+    this.categories.add(categoriesItem);
+    return this;
+  }
+
+   /**
+   * Array of product categories, using the character &#39;&gt;&#39; as delimiter for the breadcrumb                                 syntax
+   * @return categories
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Array of product categories, using the character '>' as delimiter for the breadcrumb                                 syntax")
+
+  public List<String> getCategories() {
+    return categories;
+  }
+
+
+  public void setCategories(List<String> categories) {
+    this.categories = categories;
+  }
+
+
+  public ProductPostRequest relatedProducts(List<String> relatedProducts) {
+    
+    this.relatedProducts = relatedProducts;
+    return this;
+  }
+
+  public ProductPostRequest addRelatedProductsItem(String relatedProductsItem) {
+    if (this.relatedProducts == null) {
+      this.relatedProducts = new ArrayList<>();
+    }
+    this.relatedProducts.add(relatedProductsItem);
+    return this;
+  }
+
+   /**
+   * Related products
+   * @return relatedProducts
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Related products")
+
+  public List<String> getRelatedProducts() {
+    return relatedProducts;
+  }
+
+
+  public void setRelatedProducts(List<String> relatedProducts) {
+    this.relatedProducts = relatedProducts;
+  }
+
+
+  public ProductPostRequest customAttributes(List<ProductCustomAttributes> customAttributes) {
+    
+    this.customAttributes = customAttributes;
+    return this;
+  }
+
+  public ProductPostRequest addCustomAttributesItem(ProductCustomAttributes customAttributesItem) {
+    if (this.customAttributes == null) {
+      this.customAttributes = new ArrayList<>();
+    }
+    this.customAttributes.add(customAttributesItem);
+    return this;
+  }
+
+   /**
+   * Custom attributes
+   * @return customAttributes
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Custom attributes")
+
+  public List<ProductCustomAttributes> getCustomAttributes() {
+    return customAttributes;
+  }
+
+
+  public void setCustomAttributes(List<ProductCustomAttributes> customAttributes) {
+    this.customAttributes = customAttributes;
+  }
+
+
+  public ProductPostRequest productIdentifier(String productIdentifier) {
+    
+    this.productIdentifier = productIdentifier;
+    return this;
+  }
+
+   /**
+   * The ID of the product in your store
+   * @return productIdentifier
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The ID of the product in your store")
+
+  public String getProductIdentifier() {
+    return productIdentifier;
+  }
+
+
+  public void setProductIdentifier(String productIdentifier) {
+    this.productIdentifier = productIdentifier;
+  }
+
+
+   /**
+   * Get catalogId
+   * minimum: 1
+   * @return catalogId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1", value = "")
+
+  public Integer getCatalogId() {
+    return catalogId;
+  }
+
+
+
+
+  public ProductPostRequest name(String name) {
+    
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Name of the product
+   * @return name
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "Product name", required = true, value = "Name of the product")
+
+  public String getName() {
+    return name;
+  }
+
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  public ProductPostRequest description(String description) {
+    
+    this.description = description;
+    return this;
+  }
+
+   /**
+   * Description of the product
+   * @return description
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "Product description", value = "Description of the product")
+
+  public String getDescription() {
+    return description;
+  }
+
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+
+  public ProductPostRequest sku(String sku) {
+    
+    this.sku = sku;
+    return this;
+  }
+
+   /**
+   * Stock Keeping Unit
+   * @return sku
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Stock Keeping Unit")
+
+  public String getSku() {
+    return sku;
+  }
+
+
+  public void setSku(String sku) {
+    this.sku = sku;
+  }
+
+
+  public ProductPostRequest upc(String upc) {
+    
+    this.upc = upc;
+    return this;
+  }
+
+   /**
+   * Universal Product Code
+   * @return upc
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Universal Product Code")
+
+  public String getUpc() {
+    return upc;
+  }
+
+
+  public void setUpc(String upc) {
+    this.upc = upc;
+  }
+
+
+  public ProductPostRequest ean(String ean) {
+    
+    this.ean = ean;
+    return this;
+  }
+
+   /**
+   * European Article Numbering
+   * @return ean
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "European Article Numbering")
+
+  public String getEan() {
+    return ean;
+  }
+
+
+  public void setEan(String ean) {
+    this.ean = ean;
+  }
+
+
+  public ProductPostRequest gtin(String gtin) {
+    
+    this.gtin = gtin;
+    return this;
+  }
+
+   /**
+   * Global Trade Item Number
+   * @return gtin
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Global Trade Item Number")
+
+  public String getGtin() {
+    return gtin;
+  }
+
+
+  public void setGtin(String gtin) {
+    this.gtin = gtin;
+  }
+
+
+  public ProductPostRequest mpn(String mpn) {
+    
+    this.mpn = mpn;
+    return this;
+  }
+
+   /**
+   * Manufacturer Part Number
+   * @return mpn
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Manufacturer Part Number")
+
+  public String getMpn() {
+    return mpn;
+  }
+
+
+  public void setMpn(String mpn) {
+    this.mpn = mpn;
+  }
+
+
+  public ProductPostRequest link(String link) {
+    
+    this.link = link;
+    return this;
+  }
+
+   /**
+   * Link for the product
+   * @return link
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Link for the product")
+
+  public String getLink() {
+    return link;
+  }
+
+
+  public void setLink(String link) {
+    this.link = link;
+  }
+
+
+  public ProductPostRequest imageLink(String imageLink) {
+    
+    this.imageLink = imageLink;
+    return this;
+  }
+
+   /**
+   * Link for the product image
+   * @return imageLink
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Link for the product image")
+
+  public String getImageLink() {
+    return imageLink;
+  }
+
+
+  public void setImageLink(String imageLink) {
+    this.imageLink = imageLink;
+  }
+
+
+  public ProductPostRequest price(Double price) {
+    
+    this.price = price;
+    return this;
+  }
+
+   /**
+   * Price of the product
+   * @return price
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "10", value = "Price of the product")
+
+  public Double getPrice() {
+    return price;
+  }
+
+
+  public void setPrice(Double price) {
+    this.price = price;
+  }
+
+
+  public ProductPostRequest salePrice(Double salePrice) {
+    
+    this.salePrice = salePrice;
+    return this;
+  }
+
+   /**
+   * Sale price of the product
+   * @return salePrice
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "10", value = "Sale price of the product")
+
+  public Double getSalePrice() {
+    return salePrice;
+  }
+
+
+  public void setSalePrice(Double salePrice) {
+    this.salePrice = salePrice;
+  }
+
+
+  public ProductPostRequest brand(String brand) {
+    
+    this.brand = brand;
+    return this;
+  }
+
+   /**
+   * Brand of the product
+   * @return brand
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Brand of the product")
+
+  public String getBrand() {
+    return brand;
+  }
+
+
+  public void setBrand(String brand) {
+    this.brand = brand;
+  }
+
+
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    return super.equals(o);
+    ProductPostRequest productPostRequest = (ProductPostRequest) o;
+    return Objects.equals(this.categories, productPostRequest.categories) &&
+        Objects.equals(this.relatedProducts, productPostRequest.relatedProducts) &&
+        Objects.equals(this.customAttributes, productPostRequest.customAttributes) &&
+        Objects.equals(this.productIdentifier, productPostRequest.productIdentifier) &&
+        Objects.equals(this.catalogId, productPostRequest.catalogId) &&
+        Objects.equals(this.name, productPostRequest.name) &&
+        Objects.equals(this.description, productPostRequest.description) &&
+        Objects.equals(this.sku, productPostRequest.sku) &&
+        Objects.equals(this.upc, productPostRequest.upc) &&
+        Objects.equals(this.ean, productPostRequest.ean) &&
+        Objects.equals(this.gtin, productPostRequest.gtin) &&
+        Objects.equals(this.mpn, productPostRequest.mpn) &&
+        Objects.equals(this.link, productPostRequest.link) &&
+        Objects.equals(this.imageLink, productPostRequest.imageLink) &&
+        Objects.equals(this.price, productPostRequest.price) &&
+        Objects.equals(this.salePrice, productPostRequest.salePrice) &&
+        Objects.equals(this.brand, productPostRequest.brand);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode());
+    return Objects.hash(categories, relatedProducts, customAttributes, productIdentifier, catalogId, name, description, sku, upc, ean, gtin, mpn, link, imageLink, price, salePrice, brand);
   }
-
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ProductPostRequest {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    sb.append("    categories: ").append(toIndentedString(categories)).append("\n");
+    sb.append("    relatedProducts: ").append(toIndentedString(relatedProducts)).append("\n");
+    sb.append("    customAttributes: ").append(toIndentedString(customAttributes)).append("\n");
+    sb.append("    productIdentifier: ").append(toIndentedString(productIdentifier)).append("\n");
+    sb.append("    catalogId: ").append(toIndentedString(catalogId)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    sku: ").append(toIndentedString(sku)).append("\n");
+    sb.append("    upc: ").append(toIndentedString(upc)).append("\n");
+    sb.append("    ean: ").append(toIndentedString(ean)).append("\n");
+    sb.append("    gtin: ").append(toIndentedString(gtin)).append("\n");
+    sb.append("    mpn: ").append(toIndentedString(mpn)).append("\n");
+    sb.append("    link: ").append(toIndentedString(link)).append("\n");
+    sb.append("    imageLink: ").append(toIndentedString(imageLink)).append("\n");
+    sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    salePrice: ").append(toIndentedString(salePrice)).append("\n");
+    sb.append("    brand: ").append(toIndentedString(brand)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -57,12 +603,175 @@ public class ProductPostRequest extends Product   {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("categories");
+    openapiFields.add("related_products");
+    openapiFields.add("custom_attributes");
+    openapiFields.add("product_identifier");
+    openapiFields.add("catalog_id");
+    openapiFields.add("name");
+    openapiFields.add("description");
+    openapiFields.add("sku");
+    openapiFields.add("upc");
+    openapiFields.add("ean");
+    openapiFields.add("gtin");
+    openapiFields.add("mpn");
+    openapiFields.add("link");
+    openapiFields.add("image_link");
+    openapiFields.add("price");
+    openapiFields.add("sale_price");
+    openapiFields.add("brand");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("product_identifier");
+    openapiRequiredFields.add("name");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ProductPostRequest
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (!ProductPostRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ProductPostRequest is not found in the empty JSON string", ProductPostRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ProductPostRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ProductPostRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ProductPostRequest.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("categories") != null && !jsonObj.get("categories").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `categories` to be an array in the JSON string but got `%s`", jsonObj.get("categories").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("related_products") != null && !jsonObj.get("related_products").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `related_products` to be an array in the JSON string but got `%s`", jsonObj.get("related_products").toString()));
+      }
+      if (jsonObj.get("custom_attributes") != null && !jsonObj.get("custom_attributes").isJsonNull()) {
+        JsonArray jsonArraycustomAttributes = jsonObj.getAsJsonArray("custom_attributes");
+        if (jsonArraycustomAttributes != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("custom_attributes").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `custom_attributes` to be an array in the JSON string but got `%s`", jsonObj.get("custom_attributes").toString()));
+          }
+
+          // validate the optional field `custom_attributes` (array)
+          for (int i = 0; i < jsonArraycustomAttributes.size(); i++) {
+            ProductCustomAttributes.validateJsonObject(jsonArraycustomAttributes.get(i).getAsJsonObject());
+          };
+        }
+      }
+      if (!jsonObj.get("product_identifier").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `product_identifier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("product_identifier").toString()));
+      }
+      if (!jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      }
+      if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      if ((jsonObj.get("sku") != null && !jsonObj.get("sku").isJsonNull()) && !jsonObj.get("sku").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `sku` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sku").toString()));
+      }
+      if ((jsonObj.get("upc") != null && !jsonObj.get("upc").isJsonNull()) && !jsonObj.get("upc").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `upc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("upc").toString()));
+      }
+      if ((jsonObj.get("ean") != null && !jsonObj.get("ean").isJsonNull()) && !jsonObj.get("ean").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ean` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ean").toString()));
+      }
+      if ((jsonObj.get("gtin") != null && !jsonObj.get("gtin").isJsonNull()) && !jsonObj.get("gtin").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `gtin` to be a primitive type in the JSON string but got `%s`", jsonObj.get("gtin").toString()));
+      }
+      if ((jsonObj.get("mpn") != null && !jsonObj.get("mpn").isJsonNull()) && !jsonObj.get("mpn").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `mpn` to be a primitive type in the JSON string but got `%s`", jsonObj.get("mpn").toString()));
+      }
+      if ((jsonObj.get("link") != null && !jsonObj.get("link").isJsonNull()) && !jsonObj.get("link").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `link` to be a primitive type in the JSON string but got `%s`", jsonObj.get("link").toString()));
+      }
+      if ((jsonObj.get("image_link") != null && !jsonObj.get("image_link").isJsonNull()) && !jsonObj.get("image_link").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `image_link` to be a primitive type in the JSON string but got `%s`", jsonObj.get("image_link").toString()));
+      }
+      if ((jsonObj.get("brand") != null && !jsonObj.get("brand").isJsonNull()) && !jsonObj.get("brand").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `brand` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brand").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ProductPostRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ProductPostRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ProductPostRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ProductPostRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ProductPostRequest>() {
+           @Override
+           public void write(JsonWriter out, ProductPostRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ProductPostRequest read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ProductPostRequest given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ProductPostRequest
+  * @throws IOException if the JSON string is invalid with respect to ProductPostRequest
+  */
+  public static ProductPostRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ProductPostRequest.class);
+  }
+
+ /**
+  * Convert an instance of ProductPostRequest to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

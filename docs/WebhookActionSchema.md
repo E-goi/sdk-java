@@ -41,6 +41,8 @@
 
 * `SUBSCRIPTION` (value: `"subscription"`)
 
+* `EDIT_SUBSCRIPTION` (value: `"edit_subscription"`)
+
 * `RESUBSCRIPTION` (value: `"resubscription"`)
 
 * `FACEBOOK_LIKE` (value: `"facebook_like"`)
@@ -68,6 +70,14 @@
 * `PUSH_ERROR` (value: `"push_error"`)
 
 * `PUSH_CANCELED` (value: `"push_canceled"`)
+
+* `NEW_ORDER` (value: `"new_order"`)
+
+* `CART_UPDATE` (value: `"cart_update"`)
+
+* `GOAL_CONVERSION` (value: `"goal_conversion"`)
+
+* `PRODUCT_VIEW` (value: `"product_view"`)
 
 
 

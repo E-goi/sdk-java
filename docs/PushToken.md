@@ -3,13 +3,14 @@
 # PushToken
 
 Push token schema
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**os** | **String** | The OS of the device. | 
-**token** | **String** | The Firebase token. | 
-**twoStepsData** | [**PushTokenTwoStepsData**](PushTokenTwoStepsData.md) |  |  [optional]
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**os** | **String** | The OS of the device. |  |
+|**token** | **String** | The Firebase token. |  |
+|**twoStepsData** | [**PushTokenTwoStepsData**](PushTokenTwoStepsData.md) |  |  [optional] |
 
 
 

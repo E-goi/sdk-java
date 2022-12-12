@@ -3,10 +3,13 @@
 # TeResponse
 
 TeResponse schema
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**result** | **Boolean** | result |  [optional] |
+|**response** | **String** | response |  [optional] |
 
 
 

@@ -1,6 +1,6 @@
 /*
  * APIv3 (New)
- *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  <security-definitions/>
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0
  * 
@@ -18,35 +18,39 @@ import org.egoi.client.model.AcceptedResponse;
 import org.egoi.client.model.ActivateContactsRequest;
 import org.egoi.client.model.ActivityCollection;
 import org.egoi.client.model.AttachTagRequest;
-import org.egoi.client.model.AttachTagResponse;
 import org.egoi.client.model.BadRequest;
 import org.egoi.client.model.ComplexContact;
-import org.egoi.client.model.ContactBaseExtra;
-import org.egoi.client.model.ContactBaseStatusExtra;
+import org.egoi.client.model.Conflict;
+import org.egoi.client.model.ContactBaseExtraPost;
+import org.egoi.client.model.ContactBaseStatusExtraNoRemoved;
 import org.egoi.client.model.ContactCollection;
 import org.egoi.client.model.ContactExportRequest;
 import org.egoi.client.model.ContactForgetRequest;
 import org.egoi.client.model.CreateContactResponse;
 import org.egoi.client.model.DeactivateContactsRequest;
+import org.egoi.client.model.DetachTagRequest;
 import org.egoi.client.model.Forbidden;
-import org.egoi.client.model.ImportBulkRequest;
-import org.egoi.client.model.InlineResponse200;
+import org.egoi.client.model.GetAllContactsExtraFieldIdParameter;
+import org.egoi.client.model.ImportBulkFileRequest;
 import org.egoi.client.model.InternalServerError;
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
 import org.egoi.client.model.NotFound;
-import org.threeten.bp.OffsetDateTime;
+import java.time.OffsetDateTime;
 import org.egoi.client.model.PostContactsConflict;
 import org.egoi.client.model.RemoveRequest;
 import org.egoi.client.model.RemoveResponse;
+import org.egoi.client.model.RequestEntityTooLarge;
 import org.egoi.client.model.RequestTimeout;
+import org.egoi.client.model.SearchContacts200Response;
 import org.egoi.client.model.ServiceUnavailable;
 import org.egoi.client.model.StartAutomationRequest;
 import org.egoi.client.model.StartAutomationResponse;
 import org.egoi.client.model.TooManyRequests;
 import org.egoi.client.model.Unauthorized;
 import org.egoi.client.model.UnprocessableEntity;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.egoi.client.model.UpdateContactsRequest;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,189 +60,182 @@ import java.util.Map;
 /**
  * API tests for ContactsApi
  */
-@Ignore
+@Disabled
 public class ContactsApiTest {
 
     private final ContactsApi api = new ContactsApi();
 
-    
     /**
      * Activate contacts
      *
      * Activates a collection of contacts (does not apply to removed contacts)
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void actionActivateContactsTest() throws ApiException {
         Integer listId = null;
         ActivateContactsRequest activateContactsRequest = null;
         AcceptedResponse response = api.actionActivateContacts(listId, activateContactsRequest);
-
         // TODO: test validations
     }
-    
+
     /**
      * Attach tag to contact
      *
-     * Attaches a tag to the provided contacts. &lt;br&gt;***Note:***&lt;br&gt; If you provide the array of **contacts** there will be a maximum limit of 1000 contacts in the payload, but if you provide a **segment_id** instead of     the array of contacts you will get an asynchronous response with the status code 202
+     * Attaches a tag to the provided contacts.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void actionAttachTagTest() throws ApiException {
         Integer listId = null;
         AttachTagRequest attachTagRequest = null;
-        AttachTagResponse response = api.actionAttachTag(listId, attachTagRequest);
-
+        AcceptedResponse response = api.actionAttachTag(listId, attachTagRequest);
         // TODO: test validations
     }
-    
+
     /**
      * Deactivate contacts
      *
      * Deactivates a collection of contacts (does not apply to removed contacts)
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void actionDeactivateContactsTest() throws ApiException {
         Integer listId = null;
         DeactivateContactsRequest deactivateContactsRequest = null;
         AcceptedResponse response = api.actionDeactivateContacts(listId, deactivateContactsRequest);
-
         // TODO: test validations
     }
-    
+
     /**
      * Detach tag to contact
      *
      * Detach a tag to the provided contacts
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void actionDetachTagTest() throws ApiException {
         Integer listId = null;
-        AttachTagRequest attachTagRequest = null;
-        AttachTagResponse response = api.actionDetachTag(listId, attachTagRequest);
-
+        DetachTagRequest detachTagRequest = null;
+        AcceptedResponse response = api.actionDetachTag(listId, detachTagRequest);
         // TODO: test validations
     }
-    
+
     /**
      * Exports a list of contacts
      *
      * Exports a list of contacts to the desired callback url
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void actionExportContactsTest() throws ApiException {
         Integer listId = null;
         ContactExportRequest contactExportRequest = null;
         AcceptedResponse response = api.actionExportContacts(listId, contactExportRequest);
-
         // TODO: test validations
     }
-    
+
     /**
      * Forget contacts
      *
-     * Forgets a list of contacts to the desired callback url
+     * Forgets a list of contacts
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void actionForgetContactsTest() throws ApiException {
         Integer listId = null;
         ContactForgetRequest contactForgetRequest = null;
         AcceptedResponse response = api.actionForgetContacts(listId, contactForgetRequest);
-
         // TODO: test validations
     }
-    
+
     /**
      * Import collection of contacts
      *
-     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)&lt;br&gt; ***Note:*** minimum of 2 contacts to use this method. [use Create new contact method instead](#operation/createContact &#39;Create new contact&#39;)
+     * Imports a collection of contacts &lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)&lt;br&gt; ***Notes:***&lt;br&gt;Minimum of 2 contacts to use this method. [Use Create new contact method instead](#operation/createContact &#39;Create new contact&#39;)&lt;br&gt;It defaults to ***Bulk object*** import.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void actionImportBulkTest() throws ApiException {
         Integer listId = null;
-        ImportBulkRequest importBulkRequest = null;
-        AcceptedResponse response = api.actionImportBulk(listId, importBulkRequest);
-
+        ImportBulkFileRequest importBulkFileRequest = null;
+        AcceptedResponse response = api.actionImportBulk(listId, importBulkFileRequest);
         // TODO: test validations
     }
-    
+
     /**
      * Start automation
      *
      * Start automation to the provided contacts
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void actionStartAutomationTest() throws ApiException {
         Integer listId = null;
         StartAutomationRequest startAutomationRequest = null;
         StartAutomationResponse response = api.actionStartAutomation(listId, startAutomationRequest);
-
         // TODO: test validations
     }
-    
+
     /**
      * Unsubscribes contacts
      *
      * Unsubscribes contacts
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void actionUnsubscribeContactTest() throws ApiException {
         Integer listId = null;
         RemoveRequest removeRequest = null;
         RemoveResponse response = api.actionUnsubscribeContact(listId, removeRequest);
-
         // TODO: test validations
     }
-    
+
+    /**
+     * Updates contacts
+     *
+     * Updates a collection of contacts (does not apply to removed contacts).      Note that all contacts will be updated with the same values and the existance of unique fields in the payload will trigger a 409 Conflict response.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void actionUpdateContactsTest() throws ApiException {
+        Integer listId = null;
+        UpdateContactsRequest updateContactsRequest = null;
+        AcceptedResponse response = api.actionUpdateContacts(listId, updateContactsRequest);
+        // TODO: test validations
+    }
+
     /**
      * Create new contact
      *
      * Create a new contact
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createContactTest() throws ApiException {
         Integer listId = null;
-        ContactBaseExtra contactBaseExtra = null;
-        CreateContactResponse response = api.createContact(listId, contactBaseExtra);
-
+        ContactBaseExtraPost contactBaseExtraPost = null;
+        CreateContactResponse response = api.createContact(listId, contactBaseExtraPost);
         // TODO: test validations
     }
-    
+
     /**
      * Get all contact activities
      *
      * Returns all contact activities
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getAllContactActivitiesTest() throws ApiException {
@@ -249,17 +246,15 @@ public class ContactsApiTest {
         OffsetDateTime dateMin = null;
         OffsetDateTime dateMax = null;
         ActivityCollection response = api.getAllContactActivities(contactId, listId, offset, limit, dateMin, dateMax);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get all contacts
      *
      * Returns all contacts
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getAllContactsTest() throws ApiException {
@@ -276,19 +271,17 @@ public class ContactsApiTest {
         Boolean phoneStatus = null;
         LocalDate birthDate = null;
         String language = null;
-        List<String> extraFieldId = null;
+        GetAllContactsExtraFieldIdParameter extraFieldId = null;
         ContactCollection response = api.getAllContacts(listId, offset, limit, firstName, lastName, email, emailStatus, cellphone, cellphoneStatus, phone, phoneStatus, birthDate, language, extraFieldId);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get all contacts by Segment Id
      *
      * Returns all contacts filtered by Segment Id
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getAllContactsBySegmentTest() throws ApiException {
@@ -298,60 +291,53 @@ public class ContactsApiTest {
         Integer limit = null;
         Boolean showRemoved = null;
         ContactCollection response = api.getAllContactsBySegment(listId, segmentId, offset, limit, showRemoved);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get contact
      *
      * Returns contact information given its ID
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getContactTest() throws ApiException {
         String contactId = null;
         Integer listId = null;
         ComplexContact response = api.getContact(contactId, listId);
-
         // TODO: test validations
     }
-    
+
     /**
      * Update a specific contact
      *
      * Update contact
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void patchContactTest() throws ApiException {
         String contactId = null;
         Integer listId = null;
-        ContactBaseStatusExtra contactBaseStatusExtra = null;
-        CreateContactResponse response = api.patchContact(contactId, listId, contactBaseStatusExtra);
-
+        ContactBaseStatusExtraNoRemoved contactBaseStatusExtraNoRemoved = null;
+        CreateContactResponse response = api.patchContact(contactId, listId, contactBaseStatusExtraNoRemoved);
         // TODO: test validations
     }
-    
+
     /**
      * Search contact
      *
      * Searches a contact across all lists and returns a collection of contacts found
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void searchContactsTest() throws ApiException {
         String contact = null;
         String type = null;
-        InlineResponse200 response = api.searchContacts(contact, type);
-
+        SearchContacts200Response response = api.searchContacts(contact, type);
         // TODO: test validations
     }
-    
+
 }

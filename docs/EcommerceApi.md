@@ -2,19 +2,19 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createCart**](EcommerceApi.md#createCart) | **POST** /{domain}/carts | Create cart
-[**createCatalog**](EcommerceApi.md#createCatalog) | **POST** /catalogs | Create new catalog
-[**createOrder**](EcommerceApi.md#createOrder) | **POST** /{domain}/orders | Create order
-[**createProduct**](EcommerceApi.md#createProduct) | **POST** /catalogs/{catalog_id}/products | Create new product
-[**deleteCatalog**](EcommerceApi.md#deleteCatalog) | **DELETE** /catalogs/{catalog_id} | Remove catalog
-[**deleteProduct**](EcommerceApi.md#deleteProduct) | **DELETE** /catalogs/{catalog_id}/products/{product_identifier} | Remove product
-[**getAllCatalogs**](EcommerceApi.md#getAllCatalogs) | **GET** /catalogs | Get all catalogs
-[**getAllProducts**](EcommerceApi.md#getAllProducts) | **GET** /catalogs/{catalog_id}/products | Get all products
-[**getProduct**](EcommerceApi.md#getProduct) | **GET** /catalogs/{catalog_id}/products/{product_identifier} | Get product
-[**importProducts**](EcommerceApi.md#importProducts) | **POST** /catalogs/{catalog_id}/products/actions/import | Import products
-[**updateProduct**](EcommerceApi.md#updateProduct) | **PATCH** /catalogs/{catalog_id}/products/{product_identifier} | Update product
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createCart**](EcommerceApi.md#createCart) | **POST** /{domain}/carts | Create cart |
+| [**createCatalog**](EcommerceApi.md#createCatalog) | **POST** /catalogs | Create new catalog |
+| [**createOrder**](EcommerceApi.md#createOrder) | **POST** /{domain}/orders | Create order |
+| [**createProduct**](EcommerceApi.md#createProduct) | **POST** /catalogs/{catalog_id}/products | Create new product |
+| [**deleteCatalog**](EcommerceApi.md#deleteCatalog) | **DELETE** /catalogs/{catalog_id} | Remove catalog |
+| [**deleteProduct**](EcommerceApi.md#deleteProduct) | **DELETE** /catalogs/{catalog_id}/products/{product_identifier} | Remove product |
+| [**getAllCatalogs**](EcommerceApi.md#getAllCatalogs) | **GET** /catalogs | Get all catalogs |
+| [**getAllProducts**](EcommerceApi.md#getAllProducts) | **GET** /catalogs/{catalog_id}/products | Get all products |
+| [**getProduct**](EcommerceApi.md#getProduct) | **GET** /catalogs/{catalog_id}/products/{product_identifier} | Get product |
+| [**importProducts**](EcommerceApi.md#importProducts) | **POST** /catalogs/{catalog_id}/products/actions/import | Import products |
+| [**updateProduct**](EcommerceApi.md#updateProduct) | **PATCH** /catalogs/{catalog_id}/products/{product_identifier} | Update product |
 
 
 <a name="createCart"></a>
@@ -65,10 +65,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **domain** | **String**| Domain |
- **cart** | [**Cart**](Cart.md)| Parameters for the Carts |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **domain** | **String**| Domain | |
+| **cart** | [**Cart**](Cart.md)| Parameters for the Carts | |
 
 ### Return type
 
@@ -86,15 +86,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | OK |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="createCatalog"></a>
 # **createCatalog**
@@ -143,9 +142,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **catalogPostRequest** | [**CatalogPostRequest**](CatalogPostRequest.md)| Parameters for the Catalog |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **catalogPostRequest** | [**CatalogPostRequest**](CatalogPostRequest.md)| Parameters for the Catalog | |
 
 ### Return type
 
@@ -163,15 +162,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **201** | Created |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="createOrder"></a>
 # **createOrder**
@@ -221,10 +220,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **domain** | **String**| Domain |
- **createOrder** | [**CreateOrder**](CreateOrder.md)| Parameters for the Orders |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **domain** | **String**| Domain | |
+| **createOrder** | [**CreateOrder**](CreateOrder.md)| Parameters for the Orders | |
 
 ### Return type
 
@@ -242,16 +241,16 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | OK |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **413** | Request Entity Too Large |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="createProduct"></a>
 # **createProduct**
@@ -301,10 +300,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **catalogId** | **Integer**| ID of the Catalog |
- **productPostRequest** | [**ProductPostRequest**](ProductPostRequest.md)| Parameters for the Product |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **catalogId** | **Integer**| ID of the Catalog | |
+| **productPostRequest** | [**ProductPostRequest**](ProductPostRequest.md)| Parameters for the Product | |
 
 ### Return type
 
@@ -322,17 +321,16 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **201** | Created |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="deleteCatalog"></a>
 # **deleteCatalog**
@@ -380,9 +378,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **catalogId** | **Integer**| ID of the Catalog |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **catalogId** | **Integer**| ID of the Catalog | |
 
 ### Return type
 
@@ -400,14 +398,14 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **204** | No Content |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="deleteProduct"></a>
 # **deleteProduct**
@@ -456,10 +454,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **catalogId** | **Integer**| ID of the Catalog |
- **productIdentifier** | **String**| ID of the Product |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **catalogId** | **Integer**| ID of the Catalog | |
+| **productIdentifier** | **String**| ID of the Product | |
 
 ### Return type
 
@@ -477,14 +475,14 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **204** | No Content |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllCatalogs"></a>
 # **getAllCatalogs**
@@ -549,17 +547,17 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllProducts"></a>
 # **getAllProducts**
-> ProductCollection getAllProducts(catalogId, productIdentifier, offset, limit)
+> ProductCollection getAllProducts(catalogId, productIdentifier, name, description, sku, upc, ean, gtin, mpn, price, salePrice, brand, customAttributes, offset, limit)
 
 Get all products
 
@@ -588,11 +586,22 @@ public class Example {
 
     EcommerceApi apiInstance = new EcommerceApi(defaultClient);
     Integer catalogId = 56; // Integer | ID of the Catalog
-    String productIdentifier = "productIdentifier_example"; // String | Product ID in your store
+    String productIdentifier = "productIdentifier_example"; // String | Filter by product ID in your store
+    String name = "name_example"; // String | Filter by name of the product
+    String description = "description_example"; // String | Filter by description of the product
+    String sku = "sku_example"; // String | Filter by Stock Keeping Unit
+    String upc = "upc_example"; // String | Filter by Universal Product Code
+    String ean = "ean_example"; // String | Filter by European Article Numbering
+    String gtin = "gtin_example"; // String | Filter by Global Trade Item Number
+    String mpn = "mpn_example"; // String | Filter by Manufacturer Part Number
+    BigDecimal price = new BigDecimal(78); // BigDecimal | Filter by price of the product
+    BigDecimal salePrice = new BigDecimal(78); // BigDecimal | Filter by sale price of the product
+    String brand = "brand_example"; // String | Filter by brand of the product
+    GetAllProductsCustomAttributesParameter customAttributes = new HashMap(); // GetAllProductsCustomAttributesParameter | Filter by custom attributes of products<div><span class='sc-cJSrbW cWGDGi'> Example: </span> <span class='sc-uJMKN cTkJKI'> 'custom_attributes[alias]=value' </span></div>
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
     try {
-      ProductCollection result = apiInstance.getAllProducts(catalogId, productIdentifier, offset, limit);
+      ProductCollection result = apiInstance.getAllProducts(catalogId, productIdentifier, name, description, sku, upc, ean, gtin, mpn, price, salePrice, brand, customAttributes, offset, limit);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling EcommerceApi#getAllProducts");
@@ -607,12 +616,23 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **catalogId** | **Integer**| ID of the Catalog |
- **productIdentifier** | **String**| Product ID in your store | [optional]
- **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
- **limit** | **Integer**| Number of items to return | [optional] [default to 10]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **catalogId** | **Integer**| ID of the Catalog | |
+| **productIdentifier** | **String**| Filter by product ID in your store | [optional] |
+| **name** | **String**| Filter by name of the product | [optional] |
+| **description** | **String**| Filter by description of the product | [optional] |
+| **sku** | **String**| Filter by Stock Keeping Unit | [optional] |
+| **upc** | **String**| Filter by Universal Product Code | [optional] |
+| **ean** | **String**| Filter by European Article Numbering | [optional] |
+| **gtin** | **String**| Filter by Global Trade Item Number | [optional] |
+| **mpn** | **String**| Filter by Manufacturer Part Number | [optional] |
+| **price** | **BigDecimal**| Filter by price of the product | [optional] |
+| **salePrice** | **BigDecimal**| Filter by sale price of the product | [optional] |
+| **brand** | **String**| Filter by brand of the product | [optional] |
+| **customAttributes** | [**GetAllProductsCustomAttributesParameter**](.md)| Filter by custom attributes of products&lt;div&gt;&lt;span class&#x3D;&#39;sc-cJSrbW cWGDGi&#39;&gt; Example: &lt;/span&gt; &lt;span class&#x3D;&#39;sc-uJMKN cTkJKI&#39;&gt; &#39;custom_attributes[alias]&#x3D;value&#39; &lt;/span&gt;&lt;/div&gt; | [optional] |
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
 
 ### Return type
 
@@ -630,14 +650,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**408** | Request Timeout |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getProduct"></a>
 # **getProduct**
@@ -687,10 +707,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **catalogId** | **Integer**| ID of the Catalog |
- **productIdentifier** | **String**| ID of the Product |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **catalogId** | **Integer**| ID of the Catalog | |
+| **productIdentifier** | **String**| ID of the Product | |
 
 ### Return type
 
@@ -708,14 +728,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="importProducts"></a>
 # **importProducts**
@@ -765,10 +785,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **catalogId** | **Integer**| ID of the Catalog |
- **productBulkRequest** | [**ProductBulkRequest**](ProductBulkRequest.md)| Parameters for the Product |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **catalogId** | **Integer**| ID of the Catalog | |
+| **productBulkRequest** | [**ProductBulkRequest**](ProductBulkRequest.md)| Parameters for the Product | |
 
 ### Return type
 
@@ -786,16 +806,16 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Accepted |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | NotFound |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **413** | Payload Too Large |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="updateProduct"></a>
 # **updateProduct**
@@ -846,11 +866,11 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **catalogId** | **Integer**| ID of the Catalog |
- **productIdentifier** | **String**| ID of the Product |
- **productPatchRequest** | [**ProductPatchRequest**](ProductPatchRequest.md)| Parameters for the product |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **catalogId** | **Integer**| ID of the Catalog | |
+| **productIdentifier** | **String**| ID of the Product | |
+| **productPatchRequest** | [**ProductPatchRequest**](ProductPatchRequest.md)| Parameters for the product | |
 
 ### Return type
 
@@ -868,14 +888,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

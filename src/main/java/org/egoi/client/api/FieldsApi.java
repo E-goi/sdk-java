@@ -1,6 +1,6 @@
 /*
  * APIv3 (New)
- *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  <security-definitions/>
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0
  * 
@@ -32,6 +32,7 @@ import org.egoi.client.model.DeleteFieldsConflict;
 import org.egoi.client.model.Field;
 import org.egoi.client.model.FieldCollection;
 import org.egoi.client.model.FieldOption;
+import org.egoi.client.model.FieldOptionPost;
 import org.egoi.client.model.FieldOptionsCollection;
 import org.egoi.client.model.Forbidden;
 import org.egoi.client.model.InternalServerError;
@@ -49,9 +50,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class FieldsApi {
     private ApiClient localVarApiClient;
+    private int localHostIndex;
+    private String localCustomBaseUrl;
 
     public FieldsApi() {
         this(Configuration.getDefaultApiClient());
@@ -67,6 +71,22 @@ public class FieldsApi {
 
     public void setApiClient(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
+    }
+
+    public int getHostIndex() {
+        return localHostIndex;
+    }
+
+    public void setHostIndex(int hostIndex) {
+        this.localHostIndex = hostIndex;
+    }
+
+    public String getCustomBaseUrl() {
+        return localCustomBaseUrl;
+    }
+
+    public void setCustomBaseUrl(String customBaseUrl) {
+        this.localCustomBaseUrl = customBaseUrl;
     }
 
     /**
@@ -91,17 +111,31 @@ public class FieldsApi {
      </table>
      */
     public okhttp3.Call createExtraFieldCall(Integer listId, Field field, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = field;
 
         // create path and map variables
         String localVarPath = "/lists/{list_id}/fields/extra"
-            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()));
+            .replace("{" + "list_id" + "}", localVarApiClient.escapeString(listId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -114,28 +148,27 @@ public class FieldsApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call createExtraFieldValidateBeforeCall(Integer listId, Field field, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'listId' is set
         if (listId == null) {
             throw new ApiException("Missing the required parameter 'listId' when calling createExtraField(Async)");
         }
-        
+
         // verify the required parameter 'field' is set
         if (field == null) {
             throw new ApiException("Missing the required parameter 'field' when calling createExtraField(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = createExtraFieldCall(listId, field, _callback);
-        return localVarCall;
+        return createExtraFieldCall(listId, field, _callback);
 
     }
 
@@ -225,7 +258,7 @@ public class FieldsApi {
      * Build call for createFieldOption
      * @param listId ID of the List (required)
      * @param fieldId ID of the Field (required)
-     * @param fieldOption Parameters for the field option (required)
+     * @param fieldOptionPost Parameters for the field option (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -244,19 +277,33 @@ public class FieldsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createFieldOptionCall(Integer listId, Integer fieldId, FieldOption fieldOption, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = fieldOption;
+    public okhttp3.Call createFieldOptionCall(Integer listId, Integer fieldId, FieldOptionPost fieldOptionPost, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = fieldOptionPost;
 
         // create path and map variables
         String localVarPath = "/lists/{list_id}/fields/extra/{field_id}/options"
-            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()))
-            .replaceAll("\\{" + "field_id" + "\\}", localVarApiClient.escapeString(fieldId.toString()));
+            .replace("{" + "list_id" + "}", localVarApiClient.escapeString(listId.toString()))
+            .replace("{" + "field_id" + "}", localVarApiClient.escapeString(fieldId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -269,33 +316,32 @@ public class FieldsApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createFieldOptionValidateBeforeCall(Integer listId, Integer fieldId, FieldOption fieldOption, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call createFieldOptionValidateBeforeCall(Integer listId, Integer fieldId, FieldOptionPost fieldOptionPost, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'listId' is set
         if (listId == null) {
             throw new ApiException("Missing the required parameter 'listId' when calling createFieldOption(Async)");
         }
-        
+
         // verify the required parameter 'fieldId' is set
         if (fieldId == null) {
             throw new ApiException("Missing the required parameter 'fieldId' when calling createFieldOption(Async)");
         }
-        
-        // verify the required parameter 'fieldOption' is set
-        if (fieldOption == null) {
-            throw new ApiException("Missing the required parameter 'fieldOption' when calling createFieldOption(Async)");
-        }
-        
 
-        okhttp3.Call localVarCall = createFieldOptionCall(listId, fieldId, fieldOption, _callback);
-        return localVarCall;
+        // verify the required parameter 'fieldOptionPost' is set
+        if (fieldOptionPost == null) {
+            throw new ApiException("Missing the required parameter 'fieldOptionPost' when calling createFieldOption(Async)");
+        }
+
+        return createFieldOptionCall(listId, fieldId, fieldOptionPost, _callback);
 
     }
 
@@ -304,7 +350,7 @@ public class FieldsApi {
      * Creates a field option
      * @param listId ID of the List (required)
      * @param fieldId ID of the Field (required)
-     * @param fieldOption Parameters for the field option (required)
+     * @param fieldOptionPost Parameters for the field option (required)
      * @return FieldOption
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -322,8 +368,8 @@ public class FieldsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public FieldOption createFieldOption(Integer listId, Integer fieldId, FieldOption fieldOption) throws ApiException {
-        ApiResponse<FieldOption> localVarResp = createFieldOptionWithHttpInfo(listId, fieldId, fieldOption);
+    public FieldOption createFieldOption(Integer listId, Integer fieldId, FieldOptionPost fieldOptionPost) throws ApiException {
+        ApiResponse<FieldOption> localVarResp = createFieldOptionWithHttpInfo(listId, fieldId, fieldOptionPost);
         return localVarResp.getData();
     }
 
@@ -332,7 +378,7 @@ public class FieldsApi {
      * Creates a field option
      * @param listId ID of the List (required)
      * @param fieldId ID of the Field (required)
-     * @param fieldOption Parameters for the field option (required)
+     * @param fieldOptionPost Parameters for the field option (required)
      * @return ApiResponse&lt;FieldOption&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -350,8 +396,8 @@ public class FieldsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<FieldOption> createFieldOptionWithHttpInfo(Integer listId, Integer fieldId, FieldOption fieldOption) throws ApiException {
-        okhttp3.Call localVarCall = createFieldOptionValidateBeforeCall(listId, fieldId, fieldOption, null);
+    public ApiResponse<FieldOption> createFieldOptionWithHttpInfo(Integer listId, Integer fieldId, FieldOptionPost fieldOptionPost) throws ApiException {
+        okhttp3.Call localVarCall = createFieldOptionValidateBeforeCall(listId, fieldId, fieldOptionPost, null);
         Type localVarReturnType = new TypeToken<FieldOption>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -361,7 +407,7 @@ public class FieldsApi {
      * Creates a field option
      * @param listId ID of the List (required)
      * @param fieldId ID of the Field (required)
-     * @param fieldOption Parameters for the field option (required)
+     * @param fieldOptionPost Parameters for the field option (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -380,9 +426,9 @@ public class FieldsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call createFieldOptionAsync(Integer listId, Integer fieldId, FieldOption fieldOption, final ApiCallback<FieldOption> _callback) throws ApiException {
+    public okhttp3.Call createFieldOptionAsync(Integer listId, Integer fieldId, FieldOptionPost fieldOptionPost, final ApiCallback<FieldOption> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createFieldOptionValidateBeforeCall(listId, fieldId, fieldOption, _callback);
+        okhttp3.Call localVarCall = createFieldOptionValidateBeforeCall(listId, fieldId, fieldOptionPost, _callback);
         Type localVarReturnType = new TypeToken<FieldOption>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -409,18 +455,32 @@ public class FieldsApi {
      </table>
      */
     public okhttp3.Call deleteExtraFieldCall(Integer listId, Integer fieldId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/lists/{list_id}/fields/extra/{field_id}"
-            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()))
-            .replaceAll("\\{" + "field_id" + "\\}", localVarApiClient.escapeString(fieldId.toString()));
+            .replace("{" + "list_id" + "}", localVarApiClient.escapeString(listId.toString()))
+            .replace("{" + "field_id" + "}", localVarApiClient.escapeString(fieldId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -430,31 +490,29 @@ public class FieldsApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteExtraFieldValidateBeforeCall(Integer listId, Integer fieldId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'listId' is set
         if (listId == null) {
             throw new ApiException("Missing the required parameter 'listId' when calling deleteExtraField(Async)");
         }
-        
+
         // verify the required parameter 'fieldId' is set
         if (fieldId == null) {
             throw new ApiException("Missing the required parameter 'fieldId' when calling deleteExtraField(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteExtraFieldCall(listId, fieldId, _callback);
-        return localVarCall;
+        return deleteExtraFieldCall(listId, fieldId, _callback);
 
     }
 
@@ -558,19 +616,33 @@ public class FieldsApi {
      </table>
      */
     public okhttp3.Call deleteFieldOptionCall(Integer listId, Integer fieldId, Integer optionId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/lists/{list_id}/fields/extra/{field_id}/options/{option_id}"
-            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()))
-            .replaceAll("\\{" + "field_id" + "\\}", localVarApiClient.escapeString(fieldId.toString()))
-            .replaceAll("\\{" + "option_id" + "\\}", localVarApiClient.escapeString(optionId.toString()));
+            .replace("{" + "list_id" + "}", localVarApiClient.escapeString(listId.toString()))
+            .replace("{" + "field_id" + "}", localVarApiClient.escapeString(fieldId.toString()))
+            .replace("{" + "option_id" + "}", localVarApiClient.escapeString(optionId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -580,36 +652,34 @@ public class FieldsApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call deleteFieldOptionValidateBeforeCall(Integer listId, Integer fieldId, Integer optionId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'listId' is set
         if (listId == null) {
             throw new ApiException("Missing the required parameter 'listId' when calling deleteFieldOption(Async)");
         }
-        
+
         // verify the required parameter 'fieldId' is set
         if (fieldId == null) {
             throw new ApiException("Missing the required parameter 'fieldId' when calling deleteFieldOption(Async)");
         }
-        
+
         // verify the required parameter 'optionId' is set
         if (optionId == null) {
             throw new ApiException("Missing the required parameter 'optionId' when calling deleteFieldOption(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = deleteFieldOptionCall(listId, fieldId, optionId, _callback);
-        return localVarCall;
+        return deleteFieldOptionCall(listId, fieldId, optionId, _callback);
 
     }
 
@@ -712,18 +782,32 @@ public class FieldsApi {
      </table>
      */
     public okhttp3.Call getAllFieldOptionsCall(Integer listId, Integer fieldId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/lists/{list_id}/fields/extra/{field_id}/options"
-            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()))
-            .replaceAll("\\{" + "field_id" + "\\}", localVarApiClient.escapeString(fieldId.toString()));
+            .replace("{" + "list_id" + "}", localVarApiClient.escapeString(listId.toString()))
+            .replace("{" + "field_id" + "}", localVarApiClient.escapeString(fieldId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -733,31 +817,29 @@ public class FieldsApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getAllFieldOptionsValidateBeforeCall(Integer listId, Integer fieldId, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'listId' is set
         if (listId == null) {
             throw new ApiException("Missing the required parameter 'listId' when calling getAllFieldOptions(Async)");
         }
-        
+
         // verify the required parameter 'fieldId' is set
         if (fieldId == null) {
             throw new ApiException("Missing the required parameter 'fieldId' when calling getAllFieldOptions(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getAllFieldOptionsCall(listId, fieldId, _callback);
-        return localVarCall;
+        return getAllFieldOptionsCall(listId, fieldId, _callback);
 
     }
 
@@ -861,14 +943,31 @@ public class FieldsApi {
      </table>
      */
     public okhttp3.Call getAllFieldsCall(Integer listId, Integer offset, Integer limit, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = null;
 
         // create path and map variables
         String localVarPath = "/lists/{list_id}/fields"
-            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()));
+            .replace("{" + "list_id" + "}", localVarApiClient.escapeString(listId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         if (offset != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("offset", offset));
         }
@@ -877,9 +976,6 @@ public class FieldsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("limit", limit));
         }
 
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -889,26 +985,24 @@ public class FieldsApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getAllFieldsValidateBeforeCall(Integer listId, Integer offset, Integer limit, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'listId' is set
         if (listId == null) {
             throw new ApiException("Missing the required parameter 'listId' when calling getAllFields(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = getAllFieldsCall(listId, offset, limit, _callback);
-        return localVarCall;
+        return getAllFieldsCall(listId, offset, limit, _callback);
 
     }
 
@@ -1015,18 +1109,32 @@ public class FieldsApi {
      </table>
      */
     public okhttp3.Call patchBaseFieldCall(Integer listId, String fieldId, PatchRequestBaseField patchRequestBaseField, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = patchRequestBaseField;
 
         // create path and map variables
         String localVarPath = "/lists/{list_id}/fields/base/{field_id}"
-            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()))
-            .replaceAll("\\{" + "field_id" + "\\}", localVarApiClient.escapeString(fieldId.toString()));
+            .replace("{" + "list_id" + "}", localVarApiClient.escapeString(listId.toString()))
+            .replace("{" + "field_id" + "}", localVarApiClient.escapeString(fieldId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1039,33 +1147,32 @@ public class FieldsApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call patchBaseFieldValidateBeforeCall(Integer listId, String fieldId, PatchRequestBaseField patchRequestBaseField, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'listId' is set
         if (listId == null) {
             throw new ApiException("Missing the required parameter 'listId' when calling patchBaseField(Async)");
         }
-        
+
         // verify the required parameter 'fieldId' is set
         if (fieldId == null) {
             throw new ApiException("Missing the required parameter 'fieldId' when calling patchBaseField(Async)");
         }
-        
+
         // verify the required parameter 'patchRequestBaseField' is set
         if (patchRequestBaseField == null) {
             throw new ApiException("Missing the required parameter 'patchRequestBaseField' when calling patchBaseField(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = patchBaseFieldCall(listId, fieldId, patchRequestBaseField, _callback);
-        return localVarCall;
+        return patchBaseFieldCall(listId, fieldId, patchRequestBaseField, _callback);
 
     }
 
@@ -1181,18 +1288,32 @@ public class FieldsApi {
      </table>
      */
     public okhttp3.Call patchExtraFieldCall(Integer listId, Integer fieldId, PatchRequestField patchRequestField, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
         Object localVarPostBody = patchRequestField;
 
         // create path and map variables
         String localVarPath = "/lists/{list_id}/fields/extra/{field_id}"
-            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()))
-            .replaceAll("\\{" + "field_id" + "\\}", localVarApiClient.escapeString(fieldId.toString()));
+            .replace("{" + "list_id" + "}", localVarApiClient.escapeString(listId.toString()))
+            .replace("{" + "field_id" + "}", localVarApiClient.escapeString(fieldId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1205,33 +1326,32 @@ public class FieldsApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call patchExtraFieldValidateBeforeCall(Integer listId, Integer fieldId, PatchRequestField patchRequestField, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'listId' is set
         if (listId == null) {
             throw new ApiException("Missing the required parameter 'listId' when calling patchExtraField(Async)");
         }
-        
+
         // verify the required parameter 'fieldId' is set
         if (fieldId == null) {
             throw new ApiException("Missing the required parameter 'fieldId' when calling patchExtraField(Async)");
         }
-        
+
         // verify the required parameter 'patchRequestField' is set
         if (patchRequestField == null) {
             throw new ApiException("Missing the required parameter 'patchRequestField' when calling patchExtraField(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = patchExtraFieldCall(listId, fieldId, patchRequestField, _callback);
-        return localVarCall;
+        return patchExtraFieldCall(listId, fieldId, patchRequestField, _callback);
 
     }
 
@@ -1328,7 +1448,7 @@ public class FieldsApi {
      * @param listId ID of the List (required)
      * @param fieldId ID of the Field (required)
      * @param optionId ID of the field option (required)
-     * @param fieldOption Parameters for the field option (required)
+     * @param fieldOptionPost Parameters for the field option (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1347,20 +1467,34 @@ public class FieldsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateFieldOptionCall(Integer listId, Integer fieldId, Integer optionId, FieldOption fieldOption, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = fieldOption;
+    public okhttp3.Call updateFieldOptionCall(Integer listId, Integer fieldId, Integer optionId, FieldOptionPost fieldOptionPost, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = fieldOptionPost;
 
         // create path and map variables
         String localVarPath = "/lists/{list_id}/fields/extra/{field_id}/options/{option_id}"
-            .replaceAll("\\{" + "list_id" + "\\}", localVarApiClient.escapeString(listId.toString()))
-            .replaceAll("\\{" + "field_id" + "\\}", localVarApiClient.escapeString(fieldId.toString()))
-            .replaceAll("\\{" + "option_id" + "\\}", localVarApiClient.escapeString(optionId.toString()));
+            .replace("{" + "list_id" + "}", localVarApiClient.escapeString(listId.toString()))
+            .replace("{" + "field_id" + "}", localVarApiClient.escapeString(fieldId.toString()))
+            .replace("{" + "option_id" + "}", localVarApiClient.escapeString(optionId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -1373,38 +1507,37 @@ public class FieldsApi {
             "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
 
         String[] localVarAuthNames = new String[] { "Apikey" };
-        return localVarApiClient.buildCall(localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateFieldOptionValidateBeforeCall(Integer listId, Integer fieldId, Integer optionId, FieldOption fieldOption, final ApiCallback _callback) throws ApiException {
-        
+    private okhttp3.Call updateFieldOptionValidateBeforeCall(Integer listId, Integer fieldId, Integer optionId, FieldOptionPost fieldOptionPost, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'listId' is set
         if (listId == null) {
             throw new ApiException("Missing the required parameter 'listId' when calling updateFieldOption(Async)");
         }
-        
+
         // verify the required parameter 'fieldId' is set
         if (fieldId == null) {
             throw new ApiException("Missing the required parameter 'fieldId' when calling updateFieldOption(Async)");
         }
-        
+
         // verify the required parameter 'optionId' is set
         if (optionId == null) {
             throw new ApiException("Missing the required parameter 'optionId' when calling updateFieldOption(Async)");
         }
-        
-        // verify the required parameter 'fieldOption' is set
-        if (fieldOption == null) {
-            throw new ApiException("Missing the required parameter 'fieldOption' when calling updateFieldOption(Async)");
-        }
-        
 
-        okhttp3.Call localVarCall = updateFieldOptionCall(listId, fieldId, optionId, fieldOption, _callback);
-        return localVarCall;
+        // verify the required parameter 'fieldOptionPost' is set
+        if (fieldOptionPost == null) {
+            throw new ApiException("Missing the required parameter 'fieldOptionPost' when calling updateFieldOption(Async)");
+        }
+
+        return updateFieldOptionCall(listId, fieldId, optionId, fieldOptionPost, _callback);
 
     }
 
@@ -1414,7 +1547,7 @@ public class FieldsApi {
      * @param listId ID of the List (required)
      * @param fieldId ID of the Field (required)
      * @param optionId ID of the field option (required)
-     * @param fieldOption Parameters for the field option (required)
+     * @param fieldOptionPost Parameters for the field option (required)
      * @return FieldOption
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1432,8 +1565,8 @@ public class FieldsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public FieldOption updateFieldOption(Integer listId, Integer fieldId, Integer optionId, FieldOption fieldOption) throws ApiException {
-        ApiResponse<FieldOption> localVarResp = updateFieldOptionWithHttpInfo(listId, fieldId, optionId, fieldOption);
+    public FieldOption updateFieldOption(Integer listId, Integer fieldId, Integer optionId, FieldOptionPost fieldOptionPost) throws ApiException {
+        ApiResponse<FieldOption> localVarResp = updateFieldOptionWithHttpInfo(listId, fieldId, optionId, fieldOptionPost);
         return localVarResp.getData();
     }
 
@@ -1443,7 +1576,7 @@ public class FieldsApi {
      * @param listId ID of the List (required)
      * @param fieldId ID of the Field (required)
      * @param optionId ID of the field option (required)
-     * @param fieldOption Parameters for the field option (required)
+     * @param fieldOptionPost Parameters for the field option (required)
      * @return ApiResponse&lt;FieldOption&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1461,8 +1594,8 @@ public class FieldsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<FieldOption> updateFieldOptionWithHttpInfo(Integer listId, Integer fieldId, Integer optionId, FieldOption fieldOption) throws ApiException {
-        okhttp3.Call localVarCall = updateFieldOptionValidateBeforeCall(listId, fieldId, optionId, fieldOption, null);
+    public ApiResponse<FieldOption> updateFieldOptionWithHttpInfo(Integer listId, Integer fieldId, Integer optionId, FieldOptionPost fieldOptionPost) throws ApiException {
+        okhttp3.Call localVarCall = updateFieldOptionValidateBeforeCall(listId, fieldId, optionId, fieldOptionPost, null);
         Type localVarReturnType = new TypeToken<FieldOption>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -1473,7 +1606,7 @@ public class FieldsApi {
      * @param listId ID of the List (required)
      * @param fieldId ID of the Field (required)
      * @param optionId ID of the field option (required)
-     * @param fieldOption Parameters for the field option (required)
+     * @param fieldOptionPost Parameters for the field option (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1492,9 +1625,9 @@ public class FieldsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call updateFieldOptionAsync(Integer listId, Integer fieldId, Integer optionId, FieldOption fieldOption, final ApiCallback<FieldOption> _callback) throws ApiException {
+    public okhttp3.Call updateFieldOptionAsync(Integer listId, Integer fieldId, Integer optionId, FieldOptionPost fieldOptionPost, final ApiCallback<FieldOption> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updateFieldOptionValidateBeforeCall(listId, fieldId, optionId, fieldOption, _callback);
+        okhttp3.Call localVarCall = updateFieldOptionValidateBeforeCall(listId, fieldId, optionId, fieldOptionPost, _callback);
         Type localVarReturnType = new TypeToken<FieldOption>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

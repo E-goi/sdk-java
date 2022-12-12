@@ -2,17 +2,17 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createList**](ListsApi.md#createList) | **POST** /lists | Create new list
-[**deleteList**](ListsApi.md#deleteList) | **DELETE** /lists/{list_id} | Remove list
-[**getAllLists**](ListsApi.md#getAllLists) | **GET** /lists | Get all lists
-[**updateList**](ListsApi.md#updateList) | **PATCH** /lists/{list_id} | Update a specific list
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createList**](ListsApi.md#createList) | **POST** /lists | Create new list |
+| [**deleteList**](ListsApi.md#deleteList) | **DELETE** /lists/{list_id} | Remove list |
+| [**getAllLists**](ListsApi.md#getAllLists) | **GET** /lists | Get all lists |
+| [**updateList**](ListsApi.md#updateList) | **PATCH** /lists/{list_id} | Update a specific list |
 
 
 <a name="createList"></a>
 # **createList**
-> ListModel createList(postRequestList)
+> ModelList createList(postRequestList)
 
 Create new list
 
@@ -42,7 +42,7 @@ public class Example {
     ListsApi apiInstance = new ListsApi(defaultClient);
     PostRequestList postRequestList = new PostRequestList(); // PostRequestList | Parameters for the List
     try {
-      ListModel result = apiInstance.createList(postRequestList);
+      ModelList result = apiInstance.createList(postRequestList);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ListsApi#createList");
@@ -57,13 +57,13 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **postRequestList** | [**PostRequestList**](PostRequestList.md)| Parameters for the List |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **postRequestList** | [**PostRequestList**](PostRequestList.md)| Parameters for the List | |
 
 ### Return type
 
-[**ListModel**](List.md)
+[**ModelList**](ModelList.md)
 
 ### Authorization
 
@@ -77,16 +77,16 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **201** | Created |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="deleteList"></a>
 # **deleteList**
@@ -134,9 +134,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **listId** | **Integer**| ID of the List |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **listId** | **Integer**| ID of the List | |
 
 ### Return type
 
@@ -154,15 +154,15 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **204** | No Content |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllLists"></a>
 # **getAllLists**
@@ -196,14 +196,14 @@ public class Example {
     ListsApi apiInstance = new ListsApi(defaultClient);
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
-    String order = "desc"; // String | Type of order
+    String order = "asc"; // String | Type of order
     String orderBy = "list_id"; // String | Reference attribute to order lists
     String internalName = "internalName_example"; // String | Internal name of the list
     String publicName = "publicName_example"; // String | Public name of the list
-    OffsetDateTime createdMin = new OffsetDateTime(); // OffsetDateTime | Created initial date
-    OffsetDateTime createdMax = new OffsetDateTime(); // OffsetDateTime | Created finish
-    OffsetDateTime updatedMin = new OffsetDateTime(); // OffsetDateTime | Updated initial
-    OffsetDateTime updatedMax = new OffsetDateTime(); // OffsetDateTime | Updated finish
+    OffsetDateTime createdMin = OffsetDateTime.now(); // OffsetDateTime | Created initial date
+    OffsetDateTime createdMax = OffsetDateTime.now(); // OffsetDateTime | Created finish
+    OffsetDateTime updatedMin = OffsetDateTime.now(); // OffsetDateTime | Updated initial
+    OffsetDateTime updatedMax = OffsetDateTime.now(); // OffsetDateTime | Updated finish
     try {
       ListCollection result = apiInstance.getAllLists(offset, limit, order, orderBy, internalName, publicName, createdMin, createdMax, updatedMin, updatedMax);
       System.out.println(result);
@@ -220,18 +220,18 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
- **limit** | **Integer**| Number of items to return | [optional] [default to 10]
- **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc]
- **orderBy** | **String**| Reference attribute to order lists | [optional] [default to list_id] [enum: list_id, internal_name, public_name, created, updated]
- **internalName** | **String**| Internal name of the list | [optional]
- **publicName** | **String**| Public name of the list | [optional]
- **createdMin** | **OffsetDateTime**| Created initial date | [optional]
- **createdMax** | **OffsetDateTime**| Created finish | [optional]
- **updatedMin** | **OffsetDateTime**| Updated initial | [optional]
- **updatedMax** | **OffsetDateTime**| Updated finish | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc] |
+| **orderBy** | **String**| Reference attribute to order lists | [optional] [default to list_id] [enum: list_id, internal_name, public_name, created, updated] |
+| **internalName** | **String**| Internal name of the list | [optional] |
+| **publicName** | **String**| Public name of the list | [optional] |
+| **createdMin** | **OffsetDateTime**| Created initial date | [optional] |
+| **createdMax** | **OffsetDateTime**| Created finish | [optional] |
+| **updatedMin** | **OffsetDateTime**| Updated initial | [optional] |
+| **updatedMax** | **OffsetDateTime**| Updated finish | [optional] |
 
 ### Return type
 
@@ -249,18 +249,18 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="updateList"></a>
 # **updateList**
-> ListModel updateList(listId, patchRequestList)
+> ModelList updateList(listId, patchRequestList)
 
 Update a specific list
 
@@ -291,7 +291,7 @@ public class Example {
     Integer listId = 56; // Integer | ID of the List
     PatchRequestList patchRequestList = new PatchRequestList(); // PatchRequestList | Parameters for the List
     try {
-      ListModel result = apiInstance.updateList(listId, patchRequestList);
+      ModelList result = apiInstance.updateList(listId, patchRequestList);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ListsApi#updateList");
@@ -306,14 +306,14 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **listId** | **Integer**| ID of the List |
- **patchRequestList** | [**PatchRequestList**](PatchRequestList.md)| Parameters for the List |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **listId** | **Integer**| ID of the List | |
+| **patchRequestList** | [**PatchRequestList**](PatchRequestList.md)| Parameters for the List | |
 
 ### Return type
 
-[**ListModel**](List.md)
+[**ModelList**](ModelList.md)
 
 ### Authorization
 
@@ -327,14 +327,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

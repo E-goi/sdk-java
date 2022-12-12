@@ -1,6 +1,6 @@
 /*
  * APIv3 (New)
- *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.   The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.   BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication   We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:  #!/bin/bash  curl -X GET 'https://api.egoiapp.com/my-account' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:  #!/bin/bash  curl -X POST 'http://api.egoiapp.com/tags' \\  -H 'accept: application/json' \\  -H 'Apikey: <YOUR_APY_KEY>' \\  -H 'Content-Type: application/json' \\  -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  <security-definitions/>
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0
  * 
@@ -16,27 +16,31 @@ package org.egoi.client.api;
 import org.egoi.client.ApiException;
 import org.egoi.client.model.AcceptedResponse;
 import org.egoi.client.model.BadRequest;
+import java.math.BigDecimal;
 import org.egoi.client.model.Cart;
 import org.egoi.client.model.Catalog;
 import org.egoi.client.model.CatalogCollection;
 import org.egoi.client.model.CatalogPostRequest;
 import org.egoi.client.model.CreateOrder;
 import org.egoi.client.model.Forbidden;
+import org.egoi.client.model.GetAllProductsCustomAttributesParameter;
 import org.egoi.client.model.InternalServerError;
 import org.egoi.client.model.NotFound;
+import org.egoi.client.model.PayloadTooLarge;
 import org.egoi.client.model.PostProductsConflict;
 import org.egoi.client.model.Product;
 import org.egoi.client.model.ProductBulkRequest;
 import org.egoi.client.model.ProductCollection;
 import org.egoi.client.model.ProductPatchRequest;
 import org.egoi.client.model.ProductPostRequest;
+import org.egoi.client.model.RequestEntityTooLarge;
 import org.egoi.client.model.RequestTimeout;
 import org.egoi.client.model.ServiceUnavailable;
 import org.egoi.client.model.TooManyRequests;
 import org.egoi.client.model.Unauthorized;
 import org.egoi.client.model.UnprocessableEntity;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,187 +50,176 @@ import java.util.Map;
 /**
  * API tests for EcommerceApi
  */
-@Ignore
+@Disabled
 public class EcommerceApiTest {
 
     private final EcommerceApi api = new EcommerceApi();
 
-    
     /**
      * Create cart
      *
      * Creates a new cart. If ***contact_id*** is specified, order will be atached to the contact, if the contact propreties are specified, we&#39;ll create the user, if its already in your list it will get the correct contact (**make sure you are sending atleast all configured list&#39;s unique fields**). This same logic is also applied to the **product_identifier**.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createCartTest() throws ApiException {
         String domain = null;
         Cart cart = null;
         AcceptedResponse response = api.createCart(domain, cart);
-
         // TODO: test validations
     }
-    
+
     /**
      * Create new catalog
      *
      * Creates a new catalog
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createCatalogTest() throws ApiException {
         CatalogPostRequest catalogPostRequest = null;
         Catalog response = api.createCatalog(catalogPostRequest);
-
         // TODO: test validations
     }
-    
+
     /**
      * Create order
      *
      * Creates a new order. If **contact_id** is specified, order will be atached to the contact, if the contact propreties are specified, we&#39;ll create the user, if its already in your list it will get the correct contact (***make sure you are sending atleast all configured list&#39;s unique fields***). This same logic is also applied to the **product_identifier**.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createOrderTest() throws ApiException {
         String domain = null;
         CreateOrder createOrder = null;
         AcceptedResponse response = api.createOrder(domain, createOrder);
-
         // TODO: test validations
     }
-    
+
     /**
      * Create new product
      *
      * Creates a new product
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void createProductTest() throws ApiException {
         Integer catalogId = null;
         ProductPostRequest productPostRequest = null;
         Product response = api.createProduct(catalogId, productPostRequest);
-
         // TODO: test validations
     }
-    
+
     /**
      * Remove catalog
      *
      * Remove catalog information given its ID
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deleteCatalogTest() throws ApiException {
         Integer catalogId = null;
         api.deleteCatalog(catalogId);
-
         // TODO: test validations
     }
-    
+
     /**
      * Remove product
      *
      * Remove product information given its ID
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void deleteProductTest() throws ApiException {
         Integer catalogId = null;
         String productIdentifier = null;
         api.deleteProduct(catalogId, productIdentifier);
-
         // TODO: test validations
     }
-    
+
     /**
      * Get all catalogs
      *
      * Returns all catalogs
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getAllCatalogsTest() throws ApiException {
         CatalogCollection response = api.getAllCatalogs();
-
         // TODO: test validations
     }
-    
+
     /**
      * Get all products
      *
      * Returns all products for the given catalog
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getAllProductsTest() throws ApiException {
         Integer catalogId = null;
         String productIdentifier = null;
+        String name = null;
+        String description = null;
+        String sku = null;
+        String upc = null;
+        String ean = null;
+        String gtin = null;
+        String mpn = null;
+        BigDecimal price = null;
+        BigDecimal salePrice = null;
+        String brand = null;
+        GetAllProductsCustomAttributesParameter customAttributes = null;
         Integer offset = null;
         Integer limit = null;
-        ProductCollection response = api.getAllProducts(catalogId, productIdentifier, offset, limit);
-
+        ProductCollection response = api.getAllProducts(catalogId, productIdentifier, name, description, sku, upc, ean, gtin, mpn, price, salePrice, brand, customAttributes, offset, limit);
         // TODO: test validations
     }
-    
+
     /**
      * Get product
      *
      * Returns product information given its ID
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void getProductTest() throws ApiException {
         Integer catalogId = null;
         String productIdentifier = null;
         Product response = api.getProduct(catalogId, productIdentifier);
-
         // TODO: test validations
     }
-    
+
     /**
      * Import products
      *
      * Imports a collection of products&lt;/br&gt;      **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits &#39;Stream Limits&#39;)
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void importProductsTest() throws ApiException {
         Integer catalogId = null;
         ProductBulkRequest productBulkRequest = null;
         AcceptedResponse response = api.importProducts(catalogId, productBulkRequest);
-
         // TODO: test validations
     }
-    
+
     /**
      * Update product
      *
      * Updates a product
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void updateProductTest() throws ApiException {
@@ -234,8 +227,7 @@ public class EcommerceApiTest {
         String productIdentifier = null;
         ProductPatchRequest productPatchRequest = null;
         Product response = api.updateProduct(catalogId, productIdentifier, productPatchRequest);
-
         // TODO: test validations
     }
-    
+
 }

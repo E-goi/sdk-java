@@ -2,12 +2,12 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createTag**](TagsApi.md#createTag) | **POST** /tags | Create new tag
-[**deleteTag**](TagsApi.md#deleteTag) | **DELETE** /tags/{tag_id} | Remove tag
-[**getAllTags**](TagsApi.md#getAllTags) | **GET** /tags | Get all tags
-[**updateTag**](TagsApi.md#updateTag) | **PUT** /tags/{tag_id} | Update a specific tag
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createTag**](TagsApi.md#createTag) | **POST** /tags | Create new tag |
+| [**deleteTag**](TagsApi.md#deleteTag) | **DELETE** /tags/{tag_id} | Remove tag |
+| [**getAllTags**](TagsApi.md#getAllTags) | **GET** /tags | Get all tags |
+| [**updateTag**](TagsApi.md#updateTag) | **PUT** /tags/{tag_id} | Update a specific tag |
 
 
 <a name="createTag"></a>
@@ -57,9 +57,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tagRequest** | [**TagRequest**](TagRequest.md)| Parameters for the Tag |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tagRequest** | [**TagRequest**](TagRequest.md)| Parameters for the Tag | |
 
 ### Return type
 
@@ -77,16 +77,16 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **201** | Created |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="deleteTag"></a>
 # **deleteTag**
@@ -134,9 +134,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tagId** | **Integer**| ID of the Tag |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tagId** | **Integer**| ID of the Tag | |
 
 ### Return type
 
@@ -154,15 +154,15 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **204** | No Content |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllTags"></a>
 # **getAllTags**
@@ -196,7 +196,7 @@ public class Example {
     TagsApi apiInstance = new TagsApi(defaultClient);
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
-    String order = "desc"; // String | Type of order
+    String order = "asc"; // String | Type of order
     String orderBy = "tag_id"; // String | Reference attribute to order tags
     try {
       TagCollection result = apiInstance.getAllTags(offset, limit, order, orderBy);
@@ -214,12 +214,12 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
- **limit** | **Integer**| Number of items to return | [optional] [default to 10]
- **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc]
- **orderBy** | **String**| Reference attribute to order tags | [optional] [default to tag_id] [enum: tag_id, name, color]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc] |
+| **orderBy** | **String**| Reference attribute to order tags | [optional] [default to tag_id] [enum: tag_id, name, color] |
 
 ### Return type
 
@@ -237,14 +237,14 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="updateTag"></a>
 # **updateTag**
@@ -294,10 +294,10 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tagId** | **Integer**| ID of the Tag |
- **tagRequest** | [**TagRequest**](TagRequest.md)| Parameters for the tag |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tagId** | **Integer**| ID of the Tag | |
+| **tagRequest** | [**TagRequest**](TagRequest.md)| Parameters for the tag | |
 
 ### Return type
 
@@ -315,15 +315,15 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

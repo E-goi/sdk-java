@@ -3,13 +3,14 @@
 # AdvancedReportUnsubscriptionsColumns
 
 Columns of the report
+
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**listBaseFields** | **List&lt;String&gt;** | Array of base fields | 
-**listExtraFields** | **List&lt;Object&gt;** |  | 
-**listStatsFields** | [**UnsubscriptionsListStatsFields**](UnsubscriptionsListStatsFields.md) |  | 
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**listBaseFields** | **List&lt;String&gt;** | Array of base fields |  |
+|**listExtraFields** | [**List&lt;AdvancedReportListExtraFieldsInner&gt;**](AdvancedReportListExtraFieldsInner.md) |  |  |
+|**listStatsFields** | [**UnsubscriptionsListStatsFields**](UnsubscriptionsListStatsFields.md) |  |  |
 
 
 

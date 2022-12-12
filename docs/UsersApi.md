@@ -2,10 +2,10 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**deleteUser**](UsersApi.md#deleteUser) | **DELETE** /users/{user_id} | Remove user
-[**getAllUsers**](UsersApi.md#getAllUsers) | **GET** /users | Get all users
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**deleteUser**](UsersApi.md#deleteUser) | **DELETE** /users/{user_id} | Remove user |
+| [**getAllUsers**](UsersApi.md#getAllUsers) | **GET** /users | Get all users |
 
 
 <a name="deleteUser"></a>
@@ -54,9 +54,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **userId** | **Integer**| ID of the User |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **Integer**| ID of the User | |
 
 ### Return type
 
@@ -74,15 +74,15 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **204** | No Content |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllUsers"></a>
 # **getAllUsers**
@@ -115,14 +115,14 @@ public class Example {
 
     UsersApi apiInstance = new UsersApi(defaultClient);
     String username = "username_example"; // String | Reference attribute to username user
-    String status = "status_example"; // String | Status filter
-    OffsetDateTime createdMin = new OffsetDateTime(); // OffsetDateTime | Created initial date
-    OffsetDateTime createdMax = new OffsetDateTime(); // OffsetDateTime | Created finish
-    OffsetDateTime updatedMin = new OffsetDateTime(); // OffsetDateTime | Updated initial
-    OffsetDateTime updatedMax = new OffsetDateTime(); // OffsetDateTime | Updated finish
+    String status = "active"; // String | Status filter
+    OffsetDateTime createdMin = OffsetDateTime.now(); // OffsetDateTime | Created initial date
+    OffsetDateTime createdMax = OffsetDateTime.now(); // OffsetDateTime | Created finish
+    OffsetDateTime updatedMin = OffsetDateTime.now(); // OffsetDateTime | Updated initial
+    OffsetDateTime updatedMax = OffsetDateTime.now(); // OffsetDateTime | Updated finish
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
-    String order = "desc"; // String | Type of order
+    String order = "asc"; // String | Type of order
     String orderBy = "user_id"; // String | Reference attribute to order users
     try {
       UserCollection result = apiInstance.getAllUsers(username, status, createdMin, createdMax, updatedMin, updatedMax, offset, limit, order, orderBy);
@@ -140,18 +140,18 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **username** | **String**| Reference attribute to username user | [optional]
- **status** | **String**| Status filter | [optional] [enum: active, inactive]
- **createdMin** | **OffsetDateTime**| Created initial date | [optional]
- **createdMax** | **OffsetDateTime**| Created finish | [optional]
- **updatedMin** | **OffsetDateTime**| Updated initial | [optional]
- **updatedMax** | **OffsetDateTime**| Updated finish | [optional]
- **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
- **limit** | **Integer**| Number of items to return | [optional] [default to 10]
- **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc]
- **orderBy** | **String**| Reference attribute to order users | [optional] [default to user_id] [enum: user_id, username]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **username** | **String**| Reference attribute to username user | [optional] |
+| **status** | **String**| Status filter | [optional] [enum: active, inactive] |
+| **createdMin** | **OffsetDateTime**| Created initial date | [optional] |
+| **createdMax** | **OffsetDateTime**| Created finish | [optional] |
+| **updatedMin** | **OffsetDateTime**| Updated initial | [optional] |
+| **updatedMax** | **OffsetDateTime**| Updated finish | [optional] |
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc] |
+| **orderBy** | **String**| Reference attribute to order users | [optional] [default to user_id] [enum: user_id, username] |
 
 ### Return type
 
@@ -169,12 +169,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 

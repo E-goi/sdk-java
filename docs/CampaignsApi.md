@@ -2,10 +2,10 @@
 
 All URIs are relative to *https://api.egoiapp.com*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**deleteCampaigns**](CampaignsApi.md#deleteCampaigns) | **DELETE** /campaigns/{campaign_hash} | Remove Campaign
-[**getAllCampaigns**](CampaignsApi.md#getAllCampaigns) | **GET** /campaigns | Get all Campaigns
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**deleteCampaigns**](CampaignsApi.md#deleteCampaigns) | **DELETE** /campaigns/{campaign_hash} | Remove Campaign |
+| [**getAllCampaigns**](CampaignsApi.md#getAllCampaigns) | **GET** /campaigns | Get all Campaigns |
 
 
 <a name="deleteCampaigns"></a>
@@ -54,9 +54,9 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **campaignHash** | **String**| ID of the Campaign |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **campaignHash** | **String**| ID of the Campaign | |
 
 ### Return type
 
@@ -74,15 +74,15 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No Content |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**408** | Request Timeout |  -  |
-**409** | Conflict |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **204** | No Content |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="getAllCampaigns"></a>
 # **getAllCampaigns**
@@ -114,27 +114,27 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     CampaignsApi apiInstance = new CampaignsApi(defaultClient);
-    String channel = "channel_example"; // String | Channel of the campaign
+    String channel = "email"; // String | Channel of the campaign
     String campaignHash = "campaignHash_example"; // String | Hash of the campaign
     Integer listId = 56; // Integer | ID of the list where the campaign belongs
-    String status = "status_example"; // String | Status of the campaign
+    String status = "draft"; // String | Status of the campaign
     String internalName = "internalName_example"; // String | Internal name of the campaign
     Integer createdBy = 56; // Integer | ID of the user who created the campaign
     Integer groupId = 56; // Integer | ID of the group where the campaign belongs
-    OffsetDateTime createdMin = new OffsetDateTime(); // OffsetDateTime | Created initial date
-    OffsetDateTime createdMax = new OffsetDateTime(); // OffsetDateTime | Created finish
-    OffsetDateTime updatedMin = new OffsetDateTime(); // OffsetDateTime | Updated initial
-    OffsetDateTime updatedMax = new OffsetDateTime(); // OffsetDateTime | Updated finish
-    LocalDate startDateMin = new LocalDate(); // LocalDate | Start date initial
-    LocalDate startDateMax = new LocalDate(); // LocalDate | Start date finish
-    LocalDate endDateMin = new LocalDate(); // LocalDate | End Date initial
-    LocalDate endDateMax = new LocalDate(); // LocalDate | End Date finish
-    LocalDate scheduleDateMin = new LocalDate(); // LocalDate | Schedule Date initial
-    LocalDate scheduleDateMax = new LocalDate(); // LocalDate | Schedule Date finish
+    OffsetDateTime createdMin = OffsetDateTime.now(); // OffsetDateTime | Created initial date
+    OffsetDateTime createdMax = OffsetDateTime.now(); // OffsetDateTime | Created finish
+    OffsetDateTime updatedMin = OffsetDateTime.now(); // OffsetDateTime | Updated initial
+    OffsetDateTime updatedMax = OffsetDateTime.now(); // OffsetDateTime | Updated finish
+    OffsetDateTime startDateMin = OffsetDateTime.now(); // OffsetDateTime | Start date initial
+    OffsetDateTime startDateMax = OffsetDateTime.now(); // OffsetDateTime | Start date finish
+    OffsetDateTime endDateMin = OffsetDateTime.now(); // OffsetDateTime | End Date initial
+    OffsetDateTime endDateMax = OffsetDateTime.now(); // OffsetDateTime | End Date finish
+    OffsetDateTime scheduleDateMin = OffsetDateTime.now(); // OffsetDateTime | Schedule Date initial
+    OffsetDateTime scheduleDateMax = OffsetDateTime.now(); // OffsetDateTime | Schedule Date finish
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
-    String order = "desc"; // String | Type of order
-    String orderBy = "created"; // String | Reference attribute to order campaigns
+    String order = "asc"; // String | Type of order
+    String orderBy = "list_id"; // String | Reference attribute to order campaigns
     try {
       CampaignsCollection result = apiInstance.getAllCampaigns(channel, campaignHash, listId, status, internalName, createdBy, groupId, createdMin, createdMax, updatedMin, updatedMax, startDateMin, startDateMax, endDateMin, endDateMax, scheduleDateMin, scheduleDateMax, offset, limit, order, orderBy);
       System.out.println(result);
@@ -151,29 +151,29 @@ public class Example {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **channel** | **String**| Channel of the campaign | [optional] [enum: email, push, sms, smart_sms, voice, web_push]
- **campaignHash** | **String**| Hash of the campaign | [optional]
- **listId** | **Integer**| ID of the list where the campaign belongs | [optional]
- **status** | **String**| Status of the campaign | [optional] [enum: draft, canceled, queued, paused, sending, sent]
- **internalName** | **String**| Internal name of the campaign | [optional]
- **createdBy** | **Integer**| ID of the user who created the campaign | [optional]
- **groupId** | **Integer**| ID of the group where the campaign belongs | [optional]
- **createdMin** | **OffsetDateTime**| Created initial date | [optional]
- **createdMax** | **OffsetDateTime**| Created finish | [optional]
- **updatedMin** | **OffsetDateTime**| Updated initial | [optional]
- **updatedMax** | **OffsetDateTime**| Updated finish | [optional]
- **startDateMin** | **LocalDate**| Start date initial | [optional]
- **startDateMax** | **LocalDate**| Start date finish | [optional]
- **endDateMin** | **LocalDate**| End Date initial | [optional]
- **endDateMax** | **LocalDate**| End Date finish | [optional]
- **scheduleDateMin** | **LocalDate**| Schedule Date initial | [optional]
- **scheduleDateMax** | **LocalDate**| Schedule Date finish | [optional]
- **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional]
- **limit** | **Integer**| Number of items to return | [optional] [default to 10]
- **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc]
- **orderBy** | **String**| Reference attribute to order campaigns | [optional] [default to created] [enum: list_id, internal_name, created_by, group_id, created]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **channel** | **String**| Channel of the campaign | [optional] [enum: email, push, sms, smart_sms, voice, web_push] |
+| **campaignHash** | **String**| Hash of the campaign | [optional] |
+| **listId** | **Integer**| ID of the list where the campaign belongs | [optional] |
+| **status** | **String**| Status of the campaign | [optional] [enum: draft, canceled, queued, paused, sending, sent] |
+| **internalName** | **String**| Internal name of the campaign | [optional] |
+| **createdBy** | **Integer**| ID of the user who created the campaign | [optional] |
+| **groupId** | **Integer**| ID of the group where the campaign belongs | [optional] |
+| **createdMin** | **OffsetDateTime**| Created initial date | [optional] |
+| **createdMax** | **OffsetDateTime**| Created finish | [optional] |
+| **updatedMin** | **OffsetDateTime**| Updated initial | [optional] |
+| **updatedMax** | **OffsetDateTime**| Updated finish | [optional] |
+| **startDateMin** | **OffsetDateTime**| Start date initial | [optional] |
+| **startDateMax** | **OffsetDateTime**| Start date finish | [optional] |
+| **endDateMin** | **OffsetDateTime**| End Date initial | [optional] |
+| **endDateMax** | **OffsetDateTime**| End Date finish | [optional] |
+| **scheduleDateMin** | **OffsetDateTime**| Schedule Date initial | [optional] |
+| **scheduleDateMax** | **OffsetDateTime**| Schedule Date finish | [optional] |
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc] |
+| **orderBy** | **String**| Reference attribute to order campaigns | [optional] [default to created] [enum: list_id, internal_name, created_by, group_id, created] |
 
 ### Return type
 
@@ -191,12 +191,12 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**408** | Request Timeout |  -  |
-**422** | Unprocessable Entity |  -  |
-**429** | Too Many Requests |  -  |
-**500** | Internal Server Error |  -  |
-**503** | Service Unavailable |  -  |
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
