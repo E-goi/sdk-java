@@ -905,7 +905,7 @@ public class Example {
 
 <a name="getAllContactActivities"></a>
 # **getAllContactActivities**
-> ActivityCollection getAllContactActivities(contactId, listId, offset, limit, dateMin, dateMax)
+> ActivityCollection getAllContactActivities(contactId, listId, offset, limit, dateMin, dateMax, actionName)
 
 Get all contact activities
 
@@ -939,8 +939,9 @@ public class Example {
     Integer limit = 10; // Integer | Number of items to return
     OffsetDateTime dateMin = OffsetDateTime.now(); // OffsetDateTime | Start date
     OffsetDateTime dateMax = OffsetDateTime.now(); // OffsetDateTime | End date
+    String actionName = "email_open"; // String | Action data to return
     try {
-      ActivityCollection result = apiInstance.getAllContactActivities(contactId, listId, offset, limit, dateMin, dateMax);
+      ActivityCollection result = apiInstance.getAllContactActivities(contactId, listId, offset, limit, dateMin, dateMax, actionName);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ContactsApi#getAllContactActivities");
@@ -963,6 +964,7 @@ public class Example {
 | **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
 | **dateMin** | **OffsetDateTime**| Start date | [optional] |
 | **dateMax** | **OffsetDateTime**| End date | [optional] |
+| **actionName** | **String**| Action data to return | [optional] [enum: email_open, email_click, forward, conversion, email_send, sms_send, voice_send, mms_send, sms_report, voice_report, invitation_send, invitation_open, mms_open, unsubscribe, email_soft_bounce, email_hard_bounce, subscription, resubscription, unsubscribe_reason, facebook_like, social_share, unsubscribe_manual, double_optin, double_optin_resend, email_spam_complaint, email_field_disable, cellphone_field_disable, phone_field_disable, unsubscribe_api, email_field_enable, cellphone_field_enable, phone_field_enable, edit_subscription, double_optedit, automation_event, push_send, push_open, push_click, push_received, push_error, push_canceled, reply_to_email, web_push_send, web_push_delivered, web_push_open, web_push_bounce, web_push_click, web_push_subscription, web_push_unsubscription, add_push_contact, remove_push_contact, forget_subscription, change_consent, push_unsubscription, voice_menu_event, voice_redirect, automation_action, automation_trigger, push_delivered, attach_tag, detach_tag, smart_sms_send, smart_sms_open, smart_sms_click, smart_sms_report] |
 
 ### Return type
 

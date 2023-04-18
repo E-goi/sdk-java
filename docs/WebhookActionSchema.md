@@ -35,6 +35,8 @@
 
 * `SMS_SEND` (value: `"sms_send"`)
 
+* `SMS_DELIVERED` (value: `"sms_delivered"`)
+
 * `VOICE_SEND` (value: `"voice_send"`)
 
 * `UNSUBSCRIBE` (value: `"unsubscribe"`)

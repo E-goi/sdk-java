@@ -67,6 +67,8 @@ info:
 
     The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.
 
+    <a href='/usecases/callbacks/' target='_blank'>[Go to callbacks documentation]</a>
+
     ***Note:*** Only http or https protocols are supported in the Url parameter.
 
     <security-definitions/>
@@ -7767,6 +7769,20 @@ paths:
       x-accepts: application/json
   /lists/{list_id}/contacts/actions/import-bulk:
     post:
+      callbacks:
+        ImportBulk:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: importBulk_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ImportContactsWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: |-
         Imports a collection of contacts </br>
              **DISCLAIMER:** stream limits applied. [view here](#section/Stream-Limits 'Stream Limits')<br> ***Notes:***<br>Minimum of 2 contacts to use this method. [Use Create new contact method instead](#operation/createContact 'Create new contact')<br>It defaults to ***Bulk object*** import.
@@ -8625,6 +8641,81 @@ paths:
         schema:
           $ref: '#/components/schemas/date_time'
         style: form
+      - allowEmptyValue: false
+        description: Action data to return
+        explode: true
+        in: query
+        name: action_name
+        required: false
+        schema:
+          enum:
+          - email_open
+          - email_click
+          - forward
+          - conversion
+          - email_send
+          - sms_send
+          - voice_send
+          - mms_send
+          - sms_report
+          - voice_report
+          - invitation_send
+          - invitation_open
+          - mms_open
+          - unsubscribe
+          - email_soft_bounce
+          - email_hard_bounce
+          - subscription
+          - resubscription
+          - unsubscribe_reason
+          - facebook_like
+          - social_share
+          - unsubscribe_manual
+          - double_optin
+          - double_optin_resend
+          - email_spam_complaint
+          - email_field_disable
+          - cellphone_field_disable
+          - phone_field_disable
+          - unsubscribe_api
+          - email_field_enable
+          - cellphone_field_enable
+          - phone_field_enable
+          - edit_subscription
+          - double_optedit
+          - automation_event
+          - push_send
+          - push_open
+          - push_click
+          - push_received
+          - push_error
+          - push_canceled
+          - reply_to_email
+          - web_push_send
+          - web_push_delivered
+          - web_push_open
+          - web_push_bounce
+          - web_push_click
+          - web_push_subscription
+          - web_push_unsubscription
+          - add_push_contact
+          - remove_push_contact
+          - forget_subscription
+          - change_consent
+          - push_unsubscription
+          - voice_menu_event
+          - voice_redirect
+          - automation_action
+          - automation_trigger
+          - push_delivered
+          - attach_tag
+          - detach_tag
+          - smart_sms_send
+          - smart_sms_open
+          - smart_sms_click
+          - smart_sms_report
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -8682,11 +8773,11 @@ paths:
       x-code-samples:
       - lang: cURL
         source: |-
-          curl --location --max-time 30 --request GET 'api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>' \
+          curl --location --max-time 30 --request GET 'api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>&action_name=<string>' \
           --header 'Apikey: <YOUR_APIKEY>'
       - lang: C#
         source: |-
-          var client = new RestClient("api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>");
+          var client = new RestClient("api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>&action_name=<string>");
           client.Timeout = 30;
           var request = new RestRequest(Method.GET);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
@@ -8698,7 +8789,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           Request request = new Request.Builder()
-              .url("api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>")
+              .url("api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>&action_name=<string>")
               .method("GET", null)
               .addHeader("Apikey", "<YOUR_APIKEY>")
               .build();
@@ -8715,7 +8806,7 @@ paths:
               }
           });
 
-          xhr.open("GET", "api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>");
+          xhr.open("GET", "api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>&action_name=<string>");
           xhr.timeout = 30;
           xhr.addEventListener("ontimeout", function(e) {
                console.log(e);
@@ -8730,7 +8821,7 @@ paths:
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-              CURLOPT_URL => "api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>",
+              CURLOPT_URL => "api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>&action_name=<string>",
               CURLOPT_RETURNTRANSFER => true,
               CURLOPT_ENCODING => "",
               CURLOPT_MAXREDIRS => 10,
@@ -8756,7 +8847,7 @@ paths:
           headers = {
               'Apikey': '<YOUR_APIKEY>'
           }
-          conn.request("GET", "/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>", payload, headers)
+          conn.request("GET", "/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>&action_name=<string>", payload, headers)
           res = conn.getresponse()
           data = res.read()
           print(data.decode("utf-8"))
@@ -8765,7 +8856,7 @@ paths:
           require "uri"
           require "net/http"
 
-          url = URI("api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>")
+          url = URI("api.egoiapp.com/lists/<integer>/contacts/<string>/activities?offset=<integer>&limit=10&date_min=<dateTime>&date_max=<dateTime>&action_name=<string>")
 
           http = Net::HTTP.new(url.host, url.port);
           http.read_timeout = 1
@@ -13522,7 +13613,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FieldCollection'
+                items:
+                  $ref: '#/components/schemas/ComplexField'
+                type: array
           description: OK
         "401":
           content:
@@ -17675,6 +17768,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/email-bounces:
     post:
+      callbacks:
+        ExportContacts:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: exportContacts_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new email bounces report
       operationId: generateEmailBouncesReport
       requestBody:
@@ -17744,7 +17851,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/email-bounces' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"bounce_date":"<boolean>","bounce_type":"<boolean>","bounce_detail":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>"}},"options":{"include_unopens":"<boolean>","notify":["<integer>","<integer>"],"grouping":"by_campaign"},"callback_url":"<string>"}'
+          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"bounce_date":"<boolean>","bounce_type":"<boolean>","bounce_detail":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","sender":"<boolean>","type":"<boolean>"}},"options":{"include_unopens":"<boolean>","notify":["<integer>","<integer>"],"grouping":"by_campaign"},"callback_url":"<string>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/reports/advanced/email-bounces");
@@ -17752,7 +17859,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"sender\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -17761,7 +17868,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"sender\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/reports/advanced/email-bounces")
               .method("POST", body)
@@ -17771,7 +17878,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"bounce_date":"<boolean>","bounce_type":"<boolean>","bounce_detail":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>"}},"options":{"include_unopens":"<boolean>","notify":["<integer>","<integer>"],"grouping":"by_campaign"},"callback_url":"<string>"});
+          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"bounce_date":"<boolean>","bounce_type":"<boolean>","bounce_detail":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","sender":"<boolean>","type":"<boolean>"}},"options":{"include_unopens":"<boolean>","notify":["<integer>","<integer>"],"grouping":"by_campaign"},"callback_url":"<string>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -17806,7 +17913,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}",
+              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"sender\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -17822,7 +17929,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}"
+          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"sender\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -17843,7 +17950,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}"
+          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"bounce_date\":\"<boolean>\",\"bounce_type\":\"<boolean>\",\"bounce_detail\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"sender\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -17851,6 +17958,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/email-clicks-by-contact:
     post:
+      callbacks:
+        EmailClicksByContactReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: emailClicksByContactReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new email clicks by contact report
       operationId: generateEmailClicksByContactReport
       requestBody:
@@ -17926,7 +18047,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/email-clicks-by-contact' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"clicks":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","url":"<boolean>","country":"<boolean>","city":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
+          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"clicks":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","url":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","sender":"<boolean>","city":"<boolean>","country":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/reports/advanced/email-clicks-by-contact");
@@ -17934,7 +18055,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -17943,7 +18064,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/reports/advanced/email-clicks-by-contact")
               .method("POST", body)
@@ -17953,7 +18074,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"clicks":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","url":"<boolean>","country":"<boolean>","city":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
+          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"clicks":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","url":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","sender":"<boolean>","city":"<boolean>","country":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -17988,7 +18109,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
+              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -18004,7 +18125,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -18025,7 +18146,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -18033,6 +18154,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/email-clicks-by-url:
     post:
+      callbacks:
+        ExportContacts:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: exportContacts_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new email clicks by URL report
       operationId: generateEmailClicksByUrlReport
       requestBody:
@@ -18108,7 +18243,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/email-clicks-by-url' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"clicks":"<boolean>","unique_clicks":"<boolean>","click_rate_per_url":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","url":"<boolean>","country":"<boolean>","city":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
+          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"clicks":"<boolean>","unique_clicks":"<boolean>","click_rate_per_url":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","url":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","city":"<boolean>","country":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/reports/advanced/email-clicks-by-url");
@@ -18116,7 +18251,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -18125,7 +18260,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/reports/advanced/email-clicks-by-url")
               .method("POST", body)
@@ -18135,7 +18270,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"clicks":"<boolean>","unique_clicks":"<boolean>","click_rate_per_url":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","url":"<boolean>","country":"<boolean>","city":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
+          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"clicks":"<boolean>","unique_clicks":"<boolean>","click_rate_per_url":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","url":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","city":"<boolean>","country":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -18170,7 +18305,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
+              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -18186,7 +18321,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -18207,7 +18342,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"clicks\":\"<boolean>\",\"unique_clicks\":\"<boolean>\",\"click_rate_per_url\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"url\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -18215,6 +18350,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/email-events:
     post:
+      callbacks:
+        EmailEventsReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: emailEventsReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new email events report
       operationId: generateEmailEventsReport
       requestBody:
@@ -18290,7 +18439,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/email-events' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"opens":"<boolean>","clicks":"<boolean>","complaints":"<boolean>","unsubscribes":"<boolean>","bounces":"<boolean>","forwards":"<boolean>","forwards_conversion":"<boolean>","fb_likes":"<boolean>","fb_shares":"<boolean>","tw_shares":"<boolean>","social_shares":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","country":"<boolean>","city":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"include_unopens":"<boolean>","notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
+          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"opens":"<boolean>","clicks":"<boolean>","complaints":"<boolean>","unsubscribes":"<boolean>","bounces":"<boolean>","forwards":"<boolean>","forwards_conversion":"<boolean>","fb_likes":"<boolean>","fb_shares":"<boolean>","tw_shares":"<boolean>","social_shares":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","url":"<boolean>","sender":"<boolean>","city":"<boolean>","country":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"include_unopens":"<boolean>","notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/reports/advanced/email-events");
@@ -18298,7 +18447,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"url\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -18307,7 +18456,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"url\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/reports/advanced/email-events")
               .method("POST", body)
@@ -18317,7 +18466,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"opens":"<boolean>","clicks":"<boolean>","complaints":"<boolean>","unsubscribes":"<boolean>","bounces":"<boolean>","forwards":"<boolean>","forwards_conversion":"<boolean>","fb_likes":"<boolean>","fb_shares":"<boolean>","tw_shares":"<boolean>","social_shares":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","country":"<boolean>","city":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"include_unopens":"<boolean>","notify":["<integer>","<integer>"]},"callback_url":"<string>"});
+          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"opens":"<boolean>","clicks":"<boolean>","complaints":"<boolean>","unsubscribes":"<boolean>","bounces":"<boolean>","forwards":"<boolean>","forwards_conversion":"<boolean>","fb_likes":"<boolean>","fb_shares":"<boolean>","tw_shares":"<boolean>","social_shares":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","url":"<boolean>","sender":"<boolean>","city":"<boolean>","country":"<boolean>","region":"<boolean>","program":"<boolean>","os":"<boolean>"}},"options":{"include_unopens":"<boolean>","notify":["<integer>","<integer>"]},"callback_url":"<string>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -18352,7 +18501,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
+              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"url\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -18368,7 +18517,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"url\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -18389,7 +18538,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"country\":\"<boolean>\",\"city\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"complaints\":\"<boolean>\",\"unsubscribes\":\"<boolean>\",\"bounces\":\"<boolean>\",\"forwards\":\"<boolean>\",\"forwards_conversion\":\"<boolean>\",\"fb_likes\":\"<boolean>\",\"fb_shares\":\"<boolean>\",\"tw_shares\":\"<boolean>\",\"social_shares\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"url\":\"<boolean>\",\"sender\":\"<boolean>\",\"city\":\"<boolean>\",\"country\":\"<boolean>\",\"region\":\"<boolean>\",\"program\":\"<boolean>\",\"os\":\"<boolean>\"}},\"options\":{\"include_unopens\":\"<boolean>\",\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -18397,6 +18546,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/email-unsubscriptions:
     post:
+      callbacks:
+        EmailUnsubscriptionsReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: emailUnsubscriptionsReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new email unsubscriptions report
       operationId: generateEmailUnsubscriptionsReport
       requestBody:
@@ -18472,7 +18635,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/email-unsubscriptions' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"unsubscription_method":"<boolean>","unsubscription_motive":"<boolean>","unsubscription_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","sender":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
+          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"unsubscription_method":"<boolean>","unsubscription_motive":"<boolean>","unsubscription_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","sender":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/reports/advanced/email-unsubscriptions");
@@ -18480,7 +18643,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -18489,7 +18652,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/reports/advanced/email-unsubscriptions")
               .method("POST", body)
@@ -18499,7 +18662,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"unsubscription_method":"<boolean>","unsubscription_motive":"<boolean>","unsubscription_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","sender":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
+          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"unsubscription_method":"<boolean>","unsubscription_motive":"<boolean>","unsubscription_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","sender":"<boolean>","send_date":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -18534,7 +18697,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
+              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -18550,7 +18713,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -18571,7 +18734,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"unsubscription_method\":\"<boolean>\",\"unsubscription_motive\":\"<boolean>\",\"unsubscription_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -18579,6 +18742,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/form-answers:
     post:
+      callbacks:
+        FormAnswersReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: formAnswersReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new form answers report
       operationId: generateFormAnswersReport
       requestBody:
@@ -18761,6 +18938,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/sends:
     post:
+      callbacks:
+        SendsReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: sendsReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new sends report
       operationId: generateSendsReport
       requestBody:
@@ -18836,7 +19027,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/sends' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"lists":["<integer>","<integer>"],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","sender":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
+          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"lists":["<integer>","<integer>"],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","sender":"<boolean>","send_date":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/reports/advanced/sends");
@@ -18844,7 +19035,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -18853,7 +19044,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/reports/advanced/sends")
               .method("POST", body)
@@ -18863,7 +19054,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"lists":["<integer>","<integer>"],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","sender":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
+          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"lists":["<integer>","<integer>"],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>","sender":"<boolean>","send_date":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -18898,7 +19089,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
+              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -18914,7 +19105,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -18935,7 +19126,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\",\"sender\":\"<boolean>\",\"send_date\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -18943,8 +19134,22 @@ paths:
       x-accepts: application/json
   /reports/advanced/sms-bounces:
     post:
+      callbacks:
+        SmsBouncesReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: smsBouncesReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new SMS bounces report
-      operationId: generateEmailSmsReport
+      operationId: generateSmsBouncesReport
       requestBody:
         content:
           application/json:
@@ -19018,7 +19223,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/sms-bounces' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"delivery_answer":"<boolean>","delivery_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","sender":"<boolean>"}},"options":{"notify":["<integer>","<integer>"],"grouping":"by_campaign"},"callback_url":"<string>"}'
+          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"delivery_answer":"<boolean>","delivery_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","sender":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>"}},"options":{"notify":["<integer>","<integer>"],"grouping":"by_campaign"},"callback_url":"<string>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/reports/advanced/sms-bounces");
@@ -19026,7 +19231,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -19035,7 +19240,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/reports/advanced/sms-bounces")
               .method("POST", body)
@@ -19045,7 +19250,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"delivery_answer":"<boolean>","delivery_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","sender":"<boolean>"}},"options":{"notify":["<integer>","<integer>"],"grouping":"by_campaign"},"callback_url":"<string>"});
+          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"delivery_answer":"<boolean>","delivery_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","sender":"<boolean>","group":"<boolean>","channel":"<boolean>","type":"<boolean>"}},"options":{"notify":["<integer>","<integer>"],"grouping":"by_campaign"},"callback_url":"<string>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -19080,7 +19285,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}",
+              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -19096,7 +19301,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}"
+          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -19117,7 +19322,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}"
+          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"sender\":\"<boolean>\",\"group\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"],\"grouping\":\"by_campaign\"},\"callback_url\":\"<string>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -19125,6 +19330,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/sms-events:
     post:
+      callbacks:
+        SmsEventsReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: smsEventsReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new SMS events report
       operationId: generateSmsEventsReport
       requestBody:
@@ -19200,7 +19419,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/sms-events' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"delivery_answer":"<boolean>","delivery_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","sender":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
+          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"delivery_answer":"<boolean>","delivery_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","sender":"<boolean>","channel":"<boolean>","type":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/reports/advanced/sms-events");
@@ -19208,7 +19427,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -19217,7 +19436,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/reports/advanced/sms-events")
               .method("POST", body)
@@ -19227,7 +19446,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"delivery_answer":"<boolean>","delivery_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","sender":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
+          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"campaigns":[{"list_id":"<integer>","type":"<string>"},{"list_id":"<integer>","type":"<string>"}],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"list_stats_fields":{"delivery_answer":"<boolean>","delivery_date":"<boolean>"},"campaign_fields":{"internal_name":"<boolean>","campaign_hash":"<boolean>","send_date":"<boolean>","group":"<boolean>","sender":"<boolean>","channel":"<boolean>","type":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -19262,7 +19481,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
+              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -19278,7 +19497,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -19299,7 +19518,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"campaigns\":[{\"list_id\":\"<integer>\",\"type\":\"<string>\"},{\"list_id\":\"<integer>\",\"type\":\"<string>\"}],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"list_stats_fields\":{\"delivery_answer\":\"<boolean>\",\"delivery_date\":\"<boolean>\"},\"campaign_fields\":{\"internal_name\":\"<boolean>\",\"campaign_hash\":\"<boolean>\",\"send_date\":\"<boolean>\",\"group\":\"<boolean>\",\"sender\":\"<boolean>\",\"channel\":\"<boolean>\",\"type\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -19307,6 +19526,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/subscriptions:
     post:
+      callbacks:
+        SubscriptionsReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: subscriptionsReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new subscriptions report
       operationId: generateSubscriptionsReport
       requestBody:
@@ -19489,6 +19722,20 @@ paths:
       x-accepts: application/json
   /reports/advanced/unsubscriptions:
     post:
+      callbacks:
+        UnsubscriptionsReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: unsubscriptionsReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
       description: Generates a new unsubscriptions report
       operationId: generateUnsubscriptionsReport
       requestBody:
@@ -25339,7 +25586,8 @@ paths:
       x-accepts: application/json
   /webhooks:
     get:
-      description: Returns all webhooks
+      description: "Returns all webhooks <a href='/usecases/webhooks/' target='_blank'>[Go\
+        \ to webhooks documentation]</a>"
       operationId: getAllWebhooks
       parameters:
       - allowEmptyValue: false
@@ -25515,7 +25763,8 @@ paths:
           puts response.read_body
       x-accepts: application/json
     post:
-      description: Create a new webhook
+      description: "Create a new webhook <a href='/usecases/webhooks/' target='_blank'>[Go\
+        \ to webhooks documentation]</a>"
       operationId: createWebhook
       requestBody:
         content:
@@ -29042,13 +29291,14 @@ components:
           - xml
           type: string
         callback_url:
-          description: Url to receive the webhook
+          description: "Url to receive the callback <a href='/usecases/callbacks/#exports-a-list-of-contacts'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           format: uri
           type: string
         segments:
           description: |-
             Array of segment IDs to filter contacts to export. ***Note:*** segments of type ***auto*** and
-                                    ***tag*** are not yet supported but they are expected to be supported soon!
+             ***tag*** are not yet supported but they are expected to be supported soon!
           items:
             type: string
           type: array
@@ -29061,6 +29311,16 @@ components:
       - format
       title: ContactExportRequest
       type: object
+    ExportReportWebhookData:
+      description: Accepted response schema
+      example:
+        file: https://openapi-generator.tech
+      properties:
+        file:
+          format: uri
+          type: string
+      title: ExportReportWebhookData
+      type: object
     ExportContactsWebhookData:
       description: Accepted response schema
       example:
@@ -29070,6 +29330,32 @@ components:
           format: uri
           type: string
       title: ExportContactsWebhookData
+      type: object
+    ImportContactsWebhookData:
+      description: Accepted response schema
+      example:
+        ignored: 5
+        imported: 100
+        invalid: 1
+        updated: 10
+      properties:
+        imported:
+          example: 100
+          minimum: 0
+          type: integer
+        updated:
+          example: 10
+          minimum: 0
+          type: integer
+        ignored:
+          example: 5
+          minimum: 0
+          type: integer
+        invalid:
+          example: 1
+          minimum: 0
+          type: integer
+      title: ImportContactsWebhookData
       type: object
     ContactForgetRequest:
       description: Contact forget request schema
@@ -29122,7 +29408,8 @@ components:
             type: integer
           type: array
         callback_url:
-          description: Url to receive the report
+          description: "Url to receive the report <a href='/usecases/callbacks/#import-collection-of-contacts'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - compare_field
@@ -29159,7 +29446,8 @@ components:
             type: integer
           type: array
         callback_url:
-          description: Url to receive the report
+          description: "Url to receive the report <a href='/usecases/callbacks/#import-collection-of-contacts'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - compare_field
@@ -29631,6 +29919,9 @@ components:
       description: Contact activity schema
       oneOf:
       - $ref: '#/components/schemas/ContactActivityClick'
+      - $ref: '#/components/schemas/ContactCampaignActivity'
+      - $ref: '#/components/schemas/ContactTagActivity'
+      - $ref: '#/components/schemas/ContactAutomationsActivity'
       - $ref: '#/components/schemas/ContactOtherActivity'
       title: Contact Activity
       type: object
@@ -29645,50 +29936,22 @@ components:
         action_name:
           description: Action name
           enum:
-          - email_open
-          - forward
-          - conversion
-          - email_send
-          - sms_send
-          - voice_send
-          - mms_send
-          - sms_report
-          - voice_report
-          - invitation_send
-          - invitation_open
-          - mms_open
-          - unsubscribe
-          - email_soft_bounce
-          - email_hard_bounce
           - subscription
-          - resubscription
+          - unsubscribe
+          - unsubscribe_api
+          - unsubscribe_manual
           - unsubscribe_reason
+          - edit_subscription
+          - resubscription
+          - conversion
           - facebook_like
           - social_share
-          - unsubscribe_manual
-          - double_optin
-          - double_optin_resend
-          - email_spam_complaint
-          - email_field_disable
           - cellphone_field_disable
+          - email_field_disable
           - phone_field_disable
-          - unsubscribe_api
           - email_field_enable
           - cellphone_field_enable
           - phone_field_enable
-          - edit_subscription
-          - double_optedit
-          - automation_event
-          - push_send
-          - push_open
-          - push_received
-          - push_error
-          - push_canceled
-          - reply_to_email
-          - web_push_send
-          - web_push_delivered
-          - web_push_open
-          - web_push_bounce
           - web_push_subscription
           - web_push_unsubscription
           - add_push_contact
@@ -29713,6 +29976,85 @@ components:
           - email_click
           - push_click
           - web_push_click
+          - smart_sms_click
+          type: string
+      title: Contact Activity
+      type: object
+    ContactActivityAbstractActionsWithCampaign:
+      description: Campaign contact activity schema
+      properties:
+        date:
+          description: The date and time
+          format: date-time
+          title: date_time
+          type: string
+        action_name:
+          description: Action name
+          enum:
+          - email_open
+          - forward
+          - email_send
+          - sms_send
+          - voice_send
+          - sms_report
+          - voice_report
+          - invitation_send
+          - invitation_open
+          - email_soft_bounce
+          - email_hard_bounce
+          - double_optin
+          - double_optin_resend
+          - email_spam_complaint
+          - double_optedit
+          - push_send
+          - push_open
+          - push_received
+          - push_error
+          - push_canceled
+          - reply_to_email
+          - web_push_send
+          - web_push_delivered
+          - web_push_open
+          - web_push_bounce
+          - voice_menu_event
+          - voice_redirect
+          - push_delivered
+          - smart_sms_send
+          - smart_sms_open
+          - smart_sms_report
+          type: string
+      title: Contact Activity
+      type: object
+    ContactActivityAbstractActionsWithTags:
+      description: Contact activity schema
+      properties:
+        date:
+          description: The date and time
+          format: date-time
+          title: date_time
+          type: string
+        action_name:
+          description: Action name
+          enum:
+          - attach_tag
+          - detach_tag
+          type: string
+      title: Contact Activity
+      type: object
+    ContactActivityAbstractActionsWithAutomations:
+      description: Contact activity schema
+      properties:
+        date:
+          description: The date and time
+          format: date-time
+          title: date_time
+          type: string
+        action_name:
+          description: Action name
+          enum:
+          - automation_event
+          - automation_action
+          - automation_trigger
           type: string
       title: Contact Activity
       type: object
@@ -29722,6 +30064,27 @@ components:
       - $ref: '#/components/schemas/ContactActivityAbstractActionsWithData'
       description: Contact click activity schema
       title: Click Activities
+      type: object
+    ContactCampaignActivity:
+      allOf:
+      - $ref: '#/components/schemas/ContactCampaignActivity_allOf'
+      - $ref: '#/components/schemas/ContactActivityAbstractActionsWithCampaign'
+      description: Contact campaign activity schema
+      title: Campaign Activities
+      type: object
+    ContactTagActivity:
+      allOf:
+      - $ref: '#/components/schemas/ContactTagActivity_allOf'
+      - $ref: '#/components/schemas/ContactActivityAbstractActionsWithTags'
+      description: Contact Tags activity schema
+      title: Tag Activities
+      type: object
+    ContactAutomationsActivity:
+      allOf:
+      - $ref: '#/components/schemas/ContactAutomationsActivity_allOf'
+      - $ref: '#/components/schemas/ContactActivityAbstractActionsWithAutomations'
+      description: Contact Automation activity schema
+      title: Automation Activities
       type: object
     PostContactsConflict:
       allOf:
@@ -31457,6 +31820,11 @@ components:
           campaign_fields:
             internal_name: true
             campaign_hash: true
+            send_date: true
+            sender: true
+            channel: true
+            type: true
+            group: true
           list_extra_fields:
           - list_id: 1
             fields:
@@ -31497,7 +31865,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportEmailBouncesOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - campaigns
@@ -31517,6 +31886,11 @@ components:
         campaign_fields:
           internal_name: true
           campaign_hash: true
+          send_date: true
+          sender: true
+          channel: true
+          type: true
+          group: true
         list_extra_fields:
         - list_id: 1
           fields:
@@ -31581,12 +31955,32 @@ components:
       example:
         internal_name: true
         campaign_hash: true
+        send_date: true
+        sender: true
+        channel: true
+        type: true
+        group: true
       properties:
         internal_name:
           description: "True to include the internal name of the campaign, false otherwise"
           type: boolean
         campaign_hash:
           description: "True to include the hash of the campaign, false otherwise"
+          type: boolean
+        send_date:
+          description: "True to include the send date of the campaign, false otherwise"
+          type: boolean
+        group:
+          description: "True to include the group of the campaign, false otherwise"
+          type: boolean
+        channel:
+          description: "True to include the channel of the campaign, false otherwise"
+          type: boolean
+        sender:
+          description: "True to include the sender of the campaign, false otherwise"
+          type: boolean
+        type:
+          description: "True to include the type of the campaign, false otherwise"
           type: boolean
       required:
       - campaign_hash
@@ -31633,13 +32027,18 @@ components:
             clicks: true
           campaign_fields:
             country: true
-            internal_name: true
             os: true
-            campaign_hash: true
             city: true
+            channel: true
             program: true
-            region: true
+            type: true
             url: true
+            internal_name: true
+            campaign_hash: true
+            send_date: true
+            sender: true
+            region: true
+            group: true
           list_extra_fields:
           - list_id: 1
             fields:
@@ -31678,7 +32077,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportEmailClicksByContactOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - campaigns
@@ -31695,13 +32095,18 @@ components:
           clicks: true
         campaign_fields:
           country: true
-          internal_name: true
           os: true
-          campaign_hash: true
           city: true
+          channel: true
           program: true
-          region: true
+          type: true
           url: true
+          internal_name: true
+          campaign_hash: true
+          send_date: true
+          sender: true
+          region: true
+          group: true
         list_extra_fields:
         - list_id: 1
           fields:
@@ -31755,13 +32160,18 @@ components:
       description: Campaign fields to include in the report
       example:
         country: true
-        internal_name: true
         os: true
-        campaign_hash: true
         city: true
+        channel: true
         program: true
-        region: true
+        type: true
         url: true
+        internal_name: true
+        campaign_hash: true
+        send_date: true
+        sender: true
+        region: true
+        group: true
       properties:
         internal_name:
           description: "True to include the internal name of the campaign, false otherwise"
@@ -31772,29 +32182,41 @@ components:
         url:
           description: "True to include the URL of the campaign, false otherwise"
           type: boolean
+        send_date:
+          description: "True to include the send date of the campaign, false otherwise"
+          type: boolean
+        group:
+          description: "True to include the group of the campaign, false otherwise"
+          type: boolean
+        channel:
+          description: "True to include the channel of the campaign, false otherwise"
+          type: boolean
+        type:
+          description: "True to include the type of the campaign, false otherwise"
+          type: boolean
+        sender:
+          description: "True to include the sender of the campaign, false otherwise"
+          type: boolean
         city:
-          description: "True to include city information, false otherwise"
+          description: "True to include city information, false otherwise (deprecated)"
           type: boolean
         country:
-          description: "True to include country information, false otherwise"
+          description: "True to include country information, false otherwise (deprecated)"
           type: boolean
         region:
-          description: "True to include region information, false otherwise"
+          description: "True to include region information, false otherwise (deprecated)"
           type: boolean
         program:
-          description: "True to include device program information, false otherwise"
+          description: "True to include device program information, false otherwise\
+            \ (deprecated)"
           type: boolean
         os:
-          description: "True to include operating system information, false otherwise"
+          description: "True to include operating system information, false otherwise\
+            \ (deprecated)"
           type: boolean
       required:
       - campaign_hash
-      - city
-      - country
       - internal_name
-      - os
-      - program
-      - region
       - url
       title: EmailClicksByContactCampaignFields
       type: object
@@ -31829,10 +32251,14 @@ components:
             internal_name: true
             os: true
             campaign_hash: true
+            send_date: true
             city: true
+            channel: true
             program: true
+            type: true
             region: true
             url: true
+            group: true
           list_extra_fields:
           - list_id: 1
             fields:
@@ -31871,7 +32297,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportEmailClicksByUrlOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - campaigns
@@ -31893,10 +32320,14 @@ components:
           internal_name: true
           os: true
           campaign_hash: true
+          send_date: true
           city: true
+          channel: true
           program: true
+          type: true
           region: true
           url: true
+          group: true
         list_extra_fields:
         - list_id: 1
           fields:
@@ -31963,10 +32394,14 @@ components:
         internal_name: true
         os: true
         campaign_hash: true
+        send_date: true
         city: true
+        channel: true
         program: true
+        type: true
         region: true
         url: true
+        group: true
       properties:
         internal_name:
           description: "True to include the internal name of the campaign, false otherwise"
@@ -31977,29 +32412,38 @@ components:
         url:
           description: "True to include the URL of the campaign, false otherwise"
           type: boolean
+        send_date:
+          description: "True to include the send date of the campaign, false otherwise"
+          type: boolean
+        group:
+          description: "True to include the group of the campaign, false otherwise"
+          type: boolean
+        channel:
+          description: "True to include the channel of the campaign, false otherwise"
+          type: boolean
+        type:
+          description: "True to include the type of the campaign, false otherwise"
+          type: boolean
         city:
-          description: "True to include city information, false otherwise"
+          description: "True to include city information, false otherwise (deprecated)"
           type: boolean
         country:
-          description: "True to include country information, false otherwise"
+          description: "True to include country information, false otherwise (deprecated)"
           type: boolean
         region:
-          description: "True to include region information, false otherwise"
+          description: "True to include region information, false otherwise (deprecated)"
           type: boolean
         program:
-          description: "True to include device program information, false otherwise"
+          description: "True to include device program information, false otherwise\
+            \ (deprecated)"
           type: boolean
         os:
-          description: "True to include operating system information, false otherwise"
+          description: "True to include operating system information, false otherwise\
+            \ (deprecated)"
           type: boolean
       required:
       - campaign_hash
-      - city
-      - country
       - internal_name
-      - os
-      - program
-      - region
       - url
       title: EmailClicksByUrlCampaignFields
       type: object
@@ -32039,12 +32483,16 @@ components:
             fb_shares: true
           campaign_fields:
             country: true
-            internal_name: true
             os: true
+            city: true
+            channel: true
+            program: true
+            type: true
+            url: true
+            internal_name: true
             campaign_hash: true
             send_date: true
-            city: true
-            program: true
+            sender: true
             region: true
             group: true
           list_extra_fields:
@@ -32086,7 +32534,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportEmailEventsOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - campaigns
@@ -32113,12 +32562,16 @@ components:
           fb_shares: true
         campaign_fields:
           country: true
-          internal_name: true
           os: true
+          city: true
+          channel: true
+          program: true
+          type: true
+          url: true
+          internal_name: true
           campaign_hash: true
           send_date: true
-          city: true
-          program: true
+          sender: true
           region: true
           group: true
         list_extra_fields:
@@ -32232,12 +32685,16 @@ components:
       description: Campaign fields to include in the report
       example:
         country: true
-        internal_name: true
         os: true
+        city: true
+        channel: true
+        program: true
+        type: true
+        url: true
+        internal_name: true
         campaign_hash: true
         send_date: true
-        city: true
-        program: true
+        sender: true
         region: true
         group: true
       properties:
@@ -32253,30 +32710,39 @@ components:
         group:
           description: "True to include the group of the campaign, false otherwise"
           type: boolean
+        channel:
+          description: "True to include the channel of the campaign, false otherwise"
+          type: boolean
+        type:
+          description: "True to include the type of the campaign, false otherwise"
+          type: boolean
+        url:
+          description: "True to include the URL of the campaign, false otherwise"
+          type: boolean
+        sender:
+          description: "True to include the sender of the campaign, false otherwise"
+          type: boolean
         city:
-          description: "True to include city information, false otherwise"
+          description: "True to include city information, false otherwise (deprecated)"
           type: boolean
         country:
-          description: "True to include country information, false otherwise"
+          description: "True to include country information, false otherwise (deprecated)"
           type: boolean
         region:
-          description: "True to include region information, false otherwise"
+          description: "True to include region information, false otherwise (deprecated)"
           type: boolean
         program:
-          description: "True to include device program information, false otherwise"
+          description: "True to include device program information, false otherwise\
+            \ (deprecated)"
           type: boolean
         os:
-          description: "True to include operating system information, false otherwise"
+          description: "True to include operating system information, false otherwise\
+            \ (deprecated)"
           type: boolean
       required:
       - campaign_hash
-      - city
-      - country
       - group
       - internal_name
-      - os
-      - program
-      - region
       - send_date
       title: EmailEventsCampaignFields
       type: object
@@ -32315,7 +32781,11 @@ components:
           campaign_fields:
             internal_name: true
             campaign_hash: true
+            send_date: true
             sender: true
+            channel: true
+            type: true
+            group: true
           list_extra_fields:
           - list_id: 1
             fields:
@@ -32354,7 +32824,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportEmailUnsubscriptionsOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - campaigns
@@ -32374,7 +32845,11 @@ components:
         campaign_fields:
           internal_name: true
           campaign_hash: true
+          send_date: true
           sender: true
+          channel: true
+          type: true
+          group: true
         list_extra_fields:
         - list_id: 1
           fields:
@@ -32439,13 +32914,29 @@ components:
       example:
         internal_name: true
         campaign_hash: true
+        send_date: true
         sender: true
+        channel: true
+        type: true
+        group: true
       properties:
         internal_name:
           description: "True to include the internal name of the campaign, false otherwise"
           type: boolean
         campaign_hash:
           description: "True to include the hash of the campaign, false otherwise"
+          type: boolean
+        send_date:
+          description: "True to include the send date of the campaign, false otherwise"
+          type: boolean
+        group:
+          description: "True to include the group of the campaign, false otherwise"
+          type: boolean
+        channel:
+          description: "True to include the channel of the campaign, false otherwise"
+          type: boolean
+        type:
+          description: "True to include the type of the campaign, false otherwise"
           type: boolean
         sender:
           description: "True to include the sender of the campaign, false otherwise"
@@ -32503,7 +32994,8 @@ components:
           title: AdvancedReportForms
           type: array
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - forms
@@ -32530,6 +33022,7 @@ components:
           campaign_fields:
             internal_name: true
             campaign_hash: true
+            send_date: true
             sender: true
             channel: true
             type: true
@@ -32571,7 +33064,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportSendsOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - columns
@@ -32587,6 +33081,7 @@ components:
         campaign_fields:
           internal_name: true
           campaign_hash: true
+          send_date: true
           sender: true
           channel: true
           type: true
@@ -32630,6 +33125,7 @@ components:
       example:
         internal_name: true
         campaign_hash: true
+        send_date: true
         sender: true
         channel: true
         type: true
@@ -32640,6 +33136,9 @@ components:
           type: boolean
         campaign_hash:
           description: "True to include the hash of the campaign, false otherwise"
+          type: boolean
+        send_date:
+          description: "True to include the send date of the campaign, false otherwise"
           type: boolean
         group:
           description: "True to include the group of the campaign, false otherwise"
@@ -32692,6 +33191,9 @@ components:
             campaign_hash: true
             send_date: true
             sender: true
+            channel: true
+            type: true
+            group: true
           list_extra_fields:
           - list_id: 1
             fields:
@@ -32731,7 +33233,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportSmsBouncesOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report<a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - campaigns
@@ -32752,6 +33255,9 @@ components:
           campaign_hash: true
           send_date: true
           sender: true
+          channel: true
+          type: true
+          group: true
         list_extra_fields:
         - list_id: 1
           fields:
@@ -32813,6 +33319,9 @@ components:
         campaign_hash: true
         send_date: true
         sender: true
+        channel: true
+        type: true
+        group: true
       properties:
         internal_name:
           description: "True to include the internal name of the campaign, false otherwise"
@@ -32822,6 +33331,15 @@ components:
           type: boolean
         send_date:
           description: "True to include the send date of the campaign, false otherwise"
+          type: boolean
+        group:
+          description: "True to include the group of the campaign, false otherwise"
+          type: boolean
+        channel:
+          description: "True to include the channel of the campaign, false otherwise"
+          type: boolean
+        type:
+          description: "True to include the type of the campaign, false otherwise"
           type: boolean
         sender:
           description: "True to include the sender of the campaign, false otherwise"
@@ -32871,6 +33389,8 @@ components:
             campaign_hash: true
             send_date: true
             sender: true
+            channel: true
+            type: true
             group: true
           list_extra_fields:
           - list_id: 1
@@ -32910,7 +33430,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportSmsEventsOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - campaigns
@@ -32931,6 +33452,8 @@ components:
           campaign_hash: true
           send_date: true
           sender: true
+          channel: true
+          type: true
           group: true
         list_extra_fields:
         - list_id: 1
@@ -32993,6 +33516,8 @@ components:
         campaign_hash: true
         send_date: true
         sender: true
+        channel: true
+        type: true
         group: true
       properties:
         internal_name:
@@ -33006,6 +33531,12 @@ components:
           type: boolean
         group:
           description: "True to include the group of the campaign, false otherwise"
+          type: boolean
+        channel:
+          description: "True to include the channel of the campaign, false otherwise"
+          type: boolean
+        type:
+          description: "True to include the type of the campaign, false otherwise"
           type: boolean
         sender:
           description: "True to include the sender of the campaign, false otherwise"
@@ -33080,7 +33611,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportSubscriptionsOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - columns
@@ -33210,7 +33742,8 @@ components:
         options:
           $ref: '#/components/schemas/AdvancedReportUnsubscriptionsOptions'
         callback_url:
-          description: URL which will receive the information of the report
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
           type: string
       required:
       - columns
@@ -34096,6 +34629,7 @@ components:
       - email_soft_bounce
       - email_hard_bounce
       - sms_send
+      - sms_delivered
       - voice_send
       - unsubscribe
       - subscription
@@ -34146,8 +34680,8 @@ components:
           type: integer
         url:
           description: |-
-            Url to send the webhook:
-             *       Note: Only 'http' or 'https' protocols are supported
+            Url to send the webhook <a href='/usecases/webhooks/' target='_blank'>[Go to webhooks documentation]</a>:
+             *       Note: Only 'http' or 'https' protocols are supported.
           type: string
         actions:
           description: Action that will trigger the webhook
@@ -34794,20 +35328,6 @@ components:
             $ref: '#/components/schemas/Product'
           type: array
       title: ProductCollection
-      type: object
-    FieldCollection:
-      description: Collection of fields
-      example:
-        items:
-        - null
-        - null
-      properties:
-        items:
-          description: Returned fields
-          items:
-            $ref: '#/components/schemas/ComplexField'
-          type: array
-      title: FieldCollection
       type: object
     FieldOptionsCollection:
       description: Collection of field options
@@ -36634,6 +37154,55 @@ components:
       properties:
         action_data:
           $ref: '#/components/schemas/ContactActivityClick_allOf_action_data'
+      type: object
+      example: null
+    ContactCampaignActivity_allOf_action_data:
+      description: Action data
+      properties:
+        campaign_hash:
+          description: campaign hash
+          example: 97b5a6cecf
+          type: string
+      type: object
+      example: null
+    ContactCampaignActivity_allOf:
+      properties:
+        action_data:
+          $ref: '#/components/schemas/ContactCampaignActivity_allOf_action_data'
+      type: object
+      example: null
+    ContactTagActivity_allOf_action_data:
+      description: Action data
+      properties:
+        tag_id:
+          example: 1
+          minimum: 1
+          readOnly: true
+          title: ID
+          type: integer
+      type: object
+      example: null
+    ContactTagActivity_allOf:
+      properties:
+        action_data:
+          $ref: '#/components/schemas/ContactTagActivity_allOf_action_data'
+      type: object
+      example: null
+    ContactAutomationsActivity_allOf_action_data:
+      description: Action data
+      properties:
+        automation_id:
+          example: 1
+          minimum: 1
+          readOnly: true
+          title: ID
+          type: integer
+      type: object
+      example: null
+    ContactAutomationsActivity_allOf:
+      properties:
+        action_data:
+          $ref: '#/components/schemas/ContactAutomationsActivity_allOf_action_data'
       type: object
       example: null
     unique_field_in_use_errors:

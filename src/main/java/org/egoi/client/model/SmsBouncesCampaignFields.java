@@ -1,6 +1,6 @@
 /*
  * APIv3 (New)
- *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  <a href='/usecases/callbacks/' target='_blank'>[Go to callbacks documentation]</a>  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0
  * 
@@ -49,7 +49,7 @@ import org.egoi.client.JSON;
  * Campaign fields to include in the report
  */
 @ApiModel(description = "Campaign fields to include in the report")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-12-12T17:30:24.773899Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-18T08:41:12.682597+01:00[Europe/Lisbon]")
 public class SmsBouncesCampaignFields {
   public static final String SERIALIZED_NAME_INTERNAL_NAME = "internal_name";
   @SerializedName(SERIALIZED_NAME_INTERNAL_NAME)
@@ -62,6 +62,18 @@ public class SmsBouncesCampaignFields {
   public static final String SERIALIZED_NAME_SEND_DATE = "send_date";
   @SerializedName(SERIALIZED_NAME_SEND_DATE)
   private Boolean sendDate;
+
+  public static final String SERIALIZED_NAME_GROUP = "group";
+  @SerializedName(SERIALIZED_NAME_GROUP)
+  private Boolean group;
+
+  public static final String SERIALIZED_NAME_CHANNEL = "channel";
+  @SerializedName(SERIALIZED_NAME_CHANNEL)
+  private Boolean channel;
+
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
+  private Boolean type;
 
   public static final String SERIALIZED_NAME_SENDER = "sender";
   @SerializedName(SERIALIZED_NAME_SENDER)
@@ -139,6 +151,75 @@ public class SmsBouncesCampaignFields {
   }
 
 
+  public SmsBouncesCampaignFields group(Boolean group) {
+    
+    this.group = group;
+    return this;
+  }
+
+   /**
+   * True to include the group of the campaign, false otherwise
+   * @return group
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "True to include the group of the campaign, false otherwise")
+
+  public Boolean getGroup() {
+    return group;
+  }
+
+
+  public void setGroup(Boolean group) {
+    this.group = group;
+  }
+
+
+  public SmsBouncesCampaignFields channel(Boolean channel) {
+    
+    this.channel = channel;
+    return this;
+  }
+
+   /**
+   * True to include the channel of the campaign, false otherwise
+   * @return channel
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "True to include the channel of the campaign, false otherwise")
+
+  public Boolean getChannel() {
+    return channel;
+  }
+
+
+  public void setChannel(Boolean channel) {
+    this.channel = channel;
+  }
+
+
+  public SmsBouncesCampaignFields type(Boolean type) {
+    
+    this.type = type;
+    return this;
+  }
+
+   /**
+   * True to include the type of the campaign, false otherwise
+   * @return type
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "True to include the type of the campaign, false otherwise")
+
+  public Boolean getType() {
+    return type;
+  }
+
+
+  public void setType(Boolean type) {
+    this.type = type;
+  }
+
+
   public SmsBouncesCampaignFields sender(Boolean sender) {
     
     this.sender = sender;
@@ -175,12 +256,15 @@ public class SmsBouncesCampaignFields {
     return Objects.equals(this.internalName, smsBouncesCampaignFields.internalName) &&
         Objects.equals(this.campaignHash, smsBouncesCampaignFields.campaignHash) &&
         Objects.equals(this.sendDate, smsBouncesCampaignFields.sendDate) &&
+        Objects.equals(this.group, smsBouncesCampaignFields.group) &&
+        Objects.equals(this.channel, smsBouncesCampaignFields.channel) &&
+        Objects.equals(this.type, smsBouncesCampaignFields.type) &&
         Objects.equals(this.sender, smsBouncesCampaignFields.sender);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(internalName, campaignHash, sendDate, sender);
+    return Objects.hash(internalName, campaignHash, sendDate, group, channel, type, sender);
   }
 
   @Override
@@ -190,6 +274,9 @@ public class SmsBouncesCampaignFields {
     sb.append("    internalName: ").append(toIndentedString(internalName)).append("\n");
     sb.append("    campaignHash: ").append(toIndentedString(campaignHash)).append("\n");
     sb.append("    sendDate: ").append(toIndentedString(sendDate)).append("\n");
+    sb.append("    group: ").append(toIndentedString(group)).append("\n");
+    sb.append("    channel: ").append(toIndentedString(channel)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    sender: ").append(toIndentedString(sender)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -216,6 +303,9 @@ public class SmsBouncesCampaignFields {
     openapiFields.add("internal_name");
     openapiFields.add("campaign_hash");
     openapiFields.add("send_date");
+    openapiFields.add("group");
+    openapiFields.add("channel");
+    openapiFields.add("type");
     openapiFields.add("sender");
 
     // a set of required properties/fields (JSON key names)

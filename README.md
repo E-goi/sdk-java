@@ -8,7 +8,7 @@ The API describes each available method. Learn about parameters, errors, and how
 If you find a bug or something worth fixing, create an issue.
 
 ### Changelog
-#### 1.1.2RC1
+#### 1.1.3RC1
 ## Requirements
 
 Building the API client library requires:
@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.egoi</groupId>
   <artifactId>egoi-java-client</artifactId>
-  <version>1.1.2RC1</version>
+  <version>1.1.3RC1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +55,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "org.egoi:egoi-java-client:1.1.2RC1"
+     implementation "org.egoi:egoi-java-client:1.1.3RC1"
   }
 ```
 
@@ -69,7 +69,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/egoi-java-client-1.1.2RC1.jar`
+* `target/egoi-java-client-1.1.3RC1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -124,10 +124,10 @@ Class | Method | HTTP request | Description
 *AdvancedReportsApi* | [**generateEmailClicksByContactReport**](docs/AdvancedReportsApi.md#generateEmailClicksByContactReport) | **POST** /reports/advanced/email-clicks-by-contact | Generate email clicks by contact report
 *AdvancedReportsApi* | [**generateEmailClicksByUrlReport**](docs/AdvancedReportsApi.md#generateEmailClicksByUrlReport) | **POST** /reports/advanced/email-clicks-by-url | Generate email clicks by URL report
 *AdvancedReportsApi* | [**generateEmailEventsReport**](docs/AdvancedReportsApi.md#generateEmailEventsReport) | **POST** /reports/advanced/email-events | Generate email events report
-*AdvancedReportsApi* | [**generateEmailSmsReport**](docs/AdvancedReportsApi.md#generateEmailSmsReport) | **POST** /reports/advanced/sms-bounces | Generate SMS bounces report
 *AdvancedReportsApi* | [**generateEmailUnsubscriptionsReport**](docs/AdvancedReportsApi.md#generateEmailUnsubscriptionsReport) | **POST** /reports/advanced/email-unsubscriptions | Generate email unsubscriptions report
 *AdvancedReportsApi* | [**generateFormAnswersReport**](docs/AdvancedReportsApi.md#generateFormAnswersReport) | **POST** /reports/advanced/form-answers | Generate form answers report
 *AdvancedReportsApi* | [**generateSendsReport**](docs/AdvancedReportsApi.md#generateSendsReport) | **POST** /reports/advanced/sends | Generate sends report
+*AdvancedReportsApi* | [**generateSmsBouncesReport**](docs/AdvancedReportsApi.md#generateSmsBouncesReport) | **POST** /reports/advanced/sms-bounces | Generate SMS bounces report
 *AdvancedReportsApi* | [**generateSmsEventsReport**](docs/AdvancedReportsApi.md#generateSmsEventsReport) | **POST** /reports/advanced/sms-events | Generate SMS events report
 *AdvancedReportsApi* | [**generateSubscriptionsReport**](docs/AdvancedReportsApi.md#generateSubscriptionsReport) | **POST** /reports/advanced/subscriptions | Generate subscriptions report
 *AdvancedReportsApi* | [**generateUnsubscriptionsReport**](docs/AdvancedReportsApi.md#generateUnsubscriptionsReport) | **POST** /reports/advanced/unsubscriptions | Generate unsubscriptions report
@@ -430,10 +430,16 @@ Class | Method | HTTP request | Description
  - [Contact1](docs/Contact1.md)
  - [Contact2](docs/Contact2.md)
  - [ContactActivity](docs/ContactActivity.md)
+ - [ContactActivityAbstractActionsWithAutomations](docs/ContactActivityAbstractActionsWithAutomations.md)
+ - [ContactActivityAbstractActionsWithCampaign](docs/ContactActivityAbstractActionsWithCampaign.md)
  - [ContactActivityAbstractActionsWithData](docs/ContactActivityAbstractActionsWithData.md)
+ - [ContactActivityAbstractActionsWithTags](docs/ContactActivityAbstractActionsWithTags.md)
  - [ContactActivityClick](docs/ContactActivityClick.md)
  - [ContactActivityClickAllOf](docs/ContactActivityClickAllOf.md)
  - [ContactActivityClickAllOfActionData](docs/ContactActivityClickAllOfActionData.md)
+ - [ContactAutomationsActivity](docs/ContactAutomationsActivity.md)
+ - [ContactAutomationsActivityAllOf](docs/ContactAutomationsActivityAllOf.md)
+ - [ContactAutomationsActivityAllOfActionData](docs/ContactAutomationsActivityAllOfActionData.md)
  - [ContactBaseExtra](docs/ContactBaseExtra.md)
  - [ContactBaseExtraBulk](docs/ContactBaseExtraBulk.md)
  - [ContactBaseExtraFull](docs/ContactBaseExtraFull.md)
@@ -464,6 +470,9 @@ Class | Method | HTTP request | Description
  - [ContactBulkFileAllOf1](docs/ContactBulkFileAllOf1.md)
  - [ContactBulkFileAllOf2](docs/ContactBulkFileAllOf2.md)
  - [ContactBulkFileAllOf3](docs/ContactBulkFileAllOf3.md)
+ - [ContactCampaignActivity](docs/ContactCampaignActivity.md)
+ - [ContactCampaignActivityAllOf](docs/ContactCampaignActivityAllOf.md)
+ - [ContactCampaignActivityAllOfActionData](docs/ContactCampaignActivityAllOfActionData.md)
  - [ContactCollection](docs/ContactCollection.md)
  - [ContactExportRequest](docs/ContactExportRequest.md)
  - [ContactExtraFieldCellphone](docs/ContactExtraFieldCellphone.md)
@@ -490,6 +499,9 @@ Class | Method | HTTP request | Description
  - [ContactSearchResponse](docs/ContactSearchResponse.md)
  - [ContactStatusFieldsBulkSchema](docs/ContactStatusFieldsBulkSchema.md)
  - [ContactStatusFieldsSchema](docs/ContactStatusFieldsSchema.md)
+ - [ContactTagActivity](docs/ContactTagActivity.md)
+ - [ContactTagActivityAllOf](docs/ContactTagActivityAllOf.md)
+ - [ContactTagActivityAllOfActionData](docs/ContactTagActivityAllOfActionData.md)
  - [ContactTags](docs/ContactTags.md)
  - [ContactTagsBulk](docs/ContactTagsBulk.md)
  - [ContactsActionUpdateContactsSchema](docs/ContactsActionUpdateContactsSchema.md)
@@ -572,8 +584,8 @@ Class | Method | HTTP request | Description
  - [EnableTransactionalConflict](docs/EnableTransactionalConflict.md)
  - [EnableTransactionalConflictsErrors](docs/EnableTransactionalConflictsErrors.md)
  - [ExportContactsWebhookData](docs/ExportContactsWebhookData.md)
+ - [ExportReportWebhookData](docs/ExportReportWebhookData.md)
  - [Field](docs/Field.md)
- - [FieldCollection](docs/FieldCollection.md)
  - [FieldInUse](docs/FieldInUse.md)
  - [FieldInUseErrors](docs/FieldInUseErrors.md)
  - [FieldInUseErrorsFieldInUseData](docs/FieldInUseErrorsFieldInUseData.md)
@@ -625,6 +637,7 @@ Class | Method | HTTP request | Description
  - [ImportBulkFileRequestSchema](docs/ImportBulkFileRequestSchema.md)
  - [ImportBulkFileRequestSchemaFile](docs/ImportBulkFileRequestSchemaFile.md)
  - [ImportBulkRequest](docs/ImportBulkRequest.md)
+ - [ImportContactsWebhookData](docs/ImportContactsWebhookData.md)
  - [ImportOrdersBulkBulkRequest](docs/ImportOrdersBulkBulkRequest.md)
  - [ImportOrdersBulkBulkRequestItems](docs/ImportOrdersBulkBulkRequestItems.md)
  - [InternalServerError](docs/InternalServerError.md)

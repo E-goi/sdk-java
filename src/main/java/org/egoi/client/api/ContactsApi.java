@@ -1,6 +1,6 @@
 /*
  * APIv3 (New)
- *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  <a href='/usecases/callbacks/' target='_blank'>[Go to callbacks documentation]</a>  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0
  * 
@@ -1974,6 +1974,7 @@ public class ContactsApi {
      * @param limit Number of items to return (optional, default to 10)
      * @param dateMin Start date (optional)
      * @param dateMax End date (optional)
+     * @param actionName Action data to return (optional)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1990,7 +1991,7 @@ public class ContactsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getAllContactActivitiesCall(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getAllContactActivitiesCall(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, String actionName, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2033,6 +2034,10 @@ public class ContactsApi {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("date_max", dateMax));
         }
 
+        if (actionName != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("action_name", actionName));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -2053,7 +2058,7 @@ public class ContactsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getAllContactActivitiesValidateBeforeCall(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getAllContactActivitiesValidateBeforeCall(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, String actionName, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'contactId' is set
         if (contactId == null) {
             throw new ApiException("Missing the required parameter 'contactId' when calling getAllContactActivities(Async)");
@@ -2064,7 +2069,7 @@ public class ContactsApi {
             throw new ApiException("Missing the required parameter 'listId' when calling getAllContactActivities(Async)");
         }
 
-        return getAllContactActivitiesCall(contactId, listId, offset, limit, dateMin, dateMax, _callback);
+        return getAllContactActivitiesCall(contactId, listId, offset, limit, dateMin, dateMax, actionName, _callback);
 
     }
 
@@ -2077,6 +2082,7 @@ public class ContactsApi {
      * @param limit Number of items to return (optional, default to 10)
      * @param dateMin Start date (optional)
      * @param dateMax End date (optional)
+     * @param actionName Action data to return (optional)
      * @return ActivityCollection
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2092,8 +2098,8 @@ public class ContactsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ActivityCollection getAllContactActivities(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax) throws ApiException {
-        ApiResponse<ActivityCollection> localVarResp = getAllContactActivitiesWithHttpInfo(contactId, listId, offset, limit, dateMin, dateMax);
+    public ActivityCollection getAllContactActivities(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, String actionName) throws ApiException {
+        ApiResponse<ActivityCollection> localVarResp = getAllContactActivitiesWithHttpInfo(contactId, listId, offset, limit, dateMin, dateMax, actionName);
         return localVarResp.getData();
     }
 
@@ -2106,6 +2112,7 @@ public class ContactsApi {
      * @param limit Number of items to return (optional, default to 10)
      * @param dateMin Start date (optional)
      * @param dateMax End date (optional)
+     * @param actionName Action data to return (optional)
      * @return ApiResponse&lt;ActivityCollection&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -2121,8 +2128,8 @@ public class ContactsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ActivityCollection> getAllContactActivitiesWithHttpInfo(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax) throws ApiException {
-        okhttp3.Call localVarCall = getAllContactActivitiesValidateBeforeCall(contactId, listId, offset, limit, dateMin, dateMax, null);
+    public ApiResponse<ActivityCollection> getAllContactActivitiesWithHttpInfo(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, String actionName) throws ApiException {
+        okhttp3.Call localVarCall = getAllContactActivitiesValidateBeforeCall(contactId, listId, offset, limit, dateMin, dateMax, actionName, null);
         Type localVarReturnType = new TypeToken<ActivityCollection>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -2136,6 +2143,7 @@ public class ContactsApi {
      * @param limit Number of items to return (optional, default to 10)
      * @param dateMin Start date (optional)
      * @param dateMax End date (optional)
+     * @param actionName Action data to return (optional)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -2152,9 +2160,9 @@ public class ContactsApi {
         <tr><td> 503 </td><td> Service Unavailable </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getAllContactActivitiesAsync(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, final ApiCallback<ActivityCollection> _callback) throws ApiException {
+    public okhttp3.Call getAllContactActivitiesAsync(String contactId, Integer listId, Integer offset, Integer limit, OffsetDateTime dateMin, OffsetDateTime dateMax, String actionName, final ApiCallback<ActivityCollection> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getAllContactActivitiesValidateBeforeCall(contactId, listId, offset, limit, dateMin, dateMax, _callback);
+        okhttp3.Call localVarCall = getAllContactActivitiesValidateBeforeCall(contactId, listId, offset, limit, dateMin, dateMax, actionName, _callback);
         Type localVarReturnType = new TypeToken<ActivityCollection>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

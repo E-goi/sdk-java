@@ -8,10 +8,10 @@ All URIs are relative to *https://api.egoiapp.com*
 | [**generateEmailClicksByContactReport**](AdvancedReportsApi.md#generateEmailClicksByContactReport) | **POST** /reports/advanced/email-clicks-by-contact | Generate email clicks by contact report |
 | [**generateEmailClicksByUrlReport**](AdvancedReportsApi.md#generateEmailClicksByUrlReport) | **POST** /reports/advanced/email-clicks-by-url | Generate email clicks by URL report |
 | [**generateEmailEventsReport**](AdvancedReportsApi.md#generateEmailEventsReport) | **POST** /reports/advanced/email-events | Generate email events report |
-| [**generateEmailSmsReport**](AdvancedReportsApi.md#generateEmailSmsReport) | **POST** /reports/advanced/sms-bounces | Generate SMS bounces report |
 | [**generateEmailUnsubscriptionsReport**](AdvancedReportsApi.md#generateEmailUnsubscriptionsReport) | **POST** /reports/advanced/email-unsubscriptions | Generate email unsubscriptions report |
 | [**generateFormAnswersReport**](AdvancedReportsApi.md#generateFormAnswersReport) | **POST** /reports/advanced/form-answers | Generate form answers report |
 | [**generateSendsReport**](AdvancedReportsApi.md#generateSendsReport) | **POST** /reports/advanced/sends | Generate sends report |
+| [**generateSmsBouncesReport**](AdvancedReportsApi.md#generateSmsBouncesReport) | **POST** /reports/advanced/sms-bounces | Generate SMS bounces report |
 | [**generateSmsEventsReport**](AdvancedReportsApi.md#generateSmsEventsReport) | **POST** /reports/advanced/sms-events | Generate SMS events report |
 | [**generateSubscriptionsReport**](AdvancedReportsApi.md#generateSubscriptionsReport) | **POST** /reports/advanced/subscriptions | Generate subscriptions report |
 | [**generateUnsubscriptionsReport**](AdvancedReportsApi.md#generateUnsubscriptionsReport) | **POST** /reports/advanced/unsubscriptions | Generate unsubscriptions report |
@@ -325,83 +325,6 @@ public class Example {
 | **500** | Internal Server Error |  -  |
 | **503** | Service Unavailable |  -  |
 
-<a name="generateEmailSmsReport"></a>
-# **generateEmailSmsReport**
-> AcceptedResponse generateEmailSmsReport(generateSmsBouncesReport)
-
-Generate SMS bounces report
-
-Generates a new SMS bounces report
-
-### Example
-```java
-// Import classes:
-import org.egoi.client.ApiClient;
-import org.egoi.client.ApiException;
-import org.egoi.client.Configuration;
-import org.egoi.client.auth.*;
-import org.egoi.client.models.*;
-import org.egoi.client.api.AdvancedReportsApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.egoiapp.com");
-    
-    // Configure API key authorization: Apikey
-    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
-    Apikey.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //Apikey.setApiKeyPrefix("Token");
-
-    AdvancedReportsApi apiInstance = new AdvancedReportsApi(defaultClient);
-    GenerateSmsBouncesReport generateSmsBouncesReport = new GenerateSmsBouncesReport(); // GenerateSmsBouncesReport | Parameters for the SMS bounces report
-    try {
-      AcceptedResponse result = apiInstance.generateEmailSmsReport(generateSmsBouncesReport);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AdvancedReportsApi#generateEmailSmsReport");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **generateSmsBouncesReport** | [**GenerateSmsBouncesReport**](GenerateSmsBouncesReport.md)| Parameters for the SMS bounces report | |
-
-### Return type
-
-[**AcceptedResponse**](AcceptedResponse.md)
-
-### Authorization
-
-[Apikey](../README.md#Apikey)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **202** | Accepted |  -  |
-| **400** | Bad Request |  -  |
-| **401** | Unauthorized |  -  |
-| **403** | Forbidden |  -  |
-| **408** | Request Timeout |  -  |
-| **422** | Unprocessable Entity |  -  |
-| **429** | Too Many Requests |  -  |
-| **500** | Internal Server Error |  -  |
-| **503** | Service Unavailable |  -  |
-
 <a name="generateEmailUnsubscriptionsReport"></a>
 # **generateEmailUnsubscriptionsReport**
 > AcceptedResponse generateEmailUnsubscriptionsReport(generateEmailUnsubscriptionsReport)
@@ -606,6 +529,83 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **generateSendsReport** | [**GenerateSendsReport**](GenerateSendsReport.md)| Parameters for the sends report | |
+
+### Return type
+
+[**AcceptedResponse**](AcceptedResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
+
+<a name="generateSmsBouncesReport"></a>
+# **generateSmsBouncesReport**
+> AcceptedResponse generateSmsBouncesReport(generateSmsBouncesReport)
+
+Generate SMS bounces report
+
+Generates a new SMS bounces report
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.AdvancedReportsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    AdvancedReportsApi apiInstance = new AdvancedReportsApi(defaultClient);
+    GenerateSmsBouncesReport generateSmsBouncesReport = new GenerateSmsBouncesReport(); // GenerateSmsBouncesReport | Parameters for the SMS bounces report
+    try {
+      AcceptedResponse result = apiInstance.generateSmsBouncesReport(generateSmsBouncesReport);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AdvancedReportsApi#generateSmsBouncesReport");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateSmsBouncesReport** | [**GenerateSmsBouncesReport**](GenerateSmsBouncesReport.md)| Parameters for the SMS bounces report | |
 
 ### Return type
 

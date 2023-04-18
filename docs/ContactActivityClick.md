@@ -21,6 +21,7 @@ Contact click activity schema
 | EMAIL_CLICK | &quot;email_click&quot; |
 | PUSH_CLICK | &quot;push_click&quot; |
 | WEB_PUSH_CLICK | &quot;web_push_click&quot; |
+| SMART_SMS_CLICK | &quot;smart_sms_click&quot; |
 
 
 

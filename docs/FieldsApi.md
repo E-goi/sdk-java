@@ -413,7 +413,7 @@ public class Example {
 
 <a name="getAllFields"></a>
 # **getAllFields**
-> FieldCollection getAllFields(listId, offset, limit)
+> List&lt;ComplexField&gt; getAllFields(listId, offset, limit)
 
 Get all fields
 
@@ -445,7 +445,7 @@ public class Example {
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
     Integer limit = 10; // Integer | Number of items to return
     try {
-      FieldCollection result = apiInstance.getAllFields(listId, offset, limit);
+      List<ComplexField> result = apiInstance.getAllFields(listId, offset, limit);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling FieldsApi#getAllFields");
@@ -468,7 +468,7 @@ public class Example {
 
 ### Return type
 
-[**FieldCollection**](FieldCollection.md)
+[**List&lt;ComplexField&gt;**](ComplexField.md)
 
 ### Authorization
 

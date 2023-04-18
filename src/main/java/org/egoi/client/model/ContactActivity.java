@@ -1,6 +1,6 @@
 /*
  * APIv3 (New)
- *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
+ *  # Introduction This is our new version of API. We invite you to start using it and give us your feedback # Getting Started  E-goi can be integrated with many environments and programming languages via our REST API. We've created a developer focused portal to give your organization a clear and quick overview of how to integrate with E-goi. The developer portal focuses on scenarios for integration and flow of events. We recommend familiarizing yourself with all of the content in the developer portal, before start using our rest API.  The E-goi  APIv3 is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.  Request data is passed to the API by POSTing JSON objects to the API endpoints with the appropriate parameters.      BaseURL = api.egoiapp.com  # RESTful Services This API supports 5 HTTP methods:  * <b>GET</b>: The HTTP GET method is used to **read** (or retrieve) a representation of a resource. * <b>POST</b>: The POST verb is most-often utilized to **create** new resources. * <b>PATCH</b>: PATCH is used for **modify** capabilities. The PATCH request only needs to contain the changes to the resource, not the complete resource * <b>PUT</b>: PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource. * <b>DELETE</b>: DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.  # Authentication  We use a custom authentication method, you will need a apikey that you can find in your account settings. Below you will see a curl example to get your account information:     #!/bin/bash     curl -X GET 'https://api.egoiapp.com/my-account' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>'  Here you can see a curl Post example with authentication:     #!/bin/bash     curl -X POST 'http://api.egoiapp.com/tags' \\     -H 'accept: application/json' \\     -H 'Apikey: <YOUR_APY_KEY>' \\     -H 'Content-Type: application/json' \\     -d '{`name`:`Your custom tag`,`color`:`#FFFFFF`}'  # SDK Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.  * <a href='https://github.com/E-goi/sdk-java'>Java</a>  * <a href='https://github.com/E-goi/sdk-php'>PHP</a>  * <a href='https://github.com/E-goi/sdk-python'>Python</a>  * <a href='https://github.com/E-goi/sdk-ruby'>Ruby</a>  * <a href='https://github.com/E-goi/sdk-javascript'>Javascript</a>  * <a href='https://github.com/E-goi/sdk-csharp'>C#</a>  # Stream Limits Stream limits are security mesures we have to make sure our API have a fair use policy, for this reason, any request that creates or modifies data (**POST**, **PATCH** and **PUT**) is limited to a maximum of **20MB** of content length. If you arrive to this limit in one of your request, you'll receive a HTTP code **413 (Request Entity Too Large)** and the request will be ignored. To avoid this error in importation's requests, it's advised the request's division in batches that have each one less than 20MB.  # Timeouts Timeouts set a maximum waiting time on a request's response. Our API, sets a default timeout for each request and when breached, you'll receive an HTTP **408 (Request Timeout)** error code. You should take into consideration that response times can vary widely based on the complexity of the request, amount of data being analyzed, and the load on the system and workspace at the time of the query. When dealing with such errors, you should first attempt to reduce the complexity and amount of data under analysis, and only then, if problems are still occurring ask for support.  For all these reasons, the default timeout for each request is **10 Seconds** and any request that creates or modifies data (**POST**, **PATCH** and **PUT**) will have a timeout of **60 Seconds**. Specific timeouts may exist for specific requests, these can be found in the request's documentation.  # Callbacks A callback is an asynchronous API request that originates from the API server and is sent to the client in response to a previous request sent by that client.  The API will make a **POST** request to the address defined in the URL with the information regarding the event of interest and share data related to that event.  <a href='/usecases/callbacks/' target='_blank'>[Go to callbacks documentation]</a>  ***Note:*** Only http or https protocols are supported in the Url parameter.  <security-definitions/>
  *
  * The version of the OpenAPI document: 3.0.0
  * 
@@ -25,8 +25,11 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import org.egoi.client.model.ContactActivityClick;
-import org.egoi.client.model.ContactActivityClickAllOfActionData;
+import org.egoi.client.model.ContactAutomationsActivity;
+import org.egoi.client.model.ContactAutomationsActivityAllOfActionData;
+import org.egoi.client.model.ContactCampaignActivity;
 import org.egoi.client.model.ContactOtherActivity;
+import org.egoi.client.model.ContactTagActivity;
 
 import javax.ws.rs.core.GenericType;
 
@@ -61,7 +64,7 @@ import com.google.gson.JsonParseException;
 
 import org.egoi.client.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-12-12T17:30:24.773899Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-18T08:41:12.682597+01:00[Europe/Lisbon]")
 public class ContactActivity extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(ContactActivity.class.getName());
 
@@ -74,7 +77,10 @@ public class ContactActivity extends AbstractOpenApiSchema {
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
             final TypeAdapter<ContactActivityClick> adapterContactActivityClick = gson.getDelegateAdapter(this, TypeToken.get(ContactActivityClick.class));
+            final TypeAdapter<ContactAutomationsActivity> adapterContactAutomationsActivity = gson.getDelegateAdapter(this, TypeToken.get(ContactAutomationsActivity.class));
+            final TypeAdapter<ContactCampaignActivity> adapterContactCampaignActivity = gson.getDelegateAdapter(this, TypeToken.get(ContactCampaignActivity.class));
             final TypeAdapter<ContactOtherActivity> adapterContactOtherActivity = gson.getDelegateAdapter(this, TypeToken.get(ContactOtherActivity.class));
+            final TypeAdapter<ContactTagActivity> adapterContactTagActivity = gson.getDelegateAdapter(this, TypeToken.get(ContactTagActivity.class));
 
             return (TypeAdapter<T>) new TypeAdapter<ContactActivity>() {
                 @Override
@@ -91,6 +97,20 @@ public class ContactActivity extends AbstractOpenApiSchema {
                         return;
                     }
 
+                    // check if the actual instance is of the type `ContactAutomationsActivity`
+                    if (value.getActualInstance() instanceof ContactAutomationsActivity) {
+                        JsonObject obj = adapterContactAutomationsActivity.toJsonTree((ContactAutomationsActivity)value.getActualInstance()).getAsJsonObject();
+                        elementAdapter.write(out, obj);
+                        return;
+                    }
+
+                    // check if the actual instance is of the type `ContactCampaignActivity`
+                    if (value.getActualInstance() instanceof ContactCampaignActivity) {
+                        JsonObject obj = adapterContactCampaignActivity.toJsonTree((ContactCampaignActivity)value.getActualInstance()).getAsJsonObject();
+                        elementAdapter.write(out, obj);
+                        return;
+                    }
+
                     // check if the actual instance is of the type `ContactOtherActivity`
                     if (value.getActualInstance() instanceof ContactOtherActivity) {
                         JsonObject obj = adapterContactOtherActivity.toJsonTree((ContactOtherActivity)value.getActualInstance()).getAsJsonObject();
@@ -98,7 +118,14 @@ public class ContactActivity extends AbstractOpenApiSchema {
                         return;
                     }
 
-                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: ContactActivityClick, ContactOtherActivity");
+                    // check if the actual instance is of the type `ContactTagActivity`
+                    if (value.getActualInstance() instanceof ContactTagActivity) {
+                        JsonObject obj = adapterContactTagActivity.toJsonTree((ContactTagActivity)value.getActualInstance()).getAsJsonObject();
+                        elementAdapter.write(out, obj);
+                        return;
+                    }
+
+                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: ContactActivityClick, ContactAutomationsActivity, ContactCampaignActivity, ContactOtherActivity, ContactTagActivity");
                 }
 
                 @Override
@@ -123,6 +150,32 @@ public class ContactActivity extends AbstractOpenApiSchema {
                         log.log(Level.FINER, "Input data does not match schema 'ContactActivityClick'", e);
                     }
 
+                    // deserialize ContactAutomationsActivity
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        ContactAutomationsActivity.validateJsonObject(jsonObject);
+                        actualAdapter = adapterContactAutomationsActivity;
+                        match++;
+                        log.log(Level.FINER, "Input data matches schema 'ContactAutomationsActivity'");
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format("Deserialization for ContactAutomationsActivity failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'ContactAutomationsActivity'", e);
+                    }
+
+                    // deserialize ContactCampaignActivity
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        ContactCampaignActivity.validateJsonObject(jsonObject);
+                        actualAdapter = adapterContactCampaignActivity;
+                        match++;
+                        log.log(Level.FINER, "Input data matches schema 'ContactCampaignActivity'");
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format("Deserialization for ContactCampaignActivity failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'ContactCampaignActivity'", e);
+                    }
+
                     // deserialize ContactOtherActivity
                     try {
                         // validate the JSON object to see if any exception is thrown
@@ -134,6 +187,19 @@ public class ContactActivity extends AbstractOpenApiSchema {
                         // deserialization failed, continue
                         errorMessages.add(String.format("Deserialization for ContactOtherActivity failed with `%s`.", e.getMessage()));
                         log.log(Level.FINER, "Input data does not match schema 'ContactOtherActivity'", e);
+                    }
+
+                    // deserialize ContactTagActivity
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        ContactTagActivity.validateJsonObject(jsonObject);
+                        actualAdapter = adapterContactTagActivity;
+                        match++;
+                        log.log(Level.FINER, "Input data matches schema 'ContactTagActivity'");
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format("Deserialization for ContactTagActivity failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'ContactTagActivity'", e);
                     }
 
                     if (match == 1) {
@@ -160,7 +226,22 @@ public class ContactActivity extends AbstractOpenApiSchema {
         setActualInstance(o);
     }
 
+    public ContactActivity(ContactAutomationsActivity o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
+    public ContactActivity(ContactCampaignActivity o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
     public ContactActivity(ContactOtherActivity o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
+    public ContactActivity(ContactTagActivity o) {
         super("oneOf", Boolean.FALSE);
         setActualInstance(o);
     }
@@ -168,7 +249,13 @@ public class ContactActivity extends AbstractOpenApiSchema {
     static {
         schemas.put("ContactActivityClick", new GenericType<ContactActivityClick>() {
         });
+        schemas.put("ContactAutomationsActivity", new GenericType<ContactAutomationsActivity>() {
+        });
+        schemas.put("ContactCampaignActivity", new GenericType<ContactCampaignActivity>() {
+        });
         schemas.put("ContactOtherActivity", new GenericType<ContactOtherActivity>() {
+        });
+        schemas.put("ContactTagActivity", new GenericType<ContactTagActivity>() {
         });
     }
 
@@ -180,7 +267,7 @@ public class ContactActivity extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * ContactActivityClick, ContactOtherActivity
+     * ContactActivityClick, ContactAutomationsActivity, ContactCampaignActivity, ContactOtherActivity, ContactTagActivity
      *
      * It could be an instance of the 'oneOf' schemas.
      * The oneOf child schemas may themselves be a composed schema (allOf, anyOf, oneOf).
@@ -192,19 +279,34 @@ public class ContactActivity extends AbstractOpenApiSchema {
             return;
         }
 
+        if (instance instanceof ContactAutomationsActivity) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof ContactCampaignActivity) {
+            super.setActualInstance(instance);
+            return;
+        }
+
         if (instance instanceof ContactOtherActivity) {
             super.setActualInstance(instance);
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be ContactActivityClick, ContactOtherActivity");
+        if (instance instanceof ContactTagActivity) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        throw new RuntimeException("Invalid instance type. Must be ContactActivityClick, ContactAutomationsActivity, ContactCampaignActivity, ContactOtherActivity, ContactTagActivity");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * ContactActivityClick, ContactOtherActivity
+     * ContactActivityClick, ContactAutomationsActivity, ContactCampaignActivity, ContactOtherActivity, ContactTagActivity
      *
-     * @return The actual instance (ContactActivityClick, ContactOtherActivity)
+     * @return The actual instance (ContactActivityClick, ContactAutomationsActivity, ContactCampaignActivity, ContactOtherActivity, ContactTagActivity)
      */
     @Override
     public Object getActualInstance() {
@@ -223,6 +325,28 @@ public class ContactActivity extends AbstractOpenApiSchema {
     }
 
     /**
+     * Get the actual instance of `ContactAutomationsActivity`. If the actual instance is not `ContactAutomationsActivity`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `ContactAutomationsActivity`
+     * @throws ClassCastException if the instance is not `ContactAutomationsActivity`
+     */
+    public ContactAutomationsActivity getContactAutomationsActivity() throws ClassCastException {
+        return (ContactAutomationsActivity)super.getActualInstance();
+    }
+
+    /**
+     * Get the actual instance of `ContactCampaignActivity`. If the actual instance is not `ContactCampaignActivity`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `ContactCampaignActivity`
+     * @throws ClassCastException if the instance is not `ContactCampaignActivity`
+     */
+    public ContactCampaignActivity getContactCampaignActivity() throws ClassCastException {
+        return (ContactCampaignActivity)super.getActualInstance();
+    }
+
+    /**
      * Get the actual instance of `ContactOtherActivity`. If the actual instance is not `ContactOtherActivity`,
      * the ClassCastException will be thrown.
      *
@@ -231,6 +355,17 @@ public class ContactActivity extends AbstractOpenApiSchema {
      */
     public ContactOtherActivity getContactOtherActivity() throws ClassCastException {
         return (ContactOtherActivity)super.getActualInstance();
+    }
+
+    /**
+     * Get the actual instance of `ContactTagActivity`. If the actual instance is not `ContactTagActivity`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `ContactTagActivity`
+     * @throws ClassCastException if the instance is not `ContactTagActivity`
+     */
+    public ContactTagActivity getContactTagActivity() throws ClassCastException {
+        return (ContactTagActivity)super.getActualInstance();
     }
 
 
@@ -252,6 +387,22 @@ public class ContactActivity extends AbstractOpenApiSchema {
       errorMessages.add(String.format("Deserialization for ContactActivityClick failed with `%s`.", e.getMessage()));
       // continue to the next one
     }
+    // validate the json string with ContactAutomationsActivity
+    try {
+      ContactAutomationsActivity.validateJsonObject(jsonObj);
+      validCount++;
+    } catch (Exception e) {
+      errorMessages.add(String.format("Deserialization for ContactAutomationsActivity failed with `%s`.", e.getMessage()));
+      // continue to the next one
+    }
+    // validate the json string with ContactCampaignActivity
+    try {
+      ContactCampaignActivity.validateJsonObject(jsonObj);
+      validCount++;
+    } catch (Exception e) {
+      errorMessages.add(String.format("Deserialization for ContactCampaignActivity failed with `%s`.", e.getMessage()));
+      // continue to the next one
+    }
     // validate the json string with ContactOtherActivity
     try {
       ContactOtherActivity.validateJsonObject(jsonObj);
@@ -260,8 +411,16 @@ public class ContactActivity extends AbstractOpenApiSchema {
       errorMessages.add(String.format("Deserialization for ContactOtherActivity failed with `%s`.", e.getMessage()));
       // continue to the next one
     }
+    // validate the json string with ContactTagActivity
+    try {
+      ContactTagActivity.validateJsonObject(jsonObj);
+      validCount++;
+    } catch (Exception e) {
+      errorMessages.add(String.format("Deserialization for ContactTagActivity failed with `%s`.", e.getMessage()));
+      // continue to the next one
+    }
     if (validCount != 1) {
-      throw new IOException(String.format("The JSON string is invalid for ContactActivity with oneOf schemas: ContactActivityClick, ContactOtherActivity. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonObj.toString()));
+      throw new IOException(String.format("The JSON string is invalid for ContactActivity with oneOf schemas: ContactActivityClick, ContactAutomationsActivity, ContactCampaignActivity, ContactOtherActivity, ContactTagActivity. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonObj.toString()));
     }
   }
 
