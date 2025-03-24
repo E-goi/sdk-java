@@ -9,8 +9,9 @@ Detach tag to contact request schema
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**tagId** | **Integer** |  |  |
-|**contacts** | **Set&lt;String&gt;** | Array of contact IDs to dettach the tag |  |
+|**contacts** | **Set&lt;String&gt;** | Array of contacts to detach the tag |  |
 |**segmentId** | **String** |  |  |
+|**fieldId** | **String** |  |  |
 
 
 

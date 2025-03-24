@@ -2,7 +2,10 @@ openapi: 3.0.0
 info:
   description: |2-
      # Introduction
-    This is our new version of API. We invite you to start using it and give us your feedback
+    Welcome to the E-goi Marketing API!
+    <br><br>This API enables you to integrate, automate, and manage all the marketing functionalities offered by E-goi. With it, you can interact with contact lists, send email campaigns, SMS, push notifications, and much more.
+    <br><br>Our API is designed to simplify integration in a straightforward, efficient, and secure way, meeting the needs of developers and businesses looking to optimize their digital marketing operations.
+    <br><br>Explore the documentation to discover all the possibilities and start creating integrations that drive your marketing results.
     # Getting Started
 
     E-goi can be integrated with many environments and programming languages via our REST API.
@@ -28,6 +31,41 @@ info:
     PUT is most-often utilized for **update** capabilities, PUT-ing to a known resource URI with the request body containing the newly-updated representation of the original resource.
     * <b>DELETE</b>:
     DELETE is pretty easy to understand. It is used to **delete** a resource identified by a URI.
+
+    # Transport Layer Security (TLS)
+    Transport Layer Security (TLS) is a widely used authentication and encryption protocol that establishes a secure communications channel for data-in-transit while ensuring that the client and server can validate one another.<br>
+    Our API requires TLS 1.2 or TLS 1.3. We recommend <b>TLS 1.3</b>.<br><br>
+    <b>TLS 1.3 ciphers</b>
+    * TLS_AES_256_GCM_SHA384 (0x1302) ECDH x25519 (eq. 3072 bits RSA) FS
+    * TLS_CHACHA20_POLY1305_SHA256 (0x1303) ECDH x25519 (eq. 3072 bits RSA) FS
+    * TLS_AES_128_GCM_SHA256 (0x1301) ECDH x25519 (eq. 3072 bits RSA) FS
+
+    <b>TLS 1.2 ciphers</b>
+    * TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (0xc030) ECDH x25519 (eq. 3072 bits RSA) FS
+    * TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (0xc02f) ECDH x25519 (eq. 3072 bits RSA) FS
+    * TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 (0x9f) DH 4096 bits FS
+    * TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 (0x9e) DH 4096 bits FS
+
+    # Rate Limits
+    Rate limits are used to control the amount of traffic that is allowed to flow between the client and the server.<br>
+    This is done to prevent abuse and ensure that the API is available to all users.<br>
+    The rate limits are applied to ensure the stability and security of our API and are based on the number of requests made in a given time period.<br>
+    If the rate limit is exceeded, the API will return a 429 status code and the request will be rejected.<br>
+    Each API response includes headers providing real-time rate limit information:
+    * **X-RateLimit-Limit**: The maximum number of requests that the consumer is permitted to make in a given time period.
+    * **X-RateLimit-Remaining**: The number of requests remaining in the current rate limit window.
+    * **X-RateLimit-Reset**: The remaining time in seconds until the rate limit window resets.
+
+    # Account Limit
+    The account limit is a rate limit that is applied to the account as a whole.<br>
+    This limit is applied to all requests made by the account, regardless of the client making the request.<br>
+    The account limit is applied to ensure that the account does not exceed the maximum number of requests allowed in a given time period.
+    Each account has an overall usage limit per hour. If the account limit is exceeded, the API will return a 429 status code and the request will be rejected.<br>
+    Each API response includes headers providing real-time rate limit information:
+    * **X-Account-Limit**: The maximum number of requests that the account is permitted to make in a given time period.
+    * **X-Account-Remaining**: The number of requests remaining in the current rate limit window.
+    * **X-Account-Reset**: The remaining time in seconds until the rate limit window resets.
+
 
     # Authentication
 
@@ -72,8 +110,8 @@ info:
     ***Note:*** Only http or https protocols are supported in the Url parameter.
 
     <security-definitions/>
-  title: APIv3 (New)
-  version: 3.0.0
+  title: Marketing API
+  version: V3
 servers:
 - description: Egoi Public API Server
   url: https://api.egoiapp.com
@@ -83,6 +121,192 @@ tags:
     \ the link to find out how! <a href='https://developers.e-goi.com/push/' target='_blank'>https://developers.e-goi.com/push/</a>"
   name: Push
 paths:
+  /automations/{automation_id}/actions:
+    get:
+      description: Returns all actions
+      operationId: getAllActions
+      parameters:
+      - allowEmptyValue: false
+        description: Reference attribute to automation id
+        explode: true
+        in: query
+        name: automation_id
+        required: false
+        schema:
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        description: Element offset (starting at zero for the first element)
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        description: Number of items to return
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationActionsCollection'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeout'
+          description: Request Timeout
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailable'
+          description: Service Unavailable
+      security:
+      - Apikey: []
+      summary: Get all actions from given automation
+      tags:
+      - Automations
+      x-code-samples:
+      - lang: cURL
+        source: |-
+          curl --location --max-time 30 --request GET 'api.egoiapp.com/automations/:automation_id/actions?automation_id=<integer>&offset=<integer>&limit=10' \
+          --header 'Apikey: <YOUR_APIKEY>'
+      - lang: C#
+        source: |-
+          var client = new RestClient("api.egoiapp.com/automations/:automation_id/actions?automation_id=<integer>&offset=<integer>&limit=10");
+          client.Timeout = 30;
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Apikey", "<YOUR_APIKEY>");
+          IRestResponse response = client.Execute(request);
+          Console.WriteLine(response.Content);
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient().newBuilder()
+              .setConnectTimeout(30, TimeUnit.MILLISECONDS)
+              .build();
+          Request request = new Request.Builder()
+              .url("api.egoiapp.com/automations/:automation_id/actions?automation_id=<integer>&offset=<integer>&limit=10")
+              .method("GET", null)
+              .addHeader("Apikey", "<YOUR_APIKEY>")
+              .build();
+          Response response = client.newCall(request).execute();
+      - lang: JavaScript
+        source: |2-
+
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+
+          xhr.addEventListener("readystatechange", function() {
+              if(this.readyState === 4) {
+                  console.log(this.responseText);
+              }
+          });
+
+          xhr.open("GET", "api.egoiapp.com/automations/:automation_id/actions?automation_id=<integer>&offset=<integer>&limit=10");
+          xhr.timeout = 30;
+          xhr.addEventListener("ontimeout", function(e) {
+               console.log(e);
+          });
+          xhr.setRequestHeader("Apikey", "<YOUR_APIKEY>");
+
+          xhr.send();
+      - lang: PHP
+        source: |
+          <?php
+
+          $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+              CURLOPT_URL => "api.egoiapp.com/automations/:automation_id/actions?automation_id=<integer>&offset=<integer>&limit=10",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "GET",
+              CURLOPT_HTTPHEADER => array(
+                  "Apikey: <YOUR_APIKEY>"
+              ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          echo $response;
+      - lang: Python
+        source: |-
+          import http.client
+          import mimetypes
+          conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
+          payload = ''
+          headers = {
+              'Apikey': '<YOUR_APIKEY>'
+          }
+          conn.request("GET", "/automations/:automation_id/actions?automation_id=<integer>&offset=<integer>&limit=10", payload, headers)
+          res = conn.getresponse()
+          data = res.read()
+          print(data.decode("utf-8"))
+      - lang: Ruby
+        source: |
+          require "uri"
+          require "net/http"
+
+          url = URI("api.egoiapp.com/automations/:automation_id/actions?automation_id=<integer>&offset=<integer>&limit=10")
+
+          http = Net::HTTP.new(url.host, url.port);
+          http.read_timeout = 1
+          request = Net::HTTP::Get.new(url)
+          request["Apikey"] = "<YOUR_APIKEY>"
+
+          response = http.request(request)
+          puts response.read_body
+      x-accepts: application/json
   /automations:
     get:
       description: Returns all automations
@@ -154,7 +378,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -692,8 +916,8 @@ paths:
         name: limit
         required: false
         schema:
-          default: 10
-          maximum: 100
+          default: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -783,11 +1007,11 @@ paths:
       x-code-samples:
       - lang: cURL
         source: |-
-          curl --location --max-time 30 --request GET 'api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=10&order=desc&order_by=created' \
+          curl --location --max-time 30 --request GET 'api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=100&order=desc&order_by=created' \
           --header 'Apikey: <YOUR_APIKEY>'
       - lang: C#
         source: |-
-          var client = new RestClient("api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=10&order=desc&order_by=created");
+          var client = new RestClient("api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=100&order=desc&order_by=created");
           client.Timeout = 30;
           var request = new RestRequest(Method.GET);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
@@ -799,7 +1023,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           Request request = new Request.Builder()
-              .url("api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=10&order=desc&order_by=created")
+              .url("api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=100&order=desc&order_by=created")
               .method("GET", null)
               .addHeader("Apikey", "<YOUR_APIKEY>")
               .build();
@@ -816,7 +1040,7 @@ paths:
               }
           });
 
-          xhr.open("GET", "api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=10&order=desc&order_by=created");
+          xhr.open("GET", "api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=100&order=desc&order_by=created");
           xhr.timeout = 30;
           xhr.addEventListener("ontimeout", function(e) {
                console.log(e);
@@ -831,7 +1055,7 @@ paths:
           $curl = curl_init();
 
           curl_setopt_array($curl, array(
-              CURLOPT_URL => "api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=10&order=desc&order_by=created",
+              CURLOPT_URL => "api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=100&order=desc&order_by=created",
               CURLOPT_RETURNTRANSFER => true,
               CURLOPT_ENCODING => "",
               CURLOPT_MAXREDIRS => 10,
@@ -857,7 +1081,7 @@ paths:
           headers = {
               'Apikey': '<YOUR_APIKEY>'
           }
-          conn.request("GET", "/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=10&order=desc&order_by=created", payload, headers)
+          conn.request("GET", "/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=100&order=desc&order_by=created", payload, headers)
           res = conn.getresponse()
           data = res.read()
           print(data.decode("utf-8"))
@@ -866,7 +1090,7 @@ paths:
           require "uri"
           require "net/http"
 
-          url = URI("api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=10&order=desc&order_by=created")
+          url = URI("api.egoiapp.com/campaigns?channel=<string>&campaign_hash=<string>&list_id=<integer>&status=<string>&internal_name=<string>&created_by=<integer>&group_id=<integer>&created_min=<dateTime>&created_max=<dateTime>&updated_min=<dateTime>&updated_max=<dateTime>&start_date_min=<dateTime>&start_date_max=<dateTime>&end_date_min=<dateTime>&end_date_max=<dateTime>&schedule_date_min=<dateTime>&schedule_date_max=<dateTime>&offset=<integer>&limit=100&order=desc&order_by=created")
 
           http = Net::HTTP.new(url.host, url.port);
           http.read_timeout = 1
@@ -881,7 +1105,7 @@ paths:
       description: Remove campaign information given its ID
       operationId: deleteCampaigns
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -1048,7 +1272,7 @@ paths:
       description: Deploys and sends an email message
       operationId: actionSendEmail
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -1439,7 +1663,7 @@ paths:
       description: Update email campaign
       operationId: patchEmailCampaign
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -1636,7 +1860,7 @@ paths:
       description: Enables a rss email message
       operationId: actionEnableEmailRss
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -2001,7 +2225,7 @@ paths:
       description: Deploys and sends a push message
       operationId: actionSendPush
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -2368,7 +2592,7 @@ paths:
       description: Update push campaign
       operationId: patchPushCampaign
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -2565,7 +2789,7 @@ paths:
       description: Deploys and sends a smart sms message
       operationId: actionSendSmartSms
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -2934,7 +3158,7 @@ paths:
       description: Update smart sms campaign
       operationId: patchSmartSmsCampaign
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -3131,7 +3355,7 @@ paths:
       description: Deploys and sends an sms message
       operationId: actionSendSms
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -3498,7 +3722,7 @@ paths:
       description: Update sms campaign
       operationId: patchSmsCampaign
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -3695,7 +3919,7 @@ paths:
       description: Deploys and sends an voice message
       operationId: actionSendVoice
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -4078,7 +4302,7 @@ paths:
       description: Update a voice campaign
       operationId: patchVoiceCampaign
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -4275,7 +4499,7 @@ paths:
       description: Deploys and sends a webpush message
       operationId: actionSendWebPush
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -4642,7 +4866,7 @@ paths:
       description: Update a webpush campaign
       operationId: patchWebPushCampaign
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -4839,7 +5063,7 @@ paths:
       description: Enable rss webpush message
       operationId: actionEnableWebPushRss
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -5222,7 +5446,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -7881,7 +8105,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/lists/<integer>/contacts/actions/import-bulk' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"mode":"<string>","compare_field":"<string>","contacts":[{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]},{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]}],"force_empty":false,"notify":["<integer>","<integer>"],"callback_url":"<string>"}'
+          --data-raw '{"mode":"<string>","compare_field":"<string>","contacts":[{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}],"utm":{"utm_source":"<string>","utm_medium":"<string>","utm_campaign":"<string>","utm_content":"<string>","utm_term":"<string>"},"referrer":{"referrer":"<string>"}},{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}],"utm":{"utm_source":"<string>","utm_medium":"<string>","utm_campaign":"<string>","utm_content":"<string>","utm_term":"<string>"},"referrer":{"referrer":"<string>"}}],"force_empty":false,"notify":["<integer>","<integer>"],"callback_url":"<string>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/lists/<integer>/contacts/actions/import-bulk");
@@ -7889,7 +8113,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -7898,7 +8122,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/lists/<integer>/contacts/actions/import-bulk")
               .method("POST", body)
@@ -7908,7 +8132,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"mode":"<string>","compare_field":"<string>","contacts":[{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]},{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]}],"force_empty":false,"notify":["<integer>","<integer>"],"callback_url":"<string>"});
+          var data = JSON.stringify({"mode":"<string>","compare_field":"<string>","contacts":[{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}],"utm":{"utm_source":"<string>","utm_medium":"<string>","utm_campaign":"<string>","utm_content":"<string>","utm_term":"<string>"},"referrer":{"referrer":"<string>"}},{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}],"utm":{"utm_source":"<string>","utm_medium":"<string>","utm_campaign":"<string>","utm_content":"<string>","utm_term":"<string>"},"referrer":{"referrer":"<string>"}}],"force_empty":false,"notify":["<integer>","<integer>"],"callback_url":"<string>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -7943,7 +8167,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}",
+              CURLOPT_POSTFIELDS =>"{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -7959,7 +8183,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}"
+          payload = "{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -7980,7 +8204,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}"
+          request.body = "{\"mode\":\"<string>\",\"compare_field\":\"<string>\",\"contacts\":[{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}},{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"}}],\"force_empty\":false,\"notify\":[\"<integer>\",\"<integer>\"],\"callback_url\":\"<string>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -8619,7 +8843,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -8865,6 +9089,203 @@ paths:
 
           response = http.request(request)
           puts response.read_body
+      x-accepts: application/json
+  /lists/{list_id}/contacts/by-field:
+    post:
+      description: "Updates a contact by field, wich must be unique in list"
+      operationId: updateContactByField
+      parameters:
+      - description: ID of the list where the contact belongs
+        explode: false
+        in: path
+        name: list_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/queryId'
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactFieldIdBaseExtraPost'
+        description: Parameters for the Contact Update by Field Id
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContactResponse'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeout'
+          description: Request Timeout
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostContactsConflict'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailable'
+          description: Service Unavailable
+      security:
+      - Apikey: []
+      summary: Updates a contact by field
+      tags:
+      - Contacts
+      x-code-samples:
+      - lang: cURL
+        source: |-
+          curl --location --max-time 30 --request POST 'api.egoiapp.com/lists/<integer>/contacts/by-field' \
+          --header 'Apikey: <YOUR_APIKEY>' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{"compare_field":{"field_id":"<string>","value":"<string>"},"base":{"contact_id":"<string>","status":"active","consent":"<string>","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","email_status":"<string>","cellphone":"<string>","cellphone_status":"<string>","phone":"<string>","phone_status":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]}'
+      - lang: C#
+        source: |-
+          var client = new RestClient("api.egoiapp.com/lists/<integer>/contacts/by-field");
+          client.Timeout = 30;
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("Apikey", "<YOUR_APIKEY>");
+          request.AddHeader("Content-Type", "application/json");
+          request.AddParameter("application/json", "{\"compare_field\":{\"field_id\":\"<string>\",\"value\":\"<string>\"},\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"consent\":\"<string>\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"email_status\":\"<string>\",\"cellphone\":\"<string>\",\"cellphone_status\":\"<string>\",\"phone\":\"<string>\",\"phone_status\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}",  ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+          Console.WriteLine(response.Content);
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient().newBuilder()
+              .setConnectTimeout(30, TimeUnit.MILLISECONDS)
+              .build();
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"compare_field\":{\"field_id\":\"<string>\",\"value\":\"<string>\"},\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"consent\":\"<string>\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"email_status\":\"<string>\",\"cellphone\":\"<string>\",\"cellphone_status\":\"<string>\",\"phone\":\"<string>\",\"phone_status\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}");
+          Request request = new Request.Builder()
+              .url("api.egoiapp.com/lists/<integer>/contacts/by-field")
+              .method("POST", body)
+              .addHeader("Apikey", "<YOUR_APIKEY>")
+              .addHeader("Content-Type", "application/json")
+              .build();
+          Response response = client.newCall(request).execute();
+      - lang: JavaScript
+        source: |-
+          var data = JSON.stringify({"compare_field":{"field_id":"<string>","value":"<string>"},"base":{"contact_id":"<string>","status":"active","consent":"<string>","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","email_status":"<string>","cellphone":"<string>","cellphone_status":"<string>","phone":"<string>","phone_status":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]});
+
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+
+          xhr.addEventListener("readystatechange", function() {
+              if(this.readyState === 4) {
+                  console.log(this.responseText);
+              }
+          });
+
+          xhr.open("POST", "api.egoiapp.com/lists/<integer>/contacts/by-field");
+          xhr.timeout = 30;
+          xhr.addEventListener("ontimeout", function(e) {
+               console.log(e);
+          });
+          xhr.setRequestHeader("Apikey", "<YOUR_APIKEY>");
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          xhr.send(data);
+      - lang: PHP
+        source: |
+          <?php
+
+          $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+              CURLOPT_URL => "api.egoiapp.com/lists/<integer>/contacts/by-field",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "POST",
+              CURLOPT_POSTFIELDS =>"{\"compare_field\":{\"field_id\":\"<string>\",\"value\":\"<string>\"},\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"consent\":\"<string>\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"email_status\":\"<string>\",\"cellphone\":\"<string>\",\"cellphone_status\":\"<string>\",\"phone\":\"<string>\",\"phone_status\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}",
+              CURLOPT_HTTPHEADER => array(
+                  "Apikey: <YOUR_APIKEY>",
+                  "Content-Type: application/json"
+              ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          echo $response;
+      - lang: Python
+        source: |-
+          import http.client
+          import mimetypes
+          conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
+          payload = "{\"compare_field\":{\"field_id\":\"<string>\",\"value\":\"<string>\"},\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"consent\":\"<string>\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"email_status\":\"<string>\",\"cellphone\":\"<string>\",\"cellphone_status\":\"<string>\",\"phone\":\"<string>\",\"phone_status\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}"
+          headers = {
+              'Apikey': '<YOUR_APIKEY>',
+              'Content-Type': 'application/json'
+          }
+          conn.request("POST", "/lists/<integer>/contacts/by-field", payload, headers)
+          res = conn.getresponse()
+          data = res.read()
+          print(data.decode("utf-8"))
+      - lang: Ruby
+        source: |
+          require "uri"
+          require "net/http"
+
+          url = URI("api.egoiapp.com/lists/<integer>/contacts/by-field")
+
+          http = Net::HTTP.new(url.host, url.port);
+          http.read_timeout = 1
+          request = Net::HTTP::Post.new(url)
+          request["Apikey"] = "<YOUR_APIKEY>"
+          request["Content-Type"] = "application/json"
+          request.body = "{\"compare_field\":{\"field_id\":\"<string>\",\"value\":\"<string>\"},\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"consent\":\"<string>\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"email_status\":\"<string>\",\"cellphone\":\"<string>\",\"cellphone_status\":\"<string>\",\"phone\":\"<string>\",\"phone_status\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}"
+
+          response = http.request(request)
+          puts response.read_body
+      x-content-type: application/json
       x-accepts: application/json
   /lists/{list_id}/contacts:
     get:
@@ -9256,7 +9677,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/lists/<integer>/contacts' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]}'
+          --data-raw '{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}],"utm":{"utm_source":"<string>","utm_medium":"<string>","utm_campaign":"<string>","utm_content":"<string>","utm_term":"<string>"},"referrer":{"referrer":"<string>"},"advertising":{"gclid":"<string>","msclkid":"<string>","fbclid":"<string>"}}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/lists/<integer>/contacts");
@@ -9264,7 +9685,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"},\"advertising\":{\"gclid\":\"<string>\",\"msclkid\":\"<string>\",\"fbclid\":\"<string>\"}}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -9273,7 +9694,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"},\"advertising\":{\"gclid\":\"<string>\",\"msclkid\":\"<string>\",\"fbclid\":\"<string>\"}}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/lists/<integer>/contacts")
               .method("POST", body)
@@ -9283,7 +9704,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]});
+          var data = JSON.stringify({"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}],"utm":{"utm_source":"<string>","utm_medium":"<string>","utm_campaign":"<string>","utm_content":"<string>","utm_term":"<string>"},"referrer":{"referrer":"<string>"},"advertising":{"gclid":"<string>","msclkid":"<string>","fbclid":"<string>"}});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -9318,7 +9739,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}",
+              CURLOPT_POSTFIELDS =>"{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"},\"advertising\":{\"gclid\":\"<string>\",\"msclkid\":\"<string>\",\"fbclid\":\"<string>\"}}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -9334,7 +9755,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}"
+          payload = "{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"},\"advertising\":{\"gclid\":\"<string>\",\"msclkid\":\"<string>\",\"fbclid\":\"<string>\"}}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -9355,7 +9776,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]}"
+          request.body = "{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}],\"utm\":{\"utm_source\":\"<string>\",\"utm_medium\":\"<string>\",\"utm_campaign\":\"<string>\",\"utm_content\":\"<string>\",\"utm_term\":\"<string>\"},\"referrer\":{\"referrer\":\"<string>\"},\"advertising\":{\"gclid\":\"<string>\",\"msclkid\":\"<string>\",\"fbclid\":\"<string>\"}}"
 
           response = http.request(request)
           puts response.read_body
@@ -9442,6 +9863,7 @@ paths:
       summary: Get contact
       tags:
       - Contacts
+      x-sort-index: 1
       x-code-samples:
       - lang: cURL
         source: |-
@@ -9972,7 +10394,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -11449,7 +11871,7 @@ paths:
       - Apikey: []
       summary: Orders import bulk request
       tags:
-      - Ecommerce Activity
+      - Ecommerce
       x-code-samples:
       - lang: cURL
         source: |-
@@ -11902,7 +12324,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -12693,7 +13115,7 @@ paths:
           curl --location --max-time 30 --request PATCH 'api.egoiapp.com/catalogs/<integer>/products/<string>' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>","categories":["<string>","<string>"],"related_products":{"external_product_id":["<string>","<string>"]},"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}]}'
+          --data-raw '{"name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>","categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}]}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/catalogs/<integer>/products/<string>");
@@ -12701,7 +13123,7 @@ paths:
           var request = new RestRequest(Method.PATCH);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":{\"external_product_id\":[\"<string>\",\"<string>\"]},\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -12710,7 +13132,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":{\"external_product_id\":[\"<string>\",\"<string>\"]},\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/catalogs/<integer>/products/<string>")
               .method("PATCH", body)
@@ -12720,7 +13142,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>","categories":["<string>","<string>"],"related_products":{"external_product_id":["<string>","<string>"]},"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}]});
+          var data = JSON.stringify({"name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>","categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}]});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -12755,7 +13177,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "PATCH",
-              CURLOPT_POSTFIELDS =>"{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":{\"external_product_id\":[\"<string>\",\"<string>\"]},\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}",
+              CURLOPT_POSTFIELDS =>"{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -12771,7 +13193,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":{\"external_product_id\":[\"<string>\",\"<string>\"]},\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}"
+          payload = "{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -12792,7 +13214,7 @@ paths:
           request = Net::HTTP::Patch.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":{\"external_product_id\":[\"<string>\",\"<string>\"]},\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}"
+          request.body = "{\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}"
 
           response = http.request(request)
           puts response.read_body
@@ -13604,7 +14026,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -14541,7 +14963,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -15125,6 +15547,174 @@ paths:
           http = Net::HTTP.new(url.host, url.port);
           http.read_timeout = 1
           request = Net::HTTP::Delete.new(url)
+          request["Apikey"] = "<YOUR_APIKEY>"
+
+          response = http.request(request)
+          puts response.read_body
+      x-accepts: application/json
+    get:
+      description: Returns list information given its ID
+      operationId: getList
+      parameters:
+      - description: ID of the List
+        explode: false
+        in: path
+        name: list_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/queryId'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComplexList'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: Not Found
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeout'
+          description: Request Timeout
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailable'
+          description: Service Unavailable
+      security:
+      - Apikey: []
+      summary: Get list
+      tags:
+      - Lists
+      x-code-samples:
+      - lang: cURL
+        source: |-
+          curl --location --max-time 30 --request GET 'api.egoiapp.com/lists/<integer>' \
+          --header 'Apikey: <YOUR_APIKEY>'
+      - lang: C#
+        source: |-
+          var client = new RestClient("api.egoiapp.com/lists/<integer>");
+          client.Timeout = 30;
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Apikey", "<YOUR_APIKEY>");
+          IRestResponse response = client.Execute(request);
+          Console.WriteLine(response.Content);
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient().newBuilder()
+              .setConnectTimeout(30, TimeUnit.MILLISECONDS)
+              .build();
+          Request request = new Request.Builder()
+              .url("api.egoiapp.com/lists/<integer>")
+              .method("GET", null)
+              .addHeader("Apikey", "<YOUR_APIKEY>")
+              .build();
+          Response response = client.newCall(request).execute();
+      - lang: JavaScript
+        source: |2-
+
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+
+          xhr.addEventListener("readystatechange", function() {
+              if(this.readyState === 4) {
+                  console.log(this.responseText);
+              }
+          });
+
+          xhr.open("GET", "api.egoiapp.com/lists/<integer>");
+          xhr.timeout = 30;
+          xhr.addEventListener("ontimeout", function(e) {
+               console.log(e);
+          });
+          xhr.setRequestHeader("Apikey", "<YOUR_APIKEY>");
+
+          xhr.send();
+      - lang: PHP
+        source: |
+          <?php
+
+          $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+              CURLOPT_URL => "api.egoiapp.com/lists/<integer>",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "GET",
+              CURLOPT_HTTPHEADER => array(
+                  "Apikey: <YOUR_APIKEY>"
+              ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          echo $response;
+      - lang: Python
+        source: |-
+          import http.client
+          import mimetypes
+          conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
+          payload = ''
+          headers = {
+              'Apikey': '<YOUR_APIKEY>'
+          }
+          conn.request("GET", "/lists/<integer>", payload, headers)
+          res = conn.getresponse()
+          data = res.read()
+          print(data.decode("utf-8"))
+      - lang: Ruby
+        source: |
+          require "uri"
+          require "net/http"
+
+          url = URI("api.egoiapp.com/lists/<integer>")
+
+          http = Net::HTTP.new(url.host, url.port);
+          http.read_timeout = 1
+          request = Net::HTTP::Get.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
 
           response = http.request(request)
@@ -16576,7 +17166,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -17242,7 +17832,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/push/apps/<string>/event' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"os":"<string>","contact":"<string>","message_hash":"<string>","event":"<string>","device_id":"<integer>"}'
+          --data-raw '{"os":"<string>","contact":"<string>","message_hash":"<string>","event":"<string>","device_id":"<integer>","mailing_id":"<integer>"}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/push/apps/<string>/event");
@@ -17250,7 +17840,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\"}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\",\"mailing_id\":\"<integer>\"}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -17259,7 +17849,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\"}");
+          RequestBody body = RequestBody.create(mediaType, "{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\",\"mailing_id\":\"<integer>\"}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/push/apps/<string>/event")
               .method("POST", body)
@@ -17269,7 +17859,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"os":"<string>","contact":"<string>","message_hash":"<string>","event":"<string>","device_id":"<integer>"});
+          var data = JSON.stringify({"os":"<string>","contact":"<string>","message_hash":"<string>","event":"<string>","device_id":"<integer>","mailing_id":"<integer>"});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -17304,7 +17894,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\"}",
+              CURLOPT_POSTFIELDS =>"{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\",\"mailing_id\":\"<integer>\"}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -17320,7 +17910,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\"}"
+          payload = "{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\",\"mailing_id\":\"<integer>\"}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -17341,7 +17931,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\"}"
+          request.body = "{\"os\":\"<string>\",\"contact\":\"<string>\",\"message_hash\":\"<string>\",\"event\":\"<string>\",\"device_id\":\"<integer>\",\"mailing_id\":\"<integer>\"}"
 
           response = http.request(request)
           puts response.read_body
@@ -17520,6 +18110,384 @@ paths:
           puts response.read_body
       x-content-type: application/json
       x-accepts: application/json
+  /reports/advanced/model:
+    post:
+      description: Generates a new report by model Id
+      operationId: generateByModelReport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateByModelReport'
+        description: Parameters for the report by model Id
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeout'
+          description: Request Timeout
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailable'
+          description: Service Unavailable
+      security:
+      - Apikey: []
+      summary: Generate report by model
+      tags:
+      - Advanced Reports
+      x-code-samples:
+      - lang: cURL
+        source: |-
+          curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/model' \
+          --header 'Apikey: <YOUR_APIKEY>' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{"model_id":"<integer>"}'
+      - lang: C#
+        source: |-
+          var client = new RestClient("api.egoiapp.com/reports/advanced/model");
+          client.Timeout = 30;
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("Apikey", "<YOUR_APIKEY>");
+          request.AddHeader("Content-Type", "application/json");
+          request.AddParameter("application/json", "{\"model_id\":\"<integer>\"}",  ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+          Console.WriteLine(response.Content);
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient().newBuilder()
+              .setConnectTimeout(30, TimeUnit.MILLISECONDS)
+              .build();
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"model_id\":\"<integer>\"}");
+          Request request = new Request.Builder()
+              .url("api.egoiapp.com/reports/advanced/model")
+              .method("POST", body)
+              .addHeader("Apikey", "<YOUR_APIKEY>")
+              .addHeader("Content-Type", "application/json")
+              .build();
+          Response response = client.newCall(request).execute();
+      - lang: JavaScript
+        source: |-
+          var data = JSON.stringify({"model_id":"<integer>"});
+
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+
+          xhr.addEventListener("readystatechange", function() {
+              if(this.readyState === 4) {
+                  console.log(this.responseText);
+              }
+          });
+
+          xhr.open("POST", "api.egoiapp.com/reports/advanced/model");
+          xhr.timeout = 30;
+          xhr.addEventListener("ontimeout", function(e) {
+               console.log(e);
+          });
+          xhr.setRequestHeader("Apikey", "<YOUR_APIKEY>");
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          xhr.send(data);
+      - lang: PHP
+        source: |
+          <?php
+
+          $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+              CURLOPT_URL => "api.egoiapp.com/reports/advanced/model",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "POST",
+              CURLOPT_POSTFIELDS =>"{\"model_id\":\"<integer>\"}",
+              CURLOPT_HTTPHEADER => array(
+                  "Apikey: <YOUR_APIKEY>",
+                  "Content-Type: application/json"
+              ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          echo $response;
+      - lang: Python
+        source: |-
+          import http.client
+          import mimetypes
+          conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
+          payload = "{\"model_id\":\"<integer>\"}"
+          headers = {
+              'Apikey': '<YOUR_APIKEY>',
+              'Content-Type': 'application/json'
+          }
+          conn.request("POST", "/reports/advanced/model", payload, headers)
+          res = conn.getresponse()
+          data = res.read()
+          print(data.decode("utf-8"))
+      - lang: Ruby
+        source: |
+          require "uri"
+          require "net/http"
+
+          url = URI("api.egoiapp.com/reports/advanced/model")
+
+          http = Net::HTTP.new(url.host, url.port);
+          http.read_timeout = 1
+          request = Net::HTTP::Post.new(url)
+          request["Apikey"] = "<YOUR_APIKEY>"
+          request["Content-Type"] = "application/json"
+          request.body = "{\"model_id\":\"<integer>\"}"
+
+          response = http.request(request)
+          puts response.read_body
+      x-content-type: application/json
+      x-accepts: application/json
+  /reports/advanced/contact-activity:
+    post:
+      callbacks:
+        ContactActivityReport:
+          '{$request.body#/callbackUrl}':
+            post:
+              operationId: contactActivityReport_Post
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/ExportReportWebhookData'
+              responses:
+                "200":
+                  description: OK
+              x-callback-request: true
+      description: Generates a new contact activity report
+      operationId: generateContactActivityReport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateContactActivityReport'
+        description: Parameters for the contact activity report
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedResponse'
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeout'
+          description: Request Timeout
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailable'
+          description: Service Unavailable
+      security:
+      - Apikey: []
+      summary: Generate contact activity report
+      tags:
+      - Advanced Reports
+      x-code-samples:
+      - lang: cURL
+        source: |-
+          curl --location --max-time 30 --request POST 'api.egoiapp.com/reports/advanced/contact-activity' \
+          --header 'Apikey: <YOUR_APIKEY>' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"lists":["<integer>","<integer>"],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"contact_activities":{"opens":"<boolean>","clicks":"<boolean>","recommends":"<boolean>","conversion":"<boolean>","email_send":"<boolean>","sms_send":"<boolean>","sms_report":"<boolean>","voice_send":"<boolean>","voice_report":"<boolean>","invitation_send":"<boolean>","invitation_open":"<boolean>","unsubscribe":"<boolean>","email_soft_bounce":"<boolean>","email_hard_bounce":"<boolean>","subscription":"<boolean>","resubscription":"<boolean>","unsubscribe_reason":"<boolean>","facebook_like":"<boolean>","social_share":"<boolean>","unsubscribe_manual":"<boolean>","double_optin":"<boolean>","email_spam_complaint":"<boolean>","email_field_disable":"<boolean>","cellphone_field_disable":"<boolean>","phone_field_disable":"<boolean>","unsubscribe_api":"<boolean>","email_field_enable":"<boolean>","cellphone_field_enable":"<boolean>","phone_field_enable":"<boolean>","edit_subscription":"<boolean>","automation_event":"<boolean>","push_send":"<boolean>","push_delivered":"<boolean>","push_error":"<boolean>","push_received":"<boolean>","push_open":"<boolean>","push_canceled":"<boolean>","push_unsubscription":"<boolean>","reply_to_email":"<boolean>","web_push_send":"<boolean>","web_push_delivered":"<boolean>","web_push_open":"<boolean>","web_push_bounce":"<boolean>","web_push_click":"<boolean>","web_push_subscription":"<boolean>","web_push_unsubscription":"<boolean>","forget_subscription":"<boolean>","change_consent":"<boolean>","double_optin_resend":"<boolean>","double_optedit":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"}'
+      - lang: C#
+        source: |-
+          var client = new RestClient("api.egoiapp.com/reports/advanced/contact-activity");
+          client.Timeout = 30;
+          var request = new RestRequest(Method.POST);
+          request.AddHeader("Apikey", "<YOUR_APIKEY>");
+          request.AddHeader("Content-Type", "application/json");
+          request.AddParameter("application/json", "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"contact_activities\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"recommends\":\"<boolean>\",\"conversion\":\"<boolean>\",\"email_send\":\"<boolean>\",\"sms_send\":\"<boolean>\",\"sms_report\":\"<boolean>\",\"voice_send\":\"<boolean>\",\"voice_report\":\"<boolean>\",\"invitation_send\":\"<boolean>\",\"invitation_open\":\"<boolean>\",\"unsubscribe\":\"<boolean>\",\"email_soft_bounce\":\"<boolean>\",\"email_hard_bounce\":\"<boolean>\",\"subscription\":\"<boolean>\",\"resubscription\":\"<boolean>\",\"unsubscribe_reason\":\"<boolean>\",\"facebook_like\":\"<boolean>\",\"social_share\":\"<boolean>\",\"unsubscribe_manual\":\"<boolean>\",\"double_optin\":\"<boolean>\",\"email_spam_complaint\":\"<boolean>\",\"email_field_disable\":\"<boolean>\",\"cellphone_field_disable\":\"<boolean>\",\"phone_field_disable\":\"<boolean>\",\"unsubscribe_api\":\"<boolean>\",\"email_field_enable\":\"<boolean>\",\"cellphone_field_enable\":\"<boolean>\",\"phone_field_enable\":\"<boolean>\",\"edit_subscription\":\"<boolean>\",\"automation_event\":\"<boolean>\",\"push_send\":\"<boolean>\",\"push_delivered\":\"<boolean>\",\"push_error\":\"<boolean>\",\"push_received\":\"<boolean>\",\"push_open\":\"<boolean>\",\"push_canceled\":\"<boolean>\",\"push_unsubscription\":\"<boolean>\",\"reply_to_email\":\"<boolean>\",\"web_push_send\":\"<boolean>\",\"web_push_delivered\":\"<boolean>\",\"web_push_open\":\"<boolean>\",\"web_push_bounce\":\"<boolean>\",\"web_push_click\":\"<boolean>\",\"web_push_subscription\":\"<boolean>\",\"web_push_unsubscription\":\"<boolean>\",\"forget_subscription\":\"<boolean>\",\"change_consent\":\"<boolean>\",\"double_optin_resend\":\"<boolean>\",\"double_optedit\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",  ParameterType.RequestBody);
+          IRestResponse response = client.Execute(request);
+          Console.WriteLine(response.Content);
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient().newBuilder()
+              .setConnectTimeout(30, TimeUnit.MILLISECONDS)
+              .build();
+          MediaType mediaType = MediaType.parse("application/json");
+          RequestBody body = RequestBody.create(mediaType, "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"contact_activities\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"recommends\":\"<boolean>\",\"conversion\":\"<boolean>\",\"email_send\":\"<boolean>\",\"sms_send\":\"<boolean>\",\"sms_report\":\"<boolean>\",\"voice_send\":\"<boolean>\",\"voice_report\":\"<boolean>\",\"invitation_send\":\"<boolean>\",\"invitation_open\":\"<boolean>\",\"unsubscribe\":\"<boolean>\",\"email_soft_bounce\":\"<boolean>\",\"email_hard_bounce\":\"<boolean>\",\"subscription\":\"<boolean>\",\"resubscription\":\"<boolean>\",\"unsubscribe_reason\":\"<boolean>\",\"facebook_like\":\"<boolean>\",\"social_share\":\"<boolean>\",\"unsubscribe_manual\":\"<boolean>\",\"double_optin\":\"<boolean>\",\"email_spam_complaint\":\"<boolean>\",\"email_field_disable\":\"<boolean>\",\"cellphone_field_disable\":\"<boolean>\",\"phone_field_disable\":\"<boolean>\",\"unsubscribe_api\":\"<boolean>\",\"email_field_enable\":\"<boolean>\",\"cellphone_field_enable\":\"<boolean>\",\"phone_field_enable\":\"<boolean>\",\"edit_subscription\":\"<boolean>\",\"automation_event\":\"<boolean>\",\"push_send\":\"<boolean>\",\"push_delivered\":\"<boolean>\",\"push_error\":\"<boolean>\",\"push_received\":\"<boolean>\",\"push_open\":\"<boolean>\",\"push_canceled\":\"<boolean>\",\"push_unsubscription\":\"<boolean>\",\"reply_to_email\":\"<boolean>\",\"web_push_send\":\"<boolean>\",\"web_push_delivered\":\"<boolean>\",\"web_push_open\":\"<boolean>\",\"web_push_bounce\":\"<boolean>\",\"web_push_click\":\"<boolean>\",\"web_push_subscription\":\"<boolean>\",\"web_push_unsubscription\":\"<boolean>\",\"forget_subscription\":\"<boolean>\",\"change_consent\":\"<boolean>\",\"double_optin_resend\":\"<boolean>\",\"double_optedit\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}");
+          Request request = new Request.Builder()
+              .url("api.egoiapp.com/reports/advanced/contact-activity")
+              .method("POST", body)
+              .addHeader("Apikey", "<YOUR_APIKEY>")
+              .addHeader("Content-Type", "application/json")
+              .build();
+          Response response = client.newCall(request).execute();
+      - lang: JavaScript
+        source: |-
+          var data = JSON.stringify({"title":"<string>","range":{"start":"<dateTime>","end":"<dateTime>"},"lists":["<integer>","<integer>"],"columns":{"list_base_fields":["<string>","<string>"],"list_extra_fields":[{"list_id":"<integer>","fields":["<string>","<string>"]},{"list_id":"<integer>","fields":["<string>","<string>"]}],"contact_activities":{"opens":"<boolean>","clicks":"<boolean>","recommends":"<boolean>","conversion":"<boolean>","email_send":"<boolean>","sms_send":"<boolean>","sms_report":"<boolean>","voice_send":"<boolean>","voice_report":"<boolean>","invitation_send":"<boolean>","invitation_open":"<boolean>","unsubscribe":"<boolean>","email_soft_bounce":"<boolean>","email_hard_bounce":"<boolean>","subscription":"<boolean>","resubscription":"<boolean>","unsubscribe_reason":"<boolean>","facebook_like":"<boolean>","social_share":"<boolean>","unsubscribe_manual":"<boolean>","double_optin":"<boolean>","email_spam_complaint":"<boolean>","email_field_disable":"<boolean>","cellphone_field_disable":"<boolean>","phone_field_disable":"<boolean>","unsubscribe_api":"<boolean>","email_field_enable":"<boolean>","cellphone_field_enable":"<boolean>","phone_field_enable":"<boolean>","edit_subscription":"<boolean>","automation_event":"<boolean>","push_send":"<boolean>","push_delivered":"<boolean>","push_error":"<boolean>","push_received":"<boolean>","push_open":"<boolean>","push_canceled":"<boolean>","push_unsubscription":"<boolean>","reply_to_email":"<boolean>","web_push_send":"<boolean>","web_push_delivered":"<boolean>","web_push_open":"<boolean>","web_push_bounce":"<boolean>","web_push_click":"<boolean>","web_push_subscription":"<boolean>","web_push_unsubscription":"<boolean>","forget_subscription":"<boolean>","change_consent":"<boolean>","double_optin_resend":"<boolean>","double_optedit":"<boolean>"}},"options":{"notify":["<integer>","<integer>"]},"callback_url":"<string>"});
+
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+
+          xhr.addEventListener("readystatechange", function() {
+              if(this.readyState === 4) {
+                  console.log(this.responseText);
+              }
+          });
+
+          xhr.open("POST", "api.egoiapp.com/reports/advanced/contact-activity");
+          xhr.timeout = 30;
+          xhr.addEventListener("ontimeout", function(e) {
+               console.log(e);
+          });
+          xhr.setRequestHeader("Apikey", "<YOUR_APIKEY>");
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          xhr.send(data);
+      - lang: PHP
+        source: |
+          <?php
+
+          $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+              CURLOPT_URL => "api.egoiapp.com/reports/advanced/contact-activity",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "POST",
+              CURLOPT_POSTFIELDS =>"{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"contact_activities\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"recommends\":\"<boolean>\",\"conversion\":\"<boolean>\",\"email_send\":\"<boolean>\",\"sms_send\":\"<boolean>\",\"sms_report\":\"<boolean>\",\"voice_send\":\"<boolean>\",\"voice_report\":\"<boolean>\",\"invitation_send\":\"<boolean>\",\"invitation_open\":\"<boolean>\",\"unsubscribe\":\"<boolean>\",\"email_soft_bounce\":\"<boolean>\",\"email_hard_bounce\":\"<boolean>\",\"subscription\":\"<boolean>\",\"resubscription\":\"<boolean>\",\"unsubscribe_reason\":\"<boolean>\",\"facebook_like\":\"<boolean>\",\"social_share\":\"<boolean>\",\"unsubscribe_manual\":\"<boolean>\",\"double_optin\":\"<boolean>\",\"email_spam_complaint\":\"<boolean>\",\"email_field_disable\":\"<boolean>\",\"cellphone_field_disable\":\"<boolean>\",\"phone_field_disable\":\"<boolean>\",\"unsubscribe_api\":\"<boolean>\",\"email_field_enable\":\"<boolean>\",\"cellphone_field_enable\":\"<boolean>\",\"phone_field_enable\":\"<boolean>\",\"edit_subscription\":\"<boolean>\",\"automation_event\":\"<boolean>\",\"push_send\":\"<boolean>\",\"push_delivered\":\"<boolean>\",\"push_error\":\"<boolean>\",\"push_received\":\"<boolean>\",\"push_open\":\"<boolean>\",\"push_canceled\":\"<boolean>\",\"push_unsubscription\":\"<boolean>\",\"reply_to_email\":\"<boolean>\",\"web_push_send\":\"<boolean>\",\"web_push_delivered\":\"<boolean>\",\"web_push_open\":\"<boolean>\",\"web_push_bounce\":\"<boolean>\",\"web_push_click\":\"<boolean>\",\"web_push_subscription\":\"<boolean>\",\"web_push_unsubscription\":\"<boolean>\",\"forget_subscription\":\"<boolean>\",\"change_consent\":\"<boolean>\",\"double_optin_resend\":\"<boolean>\",\"double_optedit\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}",
+              CURLOPT_HTTPHEADER => array(
+                  "Apikey: <YOUR_APIKEY>",
+                  "Content-Type: application/json"
+              ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          echo $response;
+      - lang: Python
+        source: |-
+          import http.client
+          import mimetypes
+          conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
+          payload = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"contact_activities\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"recommends\":\"<boolean>\",\"conversion\":\"<boolean>\",\"email_send\":\"<boolean>\",\"sms_send\":\"<boolean>\",\"sms_report\":\"<boolean>\",\"voice_send\":\"<boolean>\",\"voice_report\":\"<boolean>\",\"invitation_send\":\"<boolean>\",\"invitation_open\":\"<boolean>\",\"unsubscribe\":\"<boolean>\",\"email_soft_bounce\":\"<boolean>\",\"email_hard_bounce\":\"<boolean>\",\"subscription\":\"<boolean>\",\"resubscription\":\"<boolean>\",\"unsubscribe_reason\":\"<boolean>\",\"facebook_like\":\"<boolean>\",\"social_share\":\"<boolean>\",\"unsubscribe_manual\":\"<boolean>\",\"double_optin\":\"<boolean>\",\"email_spam_complaint\":\"<boolean>\",\"email_field_disable\":\"<boolean>\",\"cellphone_field_disable\":\"<boolean>\",\"phone_field_disable\":\"<boolean>\",\"unsubscribe_api\":\"<boolean>\",\"email_field_enable\":\"<boolean>\",\"cellphone_field_enable\":\"<boolean>\",\"phone_field_enable\":\"<boolean>\",\"edit_subscription\":\"<boolean>\",\"automation_event\":\"<boolean>\",\"push_send\":\"<boolean>\",\"push_delivered\":\"<boolean>\",\"push_error\":\"<boolean>\",\"push_received\":\"<boolean>\",\"push_open\":\"<boolean>\",\"push_canceled\":\"<boolean>\",\"push_unsubscription\":\"<boolean>\",\"reply_to_email\":\"<boolean>\",\"web_push_send\":\"<boolean>\",\"web_push_delivered\":\"<boolean>\",\"web_push_open\":\"<boolean>\",\"web_push_bounce\":\"<boolean>\",\"web_push_click\":\"<boolean>\",\"web_push_subscription\":\"<boolean>\",\"web_push_unsubscription\":\"<boolean>\",\"forget_subscription\":\"<boolean>\",\"change_consent\":\"<boolean>\",\"double_optin_resend\":\"<boolean>\",\"double_optedit\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+          headers = {
+              'Apikey': '<YOUR_APIKEY>',
+              'Content-Type': 'application/json'
+          }
+          conn.request("POST", "/reports/advanced/contact-activity", payload, headers)
+          res = conn.getresponse()
+          data = res.read()
+          print(data.decode("utf-8"))
+      - lang: Ruby
+        source: |
+          require "uri"
+          require "net/http"
+
+          url = URI("api.egoiapp.com/reports/advanced/contact-activity")
+
+          http = Net::HTTP.new(url.host, url.port);
+          http.read_timeout = 1
+          request = Net::HTTP::Post.new(url)
+          request["Apikey"] = "<YOUR_APIKEY>"
+          request["Content-Type"] = "application/json"
+          request.body = "{\"title\":\"<string>\",\"range\":{\"start\":\"<dateTime>\",\"end\":\"<dateTime>\"},\"lists\":[\"<integer>\",\"<integer>\"],\"columns\":{\"list_base_fields\":[\"<string>\",\"<string>\"],\"list_extra_fields\":[{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]},{\"list_id\":\"<integer>\",\"fields\":[\"<string>\",\"<string>\"]}],\"contact_activities\":{\"opens\":\"<boolean>\",\"clicks\":\"<boolean>\",\"recommends\":\"<boolean>\",\"conversion\":\"<boolean>\",\"email_send\":\"<boolean>\",\"sms_send\":\"<boolean>\",\"sms_report\":\"<boolean>\",\"voice_send\":\"<boolean>\",\"voice_report\":\"<boolean>\",\"invitation_send\":\"<boolean>\",\"invitation_open\":\"<boolean>\",\"unsubscribe\":\"<boolean>\",\"email_soft_bounce\":\"<boolean>\",\"email_hard_bounce\":\"<boolean>\",\"subscription\":\"<boolean>\",\"resubscription\":\"<boolean>\",\"unsubscribe_reason\":\"<boolean>\",\"facebook_like\":\"<boolean>\",\"social_share\":\"<boolean>\",\"unsubscribe_manual\":\"<boolean>\",\"double_optin\":\"<boolean>\",\"email_spam_complaint\":\"<boolean>\",\"email_field_disable\":\"<boolean>\",\"cellphone_field_disable\":\"<boolean>\",\"phone_field_disable\":\"<boolean>\",\"unsubscribe_api\":\"<boolean>\",\"email_field_enable\":\"<boolean>\",\"cellphone_field_enable\":\"<boolean>\",\"phone_field_enable\":\"<boolean>\",\"edit_subscription\":\"<boolean>\",\"automation_event\":\"<boolean>\",\"push_send\":\"<boolean>\",\"push_delivered\":\"<boolean>\",\"push_error\":\"<boolean>\",\"push_received\":\"<boolean>\",\"push_open\":\"<boolean>\",\"push_canceled\":\"<boolean>\",\"push_unsubscription\":\"<boolean>\",\"reply_to_email\":\"<boolean>\",\"web_push_send\":\"<boolean>\",\"web_push_delivered\":\"<boolean>\",\"web_push_open\":\"<boolean>\",\"web_push_bounce\":\"<boolean>\",\"web_push_click\":\"<boolean>\",\"web_push_subscription\":\"<boolean>\",\"web_push_unsubscription\":\"<boolean>\",\"forget_subscription\":\"<boolean>\",\"change_consent\":\"<boolean>\",\"double_optin_resend\":\"<boolean>\",\"double_optedit\":\"<boolean>\"}},\"options\":{\"notify\":[\"<integer>\",\"<integer>\"]},\"callback_url\":\"<string>\"}"
+
+          response = http.request(request)
+          puts response.read_body
+      x-content-type: application/json
+      x-accepts: application/json
   /reports/advanced:
     get:
       description: Returns all advanced reports
@@ -17586,7 +18554,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -18936,6 +19904,218 @@ paths:
           puts response.read_body
       x-content-type: application/json
       x-accepts: application/json
+  /reports/advanced/models:
+    get:
+      description: Returns all advanced reports
+      operationId: getAllAdvancedReportsModels
+      parameters:
+      - allowEmptyValue: false
+        description: Advanced report model title
+        explode: true
+        in: query
+        name: title
+        required: false
+        schema:
+          type: string
+        style: form
+      - allowEmptyValue: false
+        description: Element offset (starting at zero for the first element)
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        description: Number of items to return
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - allowEmptyValue: false
+        description: Type of order
+        explode: true
+        in: query
+        name: order
+        required: false
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      - description: Reference attribute to order the advanced reports
+        explode: true
+        in: query
+        name: order_by
+        required: false
+        schema:
+          default: model_id
+          enum:
+          - model_id
+          - title
+          - created
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedReportsModelsCollection'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeout'
+          description: Request Timeout
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailable'
+          description: Service Unavailable
+      security:
+      - Apikey: []
+      summary: Get all advanced reports models
+      tags:
+      - Advanced Reports
+      x-code-samples:
+      - lang: cURL
+        source: |-
+          curl --location --max-time 30 --request GET 'api.egoiapp.com/reports/advanced/models?title=<string>&offset=<integer>&limit=10&order=desc&order_by=model_id' \
+          --header 'Apikey: <YOUR_APIKEY>'
+      - lang: C#
+        source: |-
+          var client = new RestClient("api.egoiapp.com/reports/advanced/models?title=<string>&offset=<integer>&limit=10&order=desc&order_by=model_id");
+          client.Timeout = 30;
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Apikey", "<YOUR_APIKEY>");
+          IRestResponse response = client.Execute(request);
+          Console.WriteLine(response.Content);
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient().newBuilder()
+              .setConnectTimeout(30, TimeUnit.MILLISECONDS)
+              .build();
+          Request request = new Request.Builder()
+              .url("api.egoiapp.com/reports/advanced/models?title=<string>&offset=<integer>&limit=10&order=desc&order_by=model_id")
+              .method("GET", null)
+              .addHeader("Apikey", "<YOUR_APIKEY>")
+              .build();
+          Response response = client.newCall(request).execute();
+      - lang: JavaScript
+        source: |2-
+
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+
+          xhr.addEventListener("readystatechange", function() {
+              if(this.readyState === 4) {
+                  console.log(this.responseText);
+              }
+          });
+
+          xhr.open("GET", "api.egoiapp.com/reports/advanced/models?title=<string>&offset=<integer>&limit=10&order=desc&order_by=model_id");
+          xhr.timeout = 30;
+          xhr.addEventListener("ontimeout", function(e) {
+               console.log(e);
+          });
+          xhr.setRequestHeader("Apikey", "<YOUR_APIKEY>");
+
+          xhr.send();
+      - lang: PHP
+        source: |
+          <?php
+
+          $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+              CURLOPT_URL => "api.egoiapp.com/reports/advanced/models?title=<string>&offset=<integer>&limit=10&order=desc&order_by=model_id",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "GET",
+              CURLOPT_HTTPHEADER => array(
+                  "Apikey: <YOUR_APIKEY>"
+              ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          echo $response;
+      - lang: Python
+        source: |-
+          import http.client
+          import mimetypes
+          conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
+          payload = ''
+          headers = {
+              'Apikey': '<YOUR_APIKEY>'
+          }
+          conn.request("GET", "/reports/advanced/models?title=<string>&offset=<integer>&limit=10&order=desc&order_by=model_id", payload, headers)
+          res = conn.getresponse()
+          data = res.read()
+          print(data.decode("utf-8"))
+      - lang: Ruby
+        source: |
+          require "uri"
+          require "net/http"
+
+          url = URI("api.egoiapp.com/reports/advanced/models?title=<string>&offset=<integer>&limit=10&order=desc&order_by=model_id")
+
+          http = Net::HTTP.new(url.host, url.port);
+          http.read_timeout = 1
+          request = Net::HTTP::Get.new(url)
+          request["Apikey"] = "<YOUR_APIKEY>"
+
+          response = http.request(request)
+          puts response.read_body
+      x-accepts: application/json
   /reports/advanced/sends:
     post:
       callbacks:
@@ -19921,7 +21101,7 @@ paths:
       description: Returns email report given the campaign hash
       operationId: getEmailReport
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -20155,12 +21335,191 @@ paths:
           response = http.request(request)
           puts response.read_body
       x-accepts: application/json
+  /reports/push/{campaign_hash}:
+    get:
+      description: Returns a push report given the campaign hash
+      operationId: getPushReport
+      parameters:
+      - description: Hash of the Campaign
+        explode: false
+        in: path
+        name: campaign_hash
+        required: true
+        schema:
+          $ref: '#/components/schemas/hash'
+        style: simple
+      - allowEmptyValue: false
+        description: True to show operating system stats
+        explode: true
+        in: query
+        name: operating_systems
+        required: false
+        schema:
+          default: true
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PushReport'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+          description: NotFound
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeout'
+          description: Request Timeout
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntity'
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequests'
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+          description: Internal Server Error
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailable'
+          description: Service Unavailable
+      security:
+      - Apikey: []
+      summary: Get push report
+      tags:
+      - Reports
+      x-code-samples:
+      - lang: cURL
+        source: |-
+          curl --location --max-time 30 --request GET 'api.egoiapp.com/reports/push/<string>?operating_systems=true' \
+          --header 'Apikey: <YOUR_APIKEY>'
+      - lang: C#
+        source: |-
+          var client = new RestClient("api.egoiapp.com/reports/push/<string>?operating_systems=true");
+          client.Timeout = 30;
+          var request = new RestRequest(Method.GET);
+          request.AddHeader("Apikey", "<YOUR_APIKEY>");
+          IRestResponse response = client.Execute(request);
+          Console.WriteLine(response.Content);
+      - lang: Java
+        source: |-
+          OkHttpClient client = new OkHttpClient().newBuilder()
+              .setConnectTimeout(30, TimeUnit.MILLISECONDS)
+              .build();
+          Request request = new Request.Builder()
+              .url("api.egoiapp.com/reports/push/<string>?operating_systems=true")
+              .method("GET", null)
+              .addHeader("Apikey", "<YOUR_APIKEY>")
+              .build();
+          Response response = client.newCall(request).execute();
+      - lang: JavaScript
+        source: |2-
+
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+
+          xhr.addEventListener("readystatechange", function() {
+              if(this.readyState === 4) {
+                  console.log(this.responseText);
+              }
+          });
+
+          xhr.open("GET", "api.egoiapp.com/reports/push/<string>?operating_systems=true");
+          xhr.timeout = 30;
+          xhr.addEventListener("ontimeout", function(e) {
+               console.log(e);
+          });
+          xhr.setRequestHeader("Apikey", "<YOUR_APIKEY>");
+
+          xhr.send();
+      - lang: PHP
+        source: |
+          <?php
+
+          $curl = curl_init();
+
+          curl_setopt_array($curl, array(
+              CURLOPT_URL => "api.egoiapp.com/reports/push/<string>?operating_systems=true",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "GET",
+              CURLOPT_HTTPHEADER => array(
+                  "Apikey: <YOUR_APIKEY>"
+              ),
+          ));
+
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+          echo $response;
+      - lang: Python
+        source: |-
+          import http.client
+          import mimetypes
+          conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
+          payload = ''
+          headers = {
+              'Apikey': '<YOUR_APIKEY>'
+          }
+          conn.request("GET", "/reports/push/<string>?operating_systems=true", payload, headers)
+          res = conn.getresponse()
+          data = res.read()
+          print(data.decode("utf-8"))
+      - lang: Ruby
+        source: |
+          require "uri"
+          require "net/http"
+
+          url = URI("api.egoiapp.com/reports/push/<string>?operating_systems=true")
+
+          http = Net::HTTP.new(url.host, url.port);
+          http.read_timeout = 1
+          request = Net::HTTP::Get.new(url)
+          request["Apikey"] = "<YOUR_APIKEY>"
+
+          response = http.request(request)
+          puts response.read_body
+      x-accepts: application/json
   /reports/sms/{campaign_hash}:
     get:
       description: Returns sms report given the campaign hash
       operationId: getSMSReport
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -20339,7 +21698,7 @@ paths:
       description: Returns voice report given the campaign hash
       operationId: getVoiceReport
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -20518,7 +21877,7 @@ paths:
       description: Returns webpush report given the campaign hash
       operationId: getWebPushReport
       parameters:
-      - description: ID of the Campaign
+      - description: Hash of the Campaign
         explode: false
         in: path
         name: campaign_hash
@@ -20775,7 +22134,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -21127,7 +22486,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -21671,7 +23030,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -22411,7 +23770,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -23018,7 +24377,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -23571,7 +24930,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -24684,7 +26043,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -25219,7 +26578,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -25608,7 +26967,7 @@ paths:
         required: false
         schema:
           default: 10
-          maximum: 100
+          maximum: 1000
           minimum: 1
           type: integer
         style: form
@@ -26123,7 +27482,7 @@ components:
         $ref: '#/components/schemas/queryId'
       style: simple
     campaign_hash:
-      description: ID of the Campaign
+      description: Hash of the Campaign
       explode: false
       in: path
       name: campaign_hash
@@ -26437,7 +27796,7 @@ components:
       required: false
       schema:
         default: 10
-        maximum: 100
+        maximum: 1000
         minimum: 1
         type: integer
       style: form
@@ -26467,6 +27826,12 @@ components:
         type: string
       style: form
   schemas:
+    AutomationActions:
+      allOf:
+      - $ref: '#/components/schemas/AutomationActions_allOf'
+      description: Automation actions schema
+      title: AutomationActions
+      type: object
     Automation:
       allOf:
       - $ref: '#/components/schemas/Automation_allOf'
@@ -26506,6 +27871,7 @@ components:
       example:
         end_date: ""
         thumbnail: //bo29.e-goi.com/recursos/resource_folder/listas/name_image.jpg
+        processed_messages: 1
         list_id: 1
         created: ""
         channel: email
@@ -26514,13 +27880,21 @@ components:
           date: ""
           enabled: true
         created_by: 1
+        automation_id: 1
         internal_name: your internal name
         campaign_hash: campaign_hash
         group_id: 1
+        id: 1
         updated: ""
         status: sent
         start_date: ""
       properties:
+        id:
+          example: 1
+          minimum: 1
+          readOnly: true
+          title: ID
+          type: integer
         campaign_hash:
           pattern: "[a-zA-Z0-9_-]*"
           readOnly: true
@@ -26592,6 +27966,15 @@ components:
           - $ref: '#/components/schemas/date_time'
         schedule_date:
           $ref: '#/components/schemas/Campaign_schedule_date'
+        processed_messages:
+          description: Total number of processed messages
+          example: 1
+          minimum: 0
+          type: integer
+        automation_id:
+          description: The automation id of the campaign
+          example: 1
+          type: integer
       title: Campaign
       type: object
     AbstractCampaignSendRequest:
@@ -27520,12 +28903,13 @@ components:
         encoding:
           enum:
           - gsm
+          - gsm_extended
           - unicode
           example: gsm
           type: string
         max_messages:
           example: 5
-          maximum: 9
+          maximum: 7
           minimum: 1
           type: integer
       title: Campaign Options
@@ -27676,12 +29060,13 @@ components:
         encoding:
           enum:
           - gsm
+          - gsm_extended
           - unicode
           example: gsm
           type: string
         max_messages:
           example: 5
-          maximum: 9
+          maximum: 7
           minimum: 1
           type: integer
       title: Campaign Options
@@ -28420,6 +29805,10 @@ components:
       pattern: "[a-fA-F\\d]{10}"
       title: Contact ID
       type: string
+    contact_body_email:
+      example: example@e-goi.com
+      title: Contact Email
+      type: string
     show_removed:
       default: false
       example: true
@@ -28427,11 +29816,12 @@ components:
       type: boolean
     ComplexContact:
       allOf:
-      - $ref: '#/components/schemas/ComplexContact_allOf'
       - $ref: '#/components/schemas/Contact'
+      - $ref: '#/components/schemas/ContactStats'
       description: Complex contact schema
       title: ComplexContact
       type: object
+      x-sort-index: 1
     Contact:
       allOf:
       - $ref: '#/components/schemas/contactBaseExtra'
@@ -28439,6 +29829,7 @@ components:
       description: Contact schema
       title: Contact
       type: object
+      x-sort-index: 1
     ContactBaseFieldsSchema:
       description: Contact base
       properties:
@@ -28446,11 +29837,59 @@ components:
           $ref: '#/components/schemas/ContactBaseFieldsSchema_base'
       title: Contact
       type: object
+    ContactStats:
+      description: Contact stats
+      properties:
+        email_stats:
+          $ref: '#/components/schemas/ContactStats_email_stats'
+        sms_stats:
+          $ref: '#/components/schemas/ContactStats_sms_stats'
+        push_stats:
+          $ref: '#/components/schemas/ContactStats_push_stats'
+        webpush_stats:
+          $ref: '#/components/schemas/ContactStats_webpush_stats'
+        voice_stats:
+          $ref: '#/components/schemas/ContactStats_voice_stats'
+        traffic_stats:
+          $ref: '#/components/schemas/ContactStats_traffic_stats'
+      title: Contact stats
+      type: object
+      x-sort-index: 2
+    ContactByFieldFieldsPostSchema:
+      description: Contact By Field Id
+      properties:
+        compare_field:
+          $ref: '#/components/schemas/ContactByFieldFieldsPostSchema_compare_field'
+      title: Contact
+      type: object
+      x-sort-index: 1
     ContactBaseFieldsPostSchema:
       description: Contact base
       properties:
         base:
           $ref: '#/components/schemas/ContactBaseFieldsPostSchema_base'
+      title: Contact
+      type: object
+      x-sort-index: 1
+    ContactUtmPostSchema:
+      description: Contact Utm
+      properties:
+        utm:
+          $ref: '#/components/schemas/ContactUtmPostSchema_utm'
+      title: Contact
+      type: object
+    ContactReferrerPostSchema:
+      description: Contact Referrer
+      properties:
+        referrer:
+          $ref: '#/components/schemas/ContactReferrerPostSchema_referrer'
+      title: Contact
+      type: object
+    ContactAdvertisingPostSchema:
+      description: Contact Advertising
+      properties:
+        advertising:
+          $ref: '#/components/schemas/ContactAdvertisingPostSchema_advertising'
       title: Contact
       type: object
     ContactBaseFieldsWithIdSchema:
@@ -28518,12 +29957,16 @@ components:
           example: example@e-goi.com
           type: string
         cellphone:
-          description: Cellphone of the contact
+          description: "Cellphone of the contact (country code followed by phone number,\
+            \ split by '-')"
           example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         phone:
-          description: Phone of the contact
+          description: "Phone of the contact (country code followed by phone number,\
+            \ split by '-')"
           example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         push_token_android:
           description: Android push token of the contact
@@ -28535,6 +29978,63 @@ components:
           items:
             $ref: '#/components/schemas/ContactBaseWithStatusNoRemovedFieldsSchema_base_push_token_ios_inner'
           type: array
+      type: object
+    ContactCompareFieldPost:
+      properties:
+        field_id:
+          description: Field Id from wich you wish to identify the contact (must be
+            set as unique in list)
+          example: email
+          type: string
+        value:
+          description: Value for identify the contact
+          example: example@e-goi.com
+          type: string
+      type: object
+    ContactUtmPost:
+      properties:
+        utm_source:
+          description: Utm source value
+          example: source
+          type: string
+        utm_medium:
+          description: Utm medium value
+          example: medium
+          type: string
+        utm_campaign:
+          description: Utm campaign value
+          example: campaign
+          type: string
+        utm_content:
+          description: Utm content value
+          example: content
+          type: string
+        utm_term:
+          description: Utm source value
+          example: term
+          type: string
+      type: object
+    ContactReferrerPost:
+      properties:
+        referrer:
+          description: Referrer value
+          example: referrer
+          type: string
+      type: object
+    ContactAdvertisingPost:
+      properties:
+        gclid:
+          description: Identifier that Google uses in Google Ads
+          example: google
+          type: string
+        msclkid:
+          description: Identifier that Microsoft uses in Microsoft Ads
+          example: microsoft
+          type: string
+        fbclid:
+          description: Identifier that Facebook uses in Facebook Ads
+          example: facebook
+          type: string
       type: object
     ContactInsideBase:
       properties:
@@ -28890,7 +30390,24 @@ components:
       allOf:
       - $ref: '#/components/schemas/ContactBaseFieldsPostSchema'
       - $ref: '#/components/schemas/ContactExtraFieldsSchema'
+      - $ref: '#/components/schemas/contactUtmReferrerAdvertisingPost'
       description: Contact Base and Extra schema
+      title: Contact
+      type: object
+    contactFieldIdBaseExtraPost:
+      allOf:
+      - $ref: '#/components/schemas/ContactByFieldFieldsPostSchema'
+      - $ref: '#/components/schemas/ContactBaseWithStatusNoRemovedFieldsSchema'
+      - $ref: '#/components/schemas/ContactExtraFieldsSchema'
+      description: Contact Update by field Base and Extra schema
+      title: Contact
+      type: object
+    contactUtmReferrerAdvertisingPost:
+      allOf:
+      - $ref: '#/components/schemas/ContactUtmPostSchema'
+      - $ref: '#/components/schemas/ContactReferrerPostSchema'
+      - $ref: '#/components/schemas/ContactAdvertisingPostSchema'
+      description: "UTM, Referrer and Advertising parameters for the Contact"
       title: Contact
       type: object
     contactBaseExtraFull:
@@ -28988,7 +30505,10 @@ components:
           readOnly: true
           type: string
         value:
-          description: Extra field value
+          description: "Cellphone  value (country code followed by phone number, split\
+            \ by '-')"
+          example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         status:
           description: Extra field status
@@ -29012,7 +30532,10 @@ components:
           readOnly: true
           type: string
         value:
-          description: Extra field value
+          description: "Phone value (country code followed by phone number, split\
+            \ by '-')"
+          example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         status:
           description: Extra field status
@@ -29079,7 +30602,8 @@ components:
           readOnly: true
           type: string
         value:
-          description: Extra field value
+          description: "Extra field options Id's <a href='/api/v3/#tag/Fields/operation/getAllFieldOptions'\
+            \ target='_blank'>[Go to getAllFieldOptions documentation]</a>"
           example:
           - 1
           - 2
@@ -29173,6 +30697,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/Attach_by_Contacts'
       - $ref: '#/components/schemas/Attach_by_Segment'
+      - $ref: '#/components/schemas/Attach_by_Field_Id'
       properties:
         tag_id:
           example: 1
@@ -29262,6 +30787,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/Detach_by_Contacts'
       - $ref: '#/components/schemas/Detach_by_Segment'
+      - $ref: '#/components/schemas/Detach_by_Field_Id'
       properties:
         tag_id:
           example: 1
@@ -29335,6 +30861,7 @@ components:
       description: Accepted response schema
       example:
         ignored: 5
+        file: example.com
         imported: 100
         invalid: 1
         updated: 10
@@ -29355,6 +30882,9 @@ components:
           example: 1
           minimum: 0
           type: integer
+        file:
+          example: example.com
+          type: string
       title: ImportContactsWebhookData
       type: object
     ContactForgetRequest:
@@ -29386,14 +30916,16 @@ components:
       description: Contact import bulk request schema
       properties:
         mode:
-          description: Add new contacts only ('add') or add and replace existing ones
-            ('update')
+          description: "Add new contacts only ('add'), add and replace existing ones\
+            \ ('update') or only replace existing ones ('update_only')"
           enum:
           - add
           - update
+          - update_only
           type: string
         compare_field:
-          description: Field ID which will be mapped for comparison to prevent duplicates)
+          description: Field ID which will be mapped for comparison to prevent duplicates.
+            Field must be set as unique in E-goi.
           example: email
           type: string
         file:
@@ -29421,14 +30953,16 @@ components:
       description: Contact import bulk request schema
       properties:
         mode:
-          description: Add new contacts only ('add') or add and replace existing ones
-            ('update')
+          description: "Add new contacts only ('add'), add and replace existing ones\
+            \ ('update') or only replace existing ones ('update_only')"
           enum:
           - add
           - update
+          - update_only
           type: string
         compare_field:
-          description: Field ID which will be mapped for comparison to prevent duplicates)
+          description: Field ID which will be mapped for comparison to prevent duplicates.
+            Field must be set as unique in E-goi.
           example: email
           type: string
         contacts:
@@ -29496,7 +31030,7 @@ components:
       description: Contact base
       properties:
         base:
-          $ref: '#/components/schemas/ContactBaseWithStatusFieldsSchema_base'
+          $ref: '#/components/schemas/ContactBaseWithStatusFieldsBulkSchema_base'
       title: Contact
       type: object
     ContactInsideBaseBulk:
@@ -29692,6 +31226,8 @@ components:
       allOf:
       - $ref: '#/components/schemas/ContactBaseFieldsBulkSchema'
       - $ref: '#/components/schemas/ContactExtraFieldsBulkSchema'
+      - $ref: '#/components/schemas/ContactUtmPostSchema'
+      - $ref: '#/components/schemas/ContactReferrerPostSchema'
       description: Contact Base and Extra schema
       title: Contact
       type: object
@@ -30629,9 +32165,8 @@ components:
         mpn: mpn
         sale_price: 10
         related_products:
-          external_product_id:
-          - external_product_id
-          - external_product_id
+        - related_products
+        - related_products
         custom_attributes:
         - alias: sale_price_5
           value: "15.45"
@@ -30699,7 +32234,10 @@ components:
             type: string
           type: array
         related_products:
-          $ref: '#/components/schemas/ProductPatchRequest_related_products'
+          description: "Related products, array of 'product_identifier'"
+          items:
+            type: string
+          type: array
         custom_attributes:
           description: Custom attributes
           items:
@@ -31459,7 +32997,8 @@ components:
       example:
         os: os
         message_hash: message_hash
-        device_id: 0
+        device_id: 6
+        mailing_id: 0
         contact: contact
         event: event
       properties:
@@ -31472,6 +33011,9 @@ components:
         message_hash:
           description: The hash of the campaign related to the notification.
           type: string
+        mailing_id:
+          description: The id of the campaign operation related to the notification.
+          type: integer
         event:
           description: "The event to register (open, canceled)."
           type: string
@@ -31624,22 +33166,75 @@ components:
       description: Phone report schema
       title: PhoneReport
       type: object
-    PushVersions:
-      description: Push report versions schema
+    PushStats:
+      description: Push report stats schema
+      example:
+        opens: 1
+        delivered: 1
+        received: 1
+        bounces: 0
+        error: 0
+        sends: 1
       properties:
-        versions:
-          description: Array of stats for each operating system version
-          items:
-            $ref: '#/components/schemas/PushVersions_versions_inner'
-          type: array
-      title: PushVersions
+        sends:
+          description: Total number of sent messages
+          example: 1
+          minimum: 0
+          type: integer
+        opens:
+          description: Total number of opened messages
+          example: 1
+          minimum: 0
+          type: integer
+        delivered:
+          description: Total number of delivered messages
+          example: 1
+          minimum: 0
+          type: integer
+        received:
+          description: Total number of received messages
+          example: 1
+          minimum: 0
+          type: integer
+        bounces:
+          description: Total number of bounces
+          example: 0
+          minimum: 0
+          type: integer
+        error:
+          description: Total number of error messages
+          example: 0
+          minimum: 0
+          type: integer
+      title: PushStats
       type: object
     PushReport:
-      allOf:
-      - $ref: '#/components/schemas/EmailReport_allOf'
-      - $ref: '#/components/schemas/PushReport_allOf'
-      - $ref: '#/components/schemas/Overall'
       description: Push report schema
+      example:
+        operating_systems:
+        - null
+        - null
+        campaign_hash: campaign_hash
+        overall:
+          opens: 1
+          delivered: 1
+          received: 1
+          bounces: 0
+          error: 0
+          sends: 1
+      properties:
+        campaign_hash:
+          pattern: "[a-zA-Z0-9_-]*"
+          readOnly: true
+          title: Hash
+          type: string
+        overall:
+          $ref: '#/components/schemas/PushStats'
+        operating_systems:
+          description: Stats of the campaign for each operating system
+          items:
+            $ref: '#/components/schemas/PushReport_operating_systems_inner'
+          type: array
       title: Push Report
       type: object
     Overall:
@@ -31648,6 +33243,28 @@ components:
         overall:
           $ref: '#/components/schemas/Overall_overall'
       title: Overall
+      type: object
+    AdvancedReportModels:
+      description: Advanced report schema
+      example:
+        created: ""
+        model_id: 1
+        title: Report title
+      properties:
+        model_id:
+          example: 1
+          minimum: 1
+          readOnly: true
+          title: ID
+          type: integer
+        title:
+          description: Advanced report model title
+          example: Report title
+          type: string
+        created:
+          allOf:
+          - $ref: '#/components/schemas/date_time'
+      title: AdvancedReportModels
       type: object
     AdvancedReport:
       description: Advanced report schema
@@ -31707,6 +33324,19 @@ components:
       - end
       - start
       title: AdvancedReportRange
+      type: object
+    GenerateByModelReport:
+      description: Generate report by model schema
+      example:
+        model_id: 20
+      properties:
+        model_id:
+          description: Model Id
+          example: 20
+          type: integer
+      required:
+      - model_id
+      title: GenerateByModelReport
       type: object
     AdvancedReportCampaigns:
       description: Campaigns of the report
@@ -31804,6 +33434,472 @@ components:
       - list_id
       - type
       title: ReportCampaignsGroup
+      type: object
+    GenerateContactActivityReport:
+      description: Generate contact activity report schema
+      example:
+        callback_url: callback_url
+        lists:
+        - 1
+        - 1
+        columns:
+          contact_activities:
+            automation_event: true
+            cellphone_field_disable: true
+            web_push_bounce: true
+            social_share: true
+            unsubscribe: true
+            email_field_enable: true
+            double_optin_resend: true
+            web_push_send: true
+            resubscription: true
+            web_push_subscription: true
+            unsubscribe_manual: true
+            phone_field_disable: true
+            push_received: true
+            push_send: true
+            email_spam_complaint: true
+            email_hard_bounce: true
+            web_push_unsubscription: true
+            invitation_send: true
+            double_optin: true
+            opens: true
+            push_canceled: true
+            edit_subscription: true
+            voice_send: true
+            subscription: true
+            push_unsubscription: true
+            forget_subscription: true
+            unsubscribe_reason: true
+            email_send: true
+            voice_report: true
+            email_soft_bounce: true
+            email_field_disable: true
+            push_error: true
+            web_push_open: true
+            sms_report: true
+            conversion: true
+            cellphone_field_enable: true
+            unsubscribe_api: true
+            push_open: true
+            invitation_open: true
+            facebook_like: true
+            web_push_delivered: true
+            web_push_click: true
+            change_consent: true
+            push_delivered: true
+            double_optedit: true
+            sms_send: true
+            reply_to_email: true
+            clicks: true
+            recommends: true
+            phone_field_enable: true
+          list_extra_fields:
+          - list_id: 1
+            fields:
+            - fields
+            - fields
+          - list_id: 1
+            fields:
+            - fields
+            - fields
+          list_base_fields:
+          - list_base_fields
+          - list_base_fields
+        options:
+          notify:
+          - 1
+          - 1
+        range:
+          start: ""
+          end: ""
+        title: Report title
+      properties:
+        title:
+          description: Advanced report title
+          example: Report title
+          type: string
+        range:
+          $ref: '#/components/schemas/AdvancedReportRange'
+        lists:
+          description: Array of List Id's (3 items max)
+          items:
+            $ref: '#/components/schemas/id'
+          type: array
+        columns:
+          $ref: '#/components/schemas/AdvancedReportContactActivityColumns'
+        options:
+          $ref: '#/components/schemas/AdvancedReportContactActivityOptions'
+        callback_url:
+          description: "URL which will receive the information of the report <a href='/usecases/callbacks/'\
+            \ target='_blank'>[Go to callback documentation]</a>"
+          type: string
+      required:
+      - columns
+      - lists
+      - options
+      - range
+      - title
+      title: GenerateContactActivityReport
+      type: object
+    AdvancedReportContactActivityColumns:
+      description: Columns of the report
+      example:
+        contact_activities:
+          automation_event: true
+          cellphone_field_disable: true
+          web_push_bounce: true
+          social_share: true
+          unsubscribe: true
+          email_field_enable: true
+          double_optin_resend: true
+          web_push_send: true
+          resubscription: true
+          web_push_subscription: true
+          unsubscribe_manual: true
+          phone_field_disable: true
+          push_received: true
+          push_send: true
+          email_spam_complaint: true
+          email_hard_bounce: true
+          web_push_unsubscription: true
+          invitation_send: true
+          double_optin: true
+          opens: true
+          push_canceled: true
+          edit_subscription: true
+          voice_send: true
+          subscription: true
+          push_unsubscription: true
+          forget_subscription: true
+          unsubscribe_reason: true
+          email_send: true
+          voice_report: true
+          email_soft_bounce: true
+          email_field_disable: true
+          push_error: true
+          web_push_open: true
+          sms_report: true
+          conversion: true
+          cellphone_field_enable: true
+          unsubscribe_api: true
+          push_open: true
+          invitation_open: true
+          facebook_like: true
+          web_push_delivered: true
+          web_push_click: true
+          change_consent: true
+          push_delivered: true
+          double_optedit: true
+          sms_send: true
+          reply_to_email: true
+          clicks: true
+          recommends: true
+          phone_field_enable: true
+        list_extra_fields:
+        - list_id: 1
+          fields:
+          - fields
+          - fields
+        - list_id: 1
+          fields:
+          - fields
+          - fields
+        list_base_fields:
+        - list_base_fields
+        - list_base_fields
+      properties:
+        list_base_fields:
+          description: Array of base fields
+          items:
+            type: string
+          type: array
+        list_extra_fields:
+          items:
+            $ref: '#/components/schemas/AdvancedReportListExtraFields_inner'
+          required:
+          - fields
+          - list_id
+          title: AdvancedReportListExtraFields
+          type: array
+        contact_activities:
+          $ref: '#/components/schemas/ContactActivityActivitiesFields'
+      required:
+      - contact_activities
+      - list_base_fields
+      - list_extra_fields
+      title: AdvancedReportContactActivityColumns
+      type: object
+    AdvancedReportContactActivityOptions:
+      description: Columns of the report
+      example:
+        notify:
+        - 1
+        - 1
+      properties:
+        notify:
+          description: Array of user IDs to notify
+          items:
+            $ref: '#/components/schemas/queryId'
+          type: array
+      title: AdvancedReportContactActivityOptions
+      type: object
+    ContactActivityActivitiesFields:
+      description: List of contacts activities to include in the report
+      example:
+        automation_event: true
+        cellphone_field_disable: true
+        web_push_bounce: true
+        social_share: true
+        unsubscribe: true
+        email_field_enable: true
+        double_optin_resend: true
+        web_push_send: true
+        resubscription: true
+        web_push_subscription: true
+        unsubscribe_manual: true
+        phone_field_disable: true
+        push_received: true
+        push_send: true
+        email_spam_complaint: true
+        email_hard_bounce: true
+        web_push_unsubscription: true
+        invitation_send: true
+        double_optin: true
+        opens: true
+        push_canceled: true
+        edit_subscription: true
+        voice_send: true
+        subscription: true
+        push_unsubscription: true
+        forget_subscription: true
+        unsubscribe_reason: true
+        email_send: true
+        voice_report: true
+        email_soft_bounce: true
+        email_field_disable: true
+        push_error: true
+        web_push_open: true
+        sms_report: true
+        conversion: true
+        cellphone_field_enable: true
+        unsubscribe_api: true
+        push_open: true
+        invitation_open: true
+        facebook_like: true
+        web_push_delivered: true
+        web_push_click: true
+        change_consent: true
+        push_delivered: true
+        double_optedit: true
+        sms_send: true
+        reply_to_email: true
+        clicks: true
+        recommends: true
+        phone_field_enable: true
+      properties:
+        opens:
+          description: "True to include opens, false otherwise"
+          type: boolean
+        clicks:
+          description: "True to include clicks, false otherwise"
+          type: boolean
+        recommends:
+          description: "True to include recommends, false otherwise"
+          type: boolean
+        conversion:
+          description: "True to include convertions, false otherwise"
+          type: boolean
+        email_send:
+          description: "True to include email sends, false otherwise"
+          type: boolean
+        sms_send:
+          description: "True to include sms sends, false otherwise"
+          type: boolean
+        sms_report:
+          description: "True to include sms report, false otherwise"
+          type: boolean
+        voice_send:
+          description: "True to include voice sends, false otherwise"
+          type: boolean
+        voice_report:
+          description: "True to include voice report, false otherwise"
+          type: boolean
+        invitation_send:
+          description: "True to include invitation sends, false otherwise"
+          type: boolean
+        invitation_open:
+          description: "True to include invitation opens, false otherwise"
+          type: boolean
+        unsubscribe:
+          description: "True to include unsubscriptions, false otherwise"
+          type: boolean
+        email_soft_bounce:
+          description: "True to include email soft bounces, false otherwise"
+          type: boolean
+        email_hard_bounce:
+          description: "True to include email hard bounces, false otherwise"
+          type: boolean
+        subscription:
+          description: "True to include subscriptions, false otherwise"
+          type: boolean
+        resubscription:
+          description: "True to include re-subscriptions, false otherwise"
+          type: boolean
+        unsubscribe_reason:
+          description: "True to include unsubscription reason, false otherwise"
+          type: boolean
+        facebook_like:
+          description: "True to include facebook likes, false otherwise"
+          type: boolean
+        social_share:
+          description: "True to include social shares, false otherwise"
+          type: boolean
+        unsubscribe_manual:
+          description: "True to include manual unsubscriptions, false otherwise"
+          type: boolean
+        double_optin:
+          description: "True to include double optins, false otherwise"
+          type: boolean
+        email_spam_complaint:
+          description: "True to include spam complaints, false otherwise"
+          type: boolean
+        email_field_disable:
+          description: "True to include email field disable, false otherwise"
+          type: boolean
+        cellphone_field_disable:
+          description: "True to include cellphone field disable, false otherwise"
+          type: boolean
+        phone_field_disable:
+          description: "True to include phone field disable, false otherwise"
+          type: boolean
+        unsubscribe_api:
+          description: "True to include api unsubscriptions, false otherwise"
+          type: boolean
+        email_field_enable:
+          description: "True to include email field enable, false otherwise"
+          type: boolean
+        cellphone_field_enable:
+          description: "True to include cellphone field enable, false otherwise"
+          type: boolean
+        phone_field_enable:
+          description: "True to include phone field enable, false otherwise"
+          type: boolean
+        edit_subscription:
+          description: "True to include edit subscriptions, false otherwise"
+          type: boolean
+        automation_event:
+          description: "True to include automation events, false otherwise"
+          type: boolean
+        push_send:
+          description: "True to include push events, false otherwise"
+          type: boolean
+        push_delivered:
+          description: "True to include push delivered, false otherwise"
+          type: boolean
+        push_error:
+          description: "True to include push error, false otherwise"
+          type: boolean
+        push_received:
+          description: "True to include push received, false otherwise"
+          type: boolean
+        push_open:
+          description: "True to include push open, false otherwise"
+          type: boolean
+        push_canceled:
+          description: "True to include push canceled, false otherwise"
+          type: boolean
+        push_unsubscription:
+          description: "True to include push unsubscriptions, false otherwise"
+          type: boolean
+        reply_to_email:
+          description: "True to include reply to email, false otherwise"
+          type: boolean
+        web_push_send:
+          description: "True to include web push send, false otherwise"
+          type: boolean
+        web_push_delivered:
+          description: "True to include web push delivered, false otherwise"
+          type: boolean
+        web_push_open:
+          description: "True to include web push open, false otherwise"
+          type: boolean
+        web_push_bounce:
+          description: "True to include web push bounces, false otherwise"
+          type: boolean
+        web_push_click:
+          description: "True to include web push clicks, false otherwise"
+          type: boolean
+        web_push_subscription:
+          description: "True to include web push subscriptions, false otherwise"
+          type: boolean
+        web_push_unsubscription:
+          description: "True to include web push unsubscriptions, false otherwise"
+          type: boolean
+        forget_subscription:
+          description: "True to include forget subscriptions, false otherwise"
+          type: boolean
+        change_consent:
+          description: "True to include consent change, false otherwise"
+          type: boolean
+        double_optin_resend:
+          description: "True to include optin resends, false otherwise"
+          type: boolean
+        double_optedit:
+          description: "True to include double optedit, false otherwise"
+          type: boolean
+      required:
+      - automation_event
+      - cellphone_field_disable
+      - cellphone_field_enable
+      - change_consent
+      - clicks
+      - conversion
+      - double_optedit
+      - double_optin
+      - double_optin_resend
+      - edit_subscription
+      - email_field_disable
+      - email_field_enable
+      - email_hard_bounce
+      - email_send
+      - email_soft_bounce
+      - email_spam_complaint
+      - facebook_like
+      - forget_subscription
+      - invitation_open
+      - invitation_send
+      - opens
+      - phone_field_disable
+      - phone_field_enable
+      - push_canceled
+      - push_delivered
+      - push_error
+      - push_open
+      - push_received
+      - push_send
+      - push_unsubscription
+      - recommends
+      - reply_to_email
+      - resubscription
+      - sms_report
+      - sms_send
+      - social_share
+      - subscription
+      - unsubscribe
+      - unsubscribe_api
+      - unsubscribe_manual
+      - unsubscribe_reason
+      - voice_report
+      - voice_send
+      - web_push_bounce
+      - web_push_click
+      - web_push_delivered
+      - web_push_open
+      - web_push_send
+      - web_push_subscription
+      - web_push_unsubscription
+      title: ContactActivityActivitiesFields
       type: object
     GenerateEmailBouncesReport:
       description: Generate email bounces report schema
@@ -35051,6 +37147,26 @@ components:
       pattern: "[a-zA-Z0-9_-]*"
       title: FieldId
       type: string
+    AutomationActionsCollection:
+      description: Collection of automation actions
+      example:
+        total_items: 1
+        items:
+        - null
+        - null
+      properties:
+        total_items:
+          description: Returned actions count
+          example: 1
+          minimum: 0
+          type: integer
+        items:
+          description: Returned actions
+          items:
+            $ref: '#/components/schemas/AutomationActions'
+          type: array
+      title: AutomationActionsCollection
+      type: object
     AutomationCollection:
       description: Collection of automations
       example:
@@ -35078,6 +37194,7 @@ components:
         items:
         - end_date: ""
           thumbnail: //bo29.e-goi.com/recursos/resource_folder/listas/name_image.jpg
+          processed_messages: 1
           list_id: 1
           created: ""
           channel: email
@@ -35086,14 +37203,17 @@ components:
             date: ""
             enabled: true
           created_by: 1
+          automation_id: 1
           internal_name: your internal name
           campaign_hash: campaign_hash
           group_id: 1
+          id: 1
           updated: ""
           status: sent
           start_date: ""
         - end_date: ""
           thumbnail: //bo29.e-goi.com/recursos/resource_folder/listas/name_image.jpg
+          processed_messages: 1
           list_id: 1
           created: ""
           channel: email
@@ -35102,9 +37222,11 @@ components:
             date: ""
             enabled: true
           created_by: 1
+          automation_id: 1
           internal_name: your internal name
           campaign_hash: campaign_hash
           group_id: 1
+          id: 1
           updated: ""
           status: sent
           start_date: ""
@@ -35468,6 +37590,30 @@ components:
           type: array
       title: AdvancedReportsCollection
       type: object
+    AdvancedReportsModelsCollection:
+      description: Collection of advanced reports models
+      example:
+        total_items: 1
+        items:
+        - created: ""
+          model_id: 1
+          title: Report title
+        - created: ""
+          model_id: 1
+          title: Report title
+      properties:
+        total_items:
+          description: Total advanced reports models
+          example: 1
+          minimum: 0
+          type: integer
+        items:
+          description: Returned advanced reports models
+          items:
+            $ref: '#/components/schemas/AdvancedReportModels'
+          type: array
+      title: AdvancedReportsModelsCollection
+      type: object
     SegmentCollection:
       description: Collection of segments
       example:
@@ -35745,6 +37891,44 @@ components:
           type: array
       title: ListCollection
       type: object
+    AutomationActions_allOf:
+      properties:
+        action_id:
+          example: 1
+          minimum: 1
+          readOnly: true
+          title: ID
+          type: integer
+        title:
+          description: Action title
+          example: Example Action
+          type: string
+        action:
+          description: Type od action
+          example: addTag
+          type: string
+        parent_id:
+          example: 1
+          minimum: 1
+          readOnly: true
+          title: ID
+          type: integer
+        created_by:
+          example: 1
+          minimum: 1
+          readOnly: true
+          title: ID
+          type: integer
+        created:
+          allOf:
+          - $ref: '#/components/schemas/date_time'
+          readOnly: true
+        updated:
+          allOf:
+          - $ref: '#/components/schemas/date_time'
+          readOnly: true
+      type: object
+      example: null
     Automation_allOf:
       properties:
         automation_id:
@@ -36467,7 +38651,12 @@ components:
           type: array
       type: object
       example: null
-    ComplexContact_allOf_email_stats:
+    ContactBaseFieldsSchema_base:
+      allOf:
+      - $ref: '#/components/schemas/ContactInsideBase'
+      description: Contact base fields
+      type: object
+    ContactStats_email_stats:
       description: Email stats of the contact
       properties:
         sent:
@@ -36534,8 +38723,7 @@ components:
           type: string
       readOnly: true
       type: object
-      example: null
-    ComplexContact_allOf_sms_stats:
+    ContactStats_sms_stats:
       description: SMS stats of the contact
       properties:
         sent:
@@ -36548,8 +38736,8 @@ components:
           type: integer
       readOnly: true
       type: object
-      example: null
-    ComplexContact_allOf_push_stats:
+      x-sort-index: 3
+    ContactStats_push_stats:
       description: Push stats of the contact
       properties:
         sent:
@@ -36579,8 +38767,8 @@ components:
           type: string
       readOnly: true
       type: object
-      example: null
-    ComplexContact_allOf_webpush_stats:
+      x-sort-index: 4
+    ContactStats_webpush_stats:
       description: Webpush stats of the contact
       properties:
         sent:
@@ -36617,8 +38805,8 @@ components:
           type: string
       readOnly: true
       type: object
-      example: null
-    ComplexContact_allOf_voice_stats:
+      x-sort-index: 5
+    ContactStats_voice_stats:
       description: Voice stats of the contact
       properties:
         sent:
@@ -36631,30 +38819,94 @@ components:
           type: integer
       readOnly: true
       type: object
-      example: null
-    ComplexContact_allOf:
+      x-sort-index: 6
+    ContactStats_traffic_stats_utm:
+      description: Voice campaigns sent to the contact
       properties:
-        email_stats:
-          $ref: '#/components/schemas/ComplexContact_allOf_email_stats'
-        sms_stats:
-          $ref: '#/components/schemas/ComplexContact_allOf_sms_stats'
-        push_stats:
-          $ref: '#/components/schemas/ComplexContact_allOf_push_stats'
-        webpush_stats:
-          $ref: '#/components/schemas/ComplexContact_allOf_webpush_stats'
-        voice_stats:
-          $ref: '#/components/schemas/ComplexContact_allOf_voice_stats'
+        utm_source:
+          description: Utm source value
+          example: source
+          type: string
+        utm_medium:
+          description: Utm medium value
+          example: medium
+          type: string
+        utm_campaign:
+          description: Utm campaign value
+          example: campaign
+          type: string
+        utm_content:
+          description: Utm content value
+          example: content
+          type: string
+        utm_term:
+          description: Utm source value
+          example: term
+          type: string
+      readOnly: true
       type: object
-      example: null
-    ContactBaseFieldsSchema_base:
+    ContactStats_traffic_stats_referrer:
+      description: Contact referrer fields
+      properties:
+        referrer:
+          description: Contact referrer value
+          example: referrer
+          type: string
+      readOnly: true
+      type: object
+    ContactStats_traffic_stats_advertising:
+      description: Contact advertising fields
+      properties:
+        gclid:
+          description: Google Ads value
+          example: gclid
+          type: string
+        msclkid:
+          description: Microsoft Ads value
+          example: msclkid
+          type: string
+        fbclid:
+          description: Facebook Ads value
+          example: fbclid
+          type: string
+      readOnly: true
+      type: object
+    ContactStats_traffic_stats:
+      description: Traffic stats of the contact
+      properties:
+        utm:
+          $ref: '#/components/schemas/ContactStats_traffic_stats_utm'
+        referrer:
+          $ref: '#/components/schemas/ContactStats_traffic_stats_referrer'
+        advertising:
+          $ref: '#/components/schemas/ContactStats_traffic_stats_advertising'
+      readOnly: true
+      type: object
+      x-sort-index: 7
+    ContactByFieldFieldsPostSchema_compare_field:
       allOf:
-      - $ref: '#/components/schemas/ContactInsideBase'
-      description: Contact base fields
+      - $ref: '#/components/schemas/ContactCompareFieldPost'
+      description: Contact compare fields
       type: object
     ContactBaseFieldsPostSchema_base:
       allOf:
       - $ref: '#/components/schemas/ContactInsideBasePost'
       description: Contact base fields
+      type: object
+    ContactUtmPostSchema_utm:
+      allOf:
+      - $ref: '#/components/schemas/ContactUtmPost'
+      description: Contact Urchin Tracking Module (utm) fields
+      type: object
+    ContactReferrerPostSchema_referrer:
+      allOf:
+      - $ref: '#/components/schemas/ContactReferrerPost'
+      description: Contact referrer fields
+      type: object
+    ContactAdvertisingPostSchema_advertising:
+      allOf:
+      - $ref: '#/components/schemas/ContactAdvertisingPost'
+      description: Contact advertising fields
       type: object
     ContactBaseFieldsWithIdSchema_base:
       allOf:
@@ -36737,8 +38989,10 @@ components:
           - inactive
           type: string
         cellphone:
-          description: Cellphone of the contact
+          description: "Cellphone of the contact (country code followed by phone number,\
+            \ split by '-')"
           example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         cellphone_status:
           description: Cellphone channel status
@@ -36747,8 +39001,10 @@ components:
           - inactive
           type: string
         phone:
-          description: Phone of the contact
+          description: "Phone of the contact (country code followed by phone number,\
+            \ split by '-')"
           example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         phone_status:
           description: Phone channel status
@@ -36824,8 +39080,10 @@ components:
           - inactive
           type: string
         cellphone:
-          description: Cellphone of the contact
+          description: "Cellphone of the contact (country code followed by phone number,\
+            \ split by '-')"
           example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         cellphone_status:
           description: Cellphone channel status
@@ -36834,8 +39092,10 @@ components:
           - inactive
           type: string
         phone:
-          description: Phone of the contact
+          description: "Phone of the contact (country code followed by phone number,\
+            \ split by '-')"
           example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         phone_status:
           description: Phone channel status
@@ -36911,8 +39171,10 @@ components:
           - inactive
           type: string
         cellphone:
-          description: Cellphone of the contact
+          description: "Cellphone of the contact (country code followed by phone number,\
+            \ split by '-')"
           example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         cellphone_status:
           description: Cellphone channel status
@@ -36921,8 +39183,10 @@ components:
           - inactive
           type: string
         phone:
-          description: Phone of the contact
+          description: "Phone of the contact (country code followed by phone number,\
+            \ split by '-')"
           example: 351-300404336
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         phone_status:
           description: Phone channel status
@@ -36954,6 +39218,26 @@ components:
       title: Attach by Segment
       type: object
       example: null
+    Attach_by_Field_Id:
+      properties:
+        field_id:
+          pattern: "[a-zA-Z0-9_-]*"
+          title: FieldId
+          type: string
+        contacts:
+          description: Array of contacts to attach the tag
+          items:
+            example: example
+            type: string
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+      - contacts
+      - field_id
+      title: Attach by Field Id
+      type: object
+      example: null
     Detach_by_Contacts:
       properties:
         contacts:
@@ -36975,6 +39259,26 @@ components:
       required:
       - segment_id
       title: Detach by Segment
+      type: object
+      example: null
+    Detach_by_Field_Id:
+      properties:
+        field_id:
+          pattern: "[a-zA-Z0-9_-]*"
+          title: FieldId
+          type: string
+        contacts:
+          description: Array of contacts to detach the tag
+          items:
+            example: example
+            type: string
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+      - contacts
+      - field_id
+      title: Detach by Field Id
       type: object
       example: null
     ImportBulkFileRequestSchema_file:
@@ -37025,6 +39329,93 @@ components:
       allOf:
       - $ref: '#/components/schemas/ContactInsideBaseBulk'
       description: Contact base fields
+      type: object
+    ContactBaseWithStatusFieldsBulkSchema_base:
+      description: Contact base fields
+      properties:
+        contact_id:
+          example: 8f3a27ef26
+          pattern: "[a-fA-F\\d]{10}"
+          readOnly: true
+          title: Contact ID
+          type: string
+        status:
+          default: active
+          description: Status of the contact
+          enum:
+          - active
+          - inactive
+          - removed
+          - unconfirmed
+          type: string
+        consent:
+          description: Contact consent
+          enum:
+          - any
+          - consent
+          - contract
+          - legitimate_interest
+          - none
+          - protect_vital_interests
+          - public_interests
+          - required_by_law
+          - withdrawn
+          type: string
+        first_name:
+          description: First name of the contact
+          example: John
+          type: string
+        last_name:
+          description: Last name of the contact
+          example: Doe
+          type: string
+        birth_date:
+          description: Birth date of the contact
+          example: 1975-01-10
+          format: date
+          type: string
+        language:
+          $ref: '#/components/schemas/language'
+        email:
+          description: Email of the contact
+          example: example@e-goi.com
+          type: string
+        email_status:
+          description: Email channel status
+          enum:
+          - active
+          - inactive
+          type: string
+        cellphone:
+          description: Cellphone of the contact
+          example: 351-300404336
+          type: string
+        cellphone_status:
+          description: Cellphone channel status
+          enum:
+          - active
+          - inactive
+          type: string
+        phone:
+          description: Phone of the contact
+          example: 351-300404336
+          type: string
+        phone_status:
+          description: Phone channel status
+          enum:
+          - active
+          - inactive
+          type: string
+        push_token_android:
+          description: Android push token of the contact
+          items:
+            $ref: '#/components/schemas/ContactBaseWithStatusNoRemovedFieldsSchema_base_push_token_android_inner'
+          type: array
+        push_token_ios:
+          description: IOS push token of the contact
+          items:
+            $ref: '#/components/schemas/ContactBaseWithStatusNoRemovedFieldsSchema_base_push_token_ios_inner'
+          type: array
       type: object
     RemoveResponse_errors:
       example:
@@ -37251,7 +39642,7 @@ components:
             type: string
           type: array
         related_products:
-          description: Related products
+          description: "Related products, array of 'product_identifier'"
           items:
             type: string
           type: array
@@ -37262,19 +39653,6 @@ components:
           type: array
       type: object
       example: null
-    ProductPatchRequest_related_products:
-      description: Related products
-      example:
-        external_product_id:
-        - external_product_id
-        - external_product_id
-      properties:
-        external_product_id:
-          description: Array of 'product_identifier'
-          items:
-            type: string
-          type: array
-      type: object
     product_already_exists_errors:
       properties:
         product_already_exists:
@@ -37357,8 +39735,14 @@ components:
       example: null
     ComplexList_allOf:
       properties:
-        language:
+        default_language:
           $ref: '#/components/schemas/language'
+        available_languages:
+          description: Array of available languages
+          items:
+            example: en
+            type: string
+          type: array
         stats:
           $ref: '#/components/schemas/ComplexList_allOf_stats'
       type: object
@@ -37977,54 +40361,17 @@ components:
           type: array
       type: object
       example: null
-    PushVersions_versions_inner:
-      properties:
-        version:
-          description: Operating system version
-          example: unknown
-          type: string
-        opens:
-          description: Total number of opened messages
-          minimum: 0
-          type: integer
-        canceled:
-          description: Total number of delivered messages
-          minimum: 0
-          type: integer
-        delivered:
-          description: Total number of delivered messages
-          example: 1
-          minimum: 0
-          type: integer
-      type: object
-    PushReport_allOf:
+    PushReport_operating_systems_inner_allOf:
       properties:
         operating_systems:
-          description: Stats of the campaign for each operating system
-          items:
-            allOf:
-            - properties:
-                operating_system:
-                  description: Operating system name
-                  example: android
-                  type: string
-              type: object
-            - $ref: '#/components/schemas/PushVersions'
-          type: array
-        brands:
-          description: Stats of the campaign for each brand
-          items:
-            allOf:
-            - properties:
-                brand:
-                  description: Brand name
-                  example: huawei
-                  type: string
-              type: object
-            - $ref: '#/components/schemas/PushVersions'
-          type: array
+          description: Device type
+          example: desktop
+          type: string
       type: object
-      example: null
+    PushReport_operating_systems_inner:
+      allOf:
+      - $ref: '#/components/schemas/PushReport_operating_systems_inner_allOf'
+      - $ref: '#/components/schemas/PushStats'
     Overall_overall:
       description: Overall message information
       properties:
@@ -38323,7 +40670,7 @@ components:
           description: "Sender cellphone (country code followed by phone number, split\
             \ by '-')"
           example: 351-300404336
-          pattern: "^(){0,1}(\\d){1,3}-(\\d){4,20}$"
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
       type: object
       example: null
@@ -38358,7 +40705,7 @@ components:
           description: "Sender value (country code followed by phone number, split\
             \ by '-')"
           example: 351-300404336
-          pattern: "^(){0,1}(\\d){1,3}-(\\d){4,20}$"
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: string
         file:
           description: Content of your sender file in base64
@@ -38456,11 +40803,12 @@ components:
     SuppressionTypeCellphone_allOf_1:
       properties:
         value:
-          description: Array of cellphone values to add to the suppression list
+          description: "Array of cellphone values to add to the suppression list (country\
+            \ code followed by phone number, split by '-')"
           items:
-            example: 351-300404336
+            example: 351-3010404336
             type: string
-          pattern: "^(){0,1}(\\d){1,3}-(\\d){4,20}$"
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: array
       type: object
       example: null
@@ -38481,11 +40829,12 @@ components:
     SuppressionTypePhone_allOf_1:
       properties:
         value:
-          description: Array of phone values to add to the suppression list
+          description: "Array of phone values to add to the suppression list (country\
+            \ code followed by phone number, split by '-')"
           items:
-            example: 351-300404336
+            example: 351-3010404336
             type: string
-          pattern: "^(){0,1}(\\d){1,3}-(\\d){4,20}$"
+          pattern: "^(\\d){1,3}-(\\d){4,20}$"
           type: array
       type: object
       example: null

@@ -17,9 +17,9 @@ Contact base fields
 |**language** | **Language** |  |  [optional] |
 |**email** | **String** | Email of the contact |  [optional] |
 |**emailStatus** | [**EmailStatusEnum**](#EmailStatusEnum) | Email channel status |  [optional] |
-|**cellphone** | **String** | Cellphone of the contact |  [optional] |
+|**cellphone** | **String** | Cellphone of the contact (country code followed by phone number, split by &#39;-&#39;) |  [optional] |
 |**cellphoneStatus** | [**CellphoneStatusEnum**](#CellphoneStatusEnum) | Cellphone channel status |  [optional] |
-|**phone** | **String** | Phone of the contact |  [optional] |
+|**phone** | **String** | Phone of the contact (country code followed by phone number, split by &#39;-&#39;) |  [optional] |
 |**phoneStatus** | [**PhoneStatusEnum**](#PhoneStatusEnum) | Phone channel status |  [optional] |
 
 

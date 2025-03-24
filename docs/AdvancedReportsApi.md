@@ -4,6 +4,8 @@ All URIs are relative to *https://api.egoiapp.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**generateByModelReport**](AdvancedReportsApi.md#generateByModelReport) | **POST** /reports/advanced/model | Generate report by model |
+| [**generateContactActivityReport**](AdvancedReportsApi.md#generateContactActivityReport) | **POST** /reports/advanced/contact-activity | Generate contact activity report |
 | [**generateEmailBouncesReport**](AdvancedReportsApi.md#generateEmailBouncesReport) | **POST** /reports/advanced/email-bounces | Generate email bounces report |
 | [**generateEmailClicksByContactReport**](AdvancedReportsApi.md#generateEmailClicksByContactReport) | **POST** /reports/advanced/email-clicks-by-contact | Generate email clicks by contact report |
 | [**generateEmailClicksByUrlReport**](AdvancedReportsApi.md#generateEmailClicksByUrlReport) | **POST** /reports/advanced/email-clicks-by-url | Generate email clicks by URL report |
@@ -16,7 +18,162 @@ All URIs are relative to *https://api.egoiapp.com*
 | [**generateSubscriptionsReport**](AdvancedReportsApi.md#generateSubscriptionsReport) | **POST** /reports/advanced/subscriptions | Generate subscriptions report |
 | [**generateUnsubscriptionsReport**](AdvancedReportsApi.md#generateUnsubscriptionsReport) | **POST** /reports/advanced/unsubscriptions | Generate unsubscriptions report |
 | [**getAllAdvancedReports**](AdvancedReportsApi.md#getAllAdvancedReports) | **GET** /reports/advanced | Get all advanced reports |
+| [**getAllAdvancedReportsModels**](AdvancedReportsApi.md#getAllAdvancedReportsModels) | **GET** /reports/advanced/models | Get all advanced reports models |
 
+
+<a name="generateByModelReport"></a>
+# **generateByModelReport**
+> AcceptedResponse generateByModelReport(generateByModelReport)
+
+Generate report by model
+
+Generates a new report by model Id
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.AdvancedReportsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    AdvancedReportsApi apiInstance = new AdvancedReportsApi(defaultClient);
+    GenerateByModelReport generateByModelReport = new GenerateByModelReport(); // GenerateByModelReport | Parameters for the report by model Id
+    try {
+      AcceptedResponse result = apiInstance.generateByModelReport(generateByModelReport);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AdvancedReportsApi#generateByModelReport");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateByModelReport** | [**GenerateByModelReport**](GenerateByModelReport.md)| Parameters for the report by model Id | |
+
+### Return type
+
+[**AcceptedResponse**](AcceptedResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
+
+<a name="generateContactActivityReport"></a>
+# **generateContactActivityReport**
+> AcceptedResponse generateContactActivityReport(generateContactActivityReport)
+
+Generate contact activity report
+
+Generates a new contact activity report
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.AdvancedReportsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    AdvancedReportsApi apiInstance = new AdvancedReportsApi(defaultClient);
+    GenerateContactActivityReport generateContactActivityReport = new GenerateContactActivityReport(); // GenerateContactActivityReport | Parameters for the contact activity report
+    try {
+      AcceptedResponse result = apiInstance.generateContactActivityReport(generateContactActivityReport);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AdvancedReportsApi#generateContactActivityReport");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **generateContactActivityReport** | [**GenerateContactActivityReport**](GenerateContactActivityReport.md)| Parameters for the contact activity report | |
+
+### Return type
+
+[**AcceptedResponse**](AcceptedResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **202** | Accepted |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
 
 <a name="generateEmailBouncesReport"></a>
 # **generateEmailBouncesReport**
@@ -932,6 +1089,90 @@ public class Example {
 ### Return type
 
 [**AdvancedReportsCollection**](AdvancedReportsCollection.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
+
+<a name="getAllAdvancedReportsModels"></a>
+# **getAllAdvancedReportsModels**
+> AdvancedReportsModelsCollection getAllAdvancedReportsModels(title, offset, limit, order, orderBy)
+
+Get all advanced reports models
+
+Returns all advanced reports
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.AdvancedReportsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    AdvancedReportsApi apiInstance = new AdvancedReportsApi(defaultClient);
+    String title = "title_example"; // String | Advanced report model title
+    Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
+    Integer limit = 10; // Integer | Number of items to return
+    String order = "asc"; // String | Type of order
+    String orderBy = "model_id"; // String | Reference attribute to order the advanced reports
+    try {
+      AdvancedReportsModelsCollection result = apiInstance.getAllAdvancedReportsModels(title, offset, limit, order, orderBy);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AdvancedReportsApi#getAllAdvancedReportsModels");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **title** | **String**| Advanced report model title | [optional] |
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc] |
+| **orderBy** | **String**| Reference attribute to order the advanced reports | [optional] [default to model_id] [enum: model_id, title, created] |
+
+### Return type
+
+[**AdvancedReportsModelsCollection**](AdvancedReportsModelsCollection.md)
 
 ### Authorization
 

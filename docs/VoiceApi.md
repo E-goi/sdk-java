@@ -39,7 +39,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     VoiceApi apiInstance = new VoiceApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     CampaignVoiceSendRequest campaignVoiceSendRequest = new CampaignVoiceSendRequest(); // CampaignVoiceSendRequest | Parameters for the 'send voice' action
     try {
       AcceptedResponse result = apiInstance.actionSendVoice(campaignHash, campaignVoiceSendRequest);
@@ -59,7 +59,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **campaignVoiceSendRequest** | [**CampaignVoiceSendRequest**](CampaignVoiceSendRequest.md)| Parameters for the &#39;send voice&#39; action | |
 
 ### Return type
@@ -194,7 +194,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     VoiceApi apiInstance = new VoiceApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     VoicePatchCampaign voicePatchCampaign = new VoicePatchCampaign(); // VoicePatchCampaign | Parameters for the Voice Campaign
     try {
       PatchVoiceCampaign200Response result = apiInstance.patchVoiceCampaign(campaignHash, voicePatchCampaign);
@@ -214,7 +214,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **voicePatchCampaign** | [**VoicePatchCampaign**](VoicePatchCampaign.md)| Parameters for the Voice Campaign | |
 
 ### Return type

@@ -41,7 +41,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     EmailApi apiInstance = new EmailApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     try {
       AcceptedResponse result = apiInstance.actionEnableEmailRss(campaignHash);
       System.out.println(result);
@@ -60,7 +60,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 
 ### Return type
 
@@ -118,7 +118,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     EmailApi apiInstance = new EmailApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     CampaignEmailSendRequest campaignEmailSendRequest = new CampaignEmailSendRequest(); // CampaignEmailSendRequest | Parameters for the 'send email' action
     try {
       AcceptedResponse result = apiInstance.actionSendEmail(campaignHash, campaignEmailSendRequest);
@@ -138,7 +138,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **campaignEmailSendRequest** | [**CampaignEmailSendRequest**](CampaignEmailSendRequest.md)| Parameters for the &#39;send email&#39; action | |
 
 ### Return type
@@ -356,7 +356,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     EmailApi apiInstance = new EmailApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     EmailCampaignPatch emailCampaignPatch = new EmailCampaignPatch(); // EmailCampaignPatch | Parameters for the Email Campaign
     try {
       HashcodeCampaign result = apiInstance.patchEmailCampaign(campaignHash, emailCampaignPatch);
@@ -376,7 +376,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **emailCampaignPatch** | [**EmailCampaignPatch**](EmailCampaignPatch.md)| Parameters for the Email Campaign | |
 
 ### Return type

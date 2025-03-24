@@ -7,6 +7,7 @@ All URIs are relative to *https://api.egoiapp.com*
 | [**createList**](ListsApi.md#createList) | **POST** /lists | Create new list |
 | [**deleteList**](ListsApi.md#deleteList) | **DELETE** /lists/{list_id} | Remove list |
 | [**getAllLists**](ListsApi.md#getAllLists) | **GET** /lists | Get all lists |
+| [**getList**](ListsApi.md#getList) | **GET** /lists/{list_id} | Get list |
 | [**updateList**](ListsApi.md#updateList) | **PATCH** /lists/{list_id} | Update a specific list |
 
 
@@ -252,6 +253,83 @@ public class Example {
 | **200** | OK |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
+
+<a name="getList"></a>
+# **getList**
+> ComplexList getList(listId)
+
+Get list
+
+Returns list information given its ID
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.ListsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    ListsApi apiInstance = new ListsApi(defaultClient);
+    Integer listId = 56; // Integer | ID of the List
+    try {
+      ComplexList result = apiInstance.getList(listId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ListsApi#getList");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **listId** | **Integer**| ID of the List | |
+
+### Return type
+
+[**ComplexList**](ComplexList.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
 | **408** | Request Timeout |  -  |
 | **422** | Unprocessable Entity |  -  |
 | **429** | Too Many Requests |  -  |

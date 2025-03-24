@@ -43,7 +43,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     PushApi apiInstance = new PushApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     CampaignPushSendRequest campaignPushSendRequest = new CampaignPushSendRequest(); // CampaignPushSendRequest | Parameters for the 'send push' action
     try {
       AcceptedResponse result = apiInstance.actionSendPush(campaignHash, campaignPushSendRequest);
@@ -63,7 +63,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **campaignPushSendRequest** | [**CampaignPushSendRequest**](CampaignPushSendRequest.md)| Parameters for the &#39;send push&#39; action | |
 
 ### Return type
@@ -346,7 +346,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     PushApi apiInstance = new PushApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     PushCampaignPatchRequest pushCampaignPatchRequest = new PushCampaignPatchRequest(); // PushCampaignPatchRequest | Parameters for the push campaign
     try {
       HashcodeCampaign result = apiInstance.patchPushCampaign(campaignHash, pushCampaignPatchRequest);
@@ -366,7 +366,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **pushCampaignPatchRequest** | [**PushCampaignPatchRequest**](PushCampaignPatchRequest.md)| Parameters for the push campaign | |
 
 ### Return type

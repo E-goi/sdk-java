@@ -5,6 +5,7 @@ All URIs are relative to *https://api.egoiapp.com*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**deleteAutomation**](AutomationsApi.md#deleteAutomation) | **DELETE** /automations/{automation_id} | Remove automation |
+| [**getAllActions**](AutomationsApi.md#getAllActions) | **GET** /automations/{automation_id}/actions | Get all actions from given automation |
 | [**getAllAutomations**](AutomationsApi.md#getAllAutomations) | **GET** /automations | Get all automations |
 
 
@@ -80,6 +81,86 @@ null (empty response body)
 | **404** | Not Found |  -  |
 | **408** | Request Timeout |  -  |
 | **409** | Conflict |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
+
+<a name="getAllActions"></a>
+# **getAllActions**
+> AutomationActionsCollection getAllActions(automationId, offset, limit)
+
+Get all actions from given automation
+
+Returns all actions
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.AutomationsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    AutomationsApi apiInstance = new AutomationsApi(defaultClient);
+    Integer automationId = 56; // Integer | Reference attribute to automation id
+    Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
+    Integer limit = 10; // Integer | Number of items to return
+    try {
+      AutomationActionsCollection result = apiInstance.getAllActions(automationId, offset, limit);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AutomationsApi#getAllActions");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **automationId** | **Integer**| Reference attribute to automation id | [optional] |
+| **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+
+### Return type
+
+[**AutomationActionsCollection**](AutomationActionsCollection.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
 | **429** | Too Many Requests |  -  |
 | **500** | Internal Server Error |  -  |
 | **503** | Service Unavailable |  -  |

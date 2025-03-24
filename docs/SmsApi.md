@@ -39,7 +39,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     SmsApi apiInstance = new SmsApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     CampaignSmsSendRequest campaignSmsSendRequest = new CampaignSmsSendRequest(); // CampaignSmsSendRequest | Parameters for the 'send sms' action
     try {
       AcceptedResponse result = apiInstance.actionSendSms(campaignHash, campaignSmsSendRequest);
@@ -59,7 +59,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **campaignSmsSendRequest** | [**CampaignSmsSendRequest**](CampaignSmsSendRequest.md)| Parameters for the &#39;send sms&#39; action | |
 
 ### Return type
@@ -194,7 +194,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     SmsApi apiInstance = new SmsApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     SmsCampaignPatchRequest smsCampaignPatchRequest = new SmsCampaignPatchRequest(); // SmsCampaignPatchRequest | Parameters for the Sms Campaign
     try {
       HashcodeCampaign result = apiInstance.patchSmsCampaign(campaignHash, smsCampaignPatchRequest);
@@ -214,7 +214,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **smsCampaignPatchRequest** | [**SmsCampaignPatchRequest**](SmsCampaignPatchRequest.md)| Parameters for the Sms Campaign | |
 
 ### Return type

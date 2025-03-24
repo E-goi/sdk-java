@@ -9,7 +9,7 @@ Suppression list schema
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**type** | [**TypeEnum**](#TypeEnum) | Suppression type |  |
-|**value** | **List&lt;String&gt;** | Array of phone values to add to the suppression list |  |
+|**value** | **List&lt;String&gt;** | Array of phone values to add to the suppression list (country code followed by phone number, split by &#39;-&#39;) |  |
 
 
 

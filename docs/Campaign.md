@@ -8,6 +8,7 @@ Campaign schema
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**id** | **Integer** |  |  [optional] [readonly] |
 |**campaignHash** | **String** |  |  [optional] [readonly] |
 |**status** | [**StatusEnum**](#StatusEnum) | Status of the campaign |  [optional] |
 |**thumbnail** | **String** | Thumbnail of the campaign |  [optional] |
@@ -22,6 +23,8 @@ Campaign schema
 |**startDate** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional] |
 |**endDate** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional] |
 |**scheduleDate** | [**CampaignScheduleDate**](CampaignScheduleDate.md) |  |  [optional] |
+|**processedMessages** | **Integer** | Total number of processed messages |  [optional] |
+|**automationId** | **Integer** | The automation id of the campaign |  [optional] |
 
 
 

@@ -9,8 +9,9 @@ Attach tag to contact request schema
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**tagId** | **Integer** |  |  |
-|**contacts** | **Set&lt;String&gt;** | Array of contact IDs to attach the tag |  |
+|**contacts** | **Set&lt;String&gt;** | Array of contacts to attach the tag |  |
 |**segmentId** | **String** |  |  |
+|**fieldId** | **String** |  |  |
 
 
 

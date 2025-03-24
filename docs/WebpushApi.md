@@ -43,7 +43,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     WebpushApi apiInstance = new WebpushApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     try {
       AcceptedResponse result = apiInstance.actionEnableWebPushRss(campaignHash);
       System.out.println(result);
@@ -62,7 +62,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 
 ### Return type
 
@@ -119,7 +119,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     WebpushApi apiInstance = new WebpushApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     CampaignWebPushSendRequest campaignWebPushSendRequest = new CampaignWebPushSendRequest(); // CampaignWebPushSendRequest | Parameters for the 'send web-push' action
     try {
       AcceptedResponse result = apiInstance.actionSendWebPush(campaignHash, campaignWebPushSendRequest);
@@ -139,7 +139,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **campaignWebPushSendRequest** | [**CampaignWebPushSendRequest**](CampaignWebPushSendRequest.md)| Parameters for the &#39;send web-push&#39; action | |
 
 ### Return type
@@ -513,7 +513,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     WebpushApi apiInstance = new WebpushApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     WebPushPatchCampaign webPushPatchCampaign = new WebPushPatchCampaign(); // WebPushPatchCampaign | Parameters for the Webpush Campaign
     try {
       PatchVoiceCampaign200Response result = apiInstance.patchWebPushCampaign(campaignHash, webPushPatchCampaign);
@@ -533,7 +533,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 | **webPushPatchCampaign** | [**WebPushPatchCampaign**](WebPushPatchCampaign.md)| Parameters for the Webpush Campaign | |
 
 ### Return type

@@ -38,7 +38,7 @@ public class Example {
     //Apikey.setApiKeyPrefix("Token");
 
     CampaignsApi apiInstance = new CampaignsApi(defaultClient);
-    String campaignHash = "campaignHash_example"; // String | ID of the Campaign
+    String campaignHash = "campaignHash_example"; // String | Hash of the Campaign
     try {
       apiInstance.deleteCampaigns(campaignHash);
     } catch (ApiException e) {
@@ -56,7 +56,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **campaignHash** | **String**| ID of the Campaign | |
+| **campaignHash** | **String**| Hash of the Campaign | |
 
 ### Return type
 
@@ -132,7 +132,7 @@ public class Example {
     OffsetDateTime scheduleDateMin = OffsetDateTime.now(); // OffsetDateTime | Schedule Date initial
     OffsetDateTime scheduleDateMax = OffsetDateTime.now(); // OffsetDateTime | Schedule Date finish
     Integer offset = 56; // Integer | Element offset (starting at zero for the first element)
-    Integer limit = 10; // Integer | Number of items to return
+    Integer limit = 100; // Integer | Number of items to return
     String order = "asc"; // String | Type of order
     String orderBy = "list_id"; // String | Reference attribute to order campaigns
     try {
@@ -171,7 +171,7 @@ public class Example {
 | **scheduleDateMin** | **OffsetDateTime**| Schedule Date initial | [optional] |
 | **scheduleDateMax** | **OffsetDateTime**| Schedule Date finish | [optional] |
 | **offset** | **Integer**| Element offset (starting at zero for the first element) | [optional] |
-| **limit** | **Integer**| Number of items to return | [optional] [default to 10] |
+| **limit** | **Integer**| Number of items to return | [optional] [default to 100] |
 | **order** | **String**| Type of order | [optional] [default to desc] [enum: asc, desc] |
 | **orderBy** | **String**| Reference attribute to order campaigns | [optional] [default to created] [enum: list_id, internal_name, created_by, group_id, created] |
 

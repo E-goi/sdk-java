@@ -12,6 +12,7 @@ Accepted response schema
 |**updated** | **Integer** |  |  [optional] |
 |**ignored** | **Integer** |  |  [optional] |
 |**invalid** | **Integer** |  |  [optional] |
+|**_file** | **String** |  |  [optional] |
 
 
 

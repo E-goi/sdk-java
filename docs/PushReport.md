@@ -9,9 +9,8 @@ Push report schema
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**campaignHash** | **String** |  |  [optional] [readonly] |
-|**operatingSystems** | [**List&lt;Object&gt;**](Object.md) | Stats of the campaign for each operating system |  [optional] |
-|**brands** | [**List&lt;Object&gt;**](Object.md) | Stats of the campaign for each brand |  [optional] |
-|**overall** | [**OverallOverall**](OverallOverall.md) |  |  [optional] |
+|**overall** | [**PushStats**](PushStats.md) |  |  [optional] |
+|**operatingSystems** | [**List&lt;PushReportOperatingSystemsInner&gt;**](PushReportOperatingSystemsInner.md) | Stats of the campaign for each operating system |  [optional] |
 
 
 

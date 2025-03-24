@@ -8,7 +8,8 @@ Complex list schema
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**language** | **Language** |  |  |
+|**defaultLanguage** | **Language** |  |  [optional] |
+|**availableLanguages** | **List&lt;String&gt;** | Array of available languages |  [optional] |
 |**stats** | [**ComplexListAllOfStats**](ComplexListAllOfStats.md) |  |  [optional] |
 |**listId** | **Integer** |  |  [optional] [readonly] |
 |**internalName** | **String** | Internal name of the list |  [optional] |

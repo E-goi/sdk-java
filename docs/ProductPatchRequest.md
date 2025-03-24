@@ -21,7 +21,7 @@ Product patch request schema
 |**salePrice** | **Double** | Sale price of the product |  [optional] |
 |**brand** | **String** | Brand of the product |  [optional] |
 |**categories** | **List&lt;String&gt;** | Array of product categories, using the character &#39;&gt;&#39; as delimiter for the breadcrumb                         syntax |  [optional] |
-|**relatedProducts** | [**ProductPatchRequestRelatedProducts**](ProductPatchRequestRelatedProducts.md) |  |  [optional] |
+|**relatedProducts** | **List&lt;String&gt;** | Related products, array of &#39;product_identifier&#39; |  [optional] |
 |**customAttributes** | [**List&lt;ProductCustomAttributes&gt;**](ProductCustomAttributes.md) | Custom attributes |  [optional] |
 
 

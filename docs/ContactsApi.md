@@ -21,6 +21,7 @@ All URIs are relative to *https://api.egoiapp.com*
 | [**getContact**](ContactsApi.md#getContact) | **GET** /lists/{list_id}/contacts/{contact_id} | Get contact |
 | [**patchContact**](ContactsApi.md#patchContact) | **PATCH** /lists/{list_id}/contacts/{contact_id} | Update a specific contact |
 | [**searchContacts**](ContactsApi.md#searchContacts) | **GET** /contacts/search | Search contact |
+| [**updateContactByField**](ContactsApi.md#updateContactByField) | **POST** /lists/{list_id}/contacts/by-field | Updates a contact by field |
 
 
 <a name="actionActivateContacts"></a>
@@ -1416,6 +1417,86 @@ public class Example {
 | **403** | Forbidden |  -  |
 | **404** | Not Found |  -  |
 | **408** | Request Timeout |  -  |
+| **422** | Unprocessable Entity |  -  |
+| **429** | Too Many Requests |  -  |
+| **500** | Internal Server Error |  -  |
+| **503** | Service Unavailable |  -  |
+
+<a name="updateContactByField"></a>
+# **updateContactByField**
+> CreateContactResponse updateContactByField(listId, contactFieldIdBaseExtraPost)
+
+Updates a contact by field
+
+Updates a contact by field, wich must be unique in list
+
+### Example
+```java
+// Import classes:
+import org.egoi.client.ApiClient;
+import org.egoi.client.ApiException;
+import org.egoi.client.Configuration;
+import org.egoi.client.auth.*;
+import org.egoi.client.models.*;
+import org.egoi.client.api.ContactsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.egoiapp.com");
+    
+    // Configure API key authorization: Apikey
+    ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+    Apikey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //Apikey.setApiKeyPrefix("Token");
+
+    ContactsApi apiInstance = new ContactsApi(defaultClient);
+    Integer listId = 56; // Integer | ID of the list where the contact belongs
+    ContactFieldIdBaseExtraPost contactFieldIdBaseExtraPost = new ContactFieldIdBaseExtraPost(); // ContactFieldIdBaseExtraPost | Parameters for the Contact Update by Field Id
+    try {
+      CreateContactResponse result = apiInstance.updateContactByField(listId, contactFieldIdBaseExtraPost);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ContactsApi#updateContactByField");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **listId** | **Integer**| ID of the list where the contact belongs | |
+| **contactFieldIdBaseExtraPost** | [**ContactFieldIdBaseExtraPost**](ContactFieldIdBaseExtraPost.md)| Parameters for the Contact Update by Field Id | |
+
+### Return type
+
+[**CreateContactResponse**](CreateContactResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Created |  -  |
+| **400** | Bad Request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **408** | Request Timeout |  -  |
+| **409** | Conflict |  -  |
 | **422** | Unprocessable Entity |  -  |
 | **429** | Too Many Requests |  -  |
 | **500** | Internal Server Error |  -  |

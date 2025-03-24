@@ -9,7 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**fieldId** | **Integer** |  |  [optional] |
 |**format** | [**FormatEnum**](#FormatEnum) | Extra field format |  [optional] [readonly] |
-|**value** | **String** | Extra field value |  [optional] |
+|**value** | **String** | Phone value (country code followed by phone number, split by &#39;-&#39;) |  [optional] |
 |**status** | [**StatusEnum**](#StatusEnum) | Extra field status |  [optional] |
 
 
