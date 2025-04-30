@@ -51,7 +51,7 @@ import org.egoi.client.JSON;
 /**
  * WebPushReportOperatingSystemsInner
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T11:21:14.263836Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-30T16:00:36.862706+01:00[Europe/Lisbon]")
 public class WebPushReportOperatingSystemsInner {
   public static final String SERIALIZED_NAME_OPERATING_SYSTEM = "operating_system";
   @SerializedName(SERIALIZED_NAME_OPERATING_SYSTEM)

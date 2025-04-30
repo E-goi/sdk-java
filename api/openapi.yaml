@@ -11685,7 +11685,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/<string>/orders' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '{"order_id":"<string>","order_total":"<double>","cart_id":"<string>","contact":{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]},"products":[{"categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}],"product_identifier":"<string>","catalog_id":"<integer>","name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>"},{"categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}],"product_identifier":"<string>","catalog_id":"<integer>","name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>"}]}'
+          --data-raw '{"order_id":"<string>","order_total":"<double>","cart_id":"<string>","order_date":"<dateTime>","order_status":"unknown","contact":{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]},"products":[{"product_identifier":"<string>","catalog_id":"<integer>","name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>","quantity":0,"categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}]},{"product_identifier":"<string>","catalog_id":"<integer>","name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>","quantity":0,"categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}]}]}'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/<string>/orders");
@@ -11693,7 +11693,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"},{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"}]}",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"order_date\":\"<dateTime>\",\"order_status\":\"unknown\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]},{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}]}",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -11702,7 +11702,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"},{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"}]}");
+          RequestBody body = RequestBody.create(mediaType, "{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"order_date\":\"<dateTime>\",\"order_status\":\"unknown\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]},{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}]}");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/<string>/orders")
               .method("POST", body)
@@ -11712,7 +11712,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify({"order_id":"<string>","order_total":"<double>","cart_id":"<string>","contact":{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]},"products":[{"categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}],"product_identifier":"<string>","catalog_id":"<integer>","name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>"},{"categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}],"product_identifier":"<string>","catalog_id":"<integer>","name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>"}]});
+          var data = JSON.stringify({"order_id":"<string>","order_total":"<double>","cart_id":"<string>","order_date":"<dateTime>","order_status":"unknown","contact":{"base":{"contact_id":"<string>","status":"active","first_name":"<string>","last_name":"<string>","birth_date":"<date>","language":"en","email":"<string>","cellphone":"<string>","phone":"<string>","push_token_android":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}],"push_token_ios":[{"app_id":"<string>","token":"<string>"},{"app_id":"<string>","token":"<string>"}]},"extra":[{"field_id":"<integer>","format":"<string>","value":"<date>"},{"field_id":"<integer>","format":"<string>","value":"<date>"}]},"products":[{"product_identifier":"<string>","catalog_id":"<integer>","name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>","quantity":0,"categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}]},{"product_identifier":"<string>","catalog_id":"<integer>","name":"<string>","description":"<string>","sku":"<string>","upc":"<string>","ean":"<string>","gtin":"<string>","mpn":"<string>","link":"<string>","image_link":"<string>","price":0,"sale_price":0,"brand":"<string>","quantity":0,"categories":["<string>","<string>"],"related_products":["<string>","<string>"],"custom_attributes":[{"alias":"<string>","value":"<string>"},{"alias":"<string>","value":"<string>"}]}]});
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -11747,7 +11747,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"},{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"}]}",
+              CURLOPT_POSTFIELDS =>"{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"order_date\":\"<dateTime>\",\"order_status\":\"unknown\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]},{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}]}",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -11763,7 +11763,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"},{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"}]}"
+          payload = "{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"order_date\":\"<dateTime>\",\"order_status\":\"unknown\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]},{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}]}"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -11784,7 +11784,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"},{\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}],\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\"}]}"
+          request.body = "{\"order_id\":\"<string>\",\"order_total\":\"<double>\",\"cart_id\":\"<string>\",\"order_date\":\"<dateTime>\",\"order_status\":\"unknown\",\"contact\":{\"base\":{\"contact_id\":\"<string>\",\"status\":\"active\",\"first_name\":\"<string>\",\"last_name\":\"<string>\",\"birth_date\":\"<date>\",\"language\":\"en\",\"email\":\"<string>\",\"cellphone\":\"<string>\",\"phone\":\"<string>\",\"push_token_android\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}],\"push_token_ios\":[{\"app_id\":\"<string>\",\"token\":\"<string>\"},{\"app_id\":\"<string>\",\"token\":\"<string>\"}]},\"extra\":[{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"},{\"field_id\":\"<integer>\",\"format\":\"<string>\",\"value\":\"<date>\"}]},\"products\":[{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]},{\"product_identifier\":\"<string>\",\"catalog_id\":\"<integer>\",\"name\":\"<string>\",\"description\":\"<string>\",\"sku\":\"<string>\",\"upc\":\"<string>\",\"ean\":\"<string>\",\"gtin\":\"<string>\",\"mpn\":\"<string>\",\"link\":\"<string>\",\"image_link\":\"<string>\",\"price\":0,\"sale_price\":0,\"brand\":\"<string>\",\"quantity\":0,\"categories\":[\"<string>\",\"<string>\"],\"related_products\":[\"<string>\",\"<string>\"],\"custom_attributes\":[{\"alias\":\"<string>\",\"value\":\"<string>\"},{\"alias\":\"<string>\",\"value\":\"<string>\"}]}]}"
 
           response = http.request(request)
           puts response.read_body
@@ -11878,7 +11878,7 @@ paths:
           curl --location --max-time 30 --request POST 'api.egoiapp.com/lists/<integer>/orders' \
           --header 'Apikey: <YOUR_APIKEY>' \
           --header 'Content-Type: application/json' \
-          --data-raw '[{"order_id":"<string>","revenue":"<number>","store_url":"<string>","date":"<dateTime>","items":[{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"},{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"}],"contact_id":"<string>"},{"order_id":"<string>","revenue":"<number>","store_url":"<string>","date":"<dateTime>","items":[{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"},{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"}],"contact_id":"<string>"}]'
+          --data-raw '[{"order_id":"<string>","contact_id":"<string>","revenue":"<number>","store_url":"<string>","date":"<dateTime>","items":[{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"},{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"}],"order_status":"unknown"},{"order_id":"<string>","contact_id":"<string>","revenue":"<number>","store_url":"<string>","date":"<dateTime>","items":[{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"},{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"}],"order_status":"unknown"}]'
       - lang: C#
         source: |-
           var client = new RestClient("api.egoiapp.com/lists/<integer>/orders");
@@ -11886,7 +11886,7 @@ paths:
           var request = new RestRequest(Method.POST);
           request.AddHeader("Apikey", "<YOUR_APIKEY>");
           request.AddHeader("Content-Type", "application/json");
-          request.AddParameter("application/json", "[{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"},{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"}]",  ParameterType.RequestBody);
+          request.AddParameter("application/json", "[{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"},{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"}]",  ParameterType.RequestBody);
           IRestResponse response = client.Execute(request);
           Console.WriteLine(response.Content);
       - lang: Java
@@ -11895,7 +11895,7 @@ paths:
               .setConnectTimeout(30, TimeUnit.MILLISECONDS)
               .build();
           MediaType mediaType = MediaType.parse("application/json");
-          RequestBody body = RequestBody.create(mediaType, "[{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"},{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"}]");
+          RequestBody body = RequestBody.create(mediaType, "[{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"},{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"}]");
           Request request = new Request.Builder()
               .url("api.egoiapp.com/lists/<integer>/orders")
               .method("POST", body)
@@ -11905,7 +11905,7 @@ paths:
           Response response = client.newCall(request).execute();
       - lang: JavaScript
         source: |-
-          var data = JSON.stringify([{"order_id":"<string>","revenue":"<number>","store_url":"<string>","date":"<dateTime>","items":[{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"},{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"}],"contact_id":"<string>"},{"order_id":"<string>","revenue":"<number>","store_url":"<string>","date":"<dateTime>","items":[{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"},{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"}],"contact_id":"<string>"}]);
+          var data = JSON.stringify([{"order_id":"<string>","contact_id":"<string>","revenue":"<number>","store_url":"<string>","date":"<dateTime>","items":[{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"},{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"}],"order_status":"unknown"},{"order_id":"<string>","contact_id":"<string>","revenue":"<number>","store_url":"<string>","date":"<dateTime>","items":[{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"},{"id":"<string>","name":"<string>","category":"<string>","price":"<number>","quantity":"<integer>"}],"order_status":"unknown"}]);
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -11940,7 +11940,7 @@ paths:
               CURLOPT_FOLLOWLOCATION => true,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS =>"[{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"},{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"}]",
+              CURLOPT_POSTFIELDS =>"[{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"},{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"}]",
               CURLOPT_HTTPHEADER => array(
                   "Apikey: <YOUR_APIKEY>",
                   "Content-Type: application/json"
@@ -11956,7 +11956,7 @@ paths:
           import http.client
           import mimetypes
           conn = http.client.HTTPSConnection("api.egoiapp.com", timeout = 30)
-          payload = "[{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"},{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"}]"
+          payload = "[{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"},{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"}]"
           headers = {
               'Apikey': '<YOUR_APIKEY>',
               'Content-Type': 'application/json'
@@ -11977,7 +11977,7 @@ paths:
           request = Net::HTTP::Post.new(url)
           request["Apikey"] = "<YOUR_APIKEY>"
           request["Content-Type"] = "application/json"
-          request.body = "[{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"},{\"order_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"contact_id\":\"<string>\"}]"
+          request.body = "[{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"},{\"order_id\":\"<string>\",\"contact_id\":\"<string>\",\"revenue\":\"<number>\",\"store_url\":\"<string>\",\"date\":\"<dateTime>\",\"items\":[{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"},{\"id\":\"<string>\",\"name\":\"<string>\",\"category\":\"<string>\",\"price\":\"<number>\",\"quantity\":\"<integer>\"}],\"order_status\":\"unknown\"}]"
 
           response = http.request(request)
           puts response.read_body
@@ -31841,12 +31841,64 @@ components:
       description: Create data
       example:
         cart_id: cart1
+        order_date: 2000-01-23T04:56:07.000+00:00
+        order_status: unknown
         contact: null
         order_total: 1
         order_id: "100"
         products:
-        - null
-        - null
+        - product_identifier: product_identifier
+          gtin: gtin
+          image_link: image_link
+          quantity: 0.8008281904610115
+          link: link
+          description: Product description
+          upc: upc
+          mpn: mpn
+          sale_price: 10
+          related_products:
+          - related_products
+          - related_products
+          custom_attributes:
+          - alias: sale_price_5
+            value: "15.45"
+          - alias: sale_price_5
+            value: "15.45"
+          catalog_id: 1
+          ean: ean
+          price: 10
+          name: Product name
+          categories:
+          - Clothing>Women>Blue Jeans
+          - Clothing>Women>Blue Jeans
+          sku: sku
+          brand: brand
+        - product_identifier: product_identifier
+          gtin: gtin
+          image_link: image_link
+          quantity: 0.8008281904610115
+          link: link
+          description: Product description
+          upc: upc
+          mpn: mpn
+          sale_price: 10
+          related_products:
+          - related_products
+          - related_products
+          custom_attributes:
+          - alias: sale_price_5
+            value: "15.45"
+          - alias: sale_price_5
+            value: "15.45"
+          catalog_id: 1
+          ean: ean
+          price: 10
+          name: Product name
+          categories:
+          - Clothing>Women>Blue Jeans
+          - Clothing>Women>Blue Jeans
+          sku: sku
+          brand: brand
       properties:
         order_total:
           description: Ecommerce cart total
@@ -31861,12 +31913,26 @@ components:
           description: Cart ID that originated this order
           example: cart1
           type: string
+        order_date:
+          description: Date and hour of the order
+          format: date-time
+          type: string
+        order_status:
+          default: unknown
+          description: Status of the order
+          enum:
+          - created
+          - pending
+          - canceled
+          - completed
+          - unknown
+          type: string
         contact:
           $ref: '#/components/schemas/Contact_1'
         products:
           description: List of products
           items:
-            $ref: '#/components/schemas/Product'
+            $ref: '#/components/schemas/OrderProduct'
           type: array
       required:
       - order_id
@@ -31928,6 +31994,7 @@ components:
       description: Order data
       example:
         date: ""
+        order_status: unknown
         revenue: 100
         contact_id: customer@e-goi.com
         order_id: "100"
@@ -31948,13 +32015,23 @@ components:
           description: Ecommerce order id
           example: "100"
           type: string
+        order_status:
+          default: unknown
+          description: Status of the order
+          enum:
+          - created
+          - pending
+          - canceled
+          - completed
+          - unknown
+          type: string
         contact_id:
           description: Contact ID is any non-empty unique string identifying the user
             (such as an email address or e-goi uid)
           example: customer@e-goi.com
           type: string
         revenue:
-          description: Ecommerce order revenue
+          description: Ecommerce order revenue. Must be greater than 0.
           example: 100
           minimum: 0
           type: number
@@ -31973,6 +32050,7 @@ components:
             $ref: '#/components/schemas/ImportOrdersBulkBulkRequestItems'
           type: array
       required:
+      - contact_id
       - date
       - items
       - order_id
@@ -32137,6 +32215,114 @@ components:
           description: Brand of the product
           type: string
       title: BasicProduct
+      type: object
+    OrderProduct:
+      description: Order Product schema
+      example:
+        product_identifier: product_identifier
+        gtin: gtin
+        image_link: image_link
+        quantity: 0.8008281904610115
+        link: link
+        description: Product description
+        upc: upc
+        mpn: mpn
+        sale_price: 10
+        related_products:
+        - related_products
+        - related_products
+        custom_attributes:
+        - alias: sale_price_5
+          value: "15.45"
+        - alias: sale_price_5
+          value: "15.45"
+        catalog_id: 1
+        ean: ean
+        price: 10
+        name: Product name
+        categories:
+        - Clothing>Women>Blue Jeans
+        - Clothing>Women>Blue Jeans
+        sku: sku
+        brand: brand
+      properties:
+        product_identifier:
+          description: The ID of the product in your store
+          pattern: "[a-zA-Z0-9\\_\\-.]"
+          type: string
+        catalog_id:
+          example: 1
+          minimum: 1
+          readOnly: true
+          title: ID
+          type: integer
+        name:
+          description: Name of the product
+          example: Product name
+          type: string
+        description:
+          description: Description of the product
+          example: Product description
+          type: string
+        sku:
+          description: Stock Keeping Unit
+          type: string
+        upc:
+          description: Universal Product Code
+          type: string
+        ean:
+          description: European Article Numbering
+          type: string
+        gtin:
+          description: Global Trade Item Number
+          type: string
+        mpn:
+          description: Manufacturer Part Number
+          type: string
+        link:
+          description: Link for the product
+          type: string
+        image_link:
+          description: Link for the product image
+          type: string
+        price:
+          default: 0
+          description: Price of the product
+          example: 10
+          format: double
+          type: number
+        sale_price:
+          default: 0
+          description: Sale price of the product
+          example: 10
+          format: double
+          type: number
+        brand:
+          description: Brand of the product
+          type: string
+        quantity:
+          default: 0
+          description: Quantity of the product
+          format: double
+          type: number
+        categories:
+          description: "Array of product categories, using the character '>' as delimiter\
+            \ for the breadcrumb syntax"
+          items:
+            example: Clothing>Women>Blue Jeans
+            type: string
+          type: array
+        related_products:
+          description: "Related products, array of 'product_identifier'"
+          items:
+            type: string
+          type: array
+        custom_attributes:
+          description: Custom attributes
+          items:
+            $ref: '#/components/schemas/ProductCustomAttributes'
+          type: array
+      title: OrderProduct
       type: object
     Product:
       allOf:

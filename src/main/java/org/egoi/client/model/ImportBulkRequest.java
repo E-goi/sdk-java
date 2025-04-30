@@ -52,7 +52,7 @@ import org.egoi.client.JSON;
  * Contact import bulk request schema
  */
 @ApiModel(description = "Contact import bulk request schema")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T11:21:14.263836Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-30T16:00:36.862706+01:00[Europe/Lisbon]")
 public class ImportBulkRequest {
   /**
    * Add new contacts only (&#39;add&#39;), add and replace existing ones (&#39;update&#39;) or only replace existing ones (&#39;update_only&#39;)

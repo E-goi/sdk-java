@@ -54,7 +54,7 @@ import org.egoi.client.JSON;
  * Columns of the report
  */
 @ApiModel(description = "Columns of the report")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T11:21:14.263836Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-30T16:00:36.862706+01:00[Europe/Lisbon]")
 public class AdvancedReportEmailClicksByUrlColumns {
   public static final String SERIALIZED_NAME_LIST_BASE_FIELDS = "list_base_fields";
   @SerializedName(SERIALIZED_NAME_LIST_BASE_FIELDS)

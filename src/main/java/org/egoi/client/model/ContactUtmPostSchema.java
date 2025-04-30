@@ -50,7 +50,7 @@ import org.egoi.client.JSON;
  * Contact Utm
  */
 @ApiModel(description = "Contact Utm")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T11:21:14.263836Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-30T16:00:36.862706+01:00[Europe/Lisbon]")
 public class ContactUtmPostSchema {
   public static final String SERIALIZED_NAME_UTM = "utm";
   @SerializedName(SERIALIZED_NAME_UTM)

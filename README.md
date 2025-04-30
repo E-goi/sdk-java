@@ -1,14 +1,18 @@
 ![E-goi](https://www.e-goi.com/wp-content/themes/egoi2019/imgs/svg/logo-egoi.svg)
 
+Get started quickly with E-goi with our integration tools. Our SDK is a modern open source library that makes it easy to integrate your application with E-goi services.
+
 Almost anything you can do in E-goi, you can do with our API.
 
 The API describes each available method. Learn about parameters, errors, and how to format your requests. That means you can easily call on E-goi actions for your integration.
 **API** Full documentation at https://developers.e-goi.com/api/v3/
 
-If you find a bug or something worth fixing, create an issue.
+**Note:** This repository is currently in **Release Candidate** stage. Use with caution in production environments.
+
+Feel free to **fork this repository** and adapt it to your needs. Contributions and improvements are always welcome!
 
 ### Changelog
-#### 1.1.6RC1
+#### 1.1.7RC1
 ## Requirements
 
 Building the API client library requires:
@@ -39,7 +43,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.egoi</groupId>
   <artifactId>egoi-java-client</artifactId>
-  <version>1.1.6RC1</version>
+  <version>1.1.7RC1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -55,7 +59,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "org.egoi:egoi-java-client:1.1.6RC1"
+     implementation "org.egoi:egoi-java-client:1.1.7RC1"
   }
 ```
 
@@ -69,7 +73,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/egoi-java-client-1.1.6RC1.jar`
+* `target/egoi-java-client-1.1.7RC1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -719,6 +723,7 @@ Class | Method | HTTP request | Description
  - [OperationsCollection](docs/OperationsCollection.md)
  - [Order](docs/Order.md)
  - [OrderPatchRequest](docs/OrderPatchRequest.md)
+ - [OrderProduct](docs/OrderProduct.md)
  - [Overall](docs/Overall.md)
  - [OverallOverall](docs/OverallOverall.md)
  - [PatchRequestBaseField](docs/PatchRequestBaseField.md)

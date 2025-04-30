@@ -23,10 +23,11 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.egoi.client.model.Contact1;
-import org.egoi.client.model.Product;
+import org.egoi.client.model.OrderProduct;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,7 +54,7 @@ import org.egoi.client.JSON;
  * Create data
  */
 @ApiModel(description = "Create data")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T11:21:14.263836Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-30T16:00:36.862706+01:00[Europe/Lisbon]")
 public class CreateOrder {
   public static final String SERIALIZED_NAME_ORDER_TOTAL = "order_total";
   @SerializedName(SERIALIZED_NAME_ORDER_TOTAL)
@@ -67,13 +68,74 @@ public class CreateOrder {
   @SerializedName(SERIALIZED_NAME_CART_ID)
   private String cartId;
 
+  public static final String SERIALIZED_NAME_ORDER_DATE = "order_date";
+  @SerializedName(SERIALIZED_NAME_ORDER_DATE)
+  private OffsetDateTime orderDate;
+
+  /**
+   * Status of the order
+   */
+  @JsonAdapter(OrderStatusEnum.Adapter.class)
+  public enum OrderStatusEnum {
+    CREATED("created"),
+    
+    PENDING("pending"),
+    
+    CANCELED("canceled"),
+    
+    COMPLETED("completed"),
+    
+    UNKNOWN("unknown");
+
+    private String value;
+
+    OrderStatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static OrderStatusEnum fromValue(String value) {
+      for (OrderStatusEnum b : OrderStatusEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<OrderStatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final OrderStatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public OrderStatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return OrderStatusEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_ORDER_STATUS = "order_status";
+  @SerializedName(SERIALIZED_NAME_ORDER_STATUS)
+  private OrderStatusEnum orderStatus = OrderStatusEnum.UNKNOWN;
+
   public static final String SERIALIZED_NAME_CONTACT = "contact";
   @SerializedName(SERIALIZED_NAME_CONTACT)
   private Contact1 contact;
 
   public static final String SERIALIZED_NAME_PRODUCTS = "products";
   @SerializedName(SERIALIZED_NAME_PRODUCTS)
-  private List<Product> products = null;
+  private List<OrderProduct> products = null;
 
   public CreateOrder() {
   }
@@ -147,6 +209,52 @@ public class CreateOrder {
   }
 
 
+  public CreateOrder orderDate(OffsetDateTime orderDate) {
+    
+    this.orderDate = orderDate;
+    return this;
+  }
+
+   /**
+   * Date and hour of the order
+   * @return orderDate
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Date and hour of the order")
+
+  public OffsetDateTime getOrderDate() {
+    return orderDate;
+  }
+
+
+  public void setOrderDate(OffsetDateTime orderDate) {
+    this.orderDate = orderDate;
+  }
+
+
+  public CreateOrder orderStatus(OrderStatusEnum orderStatus) {
+    
+    this.orderStatus = orderStatus;
+    return this;
+  }
+
+   /**
+   * Status of the order
+   * @return orderStatus
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Status of the order")
+
+  public OrderStatusEnum getOrderStatus() {
+    return orderStatus;
+  }
+
+
+  public void setOrderStatus(OrderStatusEnum orderStatus) {
+    this.orderStatus = orderStatus;
+  }
+
+
   public CreateOrder contact(Contact1 contact) {
     
     this.contact = contact;
@@ -170,13 +278,13 @@ public class CreateOrder {
   }
 
 
-  public CreateOrder products(List<Product> products) {
+  public CreateOrder products(List<OrderProduct> products) {
     
     this.products = products;
     return this;
   }
 
-  public CreateOrder addProductsItem(Product productsItem) {
+  public CreateOrder addProductsItem(OrderProduct productsItem) {
     if (this.products == null) {
       this.products = new ArrayList<>();
     }
@@ -191,12 +299,12 @@ public class CreateOrder {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "List of products")
 
-  public List<Product> getProducts() {
+  public List<OrderProduct> getProducts() {
     return products;
   }
 
 
-  public void setProducts(List<Product> products) {
+  public void setProducts(List<OrderProduct> products) {
     this.products = products;
   }
 
@@ -214,13 +322,15 @@ public class CreateOrder {
     return Objects.equals(this.orderTotal, createOrder.orderTotal) &&
         Objects.equals(this.orderId, createOrder.orderId) &&
         Objects.equals(this.cartId, createOrder.cartId) &&
+        Objects.equals(this.orderDate, createOrder.orderDate) &&
+        Objects.equals(this.orderStatus, createOrder.orderStatus) &&
         Objects.equals(this.contact, createOrder.contact) &&
         Objects.equals(this.products, createOrder.products);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderTotal, orderId, cartId, contact, products);
+    return Objects.hash(orderTotal, orderId, cartId, orderDate, orderStatus, contact, products);
   }
 
   @Override
@@ -230,6 +340,8 @@ public class CreateOrder {
     sb.append("    orderTotal: ").append(toIndentedString(orderTotal)).append("\n");
     sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
     sb.append("    cartId: ").append(toIndentedString(cartId)).append("\n");
+    sb.append("    orderDate: ").append(toIndentedString(orderDate)).append("\n");
+    sb.append("    orderStatus: ").append(toIndentedString(orderStatus)).append("\n");
     sb.append("    contact: ").append(toIndentedString(contact)).append("\n");
     sb.append("    products: ").append(toIndentedString(products)).append("\n");
     sb.append("}");
@@ -257,6 +369,8 @@ public class CreateOrder {
     openapiFields.add("order_total");
     openapiFields.add("order_id");
     openapiFields.add("cart_id");
+    openapiFields.add("order_date");
+    openapiFields.add("order_status");
     openapiFields.add("contact");
     openapiFields.add("products");
 
@@ -298,6 +412,9 @@ public class CreateOrder {
       if ((jsonObj.get("cart_id") != null && !jsonObj.get("cart_id").isJsonNull()) && !jsonObj.get("cart_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `cart_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("cart_id").toString()));
       }
+      if ((jsonObj.get("order_status") != null && !jsonObj.get("order_status").isJsonNull()) && !jsonObj.get("order_status").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `order_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_status").toString()));
+      }
       // validate the optional field `contact`
       if (jsonObj.get("contact") != null && !jsonObj.get("contact").isJsonNull()) {
         Contact1.validateJsonObject(jsonObj.getAsJsonObject("contact"));
@@ -312,7 +429,7 @@ public class CreateOrder {
 
           // validate the optional field `products` (array)
           for (int i = 0; i < jsonArrayproducts.size(); i++) {
-            Product.validateJsonObject(jsonArrayproducts.get(i).getAsJsonObject());
+            OrderProduct.validateJsonObject(jsonArrayproducts.get(i).getAsJsonObject());
           };
         }
       }

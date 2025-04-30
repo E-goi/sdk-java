@@ -953,6 +953,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new org.egoi.client.model.OperationsCollection.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new org.egoi.client.model.Order.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new org.egoi.client.model.OrderPatchRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new org.egoi.client.model.OrderProduct.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new org.egoi.client.model.Overall.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new org.egoi.client.model.OverallOverall.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new org.egoi.client.model.PatchRequestBaseField.CustomTypeAdapterFactory());

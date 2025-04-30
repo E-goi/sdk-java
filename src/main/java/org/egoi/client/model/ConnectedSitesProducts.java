@@ -53,7 +53,7 @@ import org.egoi.client.JSON;
  * Connected Sites Products
  */
 @ApiModel(description = "Connected Sites Products")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T11:21:14.263836Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-30T16:00:36.862706+01:00[Europe/Lisbon]")
 public class ConnectedSitesProducts {
   public static final String SERIALIZED_NAME_TRACK_AND_ENGAGE = "track_and_engage";
   @SerializedName(SERIALIZED_NAME_TRACK_AND_ENGAGE)

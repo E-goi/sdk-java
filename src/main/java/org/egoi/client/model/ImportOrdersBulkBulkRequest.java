@@ -54,11 +54,68 @@ import org.egoi.client.JSON;
  * Order data
  */
 @ApiModel(description = "Order data")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T11:21:14.263836Z[Europe/Lisbon]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-30T16:00:36.862706+01:00[Europe/Lisbon]")
 public class ImportOrdersBulkBulkRequest {
   public static final String SERIALIZED_NAME_ORDER_ID = "order_id";
   @SerializedName(SERIALIZED_NAME_ORDER_ID)
   private String orderId;
+
+  /**
+   * Status of the order
+   */
+  @JsonAdapter(OrderStatusEnum.Adapter.class)
+  public enum OrderStatusEnum {
+    CREATED("created"),
+    
+    PENDING("pending"),
+    
+    CANCELED("canceled"),
+    
+    COMPLETED("completed"),
+    
+    UNKNOWN("unknown");
+
+    private String value;
+
+    OrderStatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static OrderStatusEnum fromValue(String value) {
+      for (OrderStatusEnum b : OrderStatusEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<OrderStatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final OrderStatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public OrderStatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return OrderStatusEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_ORDER_STATUS = "order_status";
+  @SerializedName(SERIALIZED_NAME_ORDER_STATUS)
+  private OrderStatusEnum orderStatus = OrderStatusEnum.UNKNOWN;
 
   public static final String SERIALIZED_NAME_CONTACT_ID = "contact_id";
   @SerializedName(SERIALIZED_NAME_CONTACT_ID)
@@ -106,6 +163,29 @@ public class ImportOrdersBulkBulkRequest {
   }
 
 
+  public ImportOrdersBulkBulkRequest orderStatus(OrderStatusEnum orderStatus) {
+    
+    this.orderStatus = orderStatus;
+    return this;
+  }
+
+   /**
+   * Status of the order
+   * @return orderStatus
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Status of the order")
+
+  public OrderStatusEnum getOrderStatus() {
+    return orderStatus;
+  }
+
+
+  public void setOrderStatus(OrderStatusEnum orderStatus) {
+    this.orderStatus = orderStatus;
+  }
+
+
   public ImportOrdersBulkBulkRequest contactId(String contactId) {
     
     this.contactId = contactId;
@@ -116,8 +196,8 @@ public class ImportOrdersBulkBulkRequest {
    * Contact ID is any non-empty unique string identifying the user (such as an email address or e-goi uid)
    * @return contactId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "customer@e-goi.com", value = "Contact ID is any non-empty unique string identifying the user (such as an email address or e-goi uid)")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "customer@e-goi.com", required = true, value = "Contact ID is any non-empty unique string identifying the user (such as an email address or e-goi uid)")
 
   public String getContactId() {
     return contactId;
@@ -136,12 +216,12 @@ public class ImportOrdersBulkBulkRequest {
   }
 
    /**
-   * Ecommerce order revenue
+   * Ecommerce order revenue. Must be greater than 0.
    * minimum: 0
    * @return revenue
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "100", required = true, value = "Ecommerce order revenue")
+  @ApiModelProperty(example = "100", required = true, value = "Ecommerce order revenue. Must be greater than 0.")
 
   public BigDecimal getRevenue() {
     return revenue;
@@ -238,6 +318,7 @@ public class ImportOrdersBulkBulkRequest {
     }
     ImportOrdersBulkBulkRequest importOrdersBulkBulkRequest = (ImportOrdersBulkBulkRequest) o;
     return Objects.equals(this.orderId, importOrdersBulkBulkRequest.orderId) &&
+        Objects.equals(this.orderStatus, importOrdersBulkBulkRequest.orderStatus) &&
         Objects.equals(this.contactId, importOrdersBulkBulkRequest.contactId) &&
         Objects.equals(this.revenue, importOrdersBulkBulkRequest.revenue) &&
         Objects.equals(this.storeUrl, importOrdersBulkBulkRequest.storeUrl) &&
@@ -247,7 +328,7 @@ public class ImportOrdersBulkBulkRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderId, contactId, revenue, storeUrl, date, items);
+    return Objects.hash(orderId, orderStatus, contactId, revenue, storeUrl, date, items);
   }
 
   @Override
@@ -255,6 +336,7 @@ public class ImportOrdersBulkBulkRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class ImportOrdersBulkBulkRequest {\n");
     sb.append("    orderId: ").append(toIndentedString(orderId)).append("\n");
+    sb.append("    orderStatus: ").append(toIndentedString(orderStatus)).append("\n");
     sb.append("    contactId: ").append(toIndentedString(contactId)).append("\n");
     sb.append("    revenue: ").append(toIndentedString(revenue)).append("\n");
     sb.append("    storeUrl: ").append(toIndentedString(storeUrl)).append("\n");
@@ -283,6 +365,7 @@ public class ImportOrdersBulkBulkRequest {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("order_id");
+    openapiFields.add("order_status");
     openapiFields.add("contact_id");
     openapiFields.add("revenue");
     openapiFields.add("store_url");
@@ -292,6 +375,7 @@ public class ImportOrdersBulkBulkRequest {
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
     openapiRequiredFields.add("order_id");
+    openapiRequiredFields.add("contact_id");
     openapiRequiredFields.add("revenue");
     openapiRequiredFields.add("store_url");
     openapiRequiredFields.add("date");
@@ -328,7 +412,10 @@ public class ImportOrdersBulkBulkRequest {
       if (!jsonObj.get("order_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_id").toString()));
       }
-      if ((jsonObj.get("contact_id") != null && !jsonObj.get("contact_id").isJsonNull()) && !jsonObj.get("contact_id").isJsonPrimitive()) {
+      if ((jsonObj.get("order_status") != null && !jsonObj.get("order_status").isJsonNull()) && !jsonObj.get("order_status").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `order_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_status").toString()));
+      }
+      if (!jsonObj.get("contact_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `contact_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("contact_id").toString()));
       }
       if (!jsonObj.get("store_url").isJsonPrimitive()) {

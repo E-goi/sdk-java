@@ -21,10 +21,11 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.egoi.client.model.Contact1;
-import org.egoi.client.model.Product;
+import org.egoi.client.model.OrderProduct;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -65,6 +66,22 @@ public class CreateOrderTest {
     @Test
     public void cartIdTest() {
         // TODO: test cartId
+    }
+
+    /**
+     * Test the property 'orderDate'
+     */
+    @Test
+    public void orderDateTest() {
+        // TODO: test orderDate
+    }
+
+    /**
+     * Test the property 'orderStatus'
+     */
+    @Test
+    public void orderStatusTest() {
+        // TODO: test orderStatus
     }
 
     /**

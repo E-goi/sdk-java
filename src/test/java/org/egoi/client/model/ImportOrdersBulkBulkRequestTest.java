@@ -53,6 +53,14 @@ public class ImportOrdersBulkBulkRequestTest {
     }
 
     /**
+     * Test the property 'orderStatus'
+     */
+    @Test
+    public void orderStatusTest() {
+        // TODO: test orderStatus
+    }
+
+    /**
      * Test the property 'contactId'
      */
     @Test
